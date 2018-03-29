@@ -15,9 +15,9 @@ working_area = React.createFactory(WorkingArea)
 class TopLayout extends React.Component
   render: ->
     div { className: 'top-layout' },
-      div { className: 'top-layout__toolbar' },
+      div { className: 'top-layout__toolbar nail-base' },
         toolbar {}
-      div { className: 'top-layout__working-area' },
+      div { className: 'top-layout__working-area nail-base' },
         working_area {}
 
 
