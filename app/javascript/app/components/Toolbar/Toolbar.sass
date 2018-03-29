@@ -1,0 +1,40 @@
+@import ../../Common
+
+.toolbar
+  position: absolute
+  box-sizing: border-box
+  left: 0
+  width: 100%
+  top: 0
+  height: 100%
+  background-color: $base-color
+  display: flex
+  overflow: hidden
+
+  &:hover
+    height: 112px
+
+  .toolbar-button
+    flex: 0 0 auto
+    width: 96px
+    height: 112px
+    color: #fff
+    text-decoration: none
+
+    &:hover
+      background-color: scale-color($base-color, $lightness: +8%)
+
+    &.current-tool
+      background-color: $secondary-color
+      cursor: default
+
+    .icon
+      display: block
+      width: 48px
+      height: 48px
+      margin: 8px auto
+
+
+    .label
+      text-align: center
+      font-size: 15px
