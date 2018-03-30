@@ -5,6 +5,9 @@ import PropTypes from 'prop-types'
 
 div = React.createFactory('div')
 
+import SearchPanel from './SearchPanel'
+search_panel = React.createFactory(SearchPanel)
+
 
 class WorkingArea extends React.Component
   render: ->
