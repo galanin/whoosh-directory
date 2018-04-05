@@ -19,7 +19,7 @@ class SearchPanel extends React.Component
     div { className: 'search-panel nailed' },
       div { className: 'search-panel__input-container' },
         input { autoFocus: true, className: 'search-panel__input' }
-        div { className: 'search-panel__reset nail-base' },
+        div { className: 'search-panel__reset' },
           svg { className: 'search-panel__reset-icon', viewBox: '0 0 48 40' },
             path { d: 'M48 0H12L0 20l12 20h36zM35 30l-7-7-7 7-3-3 7-7-7-7 3-3 7 7 7-7 3 3-7 7 7 7z' }
       div { className: 'search-panel__buttons-container' },
