@@ -3,6 +3,8 @@ class Import
   class Cache
 
     attr_reader :cache, :index_by_id
+    delegate :each, to: :cache
+    delegate :[], to: :index_by_id
 
 
     def initialize(entity_class)
@@ -45,20 +47,20 @@ class Import
 
 
   def build_structure
-    unit_cache.cache.each do |unit|
+    unit_cache.each do |unit|
       next unless unit.parent_id.present?
-      parent = unit_cache.index_by_id[unit.parent_id]
+      parent = unit_cache[unit.parent_id]
       parent.child_ids ||= []
       parent.child_ids << unit.id
     end
-    unit_cache.cache.each { |unit| unit.level = nil }
-    unit_cache.cache.each { |unit| count_unit_level(unit); puts "#{unit.id} #{unit.level}" }
+    unit_cache.each { |unit| unit.level = nil }
+    unit_cache.each { |unit| count_unit_level(unit); puts "#{unit.id} #{unit.level}" }
 
-    employment_cache.cache.each do |employment|
-      person = person_cache.index_by_id[employment.person_id]
+    employment_cache.each do |employment|
+      person = person_cache[employment.person_id]
       person.employment_ids ||= []
       person.employment_ids << employment.id
-      unit = unit_cache.index_by_id[employment.unit_id]
+      unit = unit_cache[employment.unit_id]
       unit.employment_ids ||= []
       unit.employment_ids << employment.id
     end
@@ -69,7 +71,7 @@ class Import
     unit.level ||= if unit.parent_id.blank?
       0
     else
-      count_unit_level(unit_cache.index_by_id[unit.parent_id]) + 1
+      count_unit_level(unit_cache[unit.parent_id]) + 1
     end
   end
 
