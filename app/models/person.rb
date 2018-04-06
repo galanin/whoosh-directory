@@ -3,13 +3,15 @@ class Person < ApplicationRecord
   include Mongoid::Timestamps
   include ImportEntity
 
-  field :uuid,            type: String
+  field :_id,             type: String
   field :first_name,      type: String
   field :middle_name,     type: String
   field :last_name,       type: String
   field :birthday,        type: String
   field :hide_birthday,   type: Boolean
   field :gender,          type: String
+  field :employment_ids,  type: Array
+
 
   has_many   :employments
 

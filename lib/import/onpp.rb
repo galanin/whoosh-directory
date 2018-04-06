@@ -13,55 +13,20 @@ class Import
       import_units
       import_people
       import_employments
-
-      build_structure
     end
     
     
     private
 
 
-    def unit_index_by_uuid
-      @unit_index_by_uuid ||= @import.unit_cache.index_by(&:uuid)
-    end
-
-
-    def person_index_by_uuid
-      @person_index_by_uuid ||= @import.person_cache.index_by(&:uuid)
-    end
-
-
-    def employment_index_by_uuid
-      @employment_index_by_uuid ||= @import.employment_cache.index_by(&:uuid)
-    end
-
-
-    def import_unit(field_values)
-      (unit_index_by_uuid[field_values[:uuid]] ||= @import.create_unit(field_values)).
-          tap { |u| u.write_attributes(field_values); u.imported! }
-    end
-
-
-    def import_person(field_values)
-      (person_index_by_uuid[field_values[:uuid]] ||= @import.create_person(field_values)).
-          tap { |p| p.write_attributes(field_values); p.imported! }
-    end
-
-
-    def import_employment(field_values)
-      (employment_index_by_uuid[field_values[:uuid]] ||= @import.create_employment(field_values)).
-          tap { |e| e.write_attributes(field_values); e.imported! }
-    end
-
-
     def import_units
       @new_units ||= @doc.xpath('.//organization').map do |org|
-        import_unit(
-            uuid:        org['ID'],
-            title:       org['FULLNAME'],
-            short:       org['NAME'],
-            path:        org['HASH'],
-            parent_uuid: org['UP_ID'],
+        @import.unit_cache.import(
+            id:        org['ID'],
+            title:     org['FULLNAME'],
+            short:     org['NAME'],
+            path:      org['HASH'],
+            parent_id: org['UP_ID'],
             )
       end
     end
@@ -74,8 +39,8 @@ class Import
 
     def import_people
       @new_people ||= @doc.xpath('.//person').map do |person|
-        import_person(
-            uuid:          person['ID_FL'],
+        @import.person_cache.import(
+            id:            person['ID_FL'],
             first_name:    person['I'],
             middle_name:   person['O'],
             last_name:     person['F'],
@@ -95,12 +60,12 @@ class Import
 
     def import_employments
       @new_employments ||= @doc.xpath('.//person').map do |person|
-        import_employment(
-            uuid:              person['ID_M'],
-            person_uuid:       person['ID_FL'],
+        @import.employment_cache.import(
+            id:                person['ID_M'],
+            person_id:         person['ID_FL'],
             post:              person['POST'],
-            unit_uuid:         person['ID_PODR'],
-            dept_uuid:         person['ID_STRUCT_PODR'],
+            unit_id:           person['ID_PODR'],
+            dept_id:           person['ID_STRUCT_PODR'],
             number:            person['TN'].to_i,
             category:          person['KAT'],
             office:            person['ROOM'],
@@ -115,18 +80,6 @@ class Import
             working_type:      person['VID_ZAN'],
             working_type_prio: WORKING_TYPE_PRIO[person['VID_ZAN']] || 99,
             )
-      end
-    end
-
-
-    def build_structure
-      @new_units.each do |unit|
-        unit.parent = unit_index_by_uuid[unit.parent_uuid]
-      end
-      @new_employments.each do |employment|
-        employment.person = person_index_by_uuid[employment.person_uuid]
-        employment.unit   = unit_index_by_uuid[employment.unit_uuid]
-        employment.dept   = unit_index_by_uuid[employment.dept_uuid]
       end
     end
 

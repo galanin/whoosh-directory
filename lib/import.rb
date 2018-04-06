@@ -1,89 +1,80 @@
 class Import
 
-  def unit_cache
-    @unit_cache ||= OrganizationUnit.all.to_a
+  class Cache
+
+    attr_reader :cache, :index_by_id
+
+
+    def initialize(entity_class)
+      @entity_class = entity_class
+      @cache = entity_class.all.to_a
+      @index_by_id = @cache.index_by(&:id)
+    end
+
+
+    def import(field_values)
+      entity_id  = field_values[:id]
+      entity = index_by_id[entity_id]
+      if entity.present?
+        entity.write_attributes(field_values)
+      else
+        entity = create(field_values)
+      end
+      entity.imported!
+    end
+
+
+    def create(field_values)
+      new_entity = @entity_class.new(field_values)
+      @cache << new_entity
+      @index_by_id[new_entity.id] = new_entity
+      new_entity
+    end
+
   end
 
 
-  def unit_index_by_id
-    @existing_units_index_by_id ||= unit_cache.index_by(&:id)
-  end
+  attr_reader :unit_cache, :person_cache, :employment_cache
 
 
-  def person_cache
-    @person_cache ||= Person.all.to_a
-  end
-
-
-  def person_index_by_id
-    @existing_person_index_by_id ||= person_cache.index_by(&:id)
-  end
-
-
-  def employment_cache
-    @employment_cache ||= Employment.all.to_a
-  end
-
-
-  def employment_index_by_id
-    @existing_employment_index_by_id ||= person_cache.index_by(&:id)
+  def initialize
+    @unit_cache = Cache.new(OrganizationUnit)
+    @person_cache = Cache.new(Person)
+    @employment_cache = Cache.new(Employment)
   end
 
 
   def build_structure
-    unit_cache.each do |unit|
-      unit.parent = unit_index_by_id[unit.parent_id]
+    unit_cache.cache.each do |unit|
+      next unless unit.parent_id.present?
+      parent = unit_cache.index_by_id[unit.parent_id]
+      parent.child_ids ||= []
+      parent.child_ids << unit.id
     end
-    employment_cache.each do |employment|
-      employment.person = person_index_by_id[employment.person_id]
-      employment.unit   = unit_index_by_id[employment.unit_id]
-      employment.dept   = unit_index_by_id[employment.dept_id]
+    employment_cache.cache.each do |employment|
+      person = person_cache.index_by_id[employment.person_id]
+      person.employment_ids ||= []
+      person.employment_ids << employment.id
+      unit = unit_cache.index_by_id[employment.unit_id]
+      unit.employment_ids ||= []
+      unit.employment_ids << employment.id
     end
-  end
-
-
-  def create_unit(field_values)
-    new_unit = OrganizationUnit.new(field_values)
-    unit_cache << new_unit
-    unit_index_by_id[new_unit.id] = new_unit
-    new_unit
-  end
-
-
-  def create_person(field_values)
-    new_person = Person.new(field_values)
-    person_cache << new_person
-    person_index_by_id[new_person.id] = new_person
-    new_person
-  end
-
-
-  def create_employment(field_values)
-    new_employment = Employment.new(field_values)
-    employment_cache << new_employment
-    employment_index_by_id[new_employment.id] = new_employment
-    new_employment
   end
 
 
   def save
-    puts 'PERSON'
-    person_cache.select(&:imported?).select(&:invalid?).select(&:changed?).each { |e| p e }
-    puts 'EMPLOYMENT'
-    employment_cache.select(&:imported?).select(&:changed?).each { |e| p e.uuid, e.person_uuid, e.changes, e.valid? }
-    puts 'UNIT'
-    unit_cache.select(&:imported?).select(&:valid?).select(&:changed?).each { |u| p u.uuid, u.changes }
+    build_structure
 
-    unit_cache.select(&:imported?).select(&:changed?).each(&:save)
-    person_cache.select(&:imported?).select(&:changed?).each(&:save)
-    employment_cache.select(&:imported?).select(&:changed?).each(&:save)
+    unit_cache.cache.select(&:imported?).select(&:changed?).each(&:save)
+    person_cache.cache.select(&:imported?).select(&:changed?).each(&:save)
+    employment_cache.cache.select(&:imported?).select(&:changed?).each(&:save)
   end
 
 
   def cleanup
-    unit_cache.select(&:expired?).each(&:destroy)
-    person_cache.select(&:expired?).each(&:destroy)
-    employment_cache.select(&:expired?).each(&:destroy)
+    unit_cache.cache.select(&:expired?).each(&:destroy)
+    person_cache.cache.select(&:expired?).each(&:destroy)
+    employment_cache.cache.select(&:expired?).each(&:destroy)
   end
 
 end

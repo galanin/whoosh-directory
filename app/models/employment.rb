@@ -3,11 +3,8 @@ class Employment < ApplicationRecord
   include Mongoid::Timestamps
   include ImportEntity
 
-  field :uuid,              type: String
-  field :person_uuid,       type: String
+  field :_id,               type: String
   field :post,              type: String
-  field :unit_uuid,         type: String
-  field :dept_uuid,         type: String
   field :number,            type: Integer
   field :category,          type: String
   field :office,            type: String
