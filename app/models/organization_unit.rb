@@ -9,6 +9,7 @@ class OrganizationUnit < ApplicationRecord
   field :path,           type: String
   field :child_ids,      type: Array
   field :employment_ids, type: Array
+  field :level,          type: Integer
 
   has_many   :children, inverse_of: :parent, class_name: 'OrganizationUnit', order: :path.asc
   belongs_to :parent, inverse_of: :children, class_name: 'OrganizationUnit', optional: true

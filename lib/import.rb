@@ -51,6 +51,9 @@ class Import
       parent.child_ids ||= []
       parent.child_ids << unit.id
     end
+    unit_cache.cache.each { |unit| unit.level = nil }
+    unit_cache.cache.each { |unit| count_unit_level(unit); puts "#{unit.id} #{unit.level}" }
+
     employment_cache.cache.each do |employment|
       person = person_cache.index_by_id[employment.person_id]
       person.employment_ids ||= []
@@ -58,6 +61,15 @@ class Import
       unit = unit_cache.index_by_id[employment.unit_id]
       unit.employment_ids ||= []
       unit.employment_ids << employment.id
+    end
+  end
+
+
+  def count_unit_level(unit)
+    unit.level ||= if unit.parent_id.blank?
+      0
+    else
+      count_unit_level(unit_cache.index_by_id[unit.parent_id]) + 1
     end
   end
 
