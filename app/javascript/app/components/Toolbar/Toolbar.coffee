@@ -29,11 +29,9 @@ class Toolbar extends React.Component
 
   render: ->
     current = @props.current_tool
-    console.log current
 
     div { className: 'toolbar nailed' },
       for key, button of buttons
-        console.log key, button
         toolbar_button { key: key, href: button.href, icon: button.icon, label: button.label, current: current == key }
 
 

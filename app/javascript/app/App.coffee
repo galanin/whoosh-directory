@@ -25,7 +25,6 @@ class App extends React.Component
 #    store.dispatch setData(this.props.data)
 
   render: ->
-    console.log store
     provider { store: store },
       connected_router { history: history },
         route { component: TopLayout }
