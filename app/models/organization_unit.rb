@@ -4,8 +4,9 @@ class OrganizationUnit < ApplicationRecord
   include ImportEntity
 
   field :_id,            type: String
-  field :title,          type: String
-  field :short,          type: String
+  field :long_title,     type: String
+  field :short_title,    type: String
+  field :list_title,     type: String
   field :path,           type: String
   field :child_ids,      type: Array
   field :employment_ids, type: Array
@@ -21,8 +22,9 @@ class OrganizationUnit < ApplicationRecord
   def as_json(options = nil)
     {
         id:             id.to_s,
-        title:          title,
-        short:          short,
+        long_title:     long_title,
+        short_title:    short_title,
+        list_title:     list_title,
         parent_id:      parent_id.to_s,
         path:           path,
         level:          level,

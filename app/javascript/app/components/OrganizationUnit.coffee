@@ -59,7 +59,7 @@ class OrganizationUnit extends React.Component
 
       div { className: 'organization-unit__content' },
         div { className: 'organization-unit__title' },
-          @props.unit_data.short || @props.unit_data.title
+          @props.unit_data.list_title
         if @props.unit_data.child_ids.length > 0
           div { className: 'organization-unit__children' },
             for child_id in @props.unit_data.child_ids

@@ -22,11 +22,12 @@ class Import
     def import_units
       @new_units ||= @doc.xpath('.//organization').map do |org|
         @import.unit_cache.import(
-            id:        org['ID'],
-            title:     org['FULLNAME'],
-            short:     org['NAME'],
-            path:      org['HASH'],
-            parent_id: org['UP_ID'],
+            id:          org['ID'],
+            long_title:  org['FULLNAME'],
+            short_title: org['NAME'],
+            list_title:  org['FULLNAME'].length > 60 ? (org['NAME'].presence || org['FULLNAME']) : (org['FULLNAME'].presence || org['NAME']),
+            path:        org['HASH'],
+            parent_id:   org['UP_ID'],
             )
       end
     end
