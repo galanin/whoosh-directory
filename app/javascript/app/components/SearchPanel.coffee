@@ -16,7 +16,7 @@ import hot_phones from './hot-phones.svg'
 
 class SearchPanel extends React.Component
   render: ->
-    div { className: 'search-panel nailed' },
+    div { className: 'search-panel plug' },
       div { className: 'search-panel__input-container' },
         input { autoFocus: true, className: 'search-panel__input' }
         div { className: 'search-panel__reset' },

@@ -8,6 +8,8 @@ import { Route } from 'react-router'
 
 import history from './utils/history'
 import store from './utils/store'
+import { setUnits } from './actions/units'
+import { setExpandedUnits } from './actions/expand_units'
 
 import TopLayout from './components/TopLayout'
 
@@ -19,10 +21,13 @@ route = React.createFactory(Route)
 
 class App extends React.Component
   @propTypes =
-    data: PropTypes.object
+    organization_units: PropTypes.object
+  @contextTypes =
+    store: PropTypes.object
 
   componentWillMount: ->
-#    store.dispatch setData(this.props.data)
+    store.dispatch setUnits(this.props.organization_units)
+    store.dispatch setExpandedUnits(this.props.expanded_units)
 
   render: ->
     provider { store: store },

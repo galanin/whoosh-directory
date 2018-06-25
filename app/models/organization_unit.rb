@@ -17,4 +17,18 @@ class OrganizationUnit < ApplicationRecord
   has_many :unit_employments, inverse_of: :unit, class_name: 'Employment'
   has_many :dept_employments, inverse_of: :dept, class_name: 'Employment'
 
+
+  def as_json(options = nil)
+    {
+        id:             id.to_s,
+        title:          title,
+        short:          short,
+        parent_id:      parent_id.to_s,
+        path:           path,
+        level:          level,
+        child_ids:      child_ids,
+        employment_ids: employment_ids,
+    }
+  end
+
 end

@@ -30,7 +30,7 @@ class Toolbar extends React.Component
   render: ->
     current = @props.current_tool
 
-    div { className: 'toolbar nailed' },
+    div { className: 'toolbar plug' },
       for key, button of buttons
         toolbar_button { key: key, href: button.href, icon: button.icon, label: button.label, current: current == key }
 
