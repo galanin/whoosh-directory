@@ -2,20 +2,20 @@ require 'import'
 
 class Import
   class ONPP
-    
+
     def initialize(import, xml_str)
       @import = import
       @doc = Nokogiri::XML(xml_str, nil, 'CP1251')
     end
-    
-    
+
+
     def execute
       import_units
       import_people
       import_employments
     end
-    
-    
+
+
     private
 
 
@@ -25,7 +25,7 @@ class Import
             id:          org['ID'],
             long_title:  org['FULLNAME'],
             short_title: org['NAME'],
-            list_title:  org['FULLNAME'].length > 60 ? (org['NAME'].presence || org['FULLNAME']) : (org['FULLNAME'].presence || org['NAME']),
+            list_title:  org['FULLNAME'].length > 80 ? (org['NAME'].presence || org['FULLNAME']) : (org['FULLNAME'].presence || org['NAME']),
             path:        org['HASH'],
             parent_id:   org['UP_ID'],
             )
