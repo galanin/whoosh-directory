@@ -5,9 +5,12 @@
 #   git config --global core.excludesfile '~/.gitignore_global'
 
 /.idea/
+.DS_Store
 
 # Ignore bundler config.
 /.bundle/
+
+.env
 
 /config/mongoid.yml
 
@@ -18,12 +21,18 @@
 !/tmp/.keep
 
 /node_modules
+/node_modules_cache/
 /yarn-error.log
+/npm-error.log
 
 .byebug_history
 /public/packs/
 /public/packs-test/
-/node_modules/
-/node_modules_cache/
 yarn-debug.log*
-.yarn-integrity
+npm-debug.log*
+
+# ignore built static files
+/dist
+/webpack-assets.json
+/webpack-stats.json
+/react-loadable.json

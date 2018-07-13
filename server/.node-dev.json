@@ -1,0 +1,21 @@
+{
+  "notify": false,
+  "extensions": {
+    "js": {
+      "name": "babel-core/register",
+      "options": {
+        "presets": [
+          "react", "es2017"
+        ],
+        "plugins": [
+          "transform-class-properties",
+          "transform-object-rest-spread",
+          "dynamic-import-node"
+        ]
+      }
+    },
+    "svg": {
+      "name": "babel-core/register"
+    }
+  }
+}

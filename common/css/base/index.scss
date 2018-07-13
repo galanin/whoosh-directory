@@ -1,0 +1,14 @@
+// Resource files (.e.g. variables, mixins, etc)
+@import '../resources/variables';
+@import '../resources/mixins';
+
+// Add custom fonts, overrides, and base styles.
+@import 'fonts';
+@import 'overrides';
+@import 'styles';
+@import 'top-layout';
+@import 'toolbar';
+@import 'search-panel';
+@import 'working-area';
+@import 'organization-structure';
+@import 'organization-unit';
