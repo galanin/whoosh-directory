@@ -3,7 +3,7 @@ class Import
   class Cache
 
     attr_reader :cache, :index_by_id
-    delegate :each, to: :cache
+    delegate :each, :select, to: :cache
     delegate :[], to: :index_by_id
 
 
@@ -53,8 +53,15 @@ class Import
       parent.child_ids ||= []
       parent.child_ids << unit.id
     end
+
+    unit_cache.each do |unit|
+      next unless unit.child_ids.present?
+      unit.child_ids.uniq!
+      unit.child_ids.sort_by! { |child_id| unit_cache[child_id].path }
+    end
+
     unit_cache.each { |unit| unit.level = nil }
-    unit_cache.each { |unit| count_unit_level(unit); puts "#{unit.id} #{unit.level}" }
+    unit_cache.each { |unit| count_unit_level(unit); }
 
     employment_cache.each do |employment|
       person = person_cache[employment.person_id]
