@@ -12,7 +12,7 @@ class OrganizationUnit < ApplicationRecord
   field :employment_ids, type: Array
   field :level,          type: Integer
 
-  has_many   :children, inverse_of: :parent, class_name: 'OrganizationUnit', order: :path.asc
+  has_many   :subunits, inverse_of: :parent, class_name: 'OrganizationUnit', order: :path.asc
   belongs_to :parent, inverse_of: :children, class_name: 'OrganizationUnit', optional: true
 
   has_many :unit_employments, inverse_of: :unit, class_name: 'Employment'
