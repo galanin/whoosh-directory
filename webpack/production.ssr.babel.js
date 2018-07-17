@@ -35,7 +35,7 @@ export default merge.strategy({
     }
   },
   target: 'node',
-  entry: ['./server/renderer/handler.js'],
+  entry: ['./server/renderer/handler.jsx'],
   externals: [
     // images are handled by isomorphic webpack.
     // html files are required directly
@@ -59,6 +59,24 @@ export default merge.strategy({
           // tell babel to uglify production server code for SSR rendering
           options: set(babelOpts, 'presets[0][1].targets.uglify', true)
         }
+      },
+      {
+        test: /\.coffee$/,
+        exclude: /node_modules/,
+        use: [
+          {
+            loader: 'babel-loader',
+            options: babelOpts
+          },
+          {
+            loader: 'coffee-loader',
+            options: {
+              transpile: {
+                presets: ['env']
+              }
+            }
+          }
+        ]
       },
       {
         test: /\.scss$/,
