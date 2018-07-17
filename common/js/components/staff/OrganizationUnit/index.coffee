@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import classNames from 'classnames'
-import InlineSVG from 'svg-inline-react'
+import InlineSVG from 'react-svg-inline'
 
 import { collapseUnit, expandUnit } from '@actions/expand_units'
 
@@ -52,8 +52,8 @@ class OrganizationUnit extends React.Component
     div { className: class_name },
       if has_children
         div { className: 'organization-unit__button', onClick: @onClick.bind(this) },
-          svg { className: 'organization-unit__button-open', src: require('./icons/plus-square.svg') }
-          svg { className: 'organization-unit__button-close', src: require('./icons/minus-square.svg') }
+          svg { className: 'organization-unit__button-open', svg: Plus }
+          svg { className: 'organization-unit__button-close', svg: Minus }
       else
         div { className: 'organization-unit__button-stub' },
 

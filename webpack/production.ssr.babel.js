@@ -85,6 +85,33 @@ export default merge.strategy({
             }
           }
         ]
+      },
+      {
+        test: /\.svg$/,
+        use: [
+          {
+            loader: 'raw-loader'
+          },
+          {
+            loader: 'svgo-loader',
+            options: {
+              plugins: [
+                {removeStyleElement: true},
+                {removeScriptElement: true},
+                {removeTitle: true},
+                {convertColors: {shorthex: true}},
+                {removeViewBox: false},
+                {removeDimensions: true},
+                {removeEditorsNSData: true},
+                {removeUnusedNS: true},
+                {removeXMLProcInst: true},
+                {removeDoctype: true},
+                {removeXMLNS: true}
+              ],
+              floatPrecision: 2
+            }
+          }
+        ]
       }
     ]
   }
