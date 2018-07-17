@@ -22,7 +22,7 @@ export fetchInitialState = () ->
       .then (data) ->
         dispatch(fetchInitialStateSuccess())
         dispatch(setUnits(data.data.organization_units))
-        dispatch(setExpandedUnits(new Set(data.data.expanded_units)))
+        dispatch(setExpandedUnits(data.data.expanded_units))
 
         Promise.resolve(data)
       .catch (error) ->

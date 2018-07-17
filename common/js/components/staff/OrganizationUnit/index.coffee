@@ -15,13 +15,8 @@ import Plus from './icons/plus-square.svg'
 
 
 mapStateToProps = (state, ownProps) ->
-  is_expanded = if state.expanded_units.toString() == '[object Set]'
-      state.expanded_units.has(ownProps.unit_id)
-    else
-      state.expanded_units.indexOf(ownProps.unit_id) >= 0
-
   unit_data: state.organization_units[ownProps.unit_id]
-  is_expanded: is_expanded
+  is_expanded: state.expanded_units[ownProps.unit_id]?
 
 mapDispatchToProps = (dispatch, ownProps) ->
   expand: (unit_id) -> dispatch(expandUnit(unit_id))
