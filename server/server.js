@@ -14,7 +14,7 @@ const app = new express();
 app.use(helmet());
 
 // Ensures SSL in used in production.
-app.use(httpsRedirect({ enabled: env === 'production' }));
+// app.use(httpsRedirect({ enabled: env === 'production' }));
 
 // parse cookies!
 app.use(cookieParser());
