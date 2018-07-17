@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import classNames from 'classnames'
-import InlineSVG from 'svg-inline-react'
+import InlineSVG from 'react-svg-inline'
 
 a = React.createFactory('a')
 div = React.createFactory('div')
@@ -17,7 +17,7 @@ class ToolbarButton extends React.Component
       'current-tool': this.props.current
 
     a { className: class_name, href: @props.href },
-      svg { src: require('./icons/' + @props.file) }
+      svg { svg: @props.svg }
       div { className: 'label' },
         @props.label
 

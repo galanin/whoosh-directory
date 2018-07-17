@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import InlineSVG from 'svg-inline-react'
+import InlineSVG from 'react-svg-inline'
 
 div = React.createFactory('div')
 img = React.createFactory('img')
@@ -18,14 +18,14 @@ class SearchPanel extends React.Component
       div { className: 'search-panel__input-container' },
         input { autoFocus: true, className: 'search-panel__input' }
         div { className: 'search-panel__reset' },
-          svg { className: 'search-panel__reset-icon', src: require('./icons/backspace.svg') },
+          svg { className: 'search-panel__reset-icon', svg: Backspace },
       div { className: 'search-panel__buttons-container' },
         div { className: 'search-panel__hot-button' },
           div { className: 'search-panel__hot-button-bg' },
-            svg { className: 'search-panel__hot-button-img', src: require('./icons/happy-birthday.svg') }
+            svg { className: 'search-panel__hot-button-img', svg: HappyBirthday }
         div { className: 'search-panel__hot-button' },
           div { className: 'search-panel__hot-button-bg' },
-            svg { className: 'search-panel__hot-button-img', src: require('./icons/hot-phones.svg') }
+            svg { className: 'search-panel__hot-button-img', svg: HotPhones }
 
 
 export default SearchPanel

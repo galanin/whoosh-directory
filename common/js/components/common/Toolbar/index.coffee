@@ -6,23 +6,20 @@ div = React.createFactory 'div'
 import ToolbarButton from './button'
 toolbar_button = React.createFactory(ToolbarButton)
 
-#import SVGInline from "react-svg-inline"
 import Logo from "./icons/logo-white.svg"
 import Phonebook from "./icons/phonebook.svg"
 
-#logo = React.createFactory(Logo)
-#phonebook = React.createFactory(Phonebook)
 
 buttons =
   portal:
     key:  'logo'
     href: 'http://portal'
-    file: 'logo-white.svg'
+    svg:  Logo
     label: 'Портал'
   staff:
     key:  'staff'
     href: 'http://staff'
-    file: 'phonebook.svg'
+    svg:  Phonebook
     label: 'Справочник сотрудников'
     current: true
 
