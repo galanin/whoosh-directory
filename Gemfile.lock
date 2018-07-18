@@ -206,6 +206,7 @@ DEPENDENCIES
   puma (~> 3.7)
   rack
   rails_real_favicon
+  rake
   spring
   spring-watcher-listen (~> 2.0.0)
   tzinfo-data
