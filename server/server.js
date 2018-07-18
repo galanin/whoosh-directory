@@ -2,7 +2,7 @@ import path from 'path';
 import express from 'express';
 import helmet from 'helmet';
 import compression from 'compression';
-import Api from './api';
+// import Api from './api';
 import cookieParser from 'cookie-parser';
 import ReactRenderer from './renderer';
 import { httpsRedirect } from '$middleware';
@@ -31,13 +31,13 @@ app.use(
 );
 
 // handle browsers requesting favicon
-app.use(
-  '/favicon.ico',
-  express.static(path.join(__dirname, '../common/images/favicon/favicon.ico'))
-);
+// app.use(
+//   '/favicon.ico',
+//   express.static(path.join(__dirname, '../common/images/favicon/favicon.ico'))
+// );
 
 // Mount the REST API
-app.use('/api', Api);
+// app.use('/api', Api);
 
 // Mount the react render handler
 
