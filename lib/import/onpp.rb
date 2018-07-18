@@ -1,4 +1,5 @@
 require 'import'
+require 'nokogiri'
 
 class Import
   class ONPP
