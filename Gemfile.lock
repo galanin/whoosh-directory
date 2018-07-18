@@ -195,6 +195,7 @@ PLATFORMS
 
 DEPENDENCIES
   activejob (~> 5.1.5)
+  activesupport (~> 5.1.5)
   byebug
   dotenv
   grape

@@ -16,7 +16,7 @@ gem 'grape-cli'
 # gem 'actionview', '~> 5.1.5'
 gem 'activejob', '~> 5.1.5'
 # gem 'activemodel', '~> 5.1.5'
-# gem 'activesupport', '~> 5.1.5'
+gem 'activesupport', '~> 5.1.5'
 
 # Use sqlite3 as the database for Active Record
 gem 'mongoid'
