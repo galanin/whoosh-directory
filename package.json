@@ -81,7 +81,7 @@
       "command": "$(npm bin)/webpack --config webpack/production.client.babel.js --progress",
       "env": {
         "NODE_ENV": "production",
-        "PUBLIC_ASSET_PATH": "/assets/"
+        "PUBLIC_ASSET_PATH": "/"
       }
     },
     "prod:build:ssr": {
