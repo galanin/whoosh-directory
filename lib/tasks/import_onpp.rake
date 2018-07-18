@@ -1,7 +1,8 @@
+require 'dotenv/tasks'
 require 'import/onpp'
 
 task import: :environment do
-  xml_str = IO.read File.join(Rails.root, 'tmp', 'onpp.xml')
+  xml_str = IO.read ENV['STAFF_IMPORT_FILE_PATH']
 
   common_import = Import.new
   Import::ONPP.new(common_import, xml_str).execute

@@ -55,6 +55,7 @@ GEM
       thread_safe (~> 0.3, >= 0.3.1)
     domain_name (0.5.20170404)
       unf (>= 0.0.5, < 1.0.0)
+    dotenv (2.4.0)
     equalizer (0.0.11)
     erubi (1.7.1)
     ffi (1.9.23)
@@ -195,6 +196,7 @@ PLATFORMS
 DEPENDENCIES
   activejob (~> 5.1.5)
   byebug
+  dotenv
   grape
   grape-cli
   jbuilder (~> 2.5)
@@ -210,4 +212,4 @@ DEPENDENCIES
   web-console (>= 3.3.0)
 
 BUNDLED WITH
-   1.16.1
+   1.16.3
