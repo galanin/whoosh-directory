@@ -56,12 +56,6 @@ class Import
       parent.child_ids << unit.id
     end
 
-    unit_cache.each do |unit|
-      next unless unit.child_ids.present?
-      unit.child_ids.uniq!
-      unit.child_ids.sort_by! { |child_id| unit_cache[child_id].path }
-    end
-
     unit_cache.each { |unit| unit.level = nil }
     unit_cache.each { |unit| count_unit_level(unit); }
 
@@ -72,6 +66,23 @@ class Import
       unit = unit_cache[employment.unit_id]
       unit.employment_ids ||= []
       unit.employment_ids << employment.id
+    end
+
+    unit_cache.each do |unit|
+      if unit.child_ids.present?
+        unit.child_ids.uniq!
+        unit.child_ids.sort_by! { |child_id| unit_cache[child_id].path }
+      end
+      if unit.employment_ids.present?
+        unit.employment_ids.uniq!
+        # TODO sort people in unit
+      end
+    end
+
+    person_cache.each do |person|
+      if person.employment_ids.present?
+        person.employment_ids.uniq!
+      end
     end
   end
 
