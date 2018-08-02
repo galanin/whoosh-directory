@@ -40,7 +40,6 @@ avatars =
 
 
 mapStateToProps = (state, ownProps) ->
-  console.log ownProps.employment_id, state.employments[ownProps.employment_id]
   employment = state.employments[ownProps.employment_id]
   employment: employment
   person: state.people[employment.person_id]
