@@ -1,0 +1,93 @@
+.organization-unit-node
+  position: relative
+  display: flex
+
+  & + .organization-unit-node
+    margin-top: 0
+
+  &.organization-unit-node_expanded
+    & > .organization-unit-node__button
+      & > .organization-unit-node__button-open
+        display: none
+
+  &.organization-unit-node_collapsed
+    & > .organization-unit-node__button
+      & > .organization-unit-node__button-close
+        display: none
+
+    .organization-unit-node__children
+      display: none
+
+
+  &:before
+    position: absolute
+    left: 18px
+    width: 20px
+    top: 16px
+    border-top: 1px dotted #bbb
+    z-index: 0
+    content: ''
+
+  &.organization-unit-node_has_children.organization-unit-node_expanded
+    &:after
+      position: absolute
+      left: 48px
+      width: 0
+      top: 10px
+      bottom: 0
+      border-left: 1px dotted #bbb
+      z-index: 0
+      content: ''
+
+  &:last-child
+    & > .organization-unit-node__content
+      position: relative
+
+      &:before
+        position: absolute
+        left: -17px
+        width: 2px
+        top: 17px
+        bottom: 0
+        background-color: #fff
+        content: ''
+
+.organization-unit-node__button,
+.organization-unit-node__button-stub
+  flex: 0 0 32px
+  height: 32px
+  z-index: 2
+
+.organization-unit-node__button
+  cursor: pointer
+  position: relative
+
+  &:hover
+
+    .organization-unit-node__button-border
+      fill: #6e0d59
+
+    .organization-unit-node__button-sign
+      fill: #6e0d59
+
+.organization-unit-node__button-bg
+  fill: #fff
+
+.organization-unit-node__button-border
+  fill: #ccc
+
+.organization-unit-node__button-sign
+  fill: #bbb
+
+.organization-unit-node__content
+  position: relative
+  flex: 0 1 100%
+  z-index: 1
+
+.organization-unit-node__title
+  margin: 0 0 4px 8px
+  padding: 5px 0 0 2px
+  color: #2b1626
+  background-color: #fff
+  cursor: pointer
+  z-index: 1

@@ -18,7 +18,7 @@ export fetchInitialState = () ->
     dispatch(fetchInitialStateRequest())
 
     api
-      .get '/api/bootstrap'
+      .get '/bootstrap'
       .then (data) ->
         dispatch(fetchInitialStateSuccess())
         dispatch(setUnits(data.data.organization_units))

@@ -6,8 +6,8 @@ import * as UnitActions from '@actions/units';
 
 div = React.createFactory('div')
 
-import OrganizationUnit from '@components/staff/OrganizationUnit'
-organization_unit = React.createFactory(OrganizationUnit)
+import OrganizationUnitNode from '@components/staff/OrganizationUnitNode'
+organization_unit = React.createFactory(OrganizationUnitNode)
 
 
 mapStateToProps = (state) ->

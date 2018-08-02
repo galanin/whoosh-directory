@@ -1,5 +1,6 @@
 import {
   SET_UNITS,
+  LOAD_UNIT_INFO,
 } from '@constants/units'
 
 export default (state = {}, action) ->
