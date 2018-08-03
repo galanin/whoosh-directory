@@ -10,10 +10,5 @@
  * Otherwise, files will be added to the main app.css chunk.
  */
 
-// Pre-built Semantic-UI css. If you want to customize this, you can build your
-// own distribution of it and include it here.
-// See https: *semantic-ui.com/introduction/build-tools.html
-import 'semantic-ui-css/semantic.min.css';
-
 // Include initial base styles.
 import '@css/base/index.scss';
