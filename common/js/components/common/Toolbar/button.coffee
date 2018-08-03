@@ -1,11 +1,11 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import classNames from 'classnames'
-import InlineSVG from 'react-svg-inline'
+import SvgIcon from '@components/common/SvgIcon'
 
 a = React.createFactory('a')
 div = React.createFactory('div')
-svg = React.createFactory(InlineSVG)
+svg = React.createFactory(SvgIcon)
 
 
 class ToolbarButton extends React.Component

@@ -30,8 +30,7 @@ module.exports = {
           'jpg',
           'jpeg',
           'gif',
-          'ico',
-          'svg'
+          'ico'
         ]
       }
     }

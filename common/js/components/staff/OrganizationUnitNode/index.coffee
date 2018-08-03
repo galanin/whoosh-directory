@@ -3,13 +3,13 @@ import PropTypes from 'prop-types'
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import classNames from 'classnames'
-import InlineSVG from 'react-svg-inline'
+import SvgIcon from '@components/common/SvgIcon'
 
 import { collapseUnit, expandUnit } from '@actions/expand_units'
 import { loadUnitInfo } from '@actions/units'
 
 div = React.createFactory('div')
-svg = React.createFactory(InlineSVG)
+svg = React.createFactory(SvgIcon)
 
 import Minus from './icons/minus-square.svg'
 import Plus from './icons/plus-square.svg'

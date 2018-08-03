@@ -1,10 +1,10 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import InlineSVG from 'react-svg-inline'
+import SvgIcon from '@components/common/SvgIcon'
 
 div = React.createFactory('div')
 img = React.createFactory('img')
-svg = React.createFactory(InlineSVG)
+svg = React.createFactory(SvgIcon)
 input = React.createFactory('input')
 
 import Backspace from './icons/backspace.svg'

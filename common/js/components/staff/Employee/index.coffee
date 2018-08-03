@@ -3,13 +3,13 @@ import PropTypes from 'prop-types'
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import classNames from 'classnames'
-import InlineSVG from 'react-svg-inline'
+import SvgIcon from '@components/common/SvgIcon'
 
 import { loadUnitInfo } from '@actions/units'
 
 div = React.createFactory('div')
 span = React.createFactory('span')
-svg = React.createFactory(InlineSVG)
+svg = React.createFactory(SvgIcon)
 
 import LeaderMan from './icons/leader-man.svg'
 import LeaderWoman from './icons/leader-woman.svg'
@@ -23,14 +23,14 @@ import AuxiliaryWorkerMan from './icons/auxiliary-worker-man.svg'
 import AuxiliaryWorkerWoman from './icons/auxiliary-worker-woman.svg'
 
 avatars =
-  F: [
+  M: [
     LeaderMan
     SpecialistMan
     EmployeeMan
     WorkerMan
     AuxiliaryWorkerMan
   ]
-  M: [
+  F: [
     LeaderWoman
     SpecialistWoman
     EmployeeWoman
@@ -55,12 +55,15 @@ class Employee extends React.Component
 
 
   render: ->
+    avatar = avatars[@props.person.gender][@props.employment.category]
+
     div { className: 'employee', onClick: @onEmployeeClick.bind(this) },
       div { className: 'employee__photo' },
         div { className: 'employee__avatar' },
-          avatar = avatars[@props.person.gender][@props.employment.category]
           if avatar?
             svg { svg: avatar }
+          else
+            ''
 
       div { className: 'employee__info' },
         div { className: 'employee__name' },
