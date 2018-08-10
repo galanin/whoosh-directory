@@ -36,6 +36,9 @@ gem 'jbuilder', '~> 2.5'
 gem 'nokogiri'
 gem 'dotenv'
 gem 'rake'
+gem 'mini_magick'
+gem 'carrierwave', '~> 1.2', require: 'carrierwave'
+gem 'carrierwave-mongoid', require: 'carrierwave/mongoid'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

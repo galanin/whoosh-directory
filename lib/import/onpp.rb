@@ -44,7 +44,7 @@ class Import
 
     def import_people
       @new_people ||= @doc.xpath('.//person').map do |person|
-        @import.person_cache.import(
+        person = @import.person_cache.import(
           id:            person['ID_FL'],
           first_name:    person['I'],
           middle_name:   person['O'],
@@ -53,6 +53,25 @@ class Import
           hide_birthday: person['HIDE_DATE_R'],
           gender:        GENDERS[person['SEX']],
         )
+        import_person_photo(person)
+        person.save!
+      end
+    end
+
+
+    def import_person_photo(person)
+      photo_path = File.join(ENV['STAFF_IMPORT_PHOTO_PATH'], "#{person.id}.jpg")
+      if File.exists?(photo_path)
+        photo_modified_time = File.mtime(photo_path)
+        if person.photo_updated_at.nil? || photo_modified_time > person.photo_updated_at
+          puts ' import'
+          File.open(photo_path) do |f|
+            person.photo = f
+            puts "  success #{person.photo.current_path}"
+          end
+        else
+          puts ' ignore'
+        end
       end
     end
 

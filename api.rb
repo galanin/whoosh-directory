@@ -16,6 +16,7 @@ require 'grape'
 require 'json'
 
 Dir["#{File.dirname(__FILE__)}/config/initializers/*.rb"].each { |f| require f }
+Dir["#{File.dirname(__FILE__)}/app/uploaders/**/*.rb"].each { |f| require f }
 Dir["#{File.dirname(__FILE__)}/app/models/concerns/**/*.rb"].each { |f| require f }
 require_relative 'app/models/application_record'
 Dir["#{File.dirname(__FILE__)}/app/models/**/*.rb"].each { |f| require f }

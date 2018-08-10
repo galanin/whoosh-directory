@@ -14,7 +14,8 @@ module.exports = {
   clientEnv: [
     'NODE_ENV',
     'APPLICATION_BASE_URL',
-    'API_BASE_URL'
+    'API_BASE_URL',
+    'PHOTO_BASE_URL'
   ],
 
   /* The identifier to use for css-modules.

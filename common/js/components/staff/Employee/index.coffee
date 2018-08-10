@@ -9,6 +9,7 @@ import { loadUnitInfo } from '@actions/units'
 
 div = React.createFactory('div')
 span = React.createFactory('span')
+img = React.createFactory('img')
 svg = React.createFactory(SvgIcon)
 
 import LeaderMan from './icons/leader-man.svg'
@@ -59,11 +60,17 @@ class Employee extends React.Component
 
     div { className: 'employee', onClick: @onEmployeeClick.bind(this) },
       div { className: 'employee__photo' },
-        div { className: 'employee__avatar' },
-          if avatar?
-            svg { svg: avatar }
-          else
-            ''
+        if @props.person.photo.thumb45.url? || @props.person.photo.thumb60.url?
+          if @props.person.photo.thumb45.url?
+            img { src: process.env.PHOTO_BASE_URL + @props.person.photo.thumb45.url, className: 'employee__thumb45' }
+          if @props.person.photo.thumb60.url?
+            img { src: process.env.PHOTO_BASE_URL + @props.person.photo.thumb60.url, className: 'employee__thumb60' }
+        else
+          div { className: 'employee__avatar' },
+            if avatar?
+              svg { svg: avatar }
+            else
+              ''
 
       div { className: 'employee__info' },
         div { className: 'employee__name' },

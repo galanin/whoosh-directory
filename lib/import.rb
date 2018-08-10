@@ -25,6 +25,7 @@ class Import
         entity = create(field_values)
       end
       entity.imported!
+      entity
     end
 
 

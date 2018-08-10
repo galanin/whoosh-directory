@@ -1,3 +1,5 @@
+require 'carrierwave/mongoid'
+
 class Person < ApplicationRecord
   include Mongoid::Document
   include Mongoid::Timestamps
@@ -14,5 +16,8 @@ class Person < ApplicationRecord
 
 
   has_many   :employments
+
+  mount_uploader :photo, PersonPhotoUploader
+  field :photo_updated_at, type: Time
 
 end

@@ -116,6 +116,10 @@
       }
     }
   },
+  "nodemonConfig": {
+    "ignore": ["app/*", "bin/*", "config/*", "dist/*", "lib/*", "log/*", "node_modules/*", "node_modules_cache/*", "public/*", "tmp/*" ],
+    "delay": "2500"
+  },
   "devDependencies": {
     "autoprefixer": "^8.2.0",
     "babel-cli": "^6.26.0",
