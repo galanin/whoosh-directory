@@ -25,9 +25,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0"
      inkscape:pageshadow="2"
-     inkscape:zoom="7.2407734"
-     inkscape:cx="47.893239"
-     inkscape:cy="-0.58091724"
+     inkscape:zoom="14.481547"
+     inkscape:cx="39.206672"
+     inkscape:cy="9.8662012"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -42,7 +42,7 @@
      inkscape:snap-to-guides="true"
      guidetolerance="30">
     <sodipodi:guide
-       position="11,0"
+       position="12,0"
        orientation="1,0"
        id="guide4135"
        inkscape:label=""
@@ -78,7 +78,7 @@
        inkscape:label=""
        inkscape:color="rgb(0,0,255)" />
     <sodipodi:guide
-       position="0,24.000001"
+       position="0,22.000001"
        orientation="0,1"
        id="guide4147"
        inkscape:label=""
@@ -102,13 +102,13 @@
        inkscape:label=""
        inkscape:color="rgb(0,0,255)" />
     <sodipodi:guide
-       position="0,0"
+       position="10,0"
        orientation="1,0"
        id="guide4155"
        inkscape:label=""
        inkscape:color="rgb(0,0,255)" />
     <sodipodi:guide
-       position="8,0"
+       position="0,23.000001"
        orientation="1,0"
        id="guide4157"
        inkscape:label=""
@@ -156,7 +156,7 @@
        inkscape:label=""
        inkscape:color="rgb(0,0,255)" />
     <sodipodi:guide
-       position="0,26.000001"
+       position="0,25.000001"
        orientation="0,1"
        id="guide4160"
        inkscape:label=""
@@ -168,7 +168,7 @@
        inkscape:label=""
        inkscape:color="rgb(0,0,255)" />
     <sodipodi:guide
-       position="6,0"
+       position="7,0"
        orientation="1,0"
        id="guide4164"
        inkscape:label=""
@@ -198,18 +198,19 @@
      id="layer1">
     <path
        style="fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:1.70000005;stroke-linecap:round;stroke-linejoin:bevel;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
-       d="m 6,6.0000003 20,0 L 26,26 6,26 Z"
+       d="M 7,7 26,7 26,26 7,26 Z"
        id="rect4162"
-       inkscape:connector-curvature="0" />
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="ccccc" />
     <path
        style="fill:#d8d8d8;fill-opacity:1;stroke:none;stroke-width:1.70000005;stroke-linecap:round;stroke-linejoin:bevel;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
-       d="M 8,8 8,24 24,24 24,8 Z M 9,9 23,9 23,23 9,23 Z"
+       d="m 9,9 0,15 15,0 0,-15 z m 1,1 13,0 0,13 -13,0 z"
        id="rect4136"
        inkscape:connector-curvature="0"
        sodipodi:nodetypes="cccccccccc" />
     <path
        style="fill:#8e8e8e;fill-opacity:1;stroke:none;stroke-width:1.70000005;stroke-linecap:round;stroke-linejoin:bevel;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
-       d="m 21,15 0,2 -10,0 0,-2 z"
+       d="m 21,16 0,1 -9,0 0,-1 z"
        id="rect4141"
        inkscape:connector-curvature="0"
        sodipodi:nodetypes="ccccc" />
