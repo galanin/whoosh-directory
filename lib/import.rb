@@ -50,6 +50,9 @@ class Import
 
 
   def build_structure
+    cleanup_outdated_child_units
+    cleanup_outdated_employments
+
     unit_cache.each do |unit|
       next unless unit.parent_id.present?
       parent = unit_cache[unit.parent_id]
@@ -83,6 +86,24 @@ class Import
     person_cache.each do |person|
       if person.employment_ids.present?
         person.employment_ids.uniq!
+      end
+    end
+  end
+
+
+  def cleanup_outdated_child_units
+    unit_cache.each do |unit|
+      if unit.child_ids.present?
+        unit.child_ids.reject! { |child_id| unit_cache[child_id].nil? }
+      end
+    end
+  end
+
+
+  def cleanup_outdated_employments
+    unit_cache.each do |unit|
+      if unit.employment_ids.present?
+        unit.employment_ids.reject! { |employment_id| employment_cache[employment_id].nil? }
       end
     end
   end
