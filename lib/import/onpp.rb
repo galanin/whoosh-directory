@@ -67,6 +67,7 @@ class Import
           puts ' import'
           File.open(photo_path) do |f|
             person.photo = f
+            person.photo_updated_at = Time.now
             puts "  success #{person.photo.current_path}"
           end
         else
