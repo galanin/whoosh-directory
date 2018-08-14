@@ -43,8 +43,8 @@ avatars =
 mapStateToProps = (state, ownProps) ->
   employment = state.employments[ownProps.employment_id]
   employment: employment
-  person: state.people[employment.person_id]
-  unit: state.organization_units[employment.unit_id]
+  person: employment && state.people[employment.person_id]
+  unit: employment && state.organization_units[employment.unit_id]
 
 mapDispatchToProps = (dispatch, ownProps) ->
   showEmployee: -> dispatch()
@@ -56,6 +56,8 @@ class Employee extends React.Component
 
 
   render: ->
+    return '' unless @props.employment
+
     avatar = avatars[@props.person.gender][@props.employment.category]
 
     div { className: 'employee', onClick: @onEmployeeClick.bind(this) },
