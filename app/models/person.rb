@@ -15,7 +15,7 @@ class Person < ApplicationRecord
   field :employment_ids,  type: Array
 
 
-  has_many   :employments
+  has_many :employments
 
   mount_uploader :photo, PersonPhotoUploader
   field :photo_updated_at, type: Time
