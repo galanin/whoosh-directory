@@ -64,4 +64,4 @@ end
 
 after 'npm:install', 'npm:build'
 after 'npm:build', 'pm2:reload'
-after 'npm:build', 'puma:phased-restart'
+after 'npm:build', 'puma:restart'
