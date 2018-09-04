@@ -20,7 +20,7 @@ class OrganizationUnit < ApplicationRecord
 
 
   def as_json(options = nil)
-    { 'id' => id }.merge attributes.except('_id')
+    super.except('_id').merge('id' => id)
   end
 
 end

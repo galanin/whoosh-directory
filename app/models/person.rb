@@ -20,4 +20,9 @@ class Person < ApplicationRecord
   mount_uploader :photo, PersonPhotoUploader
   field :photo_updated_at, type: Time
 
+
+  def as_json(options = nil)
+    super.except('_id').merge('id' => id)
+  end
+
 end

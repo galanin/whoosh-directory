@@ -23,4 +23,9 @@ class Employment < ApplicationRecord
   belongs_to :unit, inverse_of: :unit_employments, class_name: 'OrganizationUnit'
   belongs_to :dept, inverse_of: :dept_employments, class_name: 'OrganizationUnit'
 
+
+  def as_json(options = nil)
+    super.except('_id').merge('id' => id)
+  end
+
 end
