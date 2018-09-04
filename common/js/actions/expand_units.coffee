@@ -1,8 +1,8 @@
 import { SET_EXPANDED_UNITS, EXPAND_UNIT, COLLAPSE_UNIT } from '@constants/expand_units';
 
-export setExpandedUnits = (unit_hash) ->
+export setExpandedUnits = (unit_ids) ->
   type: SET_EXPANDED_UNITS,
-  unit_hash: unit_hash,
+  unit_ids: unit_ids,
 
 export expandUnit = (unit_id) ->
   type: EXPAND_UNIT,

@@ -9,26 +9,29 @@ module Staff
     end
 
 
+    after_validation do
+      UserSession.setup(params[:session_token])
+      present :session_token, UserSession.current.token
+    end
+
+
     get :bootstrap do
-      units    = OrganizationUnit.only(:id, :level, :path, :list_title, :child_ids).index_by(&:id)
-      expanded = units.select { |_, unit| unit.level < 2 }.map(&:second).map(&:id).map { |id| [id, 1] }.to_h
-      {
-          organization_units: units,
-          expanded_units:     expanded,
-      }
+      units = OrganizationUnit.only(:id, :level, :path, :list_title, :child_ids)
+      present :organization_units, units
+      present :expanded_units, UserSession.current.data[:expanded_units]
     end
 
 
     get 'units/:unit_id' do
       if params.key? :unit_id
         unit = OrganizationUnit.only(:long_title, :short_title, :employment_ids).find(params[:unit_id])
+        present :unit_info, [unit]
+
         employments = unit.employment_ids.present? ? Employment.find(unit.employment_ids) : []
+        present :employments, employments
+
         people = Person.find(employments.map(&:person_id))
-        {
-          unit_info:   unit,
-          employments: employments.index_by(&:id),
-          people:      people.index_by(&:id),
-        }
+        present :people, people
       end
     end
 

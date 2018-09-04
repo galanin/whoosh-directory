@@ -6,6 +6,10 @@ import {
 export default (state = {}, action) ->
   switch action.type
     when SET_UNITS
-      action.organization_units
+      units = {}
+      action.organization_units.forEach (unit) ->
+        units[unit.id] = unit
+      units
+
     else
       state

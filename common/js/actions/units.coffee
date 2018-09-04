@@ -13,7 +13,7 @@ export loadUnitInfo = (unit_id) ->
     Request.get("/units/#{unit_id}").then (result) ->
       dispatch(addPeople(result.body.people))
       dispatch(addEmployments(result.body.employments))
-      dispatch(showUnitInfo(result.body.unit_info))
+      dispatch(showUnitInfo(result.body.unit_info[0]))
     , (error) ->
 
 export showUnitInfo = (unit_info) ->
