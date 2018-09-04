@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux'
 import { routerReducer } from 'react-router-redux'
 
-import todos from './todos';
+import session from '@reducers/session';
 import units from '@reducers/units'
 import people from '@reducers/people'
 import employments from '@reducers/employments'
@@ -12,6 +12,7 @@ import layout from '@reducers/layout'
 
 
 export default combineReducers
+  session:            session
   organization_unit:  organization_unit
   organization_units: units
   people:             people

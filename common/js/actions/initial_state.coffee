@@ -5,6 +5,7 @@ import {
 } from '@constants/initial_state'
 import api from '@lib/api'
 import generateActionCreator from '@lib/generateActionCreator'
+import { setSessionToken } from '@actions/session'
 import { setUnits } from '@actions/units'
 import { setExpandedUnits } from '@actions/expand_units'
 
@@ -21,6 +22,7 @@ export fetchInitialState = () ->
       .get '/bootstrap'
       .then (data) ->
         dispatch(fetchInitialStateSuccess())
+        dispatch(setSessionToken(data.data.session_token))
         dispatch(setUnits(data.data.organization_units))
         dispatch(setExpandedUnits(data.data.expanded_units))
 

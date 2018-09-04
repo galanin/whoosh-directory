@@ -26,6 +26,12 @@ if (config.enableDynamicImports) {
 export default function handleRender(req, res) {
   let context = {}, modules = [], initialState = {};
 
+  if (req.cookies['staff_dir_session_token']) {
+    initialState['session'] = {
+      token: req.cookies['staff_dir_session_token']
+    };
+  }
+
   // Create a new Redux store instance
   const store = configureStore(initialState);
 
@@ -119,6 +125,14 @@ export default function handleRender(req, res) {
   // Execute the render only after all promises have been resolved.
   Promise.all(fetchData).then(() => {
     const state = store.getState();
+
+    if (state.session && state.session.token &&
+      req.cookies['staff_dir_session_token'] != state.session.token
+    ) {
+      res.cookie('staff_dir_session_token', state.session.token,
+        {maxAge: 10 * 365 * 24 * 3600 * 1000});
+    }
+
     const html = renderToString(getComponent());
     const bundles = stats && getBundles(stats, modules) || [];
     const markup = render(html, state, bundles);
