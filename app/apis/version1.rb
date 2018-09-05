@@ -35,5 +35,21 @@ module Staff
       end
     end
 
+
+    post 'units/:unit_id/expand' do
+      if params.key?(:unit_id) && params[:unit_id].present? && ! UserSession.current.data[:expanded_units].include?(params[:unit_id])
+        UserSession.current.data[:expanded_units] << params[:unit_id]
+        UserSession.current.save
+      end
+    end
+
+
+    post 'units/:unit_id/collapse' do
+      if params.key?(:unit_id) && params[:unit_id].present?
+        UserSession.current.data[:expanded_units].delete(params[:unit_id])
+        UserSession.current.save
+      end
+    end
+
   end
 end

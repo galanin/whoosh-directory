@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import classNames from 'classnames'
 import SvgIcon from '@components/common/SvgIcon'
 
-import { collapseUnit, expandUnit } from '@actions/expand_units'
+import { collapseUnit, saveCollapsedUnit, expandUnit, saveExpandedUnit } from '@actions/expand_units'
 import { loadUnitInfo } from '@actions/units'
 
 div = React.createFactory('div')
@@ -20,9 +20,14 @@ mapStateToProps = (state, ownProps) ->
   is_expanded: state.expanded_units[ownProps.unit_id]?
 
 mapDispatchToProps = (dispatch, ownProps) ->
-  expand: -> dispatch(expandUnit(ownProps.unit_id))
-  collapse: -> dispatch(collapseUnit(ownProps.unit_id))
-  loadEmployees: -> dispatch(loadUnitInfo(ownProps.unit_id))
+  expand: ->
+    dispatch(expandUnit(ownProps.unit_id))
+    dispatch(saveExpandedUnit(ownProps.unit_id))
+  collapse: ->
+    dispatch(collapseUnit(ownProps.unit_id))
+    dispatch(saveCollapsedUnit(ownProps.unit_id))
+  loadEmployees: ->
+    dispatch(loadUnitInfo(ownProps.unit_id))
 
 
 class OrganizationUnitNode extends React.Component
