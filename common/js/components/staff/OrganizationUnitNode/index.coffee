@@ -6,6 +6,7 @@ import classNames from 'classnames'
 import SvgIcon from '@components/common/SvgIcon'
 
 import { collapseUnit, saveCollapsedUnit, expandUnit, saveExpandedUnit } from '@actions/expand_units'
+import { setCurrentUnitId } from '@actions/current_unit'
 import { loadUnitInfo } from '@actions/units'
 
 div = React.createFactory('div')
@@ -18,6 +19,8 @@ import Plus from './icons/plus-square.svg'
 mapStateToProps = (state, ownProps) ->
   unit_data: state.organization_units[ownProps.unit_id]
   is_expanded: state.expanded_units[ownProps.unit_id]?
+  current_unit_id: state.current_unit_id
+
 
 mapDispatchToProps = (dispatch, ownProps) ->
   expand: ->
@@ -26,7 +29,8 @@ mapDispatchToProps = (dispatch, ownProps) ->
   collapse: ->
     dispatch(collapseUnit(ownProps.unit_id))
     dispatch(saveCollapsedUnit(ownProps.unit_id))
-  loadEmployees: ->
+  setCurrentUnit: ->
+    dispatch(setCurrentUnitId(ownProps.unit_id))
     dispatch(loadUnitInfo(ownProps.unit_id))
 
 
@@ -45,7 +49,7 @@ class OrganizationUnitNode extends React.Component
 
 
   onUnitClick: ->
-    @props.loadEmployees()
+    @props.setCurrentUnit()
 
 
   render: ->
@@ -53,14 +57,18 @@ class OrganizationUnitNode extends React.Component
 
     has_children = @hasChildren()
 
-    class_name = classNames
+    node_class_name = classNames
       'organization-unit-node': true
       'organization-unit-node_expanded': @props.is_expanded
       'organization-unit-node_collapsed': !@props.is_expanded
       'organization-unit-node_has_children': has_children
       'organization-unit-node_has_no_children': !has_children
 
-    div { className: class_name },
+    title_class_name = classNames
+      'organization-unit-node__title': true
+      'organization-unit-node__title_current': @props.unit_id == @props.current_unit_id
+
+    div { className: node_class_name },
       if has_children
         div { className: 'organization-unit-node__button', onClick: @onExpandCollapseClick.bind(this) },
           svg { className: 'organization-unit-node__button-open', svg: Plus }
@@ -69,7 +77,7 @@ class OrganizationUnitNode extends React.Component
         div { className: 'organization-unit-node__button-stub' },
 
       div { className: 'organization-unit-node__content' },
-        div { className: 'organization-unit-node__title', onClick: @onUnitClick.bind(this) },
+        div { className: title_class_name, onClick: @onUnitClick.bind(this) },
           @props.unit_data.list_title
         if has_children
           div { className: 'organization-unit-node__children' },
