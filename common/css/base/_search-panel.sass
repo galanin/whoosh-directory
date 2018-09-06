@@ -1,14 +1,22 @@
+.search-panel-container
+  padding: 0 20px
+
 .search-panel
   display: flex
 
 .search-panel__input-container
   flex: 1 0 auto
-  padding: 12px
+  padding: 12px 0
+
+.search-panel__input-field
+  filter: drop-shadow(0 8px 6px #bbb)
+  background-color: #fff
   display: flex
 
 .search-panel__input
   flex: 1 0 auto
-  background-color: #f0f0f0
+  height: 40px
+  box-sizing: border-box
   color: #666
   padding: 4px 16px
   font-weight: 300
@@ -20,14 +28,13 @@
 .search-panel__reset
   width: 48px
   flex: 0 0 auto
-  background-color: #f0f0f0
   cursor: pointer
   position: relative
 
   &:hover
     .search-panel__reset-icon
       path
-        fill: scale-color($base-color, $lightness: +8%)
+        fill: #ccc
 
 .search-panel__reset-icon
   display: block
@@ -38,7 +45,7 @@
   height: 40px
 
   path
-    fill: $base-color
+    fill: #bbb
 
 .search-panel__buttons-container
   width: 196px

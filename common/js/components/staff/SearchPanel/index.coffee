@@ -14,18 +14,20 @@ import HotPhones from './icons/hot-phones.svg'
 
 class SearchPanel extends React.Component
   render: ->
-    div { className: 'search-panel plug' },
-      div { className: 'search-panel__input-container' },
-        input { autoFocus: true, className: 'search-panel__input' }
-        div { className: 'search-panel__reset' },
-          svg { className: 'search-panel__reset-icon', svg: Backspace },
-      div { className: 'search-panel__buttons-container' },
-        div { className: 'search-panel__hot-button' },
-          div { className: 'search-panel__hot-button-bg' },
-            svg { className: 'search-panel__hot-button-img', svg: HappyBirthday }
-        div { className: 'search-panel__hot-button' },
-          div { className: 'search-panel__hot-button-bg' },
-            svg { className: 'search-panel__hot-button-img', svg: HotPhones }
+    div { className: 'search-panel-container plug' },
+      div { className: 'search-panel' },
+        div { className: 'search-panel__input-container' },
+          div { className: 'search-panel__input-field' },
+            input { autoFocus: true, className: 'search-panel__input' }
+            div { className: 'search-panel__reset' },
+              svg { className: 'search-panel__reset-icon', svg: Backspace },
+        div { className: 'search-panel__buttons-container' },
+          div { className: 'search-panel__hot-button' },
+            div { className: 'search-panel__hot-button-bg' },
+              svg { className: 'search-panel__hot-button-img', svg: HappyBirthday }
+          div { className: 'search-panel__hot-button' },
+            div { className: 'search-panel__hot-button-bg' },
+              svg { className: 'search-panel__hot-button-img', svg: HotPhones }
 
 
 export default SearchPanel

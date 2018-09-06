@@ -31,9 +31,10 @@ class OrganizationStructure extends React.Component
       else
         0
 
-    div { className: 'organization-structure plug' },
-      for root_id in roots
-        organization_unit { key: root_id, unit_id: root_id }
+    div { className: 'organization-structure-scroller plug' },
+      div { className: 'organization-structure' },
+        for root_id in roots
+          organization_unit { key: root_id, unit_id: root_id }
 
 
 export default connect(mapStateToProps, mapDispatchToProps)(OrganizationStructure)

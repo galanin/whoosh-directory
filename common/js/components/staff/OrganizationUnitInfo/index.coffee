@@ -29,18 +29,19 @@ class OrganizationUnitInfo extends React.Component
 
   render: ->
     if @props.unit_info?
-      div { className: 'organization-unit plug' },
-        if @props.unit_info.short_title?
-          div { className: 'organization-unit__short-title' },
-            @props.unit_info.short_title
-        if @props.unit_info.long_title? and @props.unit_info.long_title != @props.unit_info.short_title
-          div { className: 'organization-unit__long-title' },
-            @props.unit_info.long_title
+      div { className: 'organization-unit-scroller plug' },
+        div { className: 'organization-unit' },
+          if @props.unit_info.short_title?
+            div { className: 'organization-unit__short-title' },
+              @props.unit_info.short_title
+          if @props.unit_info.long_title? and @props.unit_info.long_title != @props.unit_info.short_title
+            div { className: 'organization-unit__long-title' },
+              @props.unit_info.long_title
 
-        if isArray(@props.unit_info.employment_ids)
-          div { className: 'organization-unit__employees' },
-            for employment_id in @props.unit_info.employment_ids
-              employee { key: employment_id, employment_id: employment_id, hide: { unit: true } }
+          if isArray(@props.unit_info.employment_ids)
+            div { className: 'organization-unit__employees' },
+              for employment_id in @props.unit_info.employment_ids
+                employee { key: employment_id, employment_id: employment_id, hide: { unit: true } }
     else
       '...'
 
