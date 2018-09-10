@@ -7,7 +7,7 @@ import SvgIcon from '@components/common/SvgIcon'
 
 import { collapseUnit, saveCollapsedUnit, expandUnit, saveExpandedUnit } from '@actions/expand_units'
 import { setCurrentUnitId } from '@actions/current_unit'
-import { loadUnitInfo } from '@actions/units'
+import { loadUnitExtra } from '@actions/unit_extras'
 
 div = React.createFactory('div')
 svg = React.createFactory(SvgIcon)
@@ -31,7 +31,7 @@ mapDispatchToProps = (dispatch, ownProps) ->
     dispatch(saveCollapsedUnit(ownProps.unit_id))
   setCurrentUnit: ->
     dispatch(setCurrentUnitId(ownProps.unit_id))
-    dispatch(loadUnitInfo(ownProps.unit_id))
+    dispatch(loadUnitExtra(ownProps.unit_id))
 
 
 class OrganizationUnitNode extends React.Component

@@ -24,8 +24,8 @@ module Staff
 
     get 'units/:unit_id' do
       if params.key? :unit_id
-        unit = OrganizationUnit.only(:long_title, :short_title, :employment_ids).find(params[:unit_id])
-        present :unit_info, [unit]
+        unit = OrganizationUnit.only(:id, :long_title, :short_title, :employment_ids).find(params[:unit_id])
+        present :unit_extra, [unit]
 
         employments = unit.employment_ids.present? ? Employment.find(unit.employment_ids) : []
         present :employments, employments

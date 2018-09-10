@@ -1,7 +1,4 @@
-import {
-  SET_UNITS,
-  LOAD_UNIT_INFO,
-} from '@constants/units'
+import { SET_UNITS } from '@constants/units'
 
 export default (state = {}, action) ->
   switch action.type

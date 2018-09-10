@@ -3,6 +3,7 @@ import { routerReducer } from 'react-router-redux'
 
 import session from '@reducers/session';
 import units from '@reducers/units'
+import unit_extras from '@reducers/unit_extras'
 import people from '@reducers/people'
 import employments from '@reducers/employments'
 import organization_unit from '@reducers/organization_unit'
@@ -16,6 +17,7 @@ export default combineReducers
   session:            session
   organization_unit:  organization_unit
   units:              units
+  unit_extras:        unit_extras
   current_unit_id:    current_unit
   people:             people
   employments:        employments
