@@ -11,7 +11,7 @@ organization_unit = React.createFactory(OrganizationUnitNode)
 
 
 mapStateToProps = (state) ->
-  organization_units: state.organization_units
+  units: state.units
 
 mapDispatchToProps = (dispatch) ->
   bindActionCreators(UnitActions, dispatch)
@@ -19,10 +19,10 @@ mapDispatchToProps = (dispatch) ->
 
 class OrganizationStructure extends React.Component
   @propTypes =
-    organization_units: PropTypes.object
+    units: PropTypes.object
 
   render: ->
-    roots = (unit.id for _, unit of @props.organization_units when unit.level == 0)
+    roots = (unit.id for _, unit of @props.units when unit.level == 0)
     roots.sort (a, b) ->
       if a.path < b.path
         -1

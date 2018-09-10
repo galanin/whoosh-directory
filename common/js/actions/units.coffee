@@ -6,7 +6,7 @@ import { addEmployments } from '@actions/employments'
 
 export setUnits = (units) ->
   type: SET_UNITS
-  organization_units: units
+  units: units
 
 export loadUnitInfo = (unit_id) ->
   (dispatch) ->

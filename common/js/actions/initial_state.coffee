@@ -23,7 +23,7 @@ export fetchInitialState = () ->
       .then (data) ->
         dispatch(fetchInitialStateSuccess())
         dispatch(setSessionToken(data.data.session_token))
-        dispatch(setUnits(data.data.organization_units))
+        dispatch(setUnits(data.data.units))
         dispatch(setExpandedUnits(data.data.expanded_units))
 
         Promise.resolve(data)

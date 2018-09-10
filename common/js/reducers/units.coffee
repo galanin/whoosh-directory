@@ -7,7 +7,7 @@ export default (state = {}, action) ->
   switch action.type
     when SET_UNITS
       units = {}
-      action.organization_units.forEach (unit) ->
+      action.units.forEach (unit) ->
         units[unit.id] = unit
       units
 

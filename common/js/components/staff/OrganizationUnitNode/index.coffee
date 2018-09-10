@@ -17,7 +17,7 @@ import Plus from './icons/plus-square.svg'
 
 
 mapStateToProps = (state, ownProps) ->
-  unit_data: state.organization_units[ownProps.unit_id]
+  unit_data: state.units[ownProps.unit_id]
   is_expanded: state.expanded_units[ownProps.unit_id]?
   current_unit_id: state.current_unit_id
 

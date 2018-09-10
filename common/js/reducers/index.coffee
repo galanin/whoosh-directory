@@ -15,7 +15,7 @@ import layout from '@reducers/layout'
 export default combineReducers
   session:            session
   organization_unit:  organization_unit
-  organization_units: units
+  units:              units
   current_unit_id:    current_unit
   people:             people
   employments:        employments

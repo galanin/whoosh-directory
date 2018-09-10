@@ -44,7 +44,7 @@ mapStateToProps = (state, ownProps) ->
   employment = state.employments[ownProps.employment_id]
   employment: employment
   person: employment && state.people[employment.person_id]
-  unit: employment && state.organization_units[employment.unit_id]
+  unit: employment && state.units[employment.unit_id]
 
 mapDispatchToProps = (dispatch, ownProps) ->
   showEmployee: -> dispatch()

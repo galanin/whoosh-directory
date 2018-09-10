@@ -17,7 +17,7 @@ module Staff
 
     get :bootstrap do
       units = OrganizationUnit.only(:id, :level, :path, :list_title, :child_ids)
-      present :organization_units, units
+      present :units, units
       present :expanded_units, UserSession.current.data[:expanded_units]
     end
 
