@@ -10,11 +10,15 @@ div = React.createFactory('div')
 import Employee from '@components/staff/Employee'
 employee = React.createFactory(Employee)
 
+import OrganizationSubUnit from '@components/staff/OrganizationSubUnit'
+sub_unit = React.createFactory(OrganizationSubUnit)
+
 
 mapStateToProps = (state) ->
   unit_id = state.current_unit_id
   extra = state.unit_extras[unit_id]
   unit_id:    unit_id
+  unit_data:  state.units[unit_id]
   unit_extra: extra && extra.extra || {}
   loading:    extra && extra.loading
   loaded:     extra && extra.loaded
@@ -43,6 +47,12 @@ class OrganizationUnitInfo extends React.Component
             div { className: 'organization-unit__employees' },
               for employment_id in @props.unit_extra.employment_ids
                 employee { key: employment_id, employment_id: employment_id, hide: { unit: true } }
+
+          if isArray(@props.unit_data.child_ids)
+            div { className: 'organization-unit__sub-units' },
+              for sub_unit_id in @props.unit_data.child_ids
+                sub_unit { key: 'sub-unit-' + sub_unit_id, unit_id: sub_unit_id }
+
     else
       '...'
 

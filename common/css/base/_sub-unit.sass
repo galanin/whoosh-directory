@@ -1,0 +1,44 @@
+.sub-unit
+  margin-bottom: .5rem
+
+.sub-unit > .sub-unit__head svg .triangle
+  transition: transform .1s ease-out
+  transform: rotate3d(0, 0, 1, 0)
+  transform-origin: 17px 16px
+
+.sub-unit.sub-unit_expanded
+  margin-bottom: 1.5rem
+
+.sub-unit.sub-unit_expanded > .sub-unit__head svg .triangle
+  transform: rotate3d(0, 0, 1, 90deg)
+
+.sub-unit__head
+  display: flex
+  cursor: pointer
+
+.sub-unit__button
+  flex: 0 0 32px
+
+.sub-unit__triangle
+  display: block
+
+  svg
+    display: block
+
+.sub-unit__title
+  padding-top: 4px
+  font-size: 18px
+  color: #444
+  user-select: none
+
+.sub-unit__content
+  margin-top: 8px
+
+.sub-unit__employees
+
+.sub-unit.sub-unit_collapsed > .sub-unit__content
+  display: none
+
+.sub-unit__sub-units
+  padding-left: 19px
+

@@ -15,6 +15,7 @@
   "_moduleAliases": {
     "@css": "common/css",
     "@fonts": "common/fonts",
+    "@icons": "common/icons",
     "@images": "common/images",
     "@actions": "common/js/actions",
     "@components": "common/js/components",

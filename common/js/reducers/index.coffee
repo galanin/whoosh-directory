@@ -9,6 +9,7 @@ import employments from '@reducers/employments'
 import organization_unit from '@reducers/organization_unit'
 import current_unit from '@reducers/current_unit'
 import expanded_units from '@reducers/expand_units'
+import expanded_sub_units from '@reducers/expand_sub_units'
 import initial_state from '@reducers/initial_state'
 import layout from '@reducers/layout'
 
@@ -22,6 +23,7 @@ export default combineReducers
   people:             people
   employments:        employments
   expanded_units:     expanded_units
+  expanded_sub_units: expanded_sub_units
   initial_state:      initial_state
   layout:             layout
   routing:            routerReducer
