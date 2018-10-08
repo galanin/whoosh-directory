@@ -84,10 +84,10 @@ class OrganizationUnitNode extends React.Component
         if has_children
           div { className: 'organization-unit-node__children' },
             for child_id in @props.unit_data.child_ids
-              organization_unit({ key: child_id, unit_id: child_id })
+              organization_unit_node({ key: child_id, unit_id: child_id })
 
 
-ConnectedOrganizationUnit = connect(mapStateToProps, mapDispatchToProps)(OrganizationUnitNode)
-organization_unit = React.createFactory(ConnectedOrganizationUnit)
+ConnectedOrganizationUnitNode = connect(mapStateToProps, mapDispatchToProps)(OrganizationUnitNode)
+organization_unit_node = React.createFactory(ConnectedOrganizationUnitNode)
 
-export default ConnectedOrganizationUnit
+export default ConnectedOrganizationUnitNode
