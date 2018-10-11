@@ -16,7 +16,7 @@ module Staff
 
 
     get :bootstrap do
-      units = OrganizationUnit.only(:id, :level, :path, :list_title, :child_ids)
+      units = Unit.only(:short_id, :level, :list_title, :child_ids)
       present :units, units
       present :expanded_units, UserSession.current.data[:expanded_units]
     end
@@ -24,13 +24,12 @@ module Staff
 
     get 'units/:unit_id' do
       if params.key? :unit_id
-        unit = OrganizationUnit.only(:id, :long_title, :short_title, :employment_ids).find(params[:unit_id])
+        unit = Unit.only(:short_id, :long_title, :short_title, :employ_ids).find_by!(short_id:  params[:unit_id])
         present :unit_extra, [unit]
 
-        employments = unit.employment_ids.present? ? Employment.find(unit.employment_ids) : []
-        present :employments, employments
+        present :employments, unit.employments.order(:in_unit_rank.asc)
 
-        people = Person.find(employments.map(&:person_id))
+        people = Person.find(unit.employments.map(&:person_id))
         present :people, people
       end
     end

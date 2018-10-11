@@ -39,7 +39,7 @@ mapDispatchToProps = (dispatch, ownProps) ->
 class OrganizationUnitNode extends React.Component
 
   hasChildren: ->
-    @props.unit_data.child_ids?.length? > 0
+    +@props.unit_data.child_ids?.length > 0
 
 
   onExpandCollapseClick: ->

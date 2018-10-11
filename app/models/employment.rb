@@ -1,31 +1,43 @@
 class Employment < ApplicationRecord
   include Mongoid::Document
   include Mongoid::Timestamps
-  include ImportEntity
+  include ShortId
 
-  field :_id,               type: String
-  field :post,              type: String
-  field :number,            type: Integer
-  field :category,          type: String
-  field :office,            type: String
-  field :building,          type: String
-  field :phones,            type: Array
-  field :lunch_begin,       type: Time
-  field :lunch_end,         type: Time
-  field :parental_leave,    type: Boolean
-  field :vacation,          type: Boolean
-  field :vacation_begin,    type: Date
-  field :vacation_end,      type: Date
-  field :working_type,      type: String
-  field :working_type_prio, type: Integer
+  field :external_id,        type: String
+  field :person_external_id, type: String
+  field :unit_external_id,   type: String
+  field :person_short_id,    type: String
+  field :unit_short_id,      type: String
+  field :post_title,         type: String
+  field :post_category_code, type: String
+  field :office,             type: String
+  field :building,           type: String
+  field :phones,             type: Array
+  field :lunch_begin,        type: String
+  field :lunch_end,          type: String
+  field :parental_leave,     type: Boolean
+  field :vacation_begin,     type: Date
+  field :vacation_end,       type: Date
+  field :for_person_rank,    type: Integer
+  field :in_unit_rank,       type: Integer
+  field :destroyed_at,       type: Time
+
 
   belongs_to :person
-  belongs_to :unit, inverse_of: :unit_employments, class_name: 'OrganizationUnit'
-  belongs_to :dept, inverse_of: :dept_employments, class_name: 'OrganizationUnit'
+  belongs_to :unit
 
 
   def as_json(options = nil)
-    super.except('_id').merge('id' => id)
+    super.slice(
+      'post_title', 'post_category_code',
+      'office', 'building', 'phones',
+      'lunch_begin', 'lunch_end',
+      'vacation_begin', 'vacation_end',
+    ).merge(
+      'id'        => short_id,
+      'person_id' => person_short_id,
+      'unit_id'   => unit_short_id,
+    )
   end
 
 end

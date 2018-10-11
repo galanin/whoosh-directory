@@ -58,7 +58,7 @@ class Employee extends React.Component
   render: ->
     return '' unless @props.employment
 
-    avatar = avatars[@props.person.gender][@props.employment.category]
+    avatar = avatars[@props.person.gender][@props.employment.post_category_code]
 
     div { className: 'employee', onClick: @onEmployeeClick.bind(this) },
       div { className: 'employee__photo' },
@@ -83,7 +83,7 @@ class Employee extends React.Component
           span { className: 'employee__middle-name' },
             @props.person.middle_name
         div { className: 'employee__post_title' },
-          @props.employment.post
+          @props.employment.post_title
         div { className: 'employee__organization_unit_title' },
           @props.unit.list_title
 
