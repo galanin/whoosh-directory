@@ -1,4 +1,4 @@
-# require 'utilities/import/collection'
+require 'utilities/import/collection'
 
 module Utilities
   module Import

@@ -17,7 +17,7 @@ require 'hashids'
 require 'grape'
 require 'json'
 
-$: << File.join(File.dirname(__FILE__), 'utilities')
+$: << File.join(File.dirname(__FILE__), 'app')
 
 Dir["#{File.dirname(__FILE__)}/config/initializers/*.rb"].each { |f| require f }
 Dir["#{File.dirname(__FILE__)}/app/uploaders/**/*.rb"].each { |f| require f }
