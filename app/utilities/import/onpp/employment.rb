@@ -41,8 +41,8 @@ module Utilities
           @office             = source_data['ROOM']
           @building           = normalize_building(source_data['KORP'])
           @phones             = normalize_phones(source_data['PHONE'])
-          @lunch_begin        = source_data['OBED_TIME_B']
-          @lunch_end          = source_data['OBED_TIME_E']
+          @lunch_begin        = normalize_time(source_data['OBED_TIME_B'])
+          @lunch_end          = normalize_time(source_data['OBED_TIME_E'])
           @parental_leave     = source_data['IS_DEKRET'] == '1'
           @vacation_begin     = source_data['DATE_B_OTP']
           @vacation_end       = source_data['DATE_E_OTP']
@@ -148,6 +148,11 @@ module Utilities
             phone_result.strip
           end
           result.uniq.select(&:present?)
+        end
+
+
+        def normalize_time(time_str)
+          time_str.sub(/:\d\d$/, '')
         end
 
       end
