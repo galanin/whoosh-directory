@@ -84,8 +84,9 @@ class Employee extends React.Component
             @props.person.middle_name
         div { className: 'employee__post_title' },
           @props.employment.post_title
-        div { className: 'employee__organization_unit_title' },
-          @props.unit.list_title
+        unless @props.hide?.unit
+          div { className: 'employee__organization_unit_title' },
+            @props.unit.list_title
 
       div { className: 'employee__phones' },
         for phone in @props.employment.phones[0..2]
