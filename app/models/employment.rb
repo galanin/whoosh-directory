@@ -28,16 +28,25 @@ class Employment < ApplicationRecord
 
 
   def as_json(options = nil)
-    super.slice(
+    result = super.slice(
       'post_title', 'post_category_code',
       'office', 'building', 'phones',
       'lunch_begin', 'lunch_end',
-      'vacation_begin', 'vacation_end',
     ).merge(
-      'id'        => short_id,
-      'person_id' => person_short_id,
-      'unit_id'   => unit_short_id,
+      'id'          => short_id,
+      'person_id'   => person_short_id,
+      'unit_id'     => unit_short_id,
     )
+
+    result.merge!('on_vacation' => true) if on_vacation
+
+    result
+  end
+
+
+  def on_vacation
+    today = Date.today
+    vacation_begin && vacation_end && today >= vacation_begin && today <= vacation_end
   end
 
 end
