@@ -6,8 +6,7 @@ import units from '@reducers/units'
 import unit_extras from '@reducers/unit_extras'
 import people from '@reducers/people'
 import employments from '@reducers/employments'
-import organization_unit from '@reducers/organization_unit'
-import current_unit from '@reducers/current_unit'
+import current from '@reducers/current'
 import expanded_units from '@reducers/expand_units'
 import expanded_sub_units from '@reducers/expand_sub_units'
 import initial_state from '@reducers/initial_state'
@@ -18,7 +17,7 @@ export default combineReducers
   session:            session
   units:              units
   unit_extras:        unit_extras
-  current_unit_id:    current_unit
+  current:            current
   people:             people
   employments:        employments
   expanded_units:     expanded_units

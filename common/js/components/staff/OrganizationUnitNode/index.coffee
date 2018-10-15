@@ -6,7 +6,7 @@ import classNames from 'classnames'
 import SvgIcon from '@components/common/SvgIcon'
 
 import { collapseUnit, saveCollapsedUnit, expandUnit, saveExpandedUnit } from '@actions/expand_units'
-import { setCurrentUnitId } from '@actions/current_unit'
+import { setCurrentUnitId } from '@actions/current'
 import { resetExpandedSubUnits } from '@actions/expand_sub_units'
 import { loadUnitExtra } from '@actions/unit_extras'
 import { popUnitInfo } from '@actions/layout'
@@ -21,7 +21,7 @@ import Plus from './icons/plus-square.svg'
 mapStateToProps = (state, ownProps) ->
   unit_data: state.units[ownProps.unit_id]
   is_expanded: state.expanded_units[ownProps.unit_id]?
-  current_unit_id: state.current_unit_id
+  current_unit_id: state.current.unit_id
 
 
 mapDispatchToProps = (dispatch, ownProps) ->

@@ -1,0 +1,99 @@
+import React from 'react'
+import PropTypes from 'prop-types'
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import { isArray } from 'lodash';
+import SvgIcon from '@components/common/SvgIcon'
+
+import { setCurrentEmploymentId } from '@actions/current'
+import { sinkEmployeeInfo } from '@actions/layout'
+
+div = React.createFactory('div')
+img = React.createFactory('img')
+svg = React.createFactory(SvgIcon)
+
+import CloseButton from '@icons/close_button.svg'
+import Location from '@icons/location.svg'
+import Lunch from '@icons/lunch.svg'
+import Birthday from '@icons/birthday.svg'
+import Vacation from '@icons/vacation.svg'
+
+mapStateToProps = (state, ownProps) ->
+  employment_id = state.current.employment_id
+  employment = state.employments[employment_id]
+  employment_id: employment_id
+  employment: employment
+  person: employment && state.people[employment.person_id]
+  unit: employment && state.units[employment.unit_id]
+  unit_extra: employment && state.unit_extras[employment.unit_id]
+
+mapDispatchToProps = (dispatch) ->
+  unsetCurrentEmployee: ->
+    dispatch(sinkEmployeeInfo())
+    dispatch(setCurrentEmploymentId(null))
+
+
+class EmployeeInfo extends React.Component
+
+  onCloseButtonClick: ->
+    console.log 'CLOSE'
+    @props.unsetCurrentEmployee()
+
+
+  render: ->
+    return '' unless @props.employment
+
+    div { className: 'employee-info-scroller plug' },
+      div { className: 'employee-info' },
+        div { className: 'employee-info__head' },
+          div { className: 'employee-info__name' },
+            @props.person.last_name + ' ' + @props.person.first_name + ' ' + @props.person.middle_name
+          div { className: 'employee-info__close-button', onClick: @onCloseButtonClick.bind(this) },
+            svg { className: 'employee-info__close-button-cross', svg: CloseButton }
+        div { className: 'employee-info__post_title' },
+          @props.employment.post_title
+        div { className: 'employee-info__unit_title' },
+          @props.unit_extra.extra.long_title
+
+        div { className: 'employee-info__two-columns' },
+          div { className: 'employee-info__photo' },
+            img { src: process.env.PHOTO_BASE_URL + @props.person.photo.large.url, className: 'employee-info__photo-large' }
+          div { className: 'employee-info__data' },
+            if @props.employment.phones.length > 0
+              div { className: 'employee-info__phones' },
+                for phone in @props.employment.phones
+                  div { className: 'employee-info__phone', key: phone },
+                    phone
+
+            div { className: 'employee-info__iconed-data employee-info__location' },
+              svg { className: 'employee-info__data-icon employee-info__location-icon', svg: Location }
+              div { className: 'employee-info__data-data employee-info__location-data' },
+                if @props.employment.building
+                  div { className: 'employee-info__location-building' },
+                    'Корпус ' + @props.employment.building
+                div { className: 'employee-info__location-office' },
+                  'Кабинет ' + @props.employment.office
+
+            div { className: 'employee-info__iconed-data employee-info__lunch' },
+              svg { className: 'employee-info__data-icon employee-info__lunch-icon', svg: Lunch }
+              div { className: 'employee-info__data-data employee-info__lunch-data' },
+                @props.employment.lunch_begin + '-' + @props.employment.lunch_end
+
+            if @props.person.birthday
+              div { className: 'employee-info__iconed-data employee-info__birthday' },
+                svg { className: 'employee-info__data-icon employee-info__birthday-icon', svg: Birthday }
+                div { className: 'employee-info__data-data employee-info__birthday-data' },
+                  @props.person.birthday
+
+            if @props.employment.on_vacation
+              div { className: 'employee-info__iconed-data employee-info__vacation' },
+                svg { className: 'employee-info__data-icon employee-info__vacation-icon', svg: Vacation }
+                div { className: 'employee-info__data-data employee-info__vacation-data' },
+                  'В отпуске'
+
+
+
+
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(EmployeeInfo)

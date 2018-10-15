@@ -13,6 +13,9 @@ organization_unit_info = React.createFactory(OrganizationUnitInfo)
 import OrganizationStructure from '@components/staff/OrganizationStructure'
 organization_structure = React.createFactory(OrganizationStructure)
 
+import EmployeeInfo from '@components/staff/EmployeeInfo'
+employee_info = React.createFactory(EmployeeInfo)
+
 
 mapStateToProps = (state) ->
   pile: state.layout.pile
@@ -32,10 +35,12 @@ class WorkingArea extends React.Component
         search_panel {}
       div { className: 'working-area__birthday-panel socket' }
       div { className: 'working-area__results-panel' },
-        div { className: "working-area__unit-info socket block-index-#{pile_hash['unit-info']}" },
+        div { className: "working-area__block working-area__unit-info socket block-index-#{pile_hash['unit-info']}" },
           organization_unit_info {}
-        div { className: "working-area__structure socket block-index-#{pile_hash['structure']}" },
+        div { className: "working-area__block working-area__structure socket block-index-#{pile_hash['structure']}" },
           organization_structure {}
+        div { className: "working-area__block working-area__employee-info socket block-index-#{pile_hash['employee-info']}" },
+          employee_info {}
 
 
 export default connect(mapStateToProps, mapDispatchToProps)(WorkingArea)

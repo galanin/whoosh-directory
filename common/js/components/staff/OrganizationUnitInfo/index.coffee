@@ -15,7 +15,7 @@ sub_unit = React.createFactory(OrganizationSubUnit)
 
 
 mapStateToProps = (state) ->
-  unit_id = state.current_unit_id
+  unit_id = state.current.unit_id
   extra = state.unit_extras[unit_id]
   unit_id:    unit_id
   unit_data:  state.units[unit_id]

@@ -6,6 +6,8 @@ import classNames from 'classnames'
 import SvgIcon from '@components/common/SvgIcon'
 
 import { loadUnitInfo } from '@actions/units'
+import { setCurrentEmploymentId } from '@actions/current'
+import { popEmployeeInfo } from '@actions/layout'
 
 div = React.createFactory('div')
 span = React.createFactory('span')
@@ -47,12 +49,15 @@ mapStateToProps = (state, ownProps) ->
   unit: employment && state.units[employment.unit_id]
 
 mapDispatchToProps = (dispatch, ownProps) ->
-  showEmployee: -> dispatch()
+  setCurrentEmployee: ->
+    dispatch(setCurrentEmploymentId(ownProps.employment_id))
+    dispatch(popEmployeeInfo())
 
 
 class Employee extends React.Component
 
   onEmployeeClick: ->
+    @props.setCurrentEmployee()
 
 
   render: ->
