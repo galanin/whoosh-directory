@@ -43,10 +43,15 @@ module Utilities
           @phones             = normalize_phones(source_data['PHONE'])
           @lunch_begin        = source_data['OBED_TIME_B']
           @lunch_end          = source_data['OBED_TIME_E']
-          @parental_leave     = source_data['IS_DEKRET']
+          @parental_leave     = source_data['IS_DEKRET'] == '1'
           @vacation_begin     = source_data['DATE_B_OTP']
           @vacation_end       = source_data['DATE_E_OTP']
           @for_person_rank    = WORKING_TYPE_RANK[source_data['VID_ZAN']] || 99
+        end
+
+
+        def may_add?
+          !parental_leave
         end
 
 
@@ -61,7 +66,6 @@ module Utilities
             phones:             phones,
             lunch_begin:        lunch_begin,
             lunch_end:          lunch_end,
-            parental_leave:     parental_leave,
             vacation_begin:     vacation_begin,
             vacation_end:       vacation_end,
             in_unit_rank:       in_unit_rank,

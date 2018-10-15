@@ -11,7 +11,7 @@ module Utilities
         def import(doc)
           doc.xpath('.//person').each do |person|
             new_data = Utilities::Import::ONPP::Employment.new(person)
-            add_new_data(new_data)
+            add_new_data(new_data) if new_data.may_add?
           end
         end
 
