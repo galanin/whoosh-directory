@@ -17,17 +17,104 @@
   display: none
 
 .working-area__results-panel
-  flex: 1 1 auto
-  display: flex
   height: 100%
-  overflow-y: hidden
+  position: relative
 
-.working-area__unit-info
-  width: 50%
-  flex: 1 1 auto
-  padding: 20px 0
 
-.working-area__structure
-  width: 50%
-  flex: 1 1 auto
-  padding: 20px
+.block-index-0
+  z-index: 0
+.block-index-1
+  z-index: 1
+.block-index-2
+  z-index: 2
+.block-index-3
+  z-index: 3
+.block-index-4
+  z-index: 4
+.block-index-5
+  z-index: 5
+
+
+@media (max-width: 959px)
+  .working-area__results-panel
+    overflow-y: auto
+
+  .working-area__unit-info
+    padding: 15px 0
+
+  .working-area__structure
+    padding: 15px 10px
+
+
+@media (min-width: 960px) and (max-width: 1439px)
+  .working-area__unit-info,
+  .working-area__results,
+  .working-area__favorites,
+  .working-area__recent
+    position: absolute
+    left: 0
+    right: 50%
+    top: 0
+    bottom: 0
+
+  .working-area__structure,
+  .working-area__employee
+    position: absolute
+    left: 50%
+    right: 0
+    top: 0
+    bottom: 0
+
+  .working-area__unit-info
+    padding: 15px 0
+
+  .working-area__structure
+    padding: 15px 10px
+
+
+@media (min-width: 1440px) and (max-width: 1919px)
+  .working-area__employee
+    position: absolute
+    left: 0
+    right: 66.6%
+    top: 0
+    bottom: 0
+    padding: 20px 0
+
+  .working-area__unit-info
+    position: absolute
+    left: 33.3%
+    right: 33.3%
+    top: 0
+    bottom: 0
+
+  .working-area__structure
+    position: absolute
+    left: 66.6%
+    right: 0
+    top: 0
+    bottom: 0
+
+  .working-area__unit-info
+    padding: 20px 0
+
+  .working-area__structure
+    padding: 20px
+
+
+@media (min-width: 1920px)
+  .working-area__unit-info
+    position: absolute
+    top: 0
+    bottom: 0
+
+  .working-area__structure
+    position: absolute
+    top: 0
+    bottom: 0
+
+  .working-area__unit-info
+    padding: 20px 0
+
+  .working-area__structure
+    padding: 20px

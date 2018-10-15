@@ -9,6 +9,7 @@ import { collapseUnit, saveCollapsedUnit, expandUnit, saveExpandedUnit } from '@
 import { setCurrentUnitId } from '@actions/current_unit'
 import { resetExpandedSubUnits } from '@actions/expand_sub_units'
 import { loadUnitExtra } from '@actions/unit_extras'
+import { popUnitInfo } from '@actions/layout'
 
 div = React.createFactory('div')
 svg = React.createFactory(SvgIcon)
@@ -34,6 +35,7 @@ mapDispatchToProps = (dispatch, ownProps) ->
     dispatch(setCurrentUnitId(ownProps.unit_id))
     dispatch(loadUnitExtra(ownProps.unit_id))
     dispatch(resetExpandedSubUnits())
+    dispatch(popUnitInfo())
 
 
 class OrganizationUnitNode extends React.Component
