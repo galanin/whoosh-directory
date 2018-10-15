@@ -21,7 +21,7 @@ module Utilities
           @first_name     = source_data['I']
           @middle_name    = source_data['O']
           @last_name      = source_data['F']
-          @birthday       = source_data['HIDE_DATE_R'] == '1' ? nil : source_data['DATE_R']
+          @birthday       = source_data['HIDE_DATE_R'] == '1' ? nil : normalize_birthday(source_data['DATE_R'])
           @gender         = GENDERS[source_data['SEX']]
           @employment_ids = []
         end
@@ -36,6 +36,12 @@ module Utilities
             birthday:    birthday,
             gender:      gender,
           }
+        end
+
+
+        def normalize_birthday(raw_str)
+          day, month = raw_str.split('.')
+          month + '.' + day
         end
 
       end
