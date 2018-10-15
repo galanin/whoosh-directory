@@ -20,7 +20,7 @@ class WorkingArea extends React.Component
         search_panel {}
       div { className: 'working-area__birthday-panel socket' }
       div { className: 'working-area__results-panel' },
-        div { className: 'working-area__persons socket' },
+        div { className: 'working-area__unit-info socket' },
           organization_unit_info {}
         div { className: 'working-area__structure socket' },
           organization_structure {}
