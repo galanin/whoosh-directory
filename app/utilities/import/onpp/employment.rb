@@ -62,6 +62,7 @@ module Utilities
             unit_external_id:   unit_external_id,
             post_title:         post_title,
             post_category_code: post_category_code,
+            building:           building,
             office:             office,
             phones:             phones,
             lunch_begin:        lunch_begin,
