@@ -56,8 +56,9 @@ class EmployeeInfo extends React.Component
           @props.unit_extra.extra.long_title
 
         div { className: 'employee-info__two-columns' },
-          div { className: 'employee-info__photo' },
-            img { src: process.env.PHOTO_BASE_URL + @props.person.photo.large.url, className: 'employee-info__photo-large' }
+          if @props.person.photo.large.url
+            div { className: 'employee-info__photo' },
+              img { src: process.env.PHOTO_BASE_URL + @props.person.photo.large.url, className: 'employee-info__photo-large' }
           div { className: 'employee-info__data' },
             if @props.employment.phones.length > 0
               div { className: 'employee-info__phones' },
