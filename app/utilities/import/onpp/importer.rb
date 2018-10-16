@@ -32,7 +32,13 @@ module Utilities
           @employments.link_data_to_people(@people)
           @employments.link_data_to_units(@units)
 
+          @units.change_management_unit(@employments)
+
           # TODO a time to modify the structure
+          @units.reset_employments_link
+          @employments.link_data_to_units(@units)
+          @units.reset_structure
+          @units.build_structure
 
           @units.sort_child_units
           @units.calc_levels

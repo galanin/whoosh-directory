@@ -73,6 +73,10 @@ module Utilities
         end
       end
 
+      def entites_by_ids(external_ids)
+        @entities.slice(*external_ids).values
+      end
+
     end
   end
 end

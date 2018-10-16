@@ -7,6 +7,8 @@ module Utilities
 
         include Utilities::Import::Collection
 
+        MANAGMENT_PREFIX = ['^Руководство','^Рук\.']
+
 
         def import(doc)
           doc.xpath('.//organization').each do |org|
@@ -60,6 +62,33 @@ module Utilities
         def link_objects_to_employment_short_ids(employment_collection)
           @entities.each do |id, unit_entity|
             unit_entity.old_object.employ_ids = employment_collection.short_ids_by_external_ids(unit_entity.new_data.employment_ids)
+          end
+        end
+
+
+        def reset_employments_link
+          @entities.each do |id, unit_entity|
+            unit_entity.new_data.employment_ids = []
+          end
+        end
+
+
+        def select_management_unit
+          @entities.values.select do |unit_entity|
+            MANAGMENT_PREFIX.any? { |regex| unit_entity.new_data.long_title =~ (Regexp.new regex)}
+          end
+        end
+
+
+        def change_management_unit(employment_collection)
+          management_units = select_management_unit
+
+          management_units.each do |management_unit_entity|
+            employments = employment_collection.entites_by_ids(management_unit_entity.new_data.employment_ids)
+            employments.each do |employment|
+              employment.new_data.unit_external_id = management_unit_entity.new_data.parent_external_id
+            end
+            remove_by_id(management_unit_entity.new_data.external_id)
           end
         end
 
