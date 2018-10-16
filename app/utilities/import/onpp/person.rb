@@ -41,7 +41,7 @@ module Utilities
 
         def normalize_birthday(raw_str)
           day, month = raw_str.split('.')
-          month + '.' + day
+          month + '-' + day
         end
 
       end
