@@ -7,8 +7,19 @@ module Utilities
 
         include Utilities::Import::Collection
 
-        MANAGMENT_PREFIX = ['^Руководство','^Рук\.']
+        COMPANY_MANAGMENTS_PREFIX = 'Руководство предприятия'
+        COMPANY_MANAGMENT = [
+          {
+            post_title: 'Генеральный директор',
+            unit_title: 'Акционерное общество "Обнинское научно-производственное предприятие "Технология" им. А.Г. Ромашина"'
+          },
+          {
+            post_title: 'Первый заместитель генерального директора',
+            unit_title: 'Блок первого заместителя генерального директора'
+          }
+        ]
 
+        MANAGMENT_PREFIX = [/^Руководство/,/^Рук\./]
 
         def import(doc)
           doc.xpath('.//organization').each do |org|
@@ -73,6 +84,52 @@ module Utilities
         end
 
 
+        def delete_empty_units
+          empty_units = @entities.values.select do |unit_entity|
+            unit_entity.new_data.employment_ids.empty? &&
+            unit_entity.new_data.child_ids.empty?
+          end
+          empty_units.each {|empty_unit| remove_by_id(empty_unit.new_data.external_id) }
+        end
+
+
+        def select_company_managment
+          @entities.values.find do |unit_entity|
+            unit_entity.new_data.long_title.include?(COMPANY_MANAGMENTS_PREFIX)
+          end
+        end
+
+
+        def change_company_managment(employment_collection)
+          company_managments_unit_entity = select_company_managment
+          company_managment_employments = employment_collection.entites_by_ids(company_managments_unit_entity.new_data.employment_ids)
+
+          COMPANY_MANAGMENT.each do |company_managment|
+            company_managment_employment = company_managment_employments.find do |employment|
+              employment.new_data.post_title.include?(company_managment[:post_title])
+            end
+            result = change_employment_unit(company_managment_employment, company_managment[:unit_title])
+            company_managment_employments.delete(company_managment_employment) if result
+          end
+
+          company_managment_employments.each do |employment_entity|
+            unit_title_substring = employment_entity.new_data.post_title.split(' ', 2)[1]
+            change_employment_unit(employment_entity, unit_title_substring)
+          end
+        end
+
+
+        def change_employment_unit(employment_entity, unit_title_substring)
+          unit_entity = find_unit_by_partial_title(unit_title_substring)
+          unit_entity.nil? ? (false) : (employment_entity.new_data.unit_external_id = unit_entity.new_data.external_id)
+        end
+
+
+        def find_unit_by_partial_title(title_substring)
+          @entities.values.find{ |unit_entity| unit_entity.new_data.long_title.include?(title_substring)}
+        end
+
+
         def select_management_unit
           @entities.values.select do |unit_entity|
             MANAGMENT_PREFIX.any? { |regex| unit_entity.new_data.long_title =~ (Regexp.new regex)}
@@ -88,7 +145,6 @@ module Utilities
             employments.each do |employment|
               employment.new_data.unit_external_id = management_unit_entity.new_data.parent_external_id
             end
-            remove_by_id(management_unit_entity.new_data.external_id)
           end
         end
 
