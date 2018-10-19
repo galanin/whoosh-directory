@@ -25,5 +25,6 @@ Dir["#{File.dirname(__FILE__)}/app/models/concerns/**/*.rb"].each { |f| require 
 require_relative 'app/models/application_record'
 Dir["#{File.dirname(__FILE__)}/app/models/**/*.rb"].each { |f| require f }
 Dir["#{File.dirname(__FILE__)}/app/utilities/**/*.rb"].each { |f| require f }
+Dir["#{File.dirname(__FILE__)}/app/helpers/**/*.rb"].each { |f| require f }
 
 require_relative 'app/apis/version1'
