@@ -11,7 +11,7 @@ class Person < ApplicationRecord
   field :last_name,       type: String
   field :birthday,        type: String
   field :gender,          type: String
-  field :employ_ids,      type: Array
+  field :employ_ids,      type: Array # employment_short_ids
   field :destroyed_at,    type: Time
 
 
