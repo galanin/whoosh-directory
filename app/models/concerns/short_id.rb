@@ -4,6 +4,7 @@ module ShortId
 
   included do
     field :short_id, type: String
+    index({ short_id: 1 })
     after_initialize { assign_short_id }
 
     def assign_short_id
