@@ -79,7 +79,7 @@ module Utilities
 
           POST_PRIORITY.find do |post|
             if employment_post =~ post[:post]
-              employment_with_priority[:epmloyment_id] = employment_unit_entity.new_data.external_id
+              employment_with_priority[:employment_id] = employment_unit_entity.new_data.external_id
               employment_with_priority[:priority] = post[:priority]
             end
           end
@@ -99,7 +99,7 @@ module Utilities
             end
 
             employments_with_priority.sort_by!{ |employment_with_priority| employment_with_priority[:priority] }
-            unit_entity.new_data.employment_ids = employments_with_priority.map { |employment| employment[:epmloyment_id] }
+            unit_entity.new_data.employment_ids = employments_with_priority.map { |employment| employment[:employment_id] }
           end
         end
 
