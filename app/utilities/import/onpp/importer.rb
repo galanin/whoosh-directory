@@ -48,7 +48,7 @@ module Utilities
 
           @units.sort_child_units
           @units.calc_levels
-          @units.sort_employments
+          @units.sort_employments(@employments)
 
           @people.fetch_from_db
           @units.fetch_from_db

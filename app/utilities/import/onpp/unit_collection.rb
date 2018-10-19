@@ -21,6 +21,28 @@ module Utilities
 
         MANAGMENT_PREFIX = [/^Руководство/,/^Рук\./]
 
+        #The element of constant POST_PRIORITY {post: //,  priority: max_number) must be last
+        POST_PRIORITY = [
+          { post: /\bгенеральный директор\z/, priority: 0 },
+          { post: /\bзаместитель генерального директора\b/, priority: 10 },
+          { post: /\bдиректор\b/, priority: 20},
+          { post: /\bглавный инженер\z/, priority: 20},
+          { post: /\bпервый заместитель директора\b/, priority: 30 },
+          { post: /\bзаместитель директора\b/, priority: 40 },
+          { post: /\bглавный энергетик\z/, priority: 50 },
+          { post: /\bглавный механик\z/, priority: 50 },
+          { post: /\bглавный метролог\z/, priority: 50 },
+          { post: /\bначальник\b/, priority: 60 },
+          { post: /\bруководитель\b/, priority: 60 },
+          { post: /\bпервый заместитель\b/, priority: 70 },
+          { post: /\bзаместитель\b/, priority: 80 },
+          { post: /\bстарший мастер\b/, priority: 90 },
+          { post: /\bмастер\b/, priority: 100 },
+          { post: /\bсекретарь\b/, priority: 110 },
+          { post: //, priority: 120 },
+        ]
+
+
         def import(doc)
           doc.xpath('.//organization').each do |org|
             new_data = Utilities::Import::ONPP::Unit.new(org)
@@ -51,8 +73,34 @@ module Utilities
         end
 
 
-        def sort_employments
-          # TODO implement
+        def set_priority(employment_unit_entity)
+          employment_post = employment_unit_entity.new_data.post_title.downcase
+          employment_with_priority = {}
+
+          POST_PRIORITY.find do |post|
+            if employment_post =~ post[:post]
+              employment_with_priority[:epmloyment_id] = employment_unit_entity.new_data.external_id
+              employment_with_priority[:priority] = post[:priority]
+            end
+          end
+
+          employment_with_priority
+        end
+
+
+
+        def sort_employments(employment_collection)
+          @entities.each do |id, unit_entity|
+            employmet_ids = unit_entity.new_data.employment_ids
+            employments = employment_collection.entites_by_ids(employmet_ids)
+
+            employments_with_priority = employments.map do |employment_unit|
+              set_priority(employment_unit)
+            end
+
+            employments_with_priority.sort_by!{ |employment_with_priority| employment_with_priority[:priority] }
+            unit_entity.new_data.employment_ids = employments_with_priority.map { |employment| employment[:epmloyment_id] }
+          end
         end
 
 
