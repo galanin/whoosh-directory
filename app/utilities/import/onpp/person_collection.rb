@@ -54,18 +54,18 @@ module Utilities
 
         def import_person_photo(external_id, person)
           photo_path = File.join(ENV['STAFF_IMPORT_PHOTO_PATH'], "#{external_id}.jpg")
-          puts photo_path
+          # puts photo_path
           if File.exists?(photo_path)
             photo_modified_time = File.mtime(photo_path)
             if person.photo_updated_at.nil? || photo_modified_time > person.photo_updated_at
-              puts ' do import'
+              # puts ' do import'
               File.open(photo_path) do |f|
                 person.photo = f
                 person.photo_updated_at = Time.now
-                puts '  success'
+                # puts '  success'
               end
             else
-              puts ' ignore'
+              # puts ' ignore'
             end
           end
         end
