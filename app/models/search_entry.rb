@@ -48,7 +48,8 @@ class SearchEntry < ApplicationRecord
           'employ_ids' => 1,
           'weight' => {
             '$sum' => weights_keys
-          }
+          },
+          'sub_order' => 1,
         }
       },
       {
