@@ -104,8 +104,7 @@ module Utilities
 
 
       def add_normal_term(term, priority, object, options = {})
-        @entities[get_entity_key(object)] ||= SearchEntity.new(object)
-        entity = @entities[get_entity_key(object)]
+        entity = get_or_build_entity(object)
 
         if options[:partial]
           (0 .. term.length - 1).each do |subterm_length|
@@ -120,6 +119,11 @@ module Utilities
 
       def normalize_term(term)
         term.downcase.scan(/[\p{Word}]+/)
+      end
+
+
+      def get_or_build_entity(searchable_object)
+        @entities[get_entity_key(searchable_object)] ||= SearchEntity.new(searchable_object)
       end
 
 
