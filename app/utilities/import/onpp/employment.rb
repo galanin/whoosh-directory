@@ -38,7 +38,7 @@ module Utilities
           @unit_external_id   = source_data['ID_PODR']
           @post_title         = source_data['POST']
           @post_category_code = POST_CATEGORY_CODE[source_data['KAT']] || POST_CATEGORY_CODE['*']
-          @office             = source_data['ROOM']
+          @office             = normalize_office(source_data['ROOM'])
           @building           = normalize_building(source_data['KORP'])
           @phones             = normalize_phones(source_data['PHONE'])
           @lunch_begin        = normalize_time(source_data['OBED_TIME_B'])
@@ -71,6 +71,16 @@ module Utilities
             vacation_end:       vacation_end,
             in_unit_rank:       in_unit_rank,
           }
+        end
+
+
+        def normalize_office(raw_str)
+          raw_str.strip!
+          if raw_str =~ /^(\d+)\s+(\p{Word})$/
+            $~[1] + $~[2]
+          else
+            raw_str
+          end.upcase
         end
 
 
