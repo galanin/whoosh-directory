@@ -2,6 +2,7 @@ class Unit < ApplicationRecord
   include Mongoid::Document
   include Mongoid::Timestamps
   include ShortId
+  include Searchable
 
   field :external_id,  type: String
   field :long_title,   type: String

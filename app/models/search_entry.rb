@@ -2,6 +2,8 @@ class SearchEntry < ApplicationRecord
   include Mongoid::Document
   include Mongoid::Timestamps
 
+  belongs_to :searchable, polymorphic: true
+
   field :unit_id,    type: String # unit_short_id
   field :person_id,  type: String # person_short_id
   field :employ_ids, type: Array # employment_short_ids

@@ -4,6 +4,7 @@ class Person < ApplicationRecord
   include Mongoid::Document
   include Mongoid::Timestamps
   include ShortId
+  include Searchable
 
   field :external_id,     type: String
   field :first_name,      type: String

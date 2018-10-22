@@ -2,6 +2,7 @@ class Employment < ApplicationRecord
   include Mongoid::Document
   include Mongoid::Timestamps
   include ShortId
+  include Searchable
 
   field :external_id,        type: String
   field :person_external_id, type: String

@@ -44,6 +44,7 @@ module Utilities
         search_entry.attributes = search_entry_attributes
         search_entry.keywords = keywords.sort.uniq
         search_entry.weights = weights
+        search_entry.searchable = searchable_object
         search_entry.save! if search_entry.changed?
       end
 
