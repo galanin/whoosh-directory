@@ -1,9 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import classNames from 'classnames'
-import SvgIcon from '@components/common/SvgIcon'
 
 import { loadUnitInfo } from '@actions/units'
 import { setCurrentEmploymentId } from '@actions/current'
@@ -12,34 +9,9 @@ import { popEmployeeInfo } from '@actions/layout'
 div = React.createFactory('div')
 span = React.createFactory('span')
 img = React.createFactory('img')
-svg = React.createFactory(SvgIcon)
 
-import LeaderMan from './icons/leader-man.svg'
-import LeaderWoman from './icons/leader-woman.svg'
-import SpecialistMan from './icons/specialist-man.svg'
-import SpecialistWoman from './icons/specialist-woman.svg'
-import EmployeeMan from './icons/employee-man.svg'
-import EmployeeWoman from './icons/employee-woman.svg'
-import WorkerMan from './icons/worker-man.svg'
-import WorkerWoman from './icons/worker-woman.svg'
-import AuxiliaryWorkerMan from './icons/auxiliary-worker-man.svg'
-import AuxiliaryWorkerWoman from './icons/auxiliary-worker-woman.svg'
-
-avatars =
-  M: [
-    LeaderMan
-    SpecialistMan
-    EmployeeMan
-    WorkerMan
-    AuxiliaryWorkerMan
-  ]
-  F: [
-    LeaderWoman
-    SpecialistWoman
-    EmployeeWoman
-    WorkerWoman
-    AuxiliaryWorkerWoman
-  ]
+import CommonAvatar from '@components/staff/CommonAvatar'
+avatar = React.createFactory(CommonAvatar)
 
 
 mapStateToProps = (state, ownProps) ->
@@ -63,21 +35,17 @@ class Employee extends React.Component
   render: ->
     return '' unless @props.employment
 
-    avatar = avatars[@props.person.gender][@props.employment.post_category_code]
+    photo = @props.person.photo
 
     div { className: 'employee', onClick: @onEmployeeClick.bind(this) },
       div { className: 'employee__photo' },
-        if @props.person.photo.thumb45.url? || @props.person.photo.thumb60.url?
-          if @props.person.photo.thumb45.url?
-            img { src: process.env.PHOTO_BASE_URL + @props.person.photo.thumb45.url, className: 'employee__thumb45' }
-          if @props.person.photo.thumb60.url?
-            img { src: process.env.PHOTO_BASE_URL + @props.person.photo.thumb60.url, className: 'employee__thumb60' }
+        if photo.thumb45.url? || photo.thumb60.url?
+          if photo.thumb45.url?
+            img { src: process.env.PHOTO_BASE_URL + photo.thumb45.url, className: 'employee__thumb45' }
+          if photo.thumb60.url?
+            img { src: process.env.PHOTO_BASE_URL + photo.thumb60.url, className: 'employee__thumb60' }
         else
-          div { className: 'employee__avatar' },
-            if avatar?
-              svg { svg: avatar }
-            else
-              ''
+            avatar { className: 'employee__avatar', gender: @props.person.gender, post_category_code: @props.employment.post_category_code }
 
       div { className: 'employee__info' },
         div { className: 'employee__name' },
