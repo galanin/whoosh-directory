@@ -40,12 +40,14 @@ module Utilities
         add_term(person.first_name, PRIORITY_FIRST_NAME, person, partial: true)
         add_term(person.middle_name, PRIORITY_MIDDLE_NAME, person, partial: true)
         add_normal_term(person.birthday, PRIORITY_LOWEST, person) if person.birthday
+        set_sub_order(person.last_name + ' ' + person.first_name + ' ' + person.middle_name, person)
       end
 
 
       def add_unit(unit)
         puts unit.long_title
         add_term(unit.long_title, PRIORITY_UNIT_TITLE, unit, partial: true)
+        set_sub_order(unit.list_title, unit)
       end
 
 
@@ -129,6 +131,12 @@ module Utilities
 
       def get_entity_key(searchable_object)
         searchable_object.id
+      end
+
+
+      def set_sub_order(sub_order, object)
+        entity = get_or_build_entity(object)
+        entity.set_sub_order(sub_order)
       end
 
 

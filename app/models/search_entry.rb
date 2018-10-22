@@ -9,6 +9,7 @@ class SearchEntry < ApplicationRecord
   field :employ_ids, type: Array # employment_short_ids
   field :keywords,   type: Array
   field :weights,    type: Hash # keyword weights
+  field :sub_order,  type: String # second sort field after final weight
 
   index(keywords: 1)
 
@@ -53,6 +54,7 @@ class SearchEntry < ApplicationRecord
       {
         '$sort' => {
           'weight' => -1,
+          'sub_order' => 1,
         }
       },
       {

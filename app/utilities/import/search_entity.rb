@@ -2,13 +2,14 @@ module Utilities
   module Import
     class SearchEntity
 
-      attr_reader :keywords, :weights, :searchable_object
+      attr_reader :keywords, :weights, :sub_order, :searchable_object
       attr_accessor :search_entry
 
 
       def initialize(searchable_object = nil)
         @keywords = []
         @weights = {}
+        @sub_order = ''
         @searchable_object = searchable_object
       end
 
@@ -30,6 +31,11 @@ module Utilities
       end
 
 
+      def set_sub_order(sub_order)
+        @sub_order = sub_order
+      end
+
+
       def build_new_entry
         @search_entry = SearchEntry.new(search_entry_attributes)
       end
@@ -44,6 +50,7 @@ module Utilities
         search_entry.attributes = search_entry_attributes
         search_entry.keywords = keywords.sort.uniq
         search_entry.weights = weights
+        search_entry.sub_order = sub_order
         search_entry.searchable = searchable_object
         search_entry.save! if search_entry.changed?
       end
