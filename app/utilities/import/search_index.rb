@@ -130,7 +130,7 @@ module Utilities
 
 
       def get_entity_key(searchable_object)
-        searchable_object.id
+        searchable_object.id.to_s
       end
 
 
