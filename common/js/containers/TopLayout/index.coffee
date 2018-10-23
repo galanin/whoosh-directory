@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { fetchInitialState } from '@actions/initial_state';
+import { loadSession } from '@actions/session'
+import { loadUnits } from '@actions/units'
 
 div = React.createFactory('div')
 
@@ -13,8 +14,10 @@ working_area = React.createFactory(WorkingArea)
 
 class TopLayout extends React.Component
   @fetchData: (state) ->
-    initial_state = fetchInitialState()
-    state.store.dispatch(initial_state)
+    Promise.all([
+      state.store.dispatch(loadSession())
+      state.store.dispatch(loadUnits())
+    ])
 
   render: ->
     div { className: 'top-layout' },

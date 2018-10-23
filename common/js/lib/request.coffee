@@ -9,7 +9,14 @@ throw 'API URL is not defined' unless baseURL?
 export encode = encodeURIComponent
 
 export Request =
-  del: (url) -> superagent.del("#{baseURL}#{url}")
-  get: (url) -> superagent.get("#{baseURL}#{url}")
-  put: (url, body) -> superagent.put("#{baseURL}#{url}", body)
-  post: (url, body) -> superagent.post("#{baseURL}#{url}", body)
+  del: (url, params = {}) ->
+    superagent.del("#{baseURL}#{url}").query(params)
+
+  get: (url, params = {}) ->
+    superagent.get("#{baseURL}#{url}").query(params)
+
+  put: (url, params = {}) ->
+    superagent.put("#{baseURL}#{url}").send(params)
+
+  post: (url, params = {}) ->
+    superagent.post("#{baseURL}#{url}").send(params)

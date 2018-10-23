@@ -126,17 +126,17 @@ export default function handleRender(req, res) {
   Promise.all(fetchData).then(() => {
     const state = store.getState();
 
-    if (state.session && state.session.token &&
-      req.cookies['staff_dir_session_token'] != state.session.token
-    ) {
-      res.cookie('staff_dir_session_token', state.session.token,
-        {maxAge: 10 * 365 * 24 * 3600 * 1000});
-    }
-
     const html = renderToString(getComponent());
     const bundles = stats && getBundles(stats, modules) || [];
     const markup = render(html, state, bundles);
     const status = 200;
+
+    if (state.session && state.session.token &&
+      req.cookies['staff_dir_session_token'] != state.session.token
+    ) {
+      res.cookie('staff_dir_session_token', state.session.token,
+        { maxAge: 10 * 365 * 24 * 3600 * 1000 });
+    }
 
     // A 301 redirect was rendered somewhere if context.url exists after
     // rendering has happened.

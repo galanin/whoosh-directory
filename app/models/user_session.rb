@@ -22,9 +22,13 @@ class UserSession < ApplicationRecord
   end
 
 
-  def self.setup(token)
-    @@current = UserSession.find_by(token: token) if token.present?
-    @@current ||= UserSession.create
+  def self.find(token)
+    UserSession.where(token: token).first if token.present?
+  end
+
+
+  def self.find_or_create(token)
+    find(token) || UserSession.create
   end
 
 end

@@ -11,13 +11,15 @@ export expandUnit = (unit_id) ->
   unit_id: unit_id,
 
 export saveExpandedUnit = (unit_id) ->
-  (dispatch) ->
-    Request.post("/units/#{unit_id}/expand").end()
+  (dispatch, getState) ->
+    state = getState()
+    Request.post("/units/#{unit_id}/expand", session_token: state.session?.token).then()
 
 export collapseUnit = (unit_id) ->
   type: COLLAPSE_UNIT,
   unit_id: unit_id,
 
 export saveCollapsedUnit = (unit_id) ->
-  (dispatch) ->
-    Request.post("/units/#{unit_id}/collapse").end()
+  (dispatch, getState) ->
+    state = getState()
+    Request.post("/units/#{unit_id}/collapse", session_token: state.session?.token).then()

@@ -8,19 +8,21 @@ module Staff
 
     before do
       header 'Access-Control-Allow-Origin', '*'
+      if request.options?
+        header 'Access-Control-Allow-Headers', 'Content-Type'
+      end
     end
 
 
-    after_validation do
-      UserSession.setup(params[:session_token])
-      present :session_token, UserSession.current.token
+    get :session do
+      current_session = UserSession.find_or_create(params[:session_token])
+      present :session_token, current_session.token
+      present :expanded_units, current_session.data[:expanded_units]
     end
 
 
-    get :bootstrap do
-      units = Unit.only(:short_id, :level, :list_title, :child_ids)
-      present :units, units
-      present :expanded_units, UserSession.current.data[:expanded_units]
+    get :units do
+      present :units, Unit.only(:short_id, :level, :list_title, :child_ids).where(destroyed_at: nil)
     end
 
 
@@ -38,17 +40,19 @@ module Staff
 
 
     post 'units/:unit_id/expand' do
-      if params.key?(:unit_id) && params[:unit_id].present? && ! UserSession.current.data[:expanded_units].include?(params[:unit_id])
-        UserSession.current.data[:expanded_units] << params[:unit_id]
-        UserSession.current.save
+      current_session = UserSession.find(params[:session_token])
+      if params[:unit_id].present? && current_session && ! current_session.data[:expanded_units].include?(params[:unit_id])
+        current_session.data[:expanded_units] << params[:unit_id]
+        current_session.save
       end
     end
 
 
     post 'units/:unit_id/collapse' do
-      if params.key?(:unit_id) && params[:unit_id].present?
-        UserSession.current.data[:expanded_units].delete(params[:unit_id])
-        UserSession.current.save
+      current_session = UserSession.find(params[:session_token])
+      if params[:unit_id].present? && current_session && current_session.data[:expanded_units].include?(params[:unit_id])
+        current_session.data[:expanded_units].delete(params[:unit_id])
+        current_session.save
       end
     end
 
