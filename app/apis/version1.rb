@@ -22,18 +22,22 @@ module Staff
 
 
     get :units do
-      present :units, Unit.only(:short_id, :level, :list_title, :child_ids).where(destroyed_at: nil)
+      present :units,
+              Unit.
+                only(:short_id, :level, :list_title, :child_ids, :employ_ids).
+                where(destroyed_at: nil)
     end
 
 
     get 'units/:unit_id' do
       if params.key? :unit_id
-        unit = Unit.only(:short_id, :long_title, :short_title, :employ_ids).find_by!(short_id: params[:unit_id])
-        present :unit_extra, [unit]
+        unit = Unit.find_by!(short_id: params[:unit_id])
+        present :unit_extra, [unit.as_json.slice('long_title', 'short_title')]
 
-        present :employments, unit.employments.order(:in_unit_rank.asc)
+        employments = Employment.in(short_id: unit.employ_ids)
+        present :employments, employments
 
-        people = Person.find(unit.employments.map(&:person_id))
+        people = Person.in(short_id: employments.map(&:person_short_id))
         present :people, people
       end
     end

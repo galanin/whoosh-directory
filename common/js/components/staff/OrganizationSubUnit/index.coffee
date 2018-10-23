@@ -60,9 +60,9 @@ class OrganizationSubUnit extends React.Component
           @props.unit_data.list_title
       div { className: 'sub-unit__content' },
 
-        if @props.is_expanded && isArray(@props.unit_extra?.employ_ids)
+        if @props.is_expanded && isArray(@props.unit_data?.employ_ids)
           div { className: 'sub-unit__employees' },
-            for employment_id in @props.unit_extra.employ_ids
+            for employment_id in @props.unit_data.employ_ids
               employee { key: employment_id, employment_id: employment_id, hide: { unit: true } }
 
         if @props.is_expanded && isArray(@props.unit_data?.child_ids)
