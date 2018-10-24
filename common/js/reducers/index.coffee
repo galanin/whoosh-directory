@@ -11,6 +11,7 @@ import expanded_units from '@reducers/expand_units'
 import expanded_sub_units from '@reducers/expand_sub_units'
 import initial_state from '@reducers/initial_state'
 import layout from '@reducers/layout'
+import search from '@reducers/search'
 
 
 export default combineReducers
@@ -24,4 +25,5 @@ export default combineReducers
   expanded_sub_units: expanded_sub_units
   initial_state:      initial_state
   layout:             layout
+  search:             search
   routing:            routerReducer

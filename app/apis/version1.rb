@@ -67,6 +67,7 @@ module Staff
     }
     get :search do
       search_result = SearchEntry.query(params[:q], params[:max])
+      present :query, params[:q]
       present :results, search_result
 
       employments = fetch_search_result_employments(search_result)
