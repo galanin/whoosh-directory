@@ -1,7 +1,7 @@
-import {Request} from '@lib/request'
+import { Request } from '@lib/request'
 
-import {SET_SESSION_TOKEN} from '@constants/session'
-import {setExpandedUnits} from '@actions/expand_units'
+import { SET_SESSION_TOKEN } from '@constants/session'
+import { setExpandedUnits } from '@actions/expand_units'
 
 export loadSession = ->
   (dispatch, getState) ->
