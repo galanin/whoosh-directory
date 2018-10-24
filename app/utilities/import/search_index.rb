@@ -47,6 +47,7 @@ module Utilities
       def add_unit(unit)
         puts unit.long_title
         add_term(unit.long_title, PRIORITY_UNIT_TITLE, unit, partial: true)
+        add_term(unit.short_title, PRIORITY_UNIT_TITLE, unit, partial: true)
         set_sub_order(unit.list_title, unit)
       end
 
