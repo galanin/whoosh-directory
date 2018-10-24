@@ -2,7 +2,7 @@ import store from '../store'
 
 import { Request } from '@lib/request'
 
-import { START_LOAD_UNIT_EXTRA, ADD_UNIT_EXTRA, SET_UNIT_EXTRA_ERROR } from '@constants/unit_extras'
+import { START_LOAD_UNIT_EXTRA, ADD_UNIT_EXTRAS, SET_UNIT_EXTRA_ERROR } from '@constants/unit_extras'
 import { addPeople } from '@actions/people'
 import { addEmployments } from '@actions/employments'
 
@@ -16,17 +16,16 @@ export loadUnitExtra = (unit_id) ->
       Request.get("/units/#{unit_id}").then (result) ->
         dispatch(addPeople(result.body.people))
         dispatch(addEmployments(result.body.employments))
-        dispatch(addUnitExtra(unit_id, result.body.unit_extra[0]))
+        dispatch(addUnitExtras(result.body.unit_extras))
       , (error) ->
 
 export startLoadUnitExtra = (unit_id) ->
   type: START_LOAD_UNIT_EXTRA
   unit_id: unit_id
 
-export addUnitExtra = (unit_id, unit_extra) ->
-  type: ADD_UNIT_EXTRA
-  unit_id: unit_id
-  unit_extra: unit_extra
+export addUnitExtras = (unit_extras) ->
+  type: ADD_UNIT_EXTRAS
+  unit_extras: unit_extras
 
 export setUnitExtraError = (unit_id, error) ->
   type: SET_UNIT_EXTRA_ERROR

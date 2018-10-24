@@ -32,7 +32,7 @@ module Staff
     get 'units/:unit_id' do
       if params.key? :unit_id
         unit = Unit.find_by!(short_id: params[:unit_id])
-        present :unit_extra, [unit.as_json.slice('long_title', 'short_title')]
+        present :unit_extras, [unit.as_json.slice('id', 'long_title', 'short_title')]
 
         employments = Employment.in(short_id: unit.employ_ids)
         present :employments, employments
