@@ -69,8 +69,10 @@ module Staff
       search_result = SearchEntry.query(params[:q], params[:max])
       present :results, search_result
 
-      present :unit_extras, fetch_search_result_unit_extras(search_result)
-      present :employments, fetch_search_result_employments(search_result)
+      employments = fetch_search_result_employments(search_result)
+
+      present :unit_extras, fetch_search_result_unit_extras(search_result, employments)
+      present :employments, employments
       present :people,      fetch_search_result_people(search_result)
     end
 
