@@ -25,9 +25,7 @@ export sendQuery = (query_string) ->
   (dispatch, getState) ->
 
     Request.get('/search').query({q: query_string}).then (response) ->
-      console.log response.body
       state = getState()
-      console.log state.search
       if response.body.query == state.search.query
         dispatch(addPeople(response.body.people))
         dispatch(addEmployments(response.body.employments))

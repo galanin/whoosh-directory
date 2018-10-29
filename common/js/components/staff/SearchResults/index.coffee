@@ -28,7 +28,6 @@ class SearchResults extends React.Component
         if isArray(@props.results) and @props.results.length > 0
           div { className: 'search-results__results' },
             for result in @props.results
-              console.log result
               if result.unit_id?
                 result_unit({ key: result.unit_id, unit_id: result.unit_id })
               else if result.person_id?

@@ -36,7 +36,6 @@ mapDispatchToProps = (dispatch) ->
 class EmployeeInfo extends React.Component
 
   onCloseButtonClick: ->
-    console.log 'CLOSE'
     @props.unsetCurrentEmployee()
 
 
