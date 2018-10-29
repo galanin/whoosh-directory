@@ -4,15 +4,17 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import classNames from 'classnames'
 import SvgIcon from '@components/common/SvgIcon'
+import { Element as ScrollElement, scroller } from 'react-scroll'
 
 import { collapseUnit, saveCollapsedUnit, expandUnit, saveExpandedUnit } from '@actions/expand_units'
-import { setCurrentUnitId } from '@actions/current'
+import { setCurrentUnitId, scrolledToUnit } from '@actions/current'
 import { resetExpandedSubUnits } from '@actions/expand_sub_units'
 import { loadUnitExtra } from '@actions/unit_extras'
 import { popUnitInfo } from '@actions/layout'
 
 div = React.createFactory('div')
 svg = React.createFactory(SvgIcon)
+scroll_element = React.createFactory(ScrollElement)
 
 import Minus from './icons/minus-square.svg'
 import Plus from './icons/plus-square.svg'
@@ -21,7 +23,9 @@ import Plus from './icons/plus-square.svg'
 mapStateToProps = (state, ownProps) ->
   unit_data: state.units[ownProps.unit_id]
   is_expanded: state.expanded_units[ownProps.unit_id]?
-  current_unit_id: state.current.unit_id
+  is_current: ownProps.unit_id == state.current.unit_id
+  is_highlighted: ownProps.unit_id == state.current.highlighted_unit_id
+  do_scroll: ownProps.unit_id == state.current.scroll_to_unit_id
 
 
 mapDispatchToProps = (dispatch, ownProps) ->
@@ -36,12 +40,25 @@ mapDispatchToProps = (dispatch, ownProps) ->
     dispatch(loadUnitExtra(ownProps.unit_id))
     dispatch(resetExpandedSubUnits())
     dispatch(popUnitInfo())
+  scrolledToUnit: ->
+    dispatch(scrolledToUnit(ownProps.unit_id))
 
 
 class OrganizationUnitNode extends React.Component
 
   hasChildren: ->
     +@props.unit_data.child_ids?.length > 0
+
+
+  componentDidUpdate: (prevProps) ->
+    if @props.do_scroll
+      scroller.scrollTo "node-#{@props.unit_id}",
+        offset:   -200
+        duration:  300
+        smooth:    true
+        isDynamic: true
+        containerId: 'organization-structure-scroller'
+      @props.scrolledToUnit()
 
 
   onExpandCollapseClick: ->
@@ -70,7 +87,8 @@ class OrganizationUnitNode extends React.Component
 
     title_class_name = classNames
       'organization-unit-node__title': true
-      'organization-unit-node__title_current': @props.unit_id == @props.current_unit_id
+      'organization-unit-node__title_current': @props.is_current
+      'organization-unit-node__title_highlighted': @props.is_highlighted
 
     div { className: node_class_name },
       if has_children
@@ -81,7 +99,7 @@ class OrganizationUnitNode extends React.Component
         div { className: 'organization-unit-node__button-stub' },
 
       div { className: 'organization-unit-node__content' },
-        div { className: title_class_name, onClick: @onUnitClick.bind(this) },
+        scroll_element { className: title_class_name, onClick: @onUnitClick.bind(this), name: "node-#{@props.unit_id}" },
           @props.unit_data.list_title
         if has_children
           div { className: 'organization-unit-node__children' },

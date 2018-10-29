@@ -45,8 +45,9 @@ module Staff
 
     post 'units/:unit_id/expand' do
       current_session = UserSession.find(params[:session_token])
-      if params[:unit_id].present? && current_session && ! current_session.data[:expanded_units].include?(params[:unit_id])
-        current_session.data[:expanded_units] << params[:unit_id]
+      unit_ids = params[:unit_id].to_s.split(',').presence.compact
+      if unit_ids.present? && current_session && (new_unit_ids = unit_ids - current_session.data[:expanded_units]).present?
+        current_session.data[:expanded_units] += new_unit_ids
         current_session.save
       end
     end
