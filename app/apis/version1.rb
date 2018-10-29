@@ -73,7 +73,6 @@ module Staff
 
       employments = fetch_search_result_employments(search_result)
 
-      present :unit_extras, fetch_search_result_unit_extras(search_result, employments)
       present :employments, employments
       present :people,      fetch_search_result_people(search_result)
     end

@@ -29,7 +29,6 @@ export sendQuery = (query_string) ->
       state = getState()
       console.log state.search
       if response.body.query == state.search.query
-        dispatch(addUnitExtras(response.body.unit_extras))
         dispatch(addPeople(response.body.people))
         dispatch(addEmployments(response.body.employments))
         dispatch(setResults(response.body.results))
