@@ -40,8 +40,12 @@ module Utilities
 
 
         def normalize_birthday(raw_str)
-          day, month = raw_str.split('.')
-          month + '-' + day
+          if raw_str.present?
+            day, month = raw_str.split('.')
+            if month.present?
+              month + '-' + day
+            end
+          end
         end
 
       end
