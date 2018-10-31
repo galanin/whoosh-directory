@@ -6,15 +6,15 @@ import baseConfig from './base';
 
 const {
   DEV_SERVER_PORT,
-  DEV_SERVER_HOSTNAME,
-  DEV_SERVER_HOST_URL
+  DEV_SERVER_ADDR,
+  DEV_SERVER_URL
 } = process.env;
 
 const webpackConfig = merge(baseConfig, {
   devtool: 'eval',
   entry: {
     app: [
-      'webpack-dev-server/client?' + DEV_SERVER_HOST_URL,
+      'webpack-dev-server/client?' + DEV_SERVER_URL,
       'webpack/hot/only-dev-server'
     ]
   },
@@ -41,12 +41,12 @@ new WebpackDevServer(webpack(webpackConfig), {
     children: false
   },
   disableHostCheck: true
-}).listen(DEV_SERVER_PORT, DEV_SERVER_HOSTNAME, e => {
+}).listen(DEV_SERVER_PORT, DEV_SERVER_ADDR, e => {
   if (e) {
     console.error(e);
   } else {
     console.info(
-      `Webpack dev server mounted at ${DEV_SERVER_HOST_URL}.`
+      `Webpack dev server mounted at ${DEV_SERVER_ADDR}:${DEV_SERVER_PORT}.`
     );
   }
 });
