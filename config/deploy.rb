@@ -14,7 +14,7 @@ set :format_options, command_output: true, log_file: "log/capistrano.log", color
 set :pty, true
 
 # Default value for :linked_files is []
-append :linked_files, 'config/mongoid.yml', '.env'
+append :linked_files, 'config/mongoid.yml', '.env', '.yarnrc'
 
 # Default value for linked_dirs is []
 append :linked_dirs, 'log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', '.bundle'

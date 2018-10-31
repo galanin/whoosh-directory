@@ -11,6 +11,7 @@
 /.bundle/
 
 .env
+.yarnrc
 
 /config/mongoid.yml
 
