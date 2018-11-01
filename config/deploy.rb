@@ -35,33 +35,5 @@ set :bundle_roles, :api
 
 set :puma_role, :api
 
-
-namespace :npm do
-
-  task :build do
-    on roles(:web) do
-      within release_path do
-        execute :npm, 'run prod:build'
-      end
-    end
-  end
-
-end
-
-
-namespace :pm2 do
-
-  task :reload do
-    on roles(:web) do
-      within release_path do
-        execute :pm2, 'reload /home/deployer/staff_production/shared/ecosystem.config.js --env production'
-      end
-    end
-  end
-
-end
-
-
-after 'npm:install', 'npm:build'
-after 'npm:build', 'pm2:reload'
-after 'npm:build', 'puma:restart'
+after 'deploy:published', 'staff:build'
+after 'deploy:finished', 'pm2:reload'
