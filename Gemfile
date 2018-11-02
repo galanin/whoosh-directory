@@ -60,7 +60,7 @@ group :development do
 
   gem 'capistrano', '~> 3.11.0', require: false
   gem 'capistrano-rvm', require: false
-  gem 'capistrano-npm', require: false
+  gem 'capistrano-yarn', require: false
   gem 'capistrano-bundler', require: false
   gem 'capistrano3-puma', require: false
   gem 'capistrano-rails-console', require: false
