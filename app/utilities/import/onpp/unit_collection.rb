@@ -45,8 +45,17 @@ module Utilities
 
         def import(doc)
           doc.xpath('.//organization').each do |org|
-            new_data = Utilities::Import::ONPP::Unit.new(org)
-            add_new_data(new_data)
+            unless present_in_black_list?(org['ID'])
+              new_data = Utilities::Import::ONPP::Unit.new(org)
+              add_new_data(new_data)
+            end
+          end
+        end
+
+
+        def import_black_list(doc)
+          doc.xpath('.//organization').map do |org|
+            add_black_list(org['ID'])
           end
         end
 
@@ -133,11 +142,29 @@ module Utilities
 
 
         def delete_empty_units
-          empty_units = @entities.values.select do |unit_entity|
-            unit_entity.new_data.employment_ids.empty? &&
-            unit_entity.new_data.child_ids.empty?
+          empty_units = find_empty_units
+          empty_units.each do |empty_unit|
+            delete_with_parent_items(empty_unit)
           end
-          empty_units.each {|empty_unit| remove_by_id(empty_unit.new_data.external_id) }
+
+        end
+
+
+        def delete_with_parent_items(unit_entity)
+          parent_unit = @entities[unit_entity.new_data.parent_external_id]
+          remove_by_id(unit_entity.new_data.external_id)
+          parent_unit.new_data.child_ids.delete(unit_entity.new_data.external_id)
+          if parent_unit.new_data.child_ids.empty? && parent_unit.new_data.employment_ids.empty?
+            delete_with_parent_items(parent_unit)
+          end
+        end
+
+
+        def find_empty_units
+          @entities.values.select do |unit_entity|
+            unit_entity.new_data.employment_ids.empty? &&
+              unit_entity.new_data.child_ids.empty?
+          end
         end
 
 

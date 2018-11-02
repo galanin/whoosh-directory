@@ -8,10 +8,18 @@ module Utilities
         include Utilities::Import::Collection
 
 
-        def import(doc)
+        def import(doc, unit_collection)
           doc.xpath('.//person').each do |person|
-            new_data = Utilities::Import::ONPP::Person.new(person)
-            add_new_data(new_data)
+            unless unit_collection.present_in_black_list?(person['ID_PODR'])
+              new_data = Utilities::Import::ONPP::Person.new(person)
+              add_new_data(new_data)
+            end
+          end
+        end
+
+        def delete_without_employment(employment_collection)
+          @entities.keys.each do |id|
+            remove_by_id(id) unless employment_collection.person_has_employment?(id)
           end
         end
 

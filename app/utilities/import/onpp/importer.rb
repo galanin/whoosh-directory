@@ -16,12 +16,22 @@ module Utilities
 
 
         def import
+
+          blacklist_xml_str = IO.read ENV['STAFF_IMPORT_BLACKLIST_FILE_PATH']
+          blacklist_doc = ::Nokogiri::XML(blacklist_xml_str, nil, 'UTF-8')
+
+          @units.import_black_list(blacklist_doc)
+          @employments.import_black_list(blacklist_doc)
+
           xml_str = IO.read ENV['STAFF_IMPORT_FILE_PATH']
           doc = ::Nokogiri::XML(xml_str, nil, 'CP1251')
 
-          @people.import(doc)
           @units.import(doc)
-          @employments.import(doc)
+          @employments.import(doc, @units)
+          @people.import(doc, @units)
+
+
+          @people.delete_without_employment(@employments)
 
           @units.build_structure
 

@@ -5,11 +5,22 @@ module Utilities
       def initialize(object_class)
         @object_class = object_class
         @entities     = {}
+        @black_list   = Utilities::Import::BlackList.new
       end
 
 
       def [](external_id)
         @entities[external_id]
+      end
+
+
+      def add_black_list(id)
+        @black_list.black_list[id] = "1"
+      end
+
+
+      def present_in_black_list?(id)
+        @black_list.black_list.has_key?(id)
       end
 
 

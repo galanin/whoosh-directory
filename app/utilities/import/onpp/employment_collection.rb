@@ -8,11 +8,28 @@ module Utilities
         include Utilities::Import::Collection
 
 
-        def import(doc)
+        def import(doc, unit_collection)
           doc.xpath('.//person').each do |person|
-            new_data = Utilities::Import::ONPP::Employment.new(person)
-            add_new_data(new_data) if new_data.may_add?
+            unless present_in_black_list?(person['ID_M']) || unit_collection.present_in_black_list?(person['ID_PODR'])
+              new_data = Utilities::Import::ONPP::Employment.new(person)
+              add_new_data(new_data) if new_data.may_add?
+            end
           end
+        end
+
+
+        def import_black_list(doc)
+          doc.xpath('.//person').map do |person|
+            add_black_list(person['ID'])
+          end
+        end
+
+
+        def person_has_employment?(person_id)
+          employments = @entities.values.select do |employment_entity|
+            employment_entity.new_data.person_external_id == person_id
+          end
+          employments.empty? ? (false) : (true)
         end
 
 
