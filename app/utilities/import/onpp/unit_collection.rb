@@ -84,16 +84,15 @@ module Utilities
 
         def set_priority(employment_unit_entity)
           employment_post = employment_unit_entity.new_data.post_title.downcase
-          employment_with_priority = {}
 
-          POST_PRIORITY.find do |post|
-            if employment_post =~ post[:post]
-              employment_with_priority[:employment_id] = employment_unit_entity.new_data.external_id
-              employment_with_priority[:priority] = post[:priority]
-            end
+          post_priority = POST_PRIORITY.find do |post|
+            employment_post =~ post[:post]
           end
 
-          employment_with_priority
+          {
+            employment_id: employment_unit_entity.new_data.external_id,
+            priority:      post_priority[:priority]
+          }
         end
 
 
