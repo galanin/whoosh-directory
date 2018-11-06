@@ -1,0 +1,82 @@
+upstream staff_production_web {
+  server 127.0.0.1:8001 fail_timeout=0;
+}
+
+upstream staff_production_api {
+  server 127.0.0.1:8002 fail_timeout=0;
+}
+
+map $http_accept     $accept_header {
+  default $http_accept;
+  "text/javascript,image/webp"     "text/javascript";
+  "application/vnd.wap.xhtml+xml"     "application/xhtml+xml";
+}
+
+server {
+  listen              80;
+  server_name         staff;
+  root                /home/deployer/staff_production/current/dist/public;
+  try_files           $uri @staff_production_web;
+
+  # remove slash in end url
+  rewrite ^/(.*)/$ /$1 permanent;
+
+
+  # remove subdomain www
+  if ($host ~* www\.(.*)) {
+    set $host_without_www $1;
+    rewrite ^(.*)$ http://$host_without_www$1 permanent;
+  }
+
+
+
+  location @staff_production_web {
+    proxy_set_header  X-Forwarded-For $proxy_add_x_forwarded_for;
+    proxy_set_header  X-Forwarded-Proto $scheme;
+    proxy_set_header  Host $http_host;
+
+    proxy_set_header Accept $accept_header; # problem with text/javascript,image/webp
+
+    add_header P3P 'CP="ALL DSP COR PSAa PSDa OUR NOR ONL UNI COM NAV"'; # ie cookies fix
+
+    proxy_redirect    off;
+    proxy_pass        http://staff_production_web;
+    limit_req         zone=one burst=5;
+
+    access_log        /home/deployer/staff_production/shared/log/web.access.log;
+    error_log         /home/deployer/staff_production/shared/log/web.error.log;
+  }
+
+  location ~ ^/(asssets)/ {
+    alias             /home/deployer/staff_production/current/dist/public;
+    gzip_static       on;
+    expires           max;
+    add_header        Cache-Control public;
+
+    open_file_cache          max=1000 inactive=500s;
+    open_file_cache_valid    600s;
+    open_file_cache_errors   on;
+    break;
+  }
+
+  error_page          500 502 504  /500.html;
+
+  location = /50x.html {
+      root            /home/deployer/tech_staging/current/public;
+  }
+
+  location = /404.html {
+      root            /home/deployer/tech_staging/current/public;
+  }
+
+  if ($request_method !~ ^(GET|HEAD|PUT|POST|DELETE|OPTIONS)$ ){
+    return            405;
+  }
+
+  location ~ \.(php|html)$ {
+    return            405;
+  }
+
+  access_log        /home/deployer/staff_production/shared/log/access.log;
+  error_log         /home/deployer/staff_production/shared/log/error.log;
+}

@@ -1,0 +1,35 @@
+[Unit]
+Description=Staff Directory Production Back-end API Service
+After=network.target
+
+# Uncomment for socket activation (see below)
+Requires=staff_production_api.socket
+
+[Service]
+# Foreground process (do not use --daemon in ExecStart or config.rb)
+Type=simple
+
+# Preferably configure a non-privileged user
+User=deployer
+Group=deployer
+
+# The path to the puma application root
+# Also replace the "<WD>" place holders below with this path.
+WorkingDirectory=/home/deployer/staff_production/current
+
+# Helpful for debugging socket activation, etc.
+Environment=PUMA_DEBUG=1
+Environment=RACK_ENV=production
+
+ExecStart=/home/deployer/.rvm/bin/rvm default do bundle exec puma -C /home/deployer/staff_production/shared/puma.rb
+ExecStop=/home/deployer/.rvm/bin/rvm default do bundle exec pumactl -F /home/deployer/staff_production/shared/puma.rb stop
+ExecReload=/home/deployer/.rvm/bin/rvm default do bundle exec pumactl -F /home/deployer/staff_production/shared/puma.rb phased-restart
+
+KillMode=process
+Restart=always
+
+PidFile=/home/deployer/staff_production/shared/tmp/pids/puma.pid
+
+[Install]
+WantedBy=multi-user.target
+
