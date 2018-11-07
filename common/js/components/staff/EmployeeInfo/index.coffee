@@ -25,7 +25,6 @@ mapStateToProps = (state, ownProps) ->
   employment: employment
   person: employment && state.people[employment.person_id]
   unit: employment && state.units[employment.unit_id]
-  unit_extra: employment && state.unit_extras[employment.unit_id]
 
 mapDispatchToProps = (dispatch) ->
   unsetCurrentEmployee: ->
@@ -52,7 +51,7 @@ class EmployeeInfo extends React.Component
         div { className: 'employee-info__post_title' },
           @props.employment.post_title
         div { className: 'employee-info__unit_title' },
-          @props.unit_extra.extra.long_title
+          @props.unit.list_title
 
         div { className: 'employee-info__two-columns' },
           if @props.person.photo.large.url
