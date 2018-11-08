@@ -4,9 +4,10 @@
       "env",
       {
         "targets": {
-          "node": "current",
-          "uglify": false
-        }
+          "node": "current"
+        },
+        "uglify": false,
+        "useBuiltIns": "entry"
       }
     ]
   ],

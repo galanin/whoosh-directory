@@ -5,9 +5,10 @@ export default {
       'env',
       {
         targets: {
-          browser: 'last 2 versions',
-          uglify: false
-        }
+          ie: '11'
+        },
+        useBuiltIns: 'entry',
+        debug: true
       }
     ],
     'react'

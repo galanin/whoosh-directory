@@ -57,11 +57,21 @@ export default {
   context: path.resolve(__dirname, '..'),
   mode: isDev ? 'development' : 'production',
   entry: {
+    polyfill: ['./client/polyfill'],
     app: ['./client/index']
   },
   optimization: {
     splitChunks: {
       cacheGroups: {
+        polyfill: {
+          name: 'polyfill',
+          chunks: 'all',
+          reuseExistingChunk: true,
+          priority: 1,
+          enforce: true,
+          // extract to vendor chunk if it's in /babel-polyfill
+          test: module => /babel-polyfill/.test(module.context)
+        },
         vendor: {
           name: 'vendor',
           chunks: 'all',
@@ -91,7 +101,6 @@ export default {
     rules: [
       {
         test: /\.jsx$|\.js$/,
-        exclude: /node_modules/,
         loader: 'babel-loader',
         options: babelOpts
       },

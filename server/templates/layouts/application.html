@@ -15,6 +15,7 @@
 <body>
   <div id="app"><%= html %></div>
   <script>window.__INITIAL_STATE__ = <%= JSON.stringify(initialState) %>;</script>
+  <%= polyJs ? `<script src="${polyJs}"></script>` : '' %>
   <%= vendorJs ? `<script src="${vendorJs}"></script>` : '' %>
   <script src="<%= appJs %>"></script>
   <%= chunkJs.map(bundle => {

@@ -12,6 +12,7 @@ export default function render(html, initialState = {}, bundles = []) {
   }
 
   const assets = global.ISOTools.assets();
+  const polyJs = assets.javascript.polyfill;
   const appJs = assets.javascript.app;
   const vendorJs = assets.javascript.vendor;
   const helmet = Helmet.renderStatic();
@@ -23,6 +24,7 @@ export default function render(html, initialState = {}, bundles = []) {
   return compile({
     html,
     helmet,
+    polyJs,
     appCss,
     appJs,
     vendorJs,

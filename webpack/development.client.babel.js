@@ -11,7 +11,7 @@ const {
 } = process.env;
 
 const webpackConfig = merge(baseConfig, {
-  devtool: 'eval',
+  devtool: 'source-map',
   entry: {
     app: [
       'webpack-dev-server/client?' + DEV_SERVER_URL,
