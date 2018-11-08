@@ -9,19 +9,13 @@
         "uglify": false,
         "useBuiltIns": "entry"
       }
-    ]
+    ],
+    "react"
   ],
   "plugins": [
     "transform-es2015-modules-commonjs",
     "transform-class-properties",
     "transform-export-extensions",
     "transform-object-rest-spread"
-  ],
-  "env": {
-    "test": {
-      "presets": [
-        "react"
-      ]
-    }
-  }
+  ]
 }
