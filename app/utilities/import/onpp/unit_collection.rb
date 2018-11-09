@@ -121,7 +121,9 @@ module Utilities
 
         def link_objects_to_children_short_ids
           @entities.each do |id, unit_entity|
-            unit_entity.old_object.child_ids = short_ids_by_external_ids(unit_entity.new_data.child_ids)
+            if unit_entity.new_data
+              unit_entity.old_object.child_ids = short_ids_by_external_ids(unit_entity.new_data.child_ids)
+            end
           end
         end
 
