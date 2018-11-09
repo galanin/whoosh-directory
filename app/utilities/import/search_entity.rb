@@ -20,7 +20,7 @@ module Utilities
 
 
       def stale?
-        keywords.nil? && search_entry.present?
+        keywords.empty? && search_entry.present?
       end
 
 
@@ -42,7 +42,7 @@ module Utilities
 
 
       def drop_stale_entry
-        search_entry.set(destroyed_at: Time.now)
+        search_entry.destroy
       end
 
 
