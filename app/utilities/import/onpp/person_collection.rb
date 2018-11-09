@@ -52,7 +52,9 @@ module Utilities
 
         def link_objects_to_employment_short_ids(employment_collection)
           @entities.each do |id, unit_entity|
-            unit_entity.old_object.employ_ids = employment_collection.short_ids_by_external_ids(unit_entity.new_data.employment_ids)
+            if unit_entity.new_data
+              unit_entity.old_object.employ_ids = employment_collection.short_ids_by_external_ids(unit_entity.new_data.employment_ids)
+            end
           end
         end
 
