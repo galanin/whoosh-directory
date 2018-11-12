@@ -42,6 +42,7 @@ gem 'rake'
 gem 'mini_magick'
 gem 'carrierwave', '~> 1.2', require: 'carrierwave'
 gem 'carrierwave-mongoid', require: 'carrierwave/mongoid'
+gem 'i18n'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

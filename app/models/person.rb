@@ -1,4 +1,6 @@
 require 'carrierwave/mongoid'
+require 'i18n'
+require 'date'
 
 class Person < ApplicationRecord
   include Mongoid::Document
@@ -25,13 +27,17 @@ class Person < ApplicationRecord
   scope :api_fields, -> { only(:short_id, :first_name, :middle_name, :last_name,
                                :birthday, :gender) }
 
+  INPUT_BIRTHDAY_FORMAT = '%m-%d'
+
 
   def as_json(options = nil)
     super.slice(
       'first_name', 'middle_name', 'last_name',
-      'birthday', 'gender', 'photo',
+      'gender', 'photo',
     ).merge(
       'id' => short_id,
+    ).merge(
+       'birthday' => (I18n.l(Date.strptime(birthday, INPUT_BIRTHDAY_FORMAT), format: :bithday) unless birthday.nil?)
     )
   end
 
