@@ -23,6 +23,7 @@ class Employment < ApplicationRecord
   field :in_unit_rank,       type: Integer
   field :destroyed_at,       type: Time
 
+  validates :external_id, :person_external_id, :unit_external_id, :person_short_id, :unit_short_id, :post_title, presence: true
 
   belongs_to :person
   belongs_to :unit

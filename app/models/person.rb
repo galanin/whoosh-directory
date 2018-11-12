@@ -17,6 +17,7 @@ class Person < ApplicationRecord
   field :employ_ids,      type: Array # employment_short_ids
   field :destroyed_at,    type: Time
 
+  validates :external_id, :first_name, :last_name, presence: true
 
   has_many :employments
 
