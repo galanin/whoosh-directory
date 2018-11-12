@@ -75,8 +75,10 @@ module Utilities
         add_term(employment.post_title, PRIORITY_LOWEST, person, partial: true)
         add_term(employment.office, PRIORITY_LOWEST, person)
         add_term(employment.building, PRIORITY_LOWEST, person)
-        employment.phones.each do |phone|
-          add_term(phone, PRIORITY_LOWEST, person)
+        if Array === employment.phones
+          employment.phones.each do |phone|
+            add_term(phone, PRIORITY_LOWEST, person)
+          end
         end
       end
 
@@ -118,8 +120,10 @@ module Utilities
 
 
       def add_term(term, priority, object, options = {})
-        normalize_term(term).each do |normal_term|
-          add_normal_term(normal_term, priority, object, options)
+        if term.present?
+          normalize_term(term).each do |normal_term|
+            add_normal_term(normal_term, priority, object, options)
+          end
         end
       end
 
