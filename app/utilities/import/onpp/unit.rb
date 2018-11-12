@@ -13,9 +13,9 @@ module Utilities
 
         def initialize(source_data)
           @external_id        = source_data['ID']
-          @long_title         = source_data['FULLNAME'].gsub(/\s{2,}/, ' ').strip
-          @short_title        = source_data['NAME'].gsub(/\s{2,}/, ' ').strip
-          @list_title         = @long_title.length > 80 ? (@short_title.presence || @long_title) : (@long_title.presence || @short_title)
+          @long_title         = source_data['FULLNAME'].gsub(/\s{2,}/, ' ').strip.presence
+          @short_title        = source_data['NAME'].gsub(/\s{2,}/, ' ').strip.presence
+          @list_title         = @long_title && @long_title.length > 80 ? (@short_title || @long_title) : (@long_title || @short_title)
           @path               = source_data['HASH']
           @parent_external_id = source_data['UP_ID']
 

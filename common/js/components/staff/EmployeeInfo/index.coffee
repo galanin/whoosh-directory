@@ -58,29 +58,32 @@ class EmployeeInfo extends React.Component
             div { className: 'employee-info__photo' },
               img { src: process.env.PHOTO_BASE_URL + @props.person.photo.large.url, className: 'employee-info__photo-large' }
           div { className: 'employee-info__data' },
-            if @props.employment.phones.length > 0
+            if isArray(@props.employment.phones) and @props.employment.phones.length > 0
               div { className: 'employee-info__phones' },
                 for phone in @props.employment.phones
                   div { className: 'employee-info__phone', key: phone },
                     phone
 
-            div { className: 'employee-info__iconed-data employee-info__location' },
-              svg { className: 'employee-info__data-icon employee-info__location-icon', svg: Location }
-              div { className: 'employee-info__data-container employee-info__location-container' },
-                div { className: 'employee-info__data-data employee-info__location-data' },
-                  if @props.employment.building
-                    div { className: 'employee-info__location-building' },
-                      @props.employment.building
-                  div { className: 'employee-info__location-office' },
-                    @props.employment.office
+            if @props.employment.building? or @props.employment.office?
+              div { className: 'employee-info__iconed-data employee-info__location' },
+                svg { className: 'employee-info__data-icon employee-info__location-icon', svg: Location }
+                div { className: 'employee-info__data-container employee-info__location-container' },
+                  div { className: 'employee-info__data-data employee-info__location-data' },
+                    if @props.employment.building?
+                      div { className: 'employee-info__location-building' },
+                        @props.employment.building
+                    if @props.employment.office?
+                      div { className: 'employee-info__location-office' },
+                        @props.employment.office
 
-            div { className: 'employee-info__iconed-data employee-info__lunch' },
-              svg { className: 'employee-info__data-icon employee-info__lunch-icon', svg: Lunch }
-              div { className: 'employee-info__data-container employee-info__lunch-container' },
-                div { className: 'employee-info__data-data employee-info__lunch-data' },
-                  @props.employment.lunch_begin + '—' + @props.employment.lunch_end
+            if @props.employment.lunch_begin? and @props.employment.lunch_end?
+              div { className: 'employee-info__iconed-data employee-info__lunch' },
+                svg { className: 'employee-info__data-icon employee-info__lunch-icon', svg: Lunch }
+                div { className: 'employee-info__data-container employee-info__lunch-container' },
+                  div { className: 'employee-info__data-data employee-info__lunch-data' },
+                    @props.employment.lunch_begin + '—' + @props.employment.lunch_end
 
-            if @props.person.birthday
+            if @props.person.birthday?
               div { className: 'employee-info__iconed-data employee-info__birthday' },
                 svg { className: 'employee-info__data-icon employee-info__birthday-icon', svg: Birthday }
                 div { className: 'employee-info__data-container employee-info__birthday-container' },
@@ -93,10 +96,6 @@ class EmployeeInfo extends React.Component
                 div { className: 'employee-info__data-container employee-info__vacation-container' },
                   div { className: 'employee-info__data-data employee-info__vacation-data' },
                     'В отпуске'
-
-
-
-
 
 
 export default connect(mapStateToProps, mapDispatchToProps)(EmployeeInfo)

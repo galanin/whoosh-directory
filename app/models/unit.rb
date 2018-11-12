@@ -23,7 +23,7 @@ class Unit < ApplicationRecord
     super.slice(
       'long_title', 'short_title', 'list_title',
       'child_ids', 'employ_ids', 'level',
-    ).merge(
+    ).compact.merge(
       'id' => short_id,
     )
   end

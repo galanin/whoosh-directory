@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux';
+import { isArray } from 'lodash';
 import classNames from 'classnames'
 
 import { loadUnitInfo } from '@actions/units'
@@ -67,10 +68,11 @@ class Employee extends React.Component
           div { className: 'employee__organization_unit_title' },
             @props.unit.list_title
 
-      div { className: 'employee__phones' },
-        for phone in @props.employment.phones[0..2]
-          div { className: 'employee__phone', key: phone },
-            phone
+      if isArray(@props.employment.phones) and @props.employment.phones.length > 0
+        div { className: 'employee__phones' },
+          for phone in @props.employment.phones[0..2]
+            div { className: 'employee__phone', key: phone },
+              phone
 
 
 ConnectedEmployee = connect(mapStateToProps, mapDispatchToProps)(Employee)

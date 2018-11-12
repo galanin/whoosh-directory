@@ -30,7 +30,10 @@ module Utilities
 
 
       def flush_to_db
-        old_object.update_attributes!(new_data.attributes)
+        attributes = new_data.attributes
+        old_object.update_attributes!(attributes.compact)
+        nil_attribute_names = attributes.select { |name, value| value.nil? }.map(&:first)
+        nil_attribute_names.each { |name| old_object.unset(name) }
       end
 
     end

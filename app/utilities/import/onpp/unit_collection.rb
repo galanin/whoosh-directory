@@ -122,7 +122,7 @@ module Utilities
         def link_objects_to_children_short_ids
           @entities.each do |id, unit_entity|
             if unit_entity.new_data
-              unit_entity.old_object.child_ids = short_ids_by_external_ids(unit_entity.new_data.child_ids)
+              unit_entity.old_object.child_ids = short_ids_by_external_ids(unit_entity.new_data.child_ids).presence
             end
           end
         end
@@ -131,7 +131,7 @@ module Utilities
         def link_objects_to_employment_short_ids(employment_collection)
           @entities.each do |id, unit_entity|
             if unit_entity.new_data
-              unit_entity.old_object.employ_ids = employment_collection.short_ids_by_external_ids(unit_entity.new_data.employment_ids)
+              unit_entity.old_object.employ_ids = employment_collection.short_ids_by_external_ids(unit_entity.new_data.employment_ids).presence
             end
           end
         end
@@ -204,7 +204,7 @@ module Utilities
 
 
         def find_unit_by_partial_title(title_substring)
-          @entities.values.find{ |unit_entity| unit_entity.new_data.long_title.include?(title_substring)}
+          @entities.values.find { |unit_entity| unit_entity.new_data.long_title.present? && unit_entity.new_data.long_title.include?(title_substring) }
         end
 
 

@@ -33,7 +33,7 @@ class Employment < ApplicationRecord
       'post_title', 'post_category_code',
       'office', 'building', 'phones',
       'lunch_begin', 'lunch_end',
-    ).merge(
+    ).compact.merge(
       'id'          => short_id,
       'person_id'   => person_short_id,
       'unit_id'     => unit_short_id,

@@ -43,9 +43,9 @@ module Utilities
           @phones             = normalize_phones(source_data['PHONE'])
           @lunch_begin        = normalize_time(source_data['OBED_TIME_B'])
           @lunch_end          = normalize_time(source_data['OBED_TIME_E'])
-          @parental_leave     = source_data['IS_DEKRET'] == '1'
-          @vacation_begin     = source_data['DATE_B_OTP']
-          @vacation_end       = source_data['DATE_E_OTP']
+          @parental_leave     = (source_data['IS_DEKRET'] == '1').presence
+          @vacation_begin     = source_data['DATE_B_OTP'].presence
+          @vacation_end       = source_data['DATE_E_OTP'].presence
           @for_person_rank    = WORKING_TYPE_RANK[source_data['VID_ZAN']] || 99
         end
 
@@ -75,12 +75,12 @@ module Utilities
 
 
         def normalize_office(raw_str)
-          raw_str.strip!
-          if raw_str =~ /^(\d+)\s+(\p{Word})$/
+          str = raw_str.to_s.strip
+          if str =~ /^(\d+)\s+(\p{Word})$/
             $~[1] + $~[2]
           else
-            raw_str
-          end.upcase
+            str
+          end.upcase.presence
         end
 
 
@@ -120,7 +120,7 @@ module Utilities
         }.freeze
 
         def normalize_building(raw_str)
-          result = raw_str.gsub(/\s+/, ' ')
+          result = raw_str.to_s.gsub(/\s+/, ' ')
           BUILDING_CLEANUP.each do |re|
             result.gsub!(re, '')
           end
@@ -130,7 +130,7 @@ module Utilities
           if /^\d+[абвгде]$/ =~ result
             result.upcase!
           end
-          result.strip
+          result.strip.presence
         end
 
 
@@ -157,12 +157,12 @@ module Utilities
             end
             phone_result.strip
           end
-          result.uniq.select(&:present?)
+          result.uniq.select(&:present?).presence
         end
 
 
         def normalize_time(time_str)
-          time_str.sub(/:\d\d$/, '')
+          time_str.to_s.sub(/:\d\d$/, '').presence
         end
 
       end

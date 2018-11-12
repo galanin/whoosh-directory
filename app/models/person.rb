@@ -34,7 +34,7 @@ class Person < ApplicationRecord
     super.slice(
       'first_name', 'middle_name', 'last_name',
       'gender', 'photo',
-    ).merge(
+    ).compact.merge(
       'id' => short_id,
     ).merge(
        'birthday' => (I18n.l(Date.strptime(birthday, INPUT_BIRTHDAY_FORMAT), format: :bithday) unless birthday.nil?)
