@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux';
+import classNames from 'classnames'
 
 import { loadUnitInfo } from '@actions/units'
 import { setCurrentEmploymentId } from '@actions/current'
@@ -19,6 +20,7 @@ mapStateToProps = (state, ownProps) ->
   employment: employment
   person: employment && state.people[employment.person_id]
   unit: employment && state.units[employment.unit_id]
+  current_employment_id: state.current.employment_id
 
 mapDispatchToProps = (dispatch, ownProps) ->
   setCurrentEmployee: ->
@@ -37,7 +39,11 @@ class Employee extends React.Component
 
     photo = @props.person.photo
 
-    div { className: 'employee', onClick: @onEmployeeClick.bind(this) },
+    class_names = classNames
+      'employee' : true
+      'employee_highlighted' : @props.employment.id == @props.current_employment_id
+
+    div { className: class_names, onClick: @onEmployeeClick.bind(this) },
       div { className: 'employee__photo' },
         if photo.thumb45.url? || photo.thumb60.url?
           if photo.thumb45.url?
