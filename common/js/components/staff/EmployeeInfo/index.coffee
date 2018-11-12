@@ -83,12 +83,12 @@ class EmployeeInfo extends React.Component
                   div { className: 'employee-info__data-data employee-info__lunch-data' },
                     @props.employment.lunch_begin + '—' + @props.employment.lunch_end
 
-            if @props.person.birthday?
+            if @props.person.birthday_formatted?
               div { className: 'employee-info__iconed-data employee-info__birthday' },
                 svg { className: 'employee-info__data-icon employee-info__birthday-icon', svg: Birthday }
                 div { className: 'employee-info__data-container employee-info__birthday-container' },
                   div { className: 'employee-info__data-data employee-info__birthday-data' },
-                    @props.person.birthday
+                    @props.person.birthday_formatted
 
             if @props.employment.on_vacation
               div { className: 'employee-info__iconed-data employee-info__vacation' },

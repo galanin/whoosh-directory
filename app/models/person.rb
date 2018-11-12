@@ -33,11 +33,11 @@ class Person < ApplicationRecord
   def as_json(options = nil)
     super.slice(
       'first_name', 'middle_name', 'last_name',
-      'gender', 'photo',
+      'birthday', 'gender', 'photo',
     ).compact.merge(
       'id' => short_id,
     ).merge(
-       'birthday' => (I18n.l(Date.strptime(birthday, INPUT_BIRTHDAY_FORMAT), format: :bithday) unless birthday.nil?)
+       'birthday_formatted' => (I18n.l(Date.strptime(birthday, INPUT_BIRTHDAY_FORMAT), format: :bithday) unless birthday.nil?)
     )
   end
 
