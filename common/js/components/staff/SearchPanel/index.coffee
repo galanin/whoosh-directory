@@ -35,6 +35,10 @@ mapDispatchToProps = (dispatch, ownProps) ->
 
 class SearchPanel extends React.Component
 
+  componentWillUnmount: ->
+    clearInterval(@timer)
+
+
   onQueryChange: (event) ->
     @props.setQuery(event.target.value)
 
@@ -43,8 +47,18 @@ class SearchPanel extends React.Component
     @props.setQuery('')
 
 
+  focusInputIfNoSelection: (input) ->
+    if window.getSelection
+      if window.getSelection()?.isCollapsed
+        clearInterval(@timer)
+        input.focus()
+
+
   onQueryBlur: (event) ->
-    event.currentTarget.focus()
+    inputElement = event.currentTarget
+    @timer = setInterval =>
+      @focusInputIfNoSelection(inputElement)
+    , 1000
 
 
   onQueryExec: ->
