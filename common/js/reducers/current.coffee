@@ -24,12 +24,10 @@ export default (state = {}, action) ->
       new_state.employment_id = action.employment_id
       new_state
 
-
     when SCROLL_TO_UNIT
       new_state = Object.assign({}, state)
       new_state.scroll_to_unit_id = action.unit_id
       new_state
-
 
     when SCROLLED_TO_UNIT
       new_state = Object.assign({}, state)
