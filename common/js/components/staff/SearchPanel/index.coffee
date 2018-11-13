@@ -13,8 +13,7 @@ svg = React.createFactory(SvgIcon)
 input = React.createFactory('input')
 
 import Backspace from './icons/backspace.svg'
-import HappyBirthday from './icons/happy-birthday.svg'
-import HotPhones from './icons/hot-phones.svg'
+import SearchButton from '@icons/search.svg'
 
 
 mapStateToProps = (state, ownProps) ->
@@ -26,9 +25,12 @@ mapDispatchToProps = (dispatch, ownProps) ->
     dispatch(setQuery(query))
     if query.match /^\s*$/
       dispatch(setResults([]))
-      dispatch(popSearchResults())
     else
       dispatch(sendQuery(query))
+    dispatch(popSearchResults())
+
+  returnToQuery: ->
+    dispatch(popSearchResults())
 
 
 class SearchPanel extends React.Component
@@ -45,6 +47,10 @@ class SearchPanel extends React.Component
     event.currentTarget.focus()
 
 
+  onQueryExec: ->
+    @props.returnToQuery()
+
+
   render: ->
     div { className: 'search-panel-container plug' },
       div { className: 'search-panel' },
@@ -55,13 +61,8 @@ class SearchPanel extends React.Component
             div { className: 'search-panel__reset', onClick: @onQueryReset.bind(this) },
               svg { className: 'search-panel__reset-icon', svg: Backspace },
 
-        div { className: 'search-panel__buttons-container' },
-          div { className: 'search-panel__hot-button' },
-            div { className: 'search-panel__hot-button-bg' },
-              svg { className: 'search-panel__hot-button-img', svg: HappyBirthday }
-          div { className: 'search-panel__hot-button' },
-            div { className: 'search-panel__hot-button-bg' },
-              svg { className: 'search-panel__hot-button-img', svg: HotPhones }
+          div { className: 'search-panel__search', onClick: @onQueryExec.bind(this) },
+            svg { className: 'search-panel__search-icon', svg: SearchButton },
 
 
 export default connect(mapStateToProps, mapDispatchToProps)(SearchPanel)
