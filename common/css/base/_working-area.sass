@@ -38,7 +38,7 @@
   z-index: 5
 
 
-@media (max-width: 959px)
+@media (max-width: $one-column-max)
   .working-area__results-panel
     overflow-y: auto
 
@@ -50,7 +50,7 @@
     padding: 15px 10px
 
 
-@media (min-width: 960px) and (max-width: 1439px)
+@media (min-width: $two-column-min) and (max-width: $two-column-max)
   .working-area__unit-info,
   .working-area__results,
   .working-area__favorites,
@@ -78,7 +78,7 @@
     padding: 15px 10px
 
 
-@media (min-width: 1440px) and (max-width: 1919px)
+@media (min-width: $three-column-min) and (max-width: $three-column-max)
   .working-area__results
     position: absolute
     left: 0
@@ -111,7 +111,7 @@
     padding: 20px
 
 
-@media (min-width: 1920px)
+@media (min-width: $four-column-min)
   .working-area__results,
   .working-area__favorites,
   .working-area__recent
