@@ -25,6 +25,10 @@ export popSearchResults = (block) ->
   type: POP_LAYOUT_BLOCK
   layout_block: LAYOUT_BLOCK_SEARCH_RESULTS
 
+export popStructure = ->
+  type: POP_LAYOUT_BLOCK
+  layout_block: LAYOUT_BLOCK_STRUCTURE
+
 export popFavorites = (block) ->
   type: POP_LAYOUT_BLOCK
   layout_block: LAYOUT_BLOCK_FAVORITES

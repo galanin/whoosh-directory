@@ -3,7 +3,7 @@ import { Request } from '@lib/request'
 import { SET_UNITS } from '@constants/units'
 
 import { expandUnits, saveExpandedUnits } from '@actions/expand_units'
-import { setHighlightedUnitId, scrollToUnit } from '@actions/current'
+import { setCurrentUnitId, setHighlightedUnitId, scrollToUnit } from '@actions/current'
 
 
 export loadUnits = ->
@@ -18,7 +18,7 @@ export setUnits = (units) ->
   units: units
 
 
-export highlightUnit = (unit_id) ->
+export openFullPath = (unit_id) ->
   (dispatch, getState) ->
     state = getState()
     unit = state.units[unit_id]
@@ -31,5 +31,17 @@ export highlightUnit = (unit_id) ->
     if parent_ids.length > 0
       dispatch(expandUnits(parent_ids))
       dispatch(saveExpandedUnits(parent_ids))
+
+
+export highlightUnit = (unit_id) ->
+  (dispatch) ->
+    dispatch(openFullPath(unit_id))
     dispatch(setHighlightedUnitId(unit_id))
+    dispatch(scrollToUnit(unit_id))
+
+
+export goToUnitInStructure = (unit_id) ->
+  (dispatch) ->
+    dispatch(openFullPath(unit_id))
+    dispatch(setCurrentUnitId(unit_id))
     dispatch(scrollToUnit(unit_id))

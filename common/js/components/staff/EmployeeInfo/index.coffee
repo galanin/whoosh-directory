@@ -5,10 +5,14 @@ import { connect } from 'react-redux';
 import { isArray } from 'lodash';
 import SvgIcon from '@components/common/SvgIcon'
 
-import { setCurrentEmploymentId } from '@actions/current'
-import { sinkEmployeeInfo } from '@actions/layout'
+import { setCurrentEmploymentId, setCurrentUnitId } from '@actions/current'
+import { sinkEmployeeInfo, popUnitInfo, popStructure } from '@actions/layout'
+import { resetExpandedSubUnits } from '@actions/expand_sub_units'
+import { loadUnitExtra } from '@actions/unit_extras'
+import { goToUnitInStructure } from '@actions/units'
 
 div = React.createFactory('div')
+a = React.createFactory('a')
 img = React.createFactory('img')
 svg = React.createFactory(SvgIcon)
 
@@ -17,6 +21,7 @@ import Location from '@icons/location.svg'
 import Lunch from '@icons/lunch.svg'
 import Birthday from '@icons/birthday.svg'
 import Vacation from '@icons/vacation.svg'
+
 
 mapStateToProps = (state, ownProps) ->
   employment_id = state.current.employment_id
@@ -30,12 +35,24 @@ mapDispatchToProps = (dispatch) ->
   unsetCurrentEmployee: ->
     dispatch(sinkEmployeeInfo())
     dispatch(setCurrentEmploymentId(null))
+  onUnitClick: (unit_id) ->
+    dispatch(setCurrentUnitId(unit_id))
+    dispatch(goToUnitInStructure(unit_id))
+    dispatch(loadUnitExtra(unit_id))
+    dispatch(resetExpandedSubUnits())
+    dispatch(popUnitInfo())
+    dispatch(popStructure())
 
 
 class EmployeeInfo extends React.Component
 
   onCloseButtonClick: ->
     @props.unsetCurrentEmployee()
+
+
+  onUnitClick: (e) ->
+    e.preventDefault()
+    @props.onUnitClick(@props.employment.unit_id)
 
 
   render: ->
@@ -50,7 +67,7 @@ class EmployeeInfo extends React.Component
             svg { className: 'employee-info__close-button-cross', svg: CloseButton }
         div { className: 'employee-info__post_title' },
           @props.employment.post_title
-        div { className: 'employee-info__unit_title' },
+        a { className: 'employee-info__unit_title', onClick: @onUnitClick.bind(this), href: '/' },
           @props.unit.list_title
 
         div { className: 'employee-info__two-columns' },
