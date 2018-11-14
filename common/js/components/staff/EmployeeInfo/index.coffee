@@ -12,6 +12,7 @@ import { loadUnitExtra } from '@actions/unit_extras'
 import { goToUnitInStructure } from '@actions/units'
 
 div = React.createFactory('div')
+span = React.createFactory('span')
 a = React.createFactory('a')
 img = React.createFactory('img')
 svg = React.createFactory(SvgIcon)
@@ -82,11 +83,17 @@ class EmployeeInfo extends React.Component
                 img { src: process.env.PHOTO_BASE_URL + @props.person.photo.large.url, className: 'employee-info__photo-large' }
 
             div { className: 'employee-info__data' },
-              if isArray(@props.employment.phones) and @props.employment.phones.length > 0
-                div { className: 'employee-info__phones' },
-                  for phone in @props.employment.phones
-                    div { className: 'employee-info__phone', key: phone },
-                      phone
+              if isArray(@props.employment.format_phones) and @props.employment.format_phones.length > 0
+                div { className: 'employee-info__phones-container' },
+                  div { className: 'employee-info__phones-header' },
+                    'Телефоны'
+                  div { className: 'employee-info__phones' },
+                    for phone in @props.employment.format_phones
+                      div { className: 'employee-info__phone', key: phone },
+                        div { className: 'employee-info__phone-label' },
+                          phone[2]
+                        div { className: 'employee-info__phone-number' },
+                          phone[1]
 
               if @props.employment.building? or @props.employment.office?
                 div { className: 'employee-info__iconed-data employee-info__location' },
@@ -95,24 +102,41 @@ class EmployeeInfo extends React.Component
                     div { className: 'employee-info__data-data employee-info__location-data' },
                       if @props.employment.building?
                         div { className: 'employee-info__location-building' },
-                          @props.employment.building
+                          span { className: 'employee-info__location-building-label' },
+                            'Корпус'
+                          span { className: 'employee-info__location-building-number' },
+                            @props.employment.building
                       if @props.employment.office?
                         div { className: 'employee-info__location-office' },
-                          @props.employment.office
+                          span { className: 'employee-info__location-office-label' },
+                            'Кабинет'
+                          span { className: 'employee-info__location-office-number' },
+                            @props.employment.office
 
               if @props.employment.lunch_begin? and @props.employment.lunch_end?
                 div { className: 'employee-info__iconed-data employee-info__lunch' },
                   svg { className: 'employee-info__data-icon employee-info__lunch-icon', svg: Lunch }
                   div { className: 'employee-info__data-container employee-info__lunch-container' },
                     div { className: 'employee-info__data-data employee-info__lunch-data' },
-                      @props.employment.lunch_begin + '—' + @props.employment.lunch_end
+                      div { className: 'employee-info__lunch-label' },
+                        'Обеденный перерыв'
+                      div { className: 'employee-info__lunch-period' },
+                        span { className: 'employee-info__lunch-begin' },
+                          @props.employment.lunch_begin
+                        span { className: 'employee-info__lunch-separator' },
+                          '—'
+                        span { className: 'employee-info__lunch-end' },
+                          @props.employment.lunch_end
 
               if @props.person.birthday_formatted?
                 div { className: 'employee-info__iconed-data employee-info__birthday' },
                   svg { className: 'employee-info__data-icon employee-info__birthday-icon', svg: Birthday }
                   div { className: 'employee-info__data-container employee-info__birthday-container' },
                     div { className: 'employee-info__data-data employee-info__birthday-data' },
-                      @props.person.birthday_formatted
+                      div { className: 'employee-info__birthday-label' },
+                        'День рождения'
+                      div { className: 'employee-info__birthday-day' },
+                        @props.person.birthday_formatted
 
               if @props.employment.on_vacation
                 div { className: 'employee-info__iconed-data employee-info__vacation' },

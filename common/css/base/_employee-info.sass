@@ -50,7 +50,7 @@
     text-decoration: underline
 
 .employee-info__two-columns
-  margin-top: 1rem
+  margin-top: 2rem
   display: flex
   padding: 0 1rem
 
@@ -65,8 +65,30 @@
 .employee-info__data
   flex: 1 1 auto
 
-.employee-info__phone
+.employee-info__phones-header
   font-size: 18px
+  color: #666
+  margin-bottom: .5rem
+
+.employee-info__phone
+  display: flex
+  flex-wrap: wrap
+  padding: 2px 0
+
+.employee-info__phone-label
+  flex: 2 1 auto
+  font-size: 14px
+  padding-top: 4px
+  color: #777
+
+.employee-info__phone-number
+  flex: 3 1 auto
+  text-align: right
+  white-space: nowrap
+  font-size: 18px
+
+  &:before
+    content: '\00a0'
 
 .employee-info__iconed-data
   margin-top: 1rem
@@ -76,7 +98,6 @@
 .employee-info__data-icon
   flex: 0 0 32px
   display: flex
-  align-items: center
 
   svg
     display: block
@@ -99,6 +120,40 @@
 .employee-info__location
   margin-top: 2rem
 
+.employee-info__location-icon
+  align-items: center
+
+.employee-info__location-building,
+.employee-info__location-office
+  white-space: nowrap
+
+.employee-info__location-building-label,
+.employee-info__location-office-label,
+.employee-info__lunch-label,
+.employee-info__birthday-label
+  font-size: 16px
+  color: #666
+  line-height: 1.1
+
+.employee-info__location-building-label,
+.employee-info__location-office-label
+  padding-top: 2px
+
+.employee-info__lunch-label,
+.employee-info__birthday-label
+  margin-bottom: 4px
+
+.employee-info__location-building-number,
+.employee-info__location-office-number,
+.employee-info__lunch-begin,
+.employee-info__lunch-end,
+.employee-info__birthday-day
+  font-size: 18px
+
+.employee-info__location-building-number,
+.employee-info__location-office-number
+  &:before
+    content: ' '
 
 .employee-info__dummy-head-info
   padding: 1rem .5rem 0 1rem

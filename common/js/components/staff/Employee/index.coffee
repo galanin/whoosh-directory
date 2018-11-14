@@ -68,11 +68,11 @@ class Employee extends React.Component
           div { className: 'employee__organization_unit_title' },
             @props.unit.list_title
 
-      if isArray(@props.employment.phones) and @props.employment.phones.length > 0
+      if isArray(@props.employment.format_phones) and @props.employment.format_phones.length > 0
         div { className: 'employee__phones' },
-          for phone in @props.employment.phones[0..2]
-            div { className: 'employee__phone', key: phone },
-              phone
+          for phone in @props.employment.format_phones[0..2]
+            div { className: 'employee__phone', key: phone[1] },
+              phone[1]
 
 
 ConnectedEmployee = connect(mapStateToProps, mapDispatchToProps)(Employee)
