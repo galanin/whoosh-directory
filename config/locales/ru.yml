@@ -54,3 +54,18 @@ ru:
     - :day
     - :month
     - :year
+  phones:
+    patterns:
+      internal:
+        regexp: '\A(\d{2})(\d{2})\z'
+        format: '\1-\2'
+      short_city:
+        regexp: '\A(\d{1,3})(\d{2})(\d{2})\z'
+        format: '\1-\2-\3'
+      city:
+        regexp: '\A(\d{1})(\d{3})(\d{3})(\d{2})(\d{2})\z'
+        format: '\1-\2-\3-\4-\5'
+    type:
+      internal: внутренний
+      city: городской
+      mobile: мобильный
