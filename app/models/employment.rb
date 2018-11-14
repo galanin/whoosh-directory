@@ -57,7 +57,7 @@ class Employment < ApplicationRecord
   def format_phones_with_type
     unless phones.nil?
       phones.map do |phone|
-        [get_formatted_phone(phone), get_phone_type_label(phone)]
+        [phone, get_formatted_phone(phone), get_phone_type_label(phone)]
       end
     end
   end
