@@ -55,28 +55,38 @@ class Employment < ApplicationRecord
 
 
   def format_phones_with_type
-    new_phones = unless phones.nil?
+    unless phones.nil?
       phones.map do |phone|
-        phone_patterns = I18n.t("phones.patterns")
-
-        phone_pattern_hash = phone_patterns.values.find do |pattern_hash|
-        phone =~ ::Regexp.new(pattern_hash[:regexp])
-        end
-
-        new_phone = phone.gsub(::Regexp.new(phone_pattern_hash[:regexp]), phone_pattern_hash[:format])
-        phone_type_label = I18n.t("phones.type.#{get_phone_type(phone)[1]}")
-
-        [new_phone, phone_type_label]
+        [get_formatted_phone(phone), get_phone_type_label(phone)]
       end
     end
-
-    new_phones
   end
 
 
-  def get_phone_type(phone)
-    PHONES_TYPE.find do |phone_type_hash|
-      phone =~ phone_type_hash[0]
+  def get_formatted_phone(phone_number)
+    phone_patterns = I18n.t('phones.patterns')
+
+    phone_pattern_hash = phone_patterns.values.find do |pattern_hash|
+      phone_number =~ ::Regexp.new(pattern_hash[:regexp])
+    end
+
+    if phone_pattern_hash.present?
+      phone_number.gsub(::Regexp.new(phone_pattern_hash[:regexp]), phone_pattern_hash[:format])
+    else
+      phone_number
+    end
+  end
+
+
+  def get_phone_type_label(phone_number)
+    pair = PHONES_TYPE.find do |phone_type_hash, _|
+      phone_number =~ phone_type_hash
+    end
+
+    if pair.present?
+      I18n.t(pair.second, scope: 'phones.type')
+    else
+      ''
     end
   end
 
