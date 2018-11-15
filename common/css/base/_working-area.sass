@@ -51,18 +51,18 @@
 
 
 @media (min-width: $two-column-min) and (max-width: $two-column-max)
-  .working-area__unit-info,
-  .working-area__results,
-  .working-area__favorites,
-  .working-area__recent
+  .working-area__structure,
+  .working-area__employee-info
     position: absolute
     left: 0
     right: 50%
     top: 0
     bottom: 0
 
-  .working-area__structure,
-  .working-area__employee-info
+  .working-area__unit-info,
+  .working-area__results,
+  .working-area__favorites,
+  .working-area__recent
     position: absolute
     left: 50%
     right: 0
@@ -79,7 +79,7 @@
 
 
 @media (min-width: $three-column-min) and (max-width: $three-column-max)
-  .working-area__results
+  .working-area__structure
     position: absolute
     left: 0
     right: 66.6%
@@ -87,6 +87,7 @@
     bottom: 0
     padding: 20px 0
 
+  .working-area__results,
   .working-area__unit-info
     position: absolute
     left: 33.3%
@@ -94,8 +95,7 @@
     top: 0
     bottom: 0
 
-  .working-area__employee-info,
-  .working-area__structure
+  .working-area__employee-info
     position: absolute
     left: 66.6%
     right: 0
@@ -112,30 +112,30 @@
 
 
 @media (min-width: $four-column-min)
-  .working-area__results,
-  .working-area__favorites,
-  .working-area__recent
+  .working-area__structure
     position: absolute
     left: 0
     right: 75%
     top: 0
     bottom: 0
 
-  .working-area__employee-info
+  .working-area__results,
+  .working-area__unit-info
     position: absolute
     left: 25%
     right: 50%
     top: 0
     bottom: 0
 
-  .working-area__unit-info
+  .working-area__employee-info
     position: absolute
     left: 50%
     right: 25%
     top: 0
     bottom: 0
 
-  .working-area__structure
+  .working-area__favorites,
+  .working-area__recent
     position: absolute
     left: 75%
     right: 0
