@@ -9,6 +9,17 @@ namespace :staff do
   end
 
 
+  task :fix_node_sass do
+    binding_path = 'node_modules/node-sass/vendor/linux-x64-64/binding.node'
+    on roles(:web) do
+      within release_path do
+        execute :mkdir, '-p', File.dirname(binding_path)
+        execute :ln, '-s', File.join(shared_path, binding_path), binding_path
+      end
+    end
+  end
+
+
   task :import do
     on roles(:api) do
       within release_path do

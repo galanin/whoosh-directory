@@ -9,6 +9,8 @@ server 'staff', user: 'deployer', roles: %w{api web}, ssh_options: { forward_age
 set :yarn_flags, '--offline --silent --no-progress'
 set :yarn_roles, :web
 
-append :linked_dirs, 'vendor/cache'
+append :linked_dirs, 'vendor/cache', 'node_modules_cache'
 
 set :bundle_flags, '--deployment --local'
+
+after 'yarn:install', 'staff:fix_node_sass'
