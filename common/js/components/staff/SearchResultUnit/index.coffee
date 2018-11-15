@@ -3,8 +3,10 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
 import { highlightUnit, goToUnitInStructure } from '@actions/units'
-import { isThreeColumn, isFourColumn } from '@lib/layout'
 import { setHighlightedUnitId } from '@actions/current'
+import { resetExpandedSubUnits } from '@actions/expand_sub_units'
+import { loadUnitExtra } from '@actions/unit_extras'
+import { popUnitInfo } from '@actions/layout'
 
 div = React.createFactory('div')
 
@@ -14,11 +16,10 @@ mapStateToProps = (state, ownProps) ->
 
 mapDispatchToProps = (dispatch, ownProps) ->
   click: ->
-    if isThreeColumn() or isFourColumn()
-      dispatch(setHighlightedUnitId(null))
-      dispatch(goToUnitInStructure(ownProps.unit_id))
-    else
-      dispatch(highlightUnit(ownProps.unit_id))
+    dispatch(goToUnitInStructure(ownProps.unit_id))
+    dispatch(loadUnitExtra(ownProps.unit_id))
+    dispatch(resetExpandedSubUnits())
+    dispatch(popUnitInfo())
 
 
 class SearchResultUnit extends React.Component
