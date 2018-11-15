@@ -12,3 +12,5 @@ set :yarn_roles, :web
 append :linked_dirs, 'vendor/cache'
 
 set :bundle_flags, '--deployment --local'
+
+after 'yarn:install', 'staff:fix_node_sass'
