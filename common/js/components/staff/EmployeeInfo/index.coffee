@@ -4,6 +4,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { isArray } from 'lodash';
 import SvgIcon from '@components/common/SvgIcon'
+import Silhouette from '@components/staff/CommonSilhouette'
 
 import { setCurrentEmploymentId, setCurrentUnitId } from '@actions/current'
 import { sinkEmployeeInfo, popUnitInfo, popStructure } from '@actions/layout'
@@ -16,15 +17,13 @@ span = React.createFactory('span')
 a = React.createFactory('a')
 img = React.createFactory('img')
 svg = React.createFactory(SvgIcon)
+silhouette = React.createFactory(Silhouette)
 
 import CloseButton from '@icons/close_button.svg'
 import Location from '@icons/location.svg'
 import Lunch from '@icons/lunch.svg'
 import Birthday from '@icons/birthday.svg'
 import Vacation from '@icons/vacation.svg'
-
-import ManSilouette from '@icons/businessman.svg'
-import WomanSilouette from '@icons/businesswoman.svg'
 
 
 mapStateToProps = (state, ownProps) ->
@@ -78,9 +77,11 @@ class EmployeeInfo extends React.Component
             @props.unit.list_title
 
           div { className: 'employee-info__two-columns' },
-            if @props.person.photo.large.url
-              div { className: 'employee-info__photo' },
+            div { className: 'employee-info__photo' },
+              if @props.person.photo.large.url
                 img { src: process.env.PHOTO_BASE_URL + @props.person.photo.large.url, className: 'employee-info__photo-large' }
+              else
+                silhouette { className: 'employee-info__avatar', gender: @props.person.gender }
 
             div { className: 'employee-info__data' },
               if isArray(@props.employment.format_phones) and @props.employment.format_phones.length > 0
@@ -146,8 +147,6 @@ class EmployeeInfo extends React.Component
                       'В отпуске'
 
       else
-        avatar = if Math.random() < .5 then ManSilouette else WomanSilouette
-
         div { className: 'employee-info employee-dummy-info' },
 
           div { className: 'employee-info__dummy-head-info' },
@@ -157,7 +156,7 @@ class EmployeeInfo extends React.Component
 
           div { className: 'employee-info__two-columns' },
             div { className: 'employee-info__photo' },
-              svg { className: 'employee-info__dummy-avatar', svg: avatar }
+              silhouette { className: 'employee-info__dummy-avatar' }
 
             div { className: 'employee-info__data' },
               div { className: 'employee-info__dummy-phones' }
