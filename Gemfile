@@ -67,6 +67,8 @@ group :development do
   gem 'capistrano3-puma', require: false
   gem 'capistrano-rails-console', require: false
   gem 'airbrussh', require: false
+
+  gem 'faker'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
