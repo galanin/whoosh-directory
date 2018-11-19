@@ -30,6 +30,12 @@ module Utilities
           @employments.import(doc, @units)
           @people.import(doc, @units)
 
+          host = ENV['STAFF_IMPORT_LDAP_HOST']
+          base = ENV['STAFF_IMPORT_LDAP_USERS_PATH']
+          user_name = ENV['STAFF_IMPORT_LDAP_USER']
+          user_password = ENV['STAFF_IMPORT_LDAP_PASSWORD']
+          id_ldap_attribute = ENV['STAFF_IMPORT_LDAP_USER_ID_ATTRIBUTE']
+          @people.import_emails(host, base, user_name, user_password, id_ldap_attribute)
 
           @people.delete_without_employment(@employments)
 

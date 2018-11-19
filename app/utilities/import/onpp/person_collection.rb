@@ -1,4 +1,5 @@
 require 'utilities/import/collection'
+require 'utilities/import/ldap_connection'
 
 module Utilities
   module Import
@@ -37,6 +38,14 @@ module Utilities
         def reset_employments_link
           @entities.each do |id, person_entity|
             person_entity.new_data.employment_ids = []
+          end
+        end
+
+
+        def import_emails(host, base, user_name, user_password, id_ldap_attribute)
+          ldap = Utilities::Import::LdapConnection.new(host, base, user_name, user_password, id_ldap_attribute)
+          @entities.each do |id, person_entity|
+            person_entity.new_data.email = ldap.get_email(id)
           end
         end
 

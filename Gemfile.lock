@@ -143,6 +143,7 @@ GEM
     mustermann (1.0.3)
     mustermann-grape (1.0.0)
       mustermann (~> 1.0.0)
+    net-ldap (0.16.1)
     net-scp (1.2.1)
       net-ssh (>= 2.6.5)
     net-ssh (5.0.2)
@@ -261,6 +262,7 @@ DEPENDENCIES
   mini_magick
   mongoid
   mongoid-autoinc
+  net-ldap
   nokogiri
   puma (~> 3.7)
   rack

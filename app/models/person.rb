@@ -14,6 +14,7 @@ class Person < ApplicationRecord
   field :last_name,       type: String
   field :birthday,        type: String
   field :gender,          type: String
+  field :email,           type: String
   field :employ_ids,      type: Array # employment_short_ids
   field :destroyed_at,    type: Time
 
@@ -34,7 +35,7 @@ class Person < ApplicationRecord
   def as_json(options = nil)
     super.slice(
       'first_name', 'middle_name', 'last_name',
-      'birthday', 'gender', 'photo',
+      'birthday', 'gender', 'photo', 'email',
     ).compact.merge(
       'id' => short_id,
     ).merge(

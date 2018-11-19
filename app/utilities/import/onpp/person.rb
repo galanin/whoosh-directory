@@ -13,6 +13,7 @@ module Utilities
                       :first_name, :middle_name, :last_name,
                       :birthday, :hide_birthday,
                       :gender,
+                      :email,
                       :employment_ids
 
 
@@ -24,6 +25,7 @@ module Utilities
           @birthday       = source_data['HIDE_DATE_R'] == '1' ? nil : normalize_birthday(source_data['DATE_R'])
           @gender         = GENDERS[source_data['SEX']]
           @employment_ids = []
+          @email          = nil
         end
 
 
@@ -35,6 +37,7 @@ module Utilities
             last_name:   last_name,
             birthday:    birthday,
             gender:      gender,
+            email:       email,
           }
         end
 
