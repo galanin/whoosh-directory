@@ -1,0 +1,591 @@
+short_title: НИИ «Альфа Центавра»
+long_title: Научно-исследовательский институт «Альфа Центавра»
+structure:
+- post_title: Директор института
+  building: 13
+  office: 201
+  sub_employees:
+    - post_title: Заместитель директора института по науке
+      building: 13
+      office: 202
+      sub_units:
+
+      - short_title: Околоземное отделение
+        long_title:
+        emplyees:
+        - post_title: Директор околоземного отделения
+          building: 14
+          office: 300
+        - post_title: Помощник директора околоземного отделения
+          building: 14
+          office: 300
+        - post_title: Заместитель директора околоземного отделения по транспортировке
+          building: 14
+          office: 301
+          sub_units:
+          - short_title:
+            long_title: Отдел верхних слоев атмосферы
+            emplyees:
+            - post_title: Начальник отдела
+              building: 14
+              office: 401
+            - post_title: Заместитель начальника отдела
+              building: 14
+              office: 402
+            sub_units:
+              - short_title:
+                long_title: Группа озонового слоя
+                emplyees:
+                - post_title: Ведущий инженер
+                  building: 14
+                  office: 403-410
+                  count: 2
+                - post_title: Инженер по ионным процессам
+                  building: 14
+                  office: 403-410
+                  count: 4
+                - post_title: Техник
+                  building: 14
+                  office: 403-410
+                  count: 5
+              - short_title:
+                long_title: Группа северного сияния
+                emplyees:
+                - post_title: Ведущий инженер
+                  building: 14
+                  office: 403-410
+                  count: 2
+                - post_title: Инженер по ионным процессам
+                  building: 14
+                  office: 403-410
+                  count: 4
+                - post_title: Техник
+                  building: 14
+                  office: 403-410
+                  count: 9
+              - short_title:
+                long_title: Группа погодных зондов
+                emplyees:
+                - post_title: Ведущий инженер
+                  building: 14
+                  office: 411-416
+                  count: 3
+                - post_title: Инженер-метеоролог
+                  building: 14
+                  office: 411-416
+                  count: 5
+                - post_title: Техник
+                  building: 14
+                  office: 411-416
+                  count: 9
+              - short_title:
+                long_title: Группа спутниковой связи
+                emplyees:
+                - post_title: Ведущий инженер
+                  building: 14
+                  office: 421-424
+                  count: 2
+                - post_title: Инженер по телекоммуникациям
+                  building: 14
+                  office: 421-424
+                  count: 5
+                - post_title: Техник
+                  building: 14
+                  office: 421-424
+                  count: 5
+
+
+          - short_title:
+            long_title: Отдел геопозиционирования
+            emplyees:
+            - post_title: Начальник отдела
+              building: 14
+              office: 501
+            - post_title: Заместитель начальника отдела
+              building: 14
+              office: 502
+            sub_units:
+            - short_title:
+              long_title: Группа протокола геопозиционирования
+              emplyees:
+              - post_title: Ведущий инженер
+                building: 14
+                office: 511-515
+                count: 1
+              - post_title: Инженер по стандартизации
+                building: 14
+                office: 511-515
+                count: 3
+              - post_title: Техник
+                building: 14
+                office: 511-515
+                count: 5
+            - short_title:
+              long_title: Группа разработки приемников сигнала геопозиционирования
+              emplyees:
+              - post_title: Ведущий инженер
+                building: 14
+                office: 516-518
+                count: 2
+              - post_title: Инженер-конструктор
+                building: 14
+                office: 516-518
+                count: 5
+              - post_title: Техник
+                building: 14
+                office: 516-518
+                count: 4
+
+          - short_title:
+            long_title: Отдел первой космической скорости
+            emplyees:
+            - post_title: Начальник отдела
+              building: 14
+              office: 601
+            - post_title: Заместитель начальника отдела
+              building: 14
+              office: 602
+            sub_units:
+            - short_title:
+              long_title: Группа ракетных ускорителей
+              emplyees:
+              - post_title: Ведущий инженер
+                building: 14
+                office: 511-515
+                count: 1
+              - post_title: Инженер-ракетостроитель
+                building: 14
+                office: 511-515
+                count: 3
+              - post_title: Техник
+                building: 14
+                office: 511-515
+                count: 5
+            - short_title:
+              long_title: Группа ракетного топлива и окислителя
+              emplyees:
+              - post_title: Ведущий инженер
+                building: 14
+                office: 511-515
+                count: 1
+              - post_title: Инженер-химик
+                building: 14
+                office: 511-515
+                count: 3
+              - post_title: Техник
+                building: 14
+                office: 511-515
+                count: 5
+            - short_title:
+              long_title: Группа возвращаемой первой ступени
+              emplyees:
+              - post_title: Ведущий инженер
+                building: 14
+                office: 511-515
+                count: 1
+              - post_title: Инженер по мягкой управляемой посадке
+                building: 14
+                office: 511-515
+                count: 3
+              - post_title: Техник
+                building: 14
+                office: 511-515
+                count: 5
+            - short_title:
+              long_title: Группа космических лифтов
+              emplyees:
+              - post_title: Ведущий инженер
+                building: 14
+                office: 511-515
+                count: 1
+              - post_title: Инженер-конструктор
+                building: 14
+                office: 511-515
+                count: 3
+              - post_title: Техник
+                building: 14
+                office: 511-515
+                count: 5
+            - short_title:
+              long_title: Группа высоких эллиптических орбит
+              emplyees:
+              - post_title: Ведущий инженер
+                building: 14
+                office: 511-515
+                count: 1
+              - post_title: Инженер по спутниковой связи
+                building: 14
+                office: 511-515
+                count: 3
+              - post_title: Техник
+                building: 14
+                office: 511-515
+                count: 5
+
+        - post_title: Заместитель директора околоземного отделения по освещению и связи
+          building: 14
+          office: 302
+          sub_units:
+          - short_title:
+            long_title: Отдел геостационарной орбиты
+            emplyees:
+            - post_title: Начальник отдела
+              building: 14
+              office:
+            - post_title: Заместитель начальника отдела
+              building: 14
+              office:
+            sub_units:
+          - short_title:
+            long_title: Лунный отдел
+            emplyees:
+            - post_title: Начальник отдела
+              building: 14
+              office:
+            - post_title: Заместитель начальника отдела
+              building: 14
+              office:
+            sub_units:
+
+      - short_title: Отделение Солнечной системы
+        long_title:
+        emplyees:
+        - post_title: Директор отделения Солнечной системы
+          building: 14
+          office: 300
+        - post_title: Помощник директора отделения Солнечной системы
+          building: 14
+          office: 300
+        - post_title: Заместитель директора отделения Солнечной системы по крупным объектам
+          building: 14
+          office: 301
+          sub_units:
+          - short_title:
+            long_title: Отдел планет земной группы
+            emplyees:
+            - post_title: Начальник отдела
+              building: 14
+              office:
+            - post_title: Заместитель начальника отдела
+              building: 14
+              office:
+            sub_units:
+          - short_title:
+            long_title: Отдел газовых гигантов
+            emplyees:
+            - post_title: Начальник отдела
+              building: 14
+              office:
+            - post_title: Заместитель начальника отдела
+              building: 14
+              office:
+            sub_units:
+        - post_title: Заместитель директора отделения Солнечной системы по малым объектам
+          building: 14
+          office: 301
+          - short_title:
+            long_title: Отдел пояса астероидов
+            emplyees:
+            - post_title: Начальник отдела
+              building: 14
+              office:
+            - post_title: Заместитель начальника отдела
+              building: 14
+              office:
+            sub_units:
+          - short_title:
+            long_title: Отдел карликовых планет, спутников и комет
+            emplyees:
+            - post_title: Начальник отдела
+              building: 14
+              office:
+            - post_title: Заместитель начальника отдела
+              building: 14
+              office:
+            sub_units:
+        sub_units:
+        - short_title:
+          long_title: Отдел второй космической скорости
+          emplyees:
+          - post_title: Начальник отдела
+            building: 14
+            office:
+          - post_title: Заместитель начальника отдела
+            building: 14
+            office:
+          sub_units:
+        - short_title:
+          long_title: Солнечный отдел
+          emplyees:
+          - post_title: Начальник отдела
+            building: 14
+            office:
+          - post_title: Заместитель начальника отдела
+            building: 14
+            office:
+          sub_units:
+
+      - short_title: Внутригалактическое отделение
+        long_title:
+        emplyees:
+        - post_title: Директор внутригалактического отделения
+          building: 14
+          office: 301
+        - post_title: Помощник директора внутригалактического отделения
+          building: 14
+          office: 301
+        - post_title: Заместитель директора внутригалактического отделения
+          building: 14
+          office: 301
+          sub_units:
+          - short_title:
+            long_title: Отдел морфологии Галактики
+            emplyees:
+            - post_title: Начальник отдела
+              building: 14
+              office:
+            - post_title: Заместитель начальника отдела
+              building: 14
+              office:
+            sub_units:
+          - short_title:
+            long_title: Отдел темной материи
+            emplyees:
+            sub_units:
+        sub_units:
+        - short_title:
+          long_title: Отдел вращения Галактики
+          emplyees:
+          - post_title: Начальник отдела
+            building: 14
+            office:
+          - post_title: Заместитель начальника отдела
+            building: 14
+            office:
+          sub_units:
+        - short_title:
+          long_title: Отдел наблюдения Галактики
+          emplyees:
+          - post_title: Начальник отдела
+            building: 14
+            office:
+          - post_title: Заместитель начальника отдела
+            building: 14
+            office:
+          sub_units:
+
+      - short_title: Межгалактическое отделение
+        long_title:
+        emplyees:
+        - post_title: Директор межгалактического отделения
+          building: 14
+          office: 301
+        sub_units:
+        - short_title:
+          long_title: Отдел Большого взрыва и эволюции Вселенной
+          emplyees:
+          - post_title: Начальник отдела
+            building: 14
+            office:
+          - post_title: Заместитель начальника отдела
+            building: 14
+            office:
+          sub_units:
+        - short_title:
+          long_title: Отдел материи и гравитации
+          emplyees:
+          - post_title: Начальник отдела
+            building: 14
+            office:
+          - post_title: Заместитель начальника отдела
+            building: 14
+            office:
+          sub_units:
+        - short_title:
+          long_title: Отдел пространственно-временных парадоксов
+          emplyees:
+          - post_title: Начальник отдела
+            building: 14
+            office:
+          - post_title: Заместитель начальника отдела
+            building: 14
+            office:
+          sub_units:
+        - short_title:
+          long_title: Отдел альтернативных теорий
+          emplyees:
+          - post_title: Начальник отдела
+            building: 14
+            office:
+          - post_title: Заместитель начальника отдела
+            building: 14
+            office:
+          sub_units:
+
+      - short_title: ОНТИ
+        long_title: Отдел научно-технической информации
+        emplyees:
+        - post_title: Начальник отдела
+          building: 14
+          office:
+        - post_title: Заместитель начальника отдела
+          building: 14
+          office:
+        sub_units:
+
+      - short_title:
+        long_title: Патентный отдел
+        emplyees:
+        - post_title: Начальник отдела
+          building: 14
+          office:
+        - post_title: Заместитель начальника отдела
+          building: 14
+          office:
+        sub_units:
+
+      - short_title:
+        long_title: Метрологический отдел
+        emplyees:
+        - post_title: Начальник отдела
+          building: 14
+          office:
+        - post_title: Заместитель начальника отдела
+          building: 14
+          office:
+        sub_units:
+
+    - post_title: Заместитель директора института по опытному производству
+      people_count: 1
+      building: 13
+      office: 203
+      sub_units:
+      - short_title:
+        long_title: Отделение опытного производства
+        emplyees:
+        sub_units:
+        - short_title:
+          long_title: Цех высокоточных средств измерения и наблюдения
+          emplyees:
+          sub_units:
+        - short_title:
+          long_title: Цех производства средств связи
+          emplyees:
+          sub_units:
+        - short_title:
+          long_title: Цех космической энергетики
+          emplyees:
+          sub_units:
+        - short_title:
+          long_title: Цех космической транспортировки
+          emplyees:
+          sub_units:
+
+      - short_title:
+        long_title: Отдел главного технолога
+        emplyees:
+        - post_title: Начальник отдела
+          building: 14
+          office:
+        - post_title: Заместитель начальника отдела
+          building: 14
+          office:
+        sub_units:
+
+      - short_title:
+        long_title: Отделение главного инженера
+        emplyees:
+        sub_units:
+
+    - post_title: Заместитель директора института по коммерции
+      people_count: 1
+      building: 13
+      office: 204
+      sub_units:
+      - short_title:
+        long_title: Маркетинговый отдел
+        emplyees:
+        - post_title: Начальник отдела
+          building: 14
+          office:
+        - post_title: Заместитель начальника отдела
+          building: 14
+          office:
+        sub_units:
+
+      - short_title:
+        long_title: Отдел патентных отчислений и роялти
+        emplyees:
+        - post_title: Начальник отдела
+          building: 14
+          office:
+        - post_title: Заместитель начальника отдела
+          building: 14
+          office:
+        sub_units:
+
+      - short_title: Отдел по связям с общественностью
+        long_title:
+        emplyees:
+        - post_title: Начальник отдела
+          building: 14
+          office:
+        - post_title: Заместитель начальника отдела
+          building: 14
+          office:
+        sub_units:
+
+    - post_title: Заместитель директора института по финансам
+      people_count: 1
+      building: 13
+      office: 205
+
+    - post_title: Заместитель директора института по административным вопросам
+      people_count: 1
+      building: 13
+      office: 206
+
+  sub_units:
+    - short_title: Отдел труда и зарплаты
+      long_title:
+      emplyees:
+      - post_title: Начальник отдела
+        building: 14
+        office:
+      - post_title: Заместитель начальника отдела
+        building: 14
+        office:
+      sub_units:
+
+    - short_title:
+      long_title: Отдел кадров
+      emplyees:
+      - post_title: Начальник отдела
+        building: 14
+        office:
+      - post_title: Заместитель начальника отдела
+        building: 14
+        office:
+      sub_units:
+
+    - short_title:
+      long_title: Бухгалтерия
+      emplyees:
+      - post_title: Главный бухгалтер
+        building: 14
+        office:
+      - post_title: Заместитель главного бухгалтера
+        building: 14
+        office:
+      sub_units:
+
+    - short_title:
+      long_title: Канцелярия
+      emplyees:
+      - post_title: Начальник канцелярии
+        building: 14
+        office:
+      - post_title: Заместитель начальника канцелярии
+        building: 14
+        office:
+      sub_units:
