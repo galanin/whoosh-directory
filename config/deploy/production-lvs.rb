@@ -14,3 +14,8 @@ append :linked_dirs, 'vendor/cache', 'node_modules_cache'
 set :bundle_flags, '--deployment --local'
 
 after 'yarn:install', 'staff:fix_node_sass'
+
+set :whenever_environment, 'production'
+set :whenever_identifier, 'staff_production'
+set :whenever_load_file, -> { "#{release_path}/config/schedule_import.rb" }
+append :linked_files, 'config/schedule_import.rb'

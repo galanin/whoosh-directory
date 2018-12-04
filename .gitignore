@@ -14,6 +14,7 @@
 .yarnrc
 
 /config/mongoid.yml
+/config/schedule_*.rb
 
 # Ignore all logfiles and tempfiles.
 /log/*
