@@ -236,8 +236,54 @@ structure:
               building: 14
               office:
             sub_units:
+            - short_title:
+              long_title: Группа спутниковых тарелок
+              emplyees:
+              - post_title: Ведущий инженер
+                building: 14
+                office: 511-515
+                count: 1
+              - post_title: Инженер по параболическим поверхностям
+                building: 14
+                office: 511-515
+                count: 3
+              - post_title: Техник
+                building: 14
+                office: 511-515
+                count: 5
+            - short_title:
+              long_title: Группа высокочастотных передатчиков
+              emplyees:
+              - post_title: Ведущий инженер
+                building: 14
+                office: 511-515
+                count: 1
+              - post_title: Инженер-электроник
+                building: 14
+                office: 511-515
+                count: 3
+              - post_title: Техник
+                building: 14
+                office: 511-515
+                count: 5
+            - short_title:
+              long_title: Группа высокочастотных приемников
+              emplyees:
+              - post_title: Ведущий инженер
+                building: 14
+                office: 511-515
+                count: 1
+              - post_title: Инженер-электроник
+                building: 14
+                office: 511-515
+                count: 3
+              - post_title: Техник
+                building: 14
+                office: 511-515
+                count: 5
+
           - short_title:
-            long_title: Лунный отдел
+            long_title: Лунная лаборатория
             emplyees:
             - post_title: Начальник отдела
               building: 14
@@ -246,6 +292,66 @@ structure:
               building: 14
               office:
             sub_units:
+            - short_title:
+              long_title: Группа искусственных орбитальных зеркал
+              emplyees:
+              - post_title: Ведущий инженер
+                building: 14
+                office: 511-515
+                count: 1
+              - post_title: Инженер-оптик
+                building: 14
+                office: 511-515
+                count: 3
+              - post_title: Техник
+                building: 14
+                office: 511-515
+                count: 5
+            - short_title:
+              long_title: Группа полной луны
+              emplyees:
+              - post_title: Ведущий инженер
+                building: 14
+                office: 511-515
+                count: 1
+              - post_title: Инженер-физик
+                building: 14
+                office: 511-515
+                count: 3
+              - post_title: Техник
+                building: 14
+                office: 511-515
+                count: 5
+            - short_title:
+              long_title: Группа приливов и отливов
+              emplyees:
+              - post_title: Старший научный сотрудник
+                building: 14
+                office: 511-515
+                count: 1
+              - post_title: Физик-океанолог
+                building: 14
+                office: 511-515
+                count: 3
+              - post_title: Лаборант
+                building: 14
+                office: 511-515
+                count: 5
+            - short_title:
+              long_title: Романтическая группа
+              emplyees:
+              - post_title: Старший лирик
+                building: 14
+                office: 511-515
+                count: 2
+              - post_title: Поэт 1-го разряда
+                building: 14
+                office: 511-515
+                count: 3
+              - post_title: Литературовед
+                building: 14
+                office: 511-515
+                count: 5
 
       - short_title: Отделение Солнечной системы
         long_title:
@@ -270,6 +376,81 @@ structure:
               building: 14
               office:
             sub_units:
+            - short_title:
+              long_title: Группа Земли
+              emplyees:
+              - post_title: Старший геолог
+                building: 14
+                office: 511-515
+                count: 2
+              - post_title: Младший геолог
+                building: 14
+                office: 511-515
+                count: 4
+              - post_title: Помощник геолога
+                building: 14
+                office: 511-515
+                count: 5
+            - short_title:
+              long_title: Группа Земли
+              emplyees:
+              - post_title: Старший геолог
+                building: 14
+                office: 511-515
+                count: 2
+              - post_title: Младший геолог
+                building: 14
+                office: 511-515
+                count: 4
+              - post_title: Помощник геолога
+                building: 14
+                office: 511-515
+                count: 5
+            - short_title:
+              long_title: Группа Меркурия
+              emplyees:
+              - post_title: Специалист по градусникам
+                building: 14
+                office: 511-515
+                count: 6
+              - post_title: Специалист по творчеству группы Queen
+                building: 14
+                office: 511-515
+                count: 2
+              - post_title: Специалист по крылатым сандалиям
+                building: 14
+                office: 511-515
+                count: 5
+            - short_title:
+              long_title: Группа Венеры
+              emplyees:
+              - post_title: Специалист по урожайности сельскохозяйственных земель
+                building: 14
+                office: 511-515
+                count: 6
+              - post_title: Специалист по кислотным облакам и дождям
+                building: 14
+                office: 511-515
+                count: 2
+              - post_title: Специалист по альтернативнм формам жизни
+                building: 14
+                office: 511-515
+                count: 5
+            - short_title:
+              long_title: Группа Марса
+              emplyees:
+              - post_title: Специалист по творчеству Джонатана Свифта
+                building: 14
+                office: 511-515
+                count: 6
+              - post_title: Специалист по гребле в марсианских каналах
+                building: 14
+                office: 511-515
+                count: 2
+              - post_title: Специалист по любопытству
+                building: 14
+                office: 511-515
+                count: 5
           - short_title:
             long_title: Отдел газовых гигантов
             emplyees:
@@ -280,6 +461,71 @@ structure:
               building: 14
               office:
             sub_units:
+            - short_title:
+              long_title: Группа Юпитера
+              emplyees:
+              - post_title: Специалист по Большому красному пятну
+                building: 14
+                office: 511-515
+                count: 6
+              - post_title: Специалист по металлическому водороду
+                building: 14
+                office: 511-515
+                count: 2
+              - post_title: Специалист по верховным божествам
+                building: 14
+                office: 511-515
+                count: 5
+              - post_title: Специалист по ледяным спутникам
+                building: 14
+                office: 511-515
+                count: 5
+            - short_title:
+              long_title: Группа Сатурна
+              emplyees:
+              - post_title: Специалист по каменному поясу
+                building: 14
+                office: 511-515
+                count: 6
+              - post_title: Специалист по разреженным планетам
+                building: 14
+                office: 511-515
+                count: 2
+              - post_title: Инженер-гексагонолог
+                building: 14
+                office: 511-515
+                count: 5
+            - short_title:
+              long_title: Группа Урана
+              emplyees:
+              - post_title: Ведущий инженер
+                building: 14
+                office: 511-515
+                count: 6
+              - post_title: Инженер
+                building: 14
+                office: 511-515
+                count: 2
+              - post_title: Техник
+                building: 14
+                office: 511-515
+                count: 5
+            - short_title:
+              long_title: Группа Нептуна
+              emplyees:
+              - post_title: Ведущий инженер
+                building: 14
+                office: 511-515
+                count: 6
+              - post_title: Инженер
+                building: 14
+                office: 511-515
+                count: 2
+              - post_title: Техник
+                building: 14
+                office: 511-515
+                count: 5
+
         - post_title: Заместитель директора отделения Солнечной системы по малым объектам
           building: 14
           office: 301
@@ -292,9 +538,20 @@ structure:
             - post_title: Заместитель начальника отдела
               building: 14
               office:
-            sub_units:
+            - post_title: Инженер по космическим полезным ископаемым
+              building: 14
+              office:
+              count: 10
+            - post_title: Учётчик
+              building: 14
+              office:
+              count: 20
+            - post_title: Инженер по противоастероидной защите
+              building: 14
+              office:
+              count: 10
           - short_title:
-            long_title: Отдел карликовых планет, спутников и комет
+            long_title: Отдел карликовых планет, планетоидов, планетных спутников и комет
             emplyees:
             - post_title: Начальник отдела
               building: 14
@@ -302,7 +559,19 @@ structure:
             - post_title: Заместитель начальника отдела
               building: 14
               office:
-            sub_units:
+            - post_title: Специалист по приливным силам
+              building: 14
+              office:
+              count: 10
+            - post_title: Специалист по внеземным источникам воды
+              building: 14
+              office:
+              count: 10
+            - post_title: Инженер по межпланетным сетям связи
+              building: 14
+              office:
+              count: 10
+
         sub_units:
         - short_title:
           long_title: Отдел второй космической скорости
@@ -314,6 +583,7 @@ structure:
             building: 14
             office:
           sub_units:
+
         - short_title:
           long_title: Солнечный отдел
           emplyees:
