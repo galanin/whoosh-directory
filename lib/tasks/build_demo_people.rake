@@ -1,11 +1,12 @@
 require 'dotenv/tasks'
 require 'yaml'
 require 'securerandom'
-require 'faker'
 
 # run this task as: rake import[ONPP]
 
 task :build_demo_people, [:count, :lang] => :environment do |task, args|
+  require 'faker'
+
   Faker::Config.locale = (args[:lang] || :ru).to_sym
   count = (args[:count] || 10_000).to_i
 
