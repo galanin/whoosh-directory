@@ -12,6 +12,7 @@ import expanded_sub_units from '@reducers/expand_sub_units'
 import initial_state from '@reducers/initial_state'
 import layout from '@reducers/layout'
 import search from '@reducers/search'
+import search_cache from '@reducers/search_cache'
 
 
 export default combineReducers
@@ -26,4 +27,5 @@ export default combineReducers
   initial_state:      initial_state
   layout:             layout
   search:             search
+  search_cache:       search_cache
   routing:            routerReducer

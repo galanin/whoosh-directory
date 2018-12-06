@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux';
 import SvgIcon from '@components/common/SvgIcon'
 
-import { setQuery, resetQuery, sendQuery, setResults } from '@actions/search'
+import { setQuery } from '@actions/search'
 import { popSearchResults } from '@actions/layout'
 
 
@@ -23,10 +23,10 @@ mapStateToProps = (state, ownProps) ->
 mapDispatchToProps = (dispatch, ownProps) ->
   setQuery: (query) ->
     dispatch(setQuery(query))
-    if query.match /^\s*$/
-      dispatch(setResults([]))
-    else
-      dispatch(sendQuery(query))
+    dispatch(popSearchResults())
+
+  resetQuery: ->
+    dispatch(setQuery(''))
     dispatch(popSearchResults())
 
   returnToQuery: ->
@@ -44,7 +44,7 @@ class SearchPanel extends React.Component
 
 
   onQueryReset: (event) ->
-    @props.setQuery('')
+    @props.resetQuery()
 
 
   focusInputIfNoSelection: (input) ->
