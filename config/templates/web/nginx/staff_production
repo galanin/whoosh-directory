@@ -28,7 +28,14 @@ server {
     rewrite ^(.*)$ http://$host_without_www$1 permanent;
   }
 
-
+  location ~ ^/(favicon)/ {
+    root                     /home/deployer/staff_production/current/public;
+    gzip_static              on;
+    open_file_cache          max=1000 inactive=500s;
+    open_file_cache_valid    600s;
+    open_file_cache_errors   on;
+    break;
+  }
 
   location @staff_production_web {
     proxy_set_header  X-Forwarded-For $proxy_add_x_forwarded_for;
