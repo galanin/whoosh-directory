@@ -78,7 +78,6 @@ class SearchPanel extends React.Component
 
 
   onKeyDown: (event) ->
-    console.log event.key, event.keyCode
     if event.keyCode == 13
       @props.returnToQuery()
 
