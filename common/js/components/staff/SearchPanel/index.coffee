@@ -83,7 +83,7 @@ class SearchPanel extends React.Component
         div { className: 'search-panel__input-container' },
           div { className: 'search-panel__input-field' },
 
-            input { autoFocus: true, className: 'search-panel__input', ref: @text_input, value: @props.query, onChange: @onQueryChange.bind(this), onBlur: @onQueryBlur.bind(this), onClick: @onQueryExec.bind(this), onKeyUp: @onKeyUp.bind(this) }
+            input { autoFocus: true, className: 'search-panel__input', ref: @text_input, value: @props.query, onChange: @onQueryChange.bind(this), onBlur: @onQueryBlur.bind(this), onClick: @onQueryExec.bind(this) }
             div { className: 'search-panel__reset', onClick: @onQueryReset.bind(this) },
               svg { className: 'search-panel__reset-icon', svg: Backspace },
 
