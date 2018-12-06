@@ -77,13 +77,19 @@ class SearchPanel extends React.Component
     @props.returnToQuery()
 
 
+  onKeyDown: (event) ->
+    console.log event.key, event.keyCode
+    if event.keyCode == 13
+      @props.returnToQuery()
+
+
   render: ->
     div { className: 'search-panel-container plug' },
       div { className: 'search-panel' },
         div { className: 'search-panel__input-container' },
           div { className: 'search-panel__input-field' },
 
-            input { autoFocus: true, className: 'search-panel__input', ref: @text_input, value: @props.query, onChange: @onQueryChange.bind(this), onBlur: @onQueryBlur.bind(this), onClick: @onQueryExec.bind(this) }
+            input { autoFocus: true, className: 'search-panel__input', ref: @text_input, value: @props.query, onChange: @onQueryChange.bind(this), onBlur: @onQueryBlur.bind(this), onClick: @onQueryExec.bind(this), onKeyUp: @onKeyDown.bind(this) }
             div { className: 'search-panel__reset', onClick: @onQueryReset.bind(this) },
               svg { className: 'search-panel__reset-icon', svg: Backspace },
 
