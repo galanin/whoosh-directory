@@ -505,7 +505,15 @@ structure:
               - post_title: Инженер
                 building: 14
                 office: 511-515
+                count: 4
+              - post_title: Специалист по древнегреческой мифологии
+                building: 14
+                office: 511-515
                 count: 2
+              - post_title: Специалист по ледяным гигантам
+                building: 14
+                office: 511-515
+                count: 5
               - post_title: Техник
                 building: 14
                 office: 511-515
@@ -520,7 +528,15 @@ structure:
               - post_title: Инженер
                 building: 14
                 office: 511-515
+                count: 4
+              - post_title: Специалист по предсказанным планетам
+                building: 14
+                office: 511-515
                 count: 2
+              - post_title: Специалист по ледяным гигантам
+                building: 14
+                office: 511-515
+                count: 6
               - post_title: Техник
                 building: 14
                 office: 511-515
@@ -583,6 +599,36 @@ structure:
             building: 14
             office:
           sub_units:
+          - short_title:
+            long_title: Группа транспортных межпланетных космических аппаратов
+            emplyees:
+            - post_title: Ведущий инженер
+              building: 14
+              office: 511-515
+              count: 6
+            - post_title: Инженер
+              building: 14
+              office: 511-515
+              count: 12
+            - post_title: Техник
+              building: 14
+              office: 511-515
+              count: 14
+          - short_title:
+            long_title: Группа пассажирских межпланетных космических аппаратов
+            emplyees:
+            - post_title: Ведущий инженер
+              building: 14
+              office: 511-515
+              count: 5
+            - post_title: Инженер
+              building: 14
+              office: 511-515
+              count: 18
+            - post_title: Техник
+              building: 14
+              office: 511-515
+              count: 12
 
         - short_title:
           long_title: Солнечный отдел
@@ -594,6 +640,75 @@ structure:
             building: 14
             office:
           sub_units:
+          - short_title:
+            long_title: Группа светимости
+            emplyees:
+            - post_title: Ведущий инженер
+              building: 14
+              office: 511-515
+              count: 4
+            - post_title: Инженер
+              building: 14
+              office: 511-515
+              count: 2
+            - post_title: Специалист по желтым карликам
+              building: 14
+              office: 511-515
+              count: 8
+            - post_title: Специалист по солнечной короне
+              building: 14
+              office: 511-515
+              count: 7
+            - post_title: Техник
+              building: 14
+              office: 511-515
+              count: 5
+          - short_title:
+            long_title: Группа магнитных бурь
+            emplyees:
+            - post_title: Ведущий инженер
+              building: 14
+              office: 511-515
+              count: 5
+            - post_title: Инженер
+              building: 14
+              office: 511-515
+              count: 6
+            - post_title: Специалист по солнечному ветру
+              building: 14
+              office: 511-515
+              count: 8
+            - post_title: Техник
+              building: 14
+              office: 511-515
+              count: 7
+          - short_title:
+            long_title: Группа исследования истории Солнечной системы
+            emplyees:
+            - post_title: Ведущий инженер
+              building: 14
+              office: 511-515
+              count: 6
+            - post_title: Инженер
+              building: 14
+              office: 511-515
+              count: 6
+            - post_title: Инженер-эволюционограф
+              building: 14
+              office: 511-515
+              count: 7
+            - post_title: Инженер по термоядерным реакциям
+              building: 14
+              office: 511-515
+              count: 5
+            - post_title: Специалист по эволюции звёзд и звёздных систем
+              building: 14
+              office: 511-515
+              count: 7
+            - post_title: Техник
+              building: 14
+              office: 511-515
+              count: 5
 
       - short_title: Внутригалактическое отделение
         long_title:
@@ -607,22 +722,154 @@ structure:
         - post_title: Заместитель директора внутригалактического отделения
           building: 14
           office: 301
+        sub_units:
+        - short_title:
+          long_title: Отдел морфологии Галактики
+          emplyees:
+          - post_title: Начальник отдела
+            building: 14
+            office:
+          - post_title: Заместитель начальника отдела
+            building: 14
+            office:
           sub_units:
           - short_title:
-            long_title: Отдел морфологии Галактики
+            long_title: Группа галактического ядра
             emplyees:
-            - post_title: Начальник отдела
+            - post_title: Ведущий специалист
               building: 14
-              office:
-            - post_title: Заместитель начальника отдела
+              office: 511-515
+              count: 6
+            - post_title: Специалист по активным галактическим ядрам
               building: 14
-              office:
-            sub_units:
+              office: 511-515
+              count: 6
+            - post_title: Специалист по аккреционному диску
+              building: 14
+              office: 511-515
+              count: 2
+            - post_title: Специалист по черным дырам
+              building: 14
+              office: 511-515
+              count: 8
+            - post_title: Техник
+              building: 14
+              office: 511-515
+              count: 8
           - short_title:
-            long_title: Отдел темной материи
+            long_title: Группа галактического балджа
             emplyees:
-            sub_units:
-        sub_units:
+            - post_title: Ведущий специалист
+              building: 14
+              office: 511-515
+              count: 6
+            - post_title: Специалист по галактическим ядрам
+              building: 14
+              office: 511-515
+              count: 4
+            - post_title: Специалист по сверхмассивным черным дырам
+              building: 14
+              office: 511-515
+              count: 12
+            - post_title: Техник
+              building: 14
+              office: 511-515
+              count: 8
+          - short_title:
+            long_title: Группа галактического рукава
+            emplyees:
+            - post_title: Ведущий специалист
+              building: 14
+              office: 511-515
+              count: 6
+            - post_title: Специалист по вращению звезд в галактике
+              building: 14
+              office: 511-515
+              count: 12
+            - post_title: Специалист по космической пыли
+              building: 14
+              office: 511-515
+              count: 7
+            - post_title: Специалист по космическому газу
+              building: 14
+              office: 511-515
+              count: 8
+            - post_title: Техник
+              building: 14
+              office: 511-515
+              count: 12
+          - short_title:
+            long_title: Группа внешних кольцеобразных структур
+            emplyees:
+            - post_title: Старший астроном
+              building: 14
+              office: 511-515
+              count: 4
+            - post_title: Астроном
+              building: 14
+              office: 511-515
+              count: 8
+          - short_title:
+            long_title: Группа галактического бара
+            emplyees:
+            - post_title: Старший астроном
+              building: 14
+              office: 511-515
+              count: 4
+            - post_title: Астроном
+              building: 14
+              office: 511-515
+              count: 8
+          - short_title:
+            long_title: Группа галактического гало
+            emplyees:
+            - post_title: Ведущий специалист
+              building: 14
+              office: 511-515
+              count: 6
+            - post_title: Специалист по темной материи
+              building: 14
+              office: 511-515
+              count: 12
+            - post_title: Специалист по космическому газу
+              building: 14
+              office: 511-515
+              count: 10
+            - post_title: Техник
+              building: 14
+              office: 511-515
+              count: 15
+          - short_title:
+            long_title: Группа коричневых карликов
+            emplyees:
+            - post_title: Ведущий специалист
+              building: 14
+              office: 511-515
+              count: 6
+            - post_title: Специалист по термоядерному синтезу
+              building: 14
+              office: 511-515
+              count: 12
+            - post_title: Специалист по литию
+              building: 14
+              office: 511-515
+              count: 4
+            - post_title: Техник
+              building: 14
+              office: 511-515
+              count: 9
+
+        - short_title:
+          long_title: Отдел темной материи
+          emplyees:
+          - post_title: Начальник отдела
+            building: 14
+            office:
+          - post_title: Заместитель начальника отдела
+            building: 14
+            office:
+          sub_units:
+
         - short_title:
           long_title: Отдел вращения Галактики
           emplyees:
