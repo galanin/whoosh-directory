@@ -5,7 +5,7 @@ import SvgIcon from '@components/common/SvgIcon'
 
 import { setQuery } from '@actions/search'
 import { popSearchResults } from '@actions/layout'
-
+import { fixText } from '@lib/keyboard_layout_fixer'
 
 div = React.createFactory('div')
 img = React.createFactory('img')
@@ -35,12 +35,24 @@ mapDispatchToProps = (dispatch, ownProps) ->
 
 class SearchPanel extends React.Component
 
+  constructor: (props) ->
+    super(props)
+    @text_input = React.createRef()
+
+
+  componentDidUpdate: ->
+    if @cursor_position?
+      @text_input.current.setSelectionRange(@cursor_position, @cursor_position)
+
+
   componentWillUnmount: ->
     clearInterval(@timer)
 
 
   onQueryChange: (event) ->
-    @props.setQuery(event.target.value)
+    fixed_value = fixText(event.target.value)
+    @cursor_position = event.target.selectionStart
+    @props.setQuery(fixed_value)
 
 
   onQueryReset: (event) ->
@@ -71,7 +83,7 @@ class SearchPanel extends React.Component
         div { className: 'search-panel__input-container' },
           div { className: 'search-panel__input-field' },
 
-            input { autoFocus: true, className: 'search-panel__input', value: @props.query, onChange: @onQueryChange.bind(this), onBlur: @onQueryBlur.bind(this) }
+            input { autoFocus: true, className: 'search-panel__input', ref: @text_input, value: @props.query, onChange: @onQueryChange.bind(this), onBlur: @onQueryBlur.bind(this), onClick: @onQueryExec.bind(this), onKeyUp: @onKeyUp.bind(this) }
             div { className: 'search-panel__reset', onClick: @onQueryReset.bind(this) },
               svg { className: 'search-panel__reset-icon', svg: Backspace },
 
