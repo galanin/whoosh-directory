@@ -104,13 +104,13 @@ class EmployeeInfo extends React.Component
                       if @props.employment.building?
                         div { className: 'employee-info__location-building' },
                           span { className: 'employee-info__location-building-label' },
-                            'Корпус'
+                            'Корпус '
                           span { className: 'employee-info__location-building-number' },
                             @props.employment.building
                       if @props.employment.office?
                         div { className: 'employee-info__location-office' },
                           span { className: 'employee-info__location-office-label' },
-                            'Кабинет'
+                            'Кабинет '
                           span { className: 'employee-info__location-office-number' },
                             @props.employment.office
 
