@@ -87,7 +87,10 @@ class EmployeeInfo extends React.Component
               if isArray(@props.employment.format_phones) and @props.employment.format_phones.length > 0
                 div { className: 'employee-info__phones-container' },
                   div { className: 'employee-info__phones-header' },
-                    'Телефоны'
+                    if @props.employment.format_phones.length == 1
+                      'Телефон'
+                    else
+                      'Телефоны'
                   div { className: 'employee-info__phones' },
                     for phone in @props.employment.format_phones
                       div { className: 'employee-info__phone', key: phone },
