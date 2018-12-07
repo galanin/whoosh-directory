@@ -74,13 +74,16 @@ module Utilities
         end
 
 
+        OFFICE_REPLACE = {
+          /б\/н/i => '',
+          /з\/пункт/i => 'Здравпункт',
+          /^(\d+)\s*-?\s*"?(\p{Word})"*$/ => '\1\2',
+        }
+
         def normalize_office(raw_str)
           str = raw_str.to_s.strip
-          if str =~ /^(\d+)\s+(\p{Word})$/
-            $~[1] + $~[2]
-          else
-            str
-          end.upcase.presence
+          str = OFFICE_REPLACE.reduce(str) { |str, (pattern, replacement)| str.sub(pattern, replacement) }
+          str.presence
         end
 
 
