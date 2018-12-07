@@ -91,9 +91,9 @@ class EmployeeInfo extends React.Component
                   div { className: 'employee-info__phones' },
                     for phone in @props.employment.format_phones
                       div { className: 'employee-info__phone', key: phone },
-                        div { className: 'employee-info__phone-label' },
-                          phone[2]
-                        div { className: 'employee-info__phone-number' },
+                        span { className: 'employee-info__phone-label' },
+                          phone[2] + ' '
+                        span { className: 'employee-info__phone-number' },
                           phone[1]
 
               if @props.employment.building? or @props.employment.office?
