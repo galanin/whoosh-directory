@@ -73,6 +73,9 @@ module Utilities
       def add_employment(employment)
         person = employment.person
         add_term(employment.post_title, PRIORITY_LOWEST, person, partial: true)
+        if employment.office =~ /^(\d+)/
+          add_term($~[1], PRIORITY_LOWEST, person)
+        end
         add_term(employment.office, PRIORITY_LOWEST, person)
         add_term(employment.building, PRIORITY_LOWEST, person)
         if Array === employment.phones
