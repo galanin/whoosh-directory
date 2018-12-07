@@ -20,6 +20,7 @@ svg = React.createFactory(SvgIcon)
 silhouette = React.createFactory(Silhouette)
 
 import CloseButton from '@icons/close_button.svg'
+import Email from '@icons/at-sign.svg'
 import Location from '@icons/location.svg'
 import Lunch from '@icons/lunch.svg'
 import Birthday from '@icons/birthday.svg'
@@ -98,6 +99,17 @@ class EmployeeInfo extends React.Component
                           phone[2] + ' '
                         span { className: 'employee-info__phone-number' },
                           phone[1]
+
+              if @props.person.email?
+                div { className: 'employee-info__iconed-data employee-info__email' },
+                  svg { className: 'employee-info__data-icon employee-info__email-icon', svg: Email }
+                  div { className: 'employee-info__data-container employee-info__email-container' },
+                    div { className: 'employee-info__data-data employee-info__email-data' },
+                      div { className: 'employee-info__email-label' },
+                        'E-mail'
+                      div { className: 'employee-info__email-address' },
+                        a { className: 'employee-info__email-link', href: 'mailto:' + @props.person.email },
+                          @props.person.email
 
               if @props.employment.building? or @props.employment.office?
                 div { className: 'employee-info__iconed-data employee-info__location' },
