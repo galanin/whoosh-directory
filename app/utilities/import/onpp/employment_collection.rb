@@ -44,6 +44,7 @@ module Utilities
         def link_data_to_units(unit_collection)
           @entities.each do |id, employment_entity|
             unit_entity = unit_collection[ employment_entity.new_data.unit_external_id ]
+            unit_entity.new_data.employment_ids = [] if unit_entity.new_data.employment_ids.nil?
             unit_entity.new_data.employment_ids << id
           end
         end

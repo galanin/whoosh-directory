@@ -8,19 +8,56 @@ module Utilities
                       :parent_external_id,
                       :child_ids,
                       :employment_ids,
+                      :contact_ids,
                       :path, :level
 
 
-        def initialize(source_data)
-          @external_id        = source_data['ID']
-          @long_title         = source_data['FULLNAME'].gsub(/\s{2,}/, ' ').strip.presence
-          @short_title        = source_data['NAME'].gsub(/\s{2,}/, ' ').strip.presence
-          @list_title         = @long_title && @long_title.length > 80 ? (@short_title || @long_title) : (@long_title || @short_title)
-          @path               = source_data['HASH']
-          @parent_external_id = source_data['UP_ID']
+        def initialize(hash)
+          @external_id        = hash[:external_id]
+          @long_title         = hash[:long_title]
+          @short_title        = hash[:short_title]
+          @list_title         = hash[:list_title]
+          @path               = hash[:path]
+          @parent_external_id = hash[:parent_external_id]
 
           @child_ids      = []
-          @employment_ids = []
+        end
+
+
+        def self.new_from_xml(source_data)
+          external_id        = source_data['ID']
+          long_title         = source_data['FULLNAME'].gsub(/\s{2,}/, ' ').strip.presence
+          short_title        = source_data['NAME'].gsub(/\s{2,}/, ' ').strip.presence
+          list_title         = long_title && long_title.length > 80 ? (short_title || long_title) : (long_title || short_title)
+          path               = source_data['HASH']
+          parent_external_id = source_data['UP_ID']
+          hash = {
+            external_id:  external_id,
+            long_title: long_title,
+            short_title: short_title,
+            list_title: list_title,
+            path: path,
+            parent_external_id: parent_external_id
+          }
+
+          Unit.new(hash)
+        end
+
+
+        def self.new_from_yml(source_data)
+          external_id = source_data["id"]
+          title = source_data["title"]
+
+          hash = {
+            external_id:  external_id,
+            long_title: title,
+            short_title: title,
+            list_title: title,
+            path: nil,
+            parent_external_id: nil
+          }
+
+          Unit.new(hash)
         end
 
 

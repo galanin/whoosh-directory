@@ -34,11 +34,18 @@ module Staff
         unit = Unit.find_by!(short_id: params[:unit_id])
         present :unit_extras, [unit.as_json.slice('id', 'long_title', 'short_title')]
 
-        employments = Employment.in(short_id: unit.employ_ids)
-        present :employments, employments
+        unless unit.employ_ids.nil?
+          employments = Employment.in(short_id: unit.employ_ids)
+          present :employments, employments
 
-        people = Person.in(short_id: employments.map(&:person_short_id))
-        present :people, people
+          people = Person.in(short_id: employments.map(&:person_short_id))
+          present :people, people
+        end
+
+        unless unit.contact_ids.nil?
+          external_contacts = ExternalContact.in(short_id: unit.contact_ids)
+          present :external_contacts, external_contacts
+        end
       end
     end
 
@@ -72,9 +79,11 @@ module Staff
       present :results, search_result
 
       employments = fetch_search_result_employments(search_result)
+      external_contacts = fetch_search_result_external_contacts(search_result)
 
-      present :employments, employments
-      present :people,      fetch_search_result_people(search_result)
+      present :employments,       employments
+      present :people,            fetch_search_result_people(search_result)
+      present :external_contacts, external_contacts
     end
 
   end

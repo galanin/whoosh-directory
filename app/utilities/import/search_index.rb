@@ -23,6 +23,9 @@ module Utilities
         Employment.where(destroyed_at: nil).each do |employment|
           search_index.add_object(employment)
         end
+        ExternalContact.where(destroyed_at: nil).each do |external_contact|
+          search_index.add_object(external_contact)
+        end
 
         search_index.update!
       end
@@ -38,6 +41,7 @@ module Utilities
         when Person then add_person(object)
         when Unit then add_unit(object)
         when Employment then add_employment(object)
+        when ExternalContact then add_external_contact(object)
         end
       end
 
@@ -81,6 +85,25 @@ module Utilities
         if Array === employment.phones
           employment.phones.each do |phone|
             add_term(phone, PRIORITY_LOWEST, person)
+          end
+        end
+      end
+
+
+      def add_external_contact(external_contact)
+        add_term(external_contact.last_name, PRIORITY_LAST_NAME, external_contact, partial: true)
+        add_term(external_contact.first_name, PRIORITY_FIRST_NAME, external_contact, partial: true)
+        add_term(external_contact.middle_name, PRIORITY_MIDDLE_NAME, external_contact, partial: true)
+        add_normal_term(external_contact.birthday, PRIORITY_LOWEST, external_contact) if external_contact.birthday
+        unless external_contact.last_name.nil? && external_contact.first_name.nil? && external_contact.middle_name.nil?
+          set_sub_order(external_contact.last_name + ' ' + external_contact.first_name + ' ' + external_contact.middle_name, external_contact)
+        end
+        add_term(external_contact.post_title, PRIORITY_LOWEST, external_contact, partial: true)
+        add_term(external_contact.office, PRIORITY_LOWEST, external_contact)
+        add_term(external_contact.building, PRIORITY_LOWEST, external_contact)
+        if Array === external_contact.phones
+          external_contact.phones.each do |phone|
+          add_term(phone, PRIORITY_LOWEST, external_contact)
           end
         end
       end

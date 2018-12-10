@@ -67,6 +67,10 @@ module Utilities
             person_id: searchable_object.short_id,
             employ_ids: searchable_object.employ_ids,
           }
+        when ExternalContact
+          {
+            contact_id: searchable_object.short_id,
+          }
         else
           {}
         end

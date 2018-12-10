@@ -18,4 +18,10 @@ module FetchingHelpers
     Person.in(short_id: person_short_ids).to_a
   end
 
+
+  def fetch_search_result_external_contacts(search_results)
+    external_contact_short_ids = search_results.map(&:contact_id).compact.flatten
+    ExternalContact.in(short_id: external_contact_short_ids).to_a
+  end
+
 end

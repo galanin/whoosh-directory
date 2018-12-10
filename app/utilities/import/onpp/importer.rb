@@ -2,6 +2,7 @@ require 'nokogiri'
 require 'utilities/import/onpp/person_collection'
 require 'utilities/import/onpp/unit_collection'
 require 'utilities/import/onpp/employment_collection'
+require 'yaml'
 
 module Utilities
   module Import
@@ -12,10 +13,16 @@ module Utilities
           @people = Utilities::Import::ONPP::PersonCollection.new(::Person)
           @units = Utilities::Import::ONPP::UnitCollection.new(::Unit)
           @employments = Utilities::Import::ONPP::EmploymentCollection.new(::Employment)
+          @external_contact =  Utilities::Import::ONPP::ExternalContactCollection.new(::ExternalContact)
         end
 
 
         def import
+
+          yaml_str = YAML.load_file ENV['STAFF_IMPORT_EXTERNAL_CONTACTS_FILE_PATH']
+
+          @units.import_from_yaml(yaml_str)
+          @external_contact.import(yaml_str)
 
           blacklist_xml_str = IO.read ENV['STAFF_IMPORT_BLACKLIST_FILE_PATH']
           blacklist_doc = ::Nokogiri::XML(blacklist_xml_str, nil, 'UTF-8')
@@ -26,7 +33,7 @@ module Utilities
           xml_str = IO.read ENV['STAFF_IMPORT_FILE_PATH']
           doc = ::Nokogiri::XML(xml_str, nil, 'CP1251')
 
-          @units.import(doc)
+          @units.import_from_xml(doc)
           @employments.import(doc, @units)
           @people.import(doc, @units)
 
@@ -47,6 +54,7 @@ module Utilities
 
           @employments.link_data_to_people(@people)
           @employments.link_data_to_units(@units)
+          @external_contact.link_data_to_units(@units)
 
           @units.change_company_managment(@employments)
           @units.reset_employments_link
@@ -69,26 +77,33 @@ module Utilities
           @people.fetch_from_db
           @units.fetch_from_db
           @employments.fetch_from_db
+          @external_contact.fetch_from_db
 
           @people.drop_stale_objects
           @units.drop_stale_objects
           @employments.drop_stale_objects
+          @external_contact.drop_stale_objects
 
           @people.build_new_objects
           @units.build_new_objects
           @employments.build_new_objects
+          @external_contact.build_new_objects
 
           @people.import_photos
+          @external_contact.import_photos
 
           @units.link_objects_to_children_short_ids
           @units.link_objects_to_employment_short_ids(@employments)
+          @units.link_objects_to_contact_short_ids(@external_contact)
           @people.link_objects_to_employment_short_ids(@employments)
           @employments.link_objects_to_people(@people)
           @employments.link_objects_to_units(@units)
+          @external_contact.link_objects_to_units(@units)
 
           @people.flush_to_db
           @units.flush_to_db
           @employments.flush_to_db
+          @external_contact.flush_to_db
         end
 
       end

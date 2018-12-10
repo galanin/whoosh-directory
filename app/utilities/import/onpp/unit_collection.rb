@@ -43,12 +43,20 @@ module Utilities
         ]
 
 
-        def import(doc)
+        def import_from_xml(doc)
           doc.xpath('.//organization').each do |org|
             unless present_in_black_list?(org['ID'])
-              new_data = Utilities::Import::ONPP::Unit.new(org)
+              new_data = Utilities::Import::ONPP::Unit.new_from_xml(org)
               add_new_data(new_data)
             end
+          end
+        end
+
+
+        def import_from_yaml(doc)
+          doc.each do |org|
+            new_data = Utilities::Import::ONPP::Unit.new_from_yml(org)
+            add_new_data(new_data)
           end
         end
 
@@ -99,15 +107,17 @@ module Utilities
 
         def sort_employments(employment_collection)
           @entities.each do |id, unit_entity|
-            employmet_ids = unit_entity.new_data.employment_ids
-            employments = employment_collection.entites_by_ids(employmet_ids)
+            unless unit_entity.new_data.employment_ids.nil?
+              employmet_ids = unit_entity.new_data.employment_ids
+              employments = employment_collection.entites_by_ids(employmet_ids)
 
-            employments_with_priority = employments.map do |employment_unit|
-              set_priority(employment_unit)
+              employments_with_priority = employments.map do |employment_unit|
+                set_priority(employment_unit)
+              end
+
+              employments_with_priority.sort_by!{ |employment_with_priority| employment_with_priority[:priority] }
+              unit_entity.new_data.employment_ids = employments_with_priority.map { |employment| employment[:employment_id] }
             end
-
-            employments_with_priority.sort_by!{ |employment_with_priority| employment_with_priority[:priority] }
-            unit_entity.new_data.employment_ids = employments_with_priority.map { |employment| employment[:employment_id] }
           end
         end
 
@@ -130,8 +140,17 @@ module Utilities
 
         def link_objects_to_employment_short_ids(employment_collection)
           @entities.each do |id, unit_entity|
-            if unit_entity.new_data
+            if unit_entity.new_data && unit_entity.new_data.employment_ids.present?
               unit_entity.old_object.employ_ids = employment_collection.short_ids_by_external_ids(unit_entity.new_data.employment_ids).presence
+            end
+          end
+        end
+
+
+        def link_objects_to_contact_short_ids(contact_collection)
+          @entities.each do |id, unit_entity|
+            if unit_entity.new_data && unit_entity.new_data.contact_ids.present?
+              unit_entity.old_object.contact_ids = contact_collection.short_ids_by_external_ids(unit_entity.new_data.contact_ids).presence
             end
           end
         end
@@ -139,7 +158,7 @@ module Utilities
 
         def reset_employments_link
           @entities.each do |id, unit_entity|
-            unit_entity.new_data.employment_ids = []
+            unit_entity.new_data.employment_ids = [] unless unit_entity.new_data.employment_ids.nil?
           end
         end
 
@@ -165,8 +184,9 @@ module Utilities
 
         def find_empty_units
           @entities.values.select do |unit_entity|
+            !unit_entity.new_data.employment_ids.nil? &&
             unit_entity.new_data.employment_ids.empty? &&
-              unit_entity.new_data.child_ids.empty?
+            unit_entity.new_data.child_ids.empty?
           end
         end
 

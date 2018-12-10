@@ -10,6 +10,7 @@ class Unit < ApplicationRecord
   field :list_title,   type: String
   field :child_ids,    type: Array
   field :employ_ids,   type: Array
+  field :contact_ids,  type: Array
   field :level,        type: Integer
   field :destroyed_at, type: Time
 
@@ -17,6 +18,7 @@ class Unit < ApplicationRecord
   belongs_to :parent, class_name: 'Unit', optional: true
 
   has_many :employments
+  has_many :external_contacts
 
 
   def as_json(options = nil)
