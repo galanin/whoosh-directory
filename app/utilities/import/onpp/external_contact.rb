@@ -26,7 +26,7 @@ module Utilities
           @birthday         = source_data['birthday']
           @office           = source_data['office']
           @building         = source_data['building']
-          @phones           = source_data['phones'].split(',')
+          @phones           = source_data['phones'].gsub(/-/,'').split(',')
           @email            = source_data['email']
 
         end

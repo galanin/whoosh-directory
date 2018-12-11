@@ -7,6 +7,7 @@ class ExternalContact < ApplicationRecord
   include Mongoid::Timestamps
   include ShortId
   include Searchable
+  include FormatPhones
 
   field :external_id,       type: String
   field :unit_external_id,  type: String
@@ -42,8 +43,8 @@ class ExternalContact < ApplicationRecord
     ).compact.merge(
       'id'          => short_id,
       'unit_id'     => unit_short_id,
-    ).merge(
-       'birthday_formatted' => (I18n.l(Date.strptime(birthday, INPUT_BIRTHDAY_FORMAT), format: :bithday) unless birthday.nil?)
+      'birthday_formatted' => (I18n.l(Date.strptime(birthday, INPUT_BIRTHDAY_FORMAT), format: :bithday) unless birthday.nil?),
+      'format_phones' => format_phones_with_type,
     )
   end
 
