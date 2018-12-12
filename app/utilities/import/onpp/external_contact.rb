@@ -8,8 +8,11 @@ module Utilities
                       :first_name,
                       :middle_name,
                       :last_name,
+                      :function_title,
+                      :location_title,
                       :post_title,
                       :birthday,
+                      :gender,
                       :office,
                       :building,
                       :phones,
@@ -22,13 +25,15 @@ module Utilities
           @first_name       = source_data['first_name']
           @middle_name      = source_data['middle_name']
           @last_name        = source_data['last_name']
+          @function_title   = source_data['function_title']
+          @location_title   = source_data['location_title']
+          @gender           = source_data['gender']
           @post_title       = source_data['post_title']
           @birthday         = source_data['birthday']
           @office           = source_data['office']
           @building         = source_data['building']
-          @phones           = source_data['phones'].gsub(/-/,'').split(',')
+          @phones           = source_data['phones'].to_s.gsub(/-/,'').split(',')
           @email            = source_data['email']
-
         end
 
 
@@ -39,6 +44,9 @@ module Utilities
             first_name:       first_name,
             middle_name:      middle_name,
             last_name:        last_name,
+            function_title:   function_title,
+            location_title:   location_title,
+            gender:           gender,
             post_title:       post_title,
             birthday:         birthday,
             office:           office,

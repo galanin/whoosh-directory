@@ -70,6 +70,7 @@ ru:
         format: '\1-\2-\3-\4-\5'
       # TODO: format city codes
     type:
+      emergency: экстренный
       internal: внутренний
       city: городской
       mobile: мобильный

@@ -2,13 +2,14 @@ module Utilities
   module Import
     class SearchIndex
 
-      PRIORITY_FULL_TERM   = 100
-      PRIORITY_LAST_NAME   = 6
-      PRIORITY_FIRST_NAME  = 5
-      PRIORITY_MIDDLE_NAME = 4
-      PRIORITY_UNIT_TITLE  = 3
-      PRIORITY_POST_TITLE  = 2
-      PRIORITY_LOWEST      = 1
+      PRIORITY_FULL_TERM          = 100
+      PRIORITY_LAST_NAME          = 6
+      PRIORITY_EXTERNAL_CONTACT   = 6
+      PRIORITY_FIRST_NAME         = 5
+      PRIORITY_MIDDLE_NAME        = 4
+      PRIORITY_UNIT_TITLE         = 3
+      PRIORITY_POST_TITLE         = 2
+      PRIORITY_LOWEST             = 1
 
 
       def self.rebuild
@@ -97,6 +98,14 @@ module Utilities
         add_normal_term(external_contact.birthday, PRIORITY_LOWEST, external_contact) if external_contact.birthday
         unless external_contact.last_name.nil? && external_contact.first_name.nil? && external_contact.middle_name.nil?
           set_sub_order(external_contact.last_name + ' ' + external_contact.first_name + ' ' + external_contact.middle_name, external_contact)
+        end
+        add_term(external_contact.function_title, PRIORITY_EXTERNAL_CONTACT, external_contact, partial: true)
+        unless external_contact.function_title.nil?
+          set_sub_order(external_contact.function_title, external_contact)
+        end
+        add_term(external_contact.location_title, PRIORITY_EXTERNAL_CONTACT, external_contact, partial: true)
+        unless external_contact.location_title.nil?
+          set_sub_order(external_contact.location_title, external_contact)
         end
         add_term(external_contact.post_title, PRIORITY_LOWEST, external_contact, partial: true)
         add_term(external_contact.office, PRIORITY_LOWEST, external_contact)

@@ -4,7 +4,8 @@ module FormatPhones
   included do
 
     PHONES_TYPE = {
-      /\A\d{3,4}\z/       =>  'internal',
+      /\A\d{2,3}\z/       =>  'emergency',
+      /\A\d{4}\z/         =>  'internal',
       /\A79\d{9}\z/       =>  'mobile',
       /\A(\d{5,7})\z/     =>  'city',
       /\A(7[0-8]\d{9})\z/ =>  'city',

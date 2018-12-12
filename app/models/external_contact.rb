@@ -16,7 +16,10 @@ class ExternalContact < ApplicationRecord
   field :middle_name,       type: String
   field :last_name,         type: String
   field :birthday,          type: String
+  field :gender,            type: String
   field :post_title,        type: String
+  field :function_title,    type: String
+  field :location_title,    type: String
   field :office,            type: String
   field :building,          type: String
   field :phones,            type: Array
@@ -40,6 +43,7 @@ class ExternalContact < ApplicationRecord
       'first_name', 'middle_name', 'last_name',
       'birthday',  'post_title', 'office',
       'building', 'phones', 'photo', 'email',
+      'gender', 'function_title', 'location_title',
     ).compact.merge(
       'id'          => short_id,
       'unit_id'     => unit_short_id,
