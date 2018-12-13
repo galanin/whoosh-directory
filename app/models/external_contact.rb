@@ -48,7 +48,7 @@ class ExternalContact < ApplicationRecord
     ).compact.merge(
       'id'          => short_id,
       'unit_id'     => unit_short_id,
-      'birthday_formatted' => (I18n.l(Date.strptime(birthday, INPUT_BIRTHDAY_FORMAT), format: :bithday) unless birthday.nil?),
+      'birthday_formatted' => (I18n.l(Date.strptime(birthday, INPUT_BIRTHDAY_FORMAT), format: :birthday) unless birthday.nil?),
       'format_phones' => format_phones_with_type,
     )
   end

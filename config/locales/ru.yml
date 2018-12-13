@@ -35,7 +35,7 @@ ru:
       default: "%d.%m.%Y"
       long: "%-d %B %Y"
       short: "%-d %b"
-      bithday: "%-d %B"
+      birthday: "%-d %B"
     month_names:
     -
     - января

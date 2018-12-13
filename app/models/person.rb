@@ -39,7 +39,7 @@ class Person < ApplicationRecord
     ).compact.merge(
       'id' => short_id,
     ).merge(
-       'birthday_formatted' => (I18n.l(Date.strptime(birthday, INPUT_BIRTHDAY_FORMAT), format: :bithday) unless birthday.nil?)
+       'birthday_formatted' => (I18n.l(Date.strptime(birthday, INPUT_BIRTHDAY_FORMAT), format: :birthday) unless birthday.nil?)
     )
   end
 
