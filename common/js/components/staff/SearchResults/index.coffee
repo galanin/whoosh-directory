@@ -16,6 +16,7 @@ contact = React.createFactory(Contact)
 
 mapStateToProps = (state, ownProps) ->
   results: state.search.results
+  query: state.search.current_machine_query
 
 mapDispatchToProps = (dispatch) ->
   {}
@@ -40,9 +41,10 @@ class SearchResults extends React.Component
 
         else
           div { className: 'search-results__no-results' },
-            'Безрезультатно'
-
-
+            if !@props.query or @props.query == ''
+              'Введите ваш запрос в поисковую строку выше'
+            else
+              'Ничего не найдено'
 
 
 export default connect(mapStateToProps, mapDispatchToProps)(SearchResults)
