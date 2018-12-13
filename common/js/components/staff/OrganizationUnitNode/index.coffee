@@ -99,7 +99,7 @@ class OrganizationUnitNode extends React.Component
         div { className: 'organization-unit-node__button-stub' }
 
       div { className: 'organization-unit-node__content' },
-        scroll_element { className: title_class_name, onClick: @onUnitClick.bind(this), name: "node-#{@props.unit_id}" },
+        scroll_element { className: title_class_name, onClick: @onUnitClick.bind(this), name: "node-#{@props.unit_id}", 'data-level': @props.unit_data.level },
           @props.unit_data.list_title
         if has_children
           div { className: 'organization-unit-node__children' },

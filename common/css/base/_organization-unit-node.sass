@@ -87,10 +87,15 @@
 .organization-unit-node__title
   margin: 0 0 4px 8px
   padding: 5px 0 0 2px
-  color: #2b1626
+  color: #444
   background-color: #fff
   cursor: pointer
   z-index: 1
+
+  &[data-level='0'],
+  &[data-level='1']
+    color: #150a10
+    font-weight: 600
 
 .organization-unit-node__title_highlighted
   margin: 0
@@ -102,5 +107,7 @@
   margin: 0
   padding: 5px 4px 4px 10px
   font-weight: bold
-  color: #fff
   background-color: #777
+  color: #fff
+  &[data-level]
+    color: #fff
