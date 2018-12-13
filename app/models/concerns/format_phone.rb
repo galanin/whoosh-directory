@@ -1,4 +1,4 @@
-module FormatPhones
+module FormatPhone
   extend ActiveSupport::Concern
 
   included do

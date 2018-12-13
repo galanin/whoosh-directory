@@ -7,7 +7,7 @@ class ExternalContact < ApplicationRecord
   include Mongoid::Timestamps
   include ShortId
   include Searchable
-  include FormatPhones
+  include FormatPhone
 
   field :external_id,       type: String
   field :unit_external_id,  type: String
