@@ -96,7 +96,7 @@ class OrganizationUnitNode extends React.Component
           svg { className: 'organization-unit-node__button-open', svg: Plus }
           svg { className: 'organization-unit-node__button-close', svg: Minus }
       else
-        div { className: 'organization-unit-node__button-stub' },
+        div { className: 'organization-unit-node__button-stub' }
 
       div { className: 'organization-unit-node__content' },
         scroll_element { className: title_class_name, onClick: @onUnitClick.bind(this), name: "node-#{@props.unit_id}" },
