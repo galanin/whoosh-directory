@@ -52,7 +52,7 @@ class Employee extends React.Component
           if photo.thumb60.url?
             img { src: process.env.PHOTO_BASE_URL + photo.thumb60.url, className: 'employee__thumb60' }
         else
-            avatar { className: 'employee__avatar', gender: @props.person.gender, post_category_code: @props.employment.post_category_code }
+            avatar { className: 'employee__avatar', gender: @props.person.gender, post_code: @props.employment.post_code }
 
       div { className: 'employee__info' },
         div { className: 'employee__name' },

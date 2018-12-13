@@ -12,6 +12,9 @@ div = React.createFactory('div')
 span = React.createFactory('span')
 img = React.createFactory('img')
 
+import CommonAvatar from '@components/staff/CommonAvatar'
+avatar = React.createFactory(CommonAvatar)
+
 
 mapStateToProps = (state, ownProps) ->
   contact = state.contacts[ownProps.contact_id]
@@ -49,6 +52,8 @@ class Contact extends React.Component
             img { src: process.env.PHOTO_BASE_URL + photo.thumb45.url, className: 'employee__thumb45' }
           if photo.thumb60.url?
             img { src: process.env.PHOTO_BASE_URL + photo.thumb60.url, className: 'employee__thumb60' }
+        else
+          avatar { className: 'employee__avatar', gender: @props.contact.gender, post_code: @props.contact.post_code }
 
       div { className: 'employee__info' },
         div { className: 'employee__name' },

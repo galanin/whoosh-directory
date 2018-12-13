@@ -15,27 +15,29 @@ import WorkerMan   from '@icons/common-avatars/worker-man.svg'
 import WorkerWoman from '@icons/common-avatars/worker-woman.svg'
 import AuxiliaryWorkerMan   from '@icons/common-avatars/auxiliary-worker-man.svg'
 import AuxiliaryWorkerWoman from '@icons/common-avatars/auxiliary-worker-woman.svg'
+import NurseWoman from '@icons/common-avatars/nurse.svg'
 
-avatars =
-  M: [
-    LeaderMan
-    SpecialistMan
-    EmployeeMan
-    WorkerMan
-    AuxiliaryWorkerMan
-  ]
-  F: [
-    LeaderWoman
-    SpecialistWoman
-    EmployeeWoman
-    WorkerWoman
-    AuxiliaryWorkerWoman
-  ]
+AVATARS =
+  M:
+    head:       LeaderMan
+    specialist: SpecialistMan
+    employee:   EmployeeMan
+    worker:     WorkerMan
+    aux_worker: AuxiliaryWorkerMan
+
+  F:
+    head:       LeaderWoman
+    specialist: SpecialistWoman
+    employee:   EmployeeWoman
+    worker:     WorkerWoman
+    aux_worker: AuxiliaryWorkerWoman
+    nurse:      NurseWoman
 
 
 class CommonAvatar extends React.Component
   render: ->
-    avatar = avatars[@props.gender]?[@props.post_category_code]
+    console.log @props
+    avatar = AVATARS[@props.gender]?[@props.post_code]
 
     if avatar?
       div { className: 'common-avatar ' + @props.className },

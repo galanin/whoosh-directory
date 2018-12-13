@@ -7,7 +7,7 @@ module Utilities
                       :person_external_id,
                       :unit_external_id,
                       :post_title,
-                      :post_category_code,
+                      :post_code,
                       :office, :building,
                       :phones,
                       :lunch_begin, :lunch_end,
@@ -24,12 +24,12 @@ module Utilities
         }.freeze
 
         POST_CATEGORY_CODE = {
-          'Руководители'            => 0,
-          'Специалисты'             => 1,
-          'Прочие служащие'         => 2,
-          '*'                       => 2,
-          'Основные рабочие'        => 3,
-          'Вспомогательные рабочие' => 4,
+          'Руководители'            => 'head',
+          'Специалисты'             => 'specialist',
+          'Прочие служащие'         => 'employee',
+          '*'                       => 'employee',
+          'Основные рабочие'        => 'worker',
+          'Вспомогательные рабочие' => 'aux_worker',
         }.freeze
 
         def initialize(source_data)
@@ -37,7 +37,7 @@ module Utilities
           @person_external_id = source_data['ID_FL']
           @unit_external_id   = source_data['ID_PODR']
           @post_title         = source_data['POST']
-          @post_category_code = POST_CATEGORY_CODE[source_data['KAT']] || POST_CATEGORY_CODE['*']
+          @post_code = POST_CATEGORY_CODE[source_data['KAT']] || POST_CATEGORY_CODE['*']
           @office             = normalize_office(source_data['ROOM'])
           @building           = normalize_building(source_data['KORP'])
           @phones             = normalize_phones(source_data['PHONE'])
@@ -61,7 +61,7 @@ module Utilities
             person_external_id: person_external_id,
             unit_external_id:   unit_external_id,
             post_title:         post_title,
-            post_category_code: post_category_code,
+            post_code: post_code,
             building:           building,
             office:             office,
             phones:             phones,

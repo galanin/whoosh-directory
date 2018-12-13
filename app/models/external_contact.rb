@@ -18,6 +18,7 @@ class ExternalContact < ApplicationRecord
   field :birthday,          type: String
   field :gender,            type: String
   field :post_title,        type: String
+  field :post_code,         type: String
   field :function_title,    type: String
   field :location_title,    type: String
   field :office,            type: String
@@ -41,7 +42,7 @@ class ExternalContact < ApplicationRecord
   def as_json(options = nil)
     super.slice(
       'first_name', 'middle_name', 'last_name',
-      'birthday',  'post_title', 'office',
+      'birthday', 'post_title', 'post_code', 'office',
       'building', 'phones', 'photo', 'email',
       'gender', 'function_title', 'location_title',
     ).compact.merge(

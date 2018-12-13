@@ -10,7 +10,7 @@ module Utilities
                       :last_name,
                       :function_title,
                       :location_title,
-                      :post_title,
+                      :post_title, :post_code,
                       :birthday,
                       :gender,
                       :office,
@@ -29,6 +29,7 @@ module Utilities
           @location_title   = source_data['location_title']
           @gender           = source_data['gender']
           @post_title       = source_data['post_title']
+          @post_code        = source_data['post_code']
           @birthday         = source_data['birthday']
           @office           = source_data['office']
           @building         = source_data['building']
@@ -48,6 +49,7 @@ module Utilities
             location_title:   location_title,
             gender:           gender,
             post_title:       post_title,
+            post_code:        post_code,
             birthday:         birthday,
             office:           office,
             building:         building,
