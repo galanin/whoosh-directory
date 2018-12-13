@@ -10,6 +10,9 @@ result_unit = React.createFactory(SearchResultUnit)
 import Employee from '@components/staff/Employee'
 employee = React.createFactory(Employee)
 
+import Contact from '@components/staff/Contact'
+contact = React.createFactory(Contact)
+
 
 mapStateToProps = (state, ownProps) ->
   results: state.search.results
@@ -30,6 +33,8 @@ class SearchResults extends React.Component
             for result in @props.results
               if result.unit_id?
                 result_unit({ key: result.unit_id, unit_id: result.unit_id })
+              else if result.contact_id?
+                contact(key: result.contact_id, contact_id: result.contact_id)
               else if result.person_id?
                 employee({ key: result.person_id, employment_id: result.employ_ids[0] })
 

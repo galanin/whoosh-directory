@@ -11,6 +11,7 @@ import {
 import { addUnitExtras } from '@actions/unit_extras'
 import { addPeople } from '@actions/people'
 import { addEmployments } from '@actions/employments'
+import { addContacts } from '@actions/contacts'
 import { popSearchResults } from '@actions/layout'
 import { setSearchRunning, setSearchFinished, hasQuerySent, hasQueryFinished, getQueryResult } from '@actions/search_cache'
 
@@ -61,8 +62,12 @@ export sendQuery = (machine_query_string) ->
     dispatch(setSearchRunning(machine_query_string))
     Request.get('/search').query(q: machine_query_string).then (response) ->
       dispatch(setSearchFinished(machine_query_string, response.body.results))
-      dispatch(addPeople(response.body.people))
-      dispatch(addEmployments(response.body.employments))
+      if response.body.people?
+        dispatch(addPeople(response.body.people))
+      if response.body.employments?
+        dispatch(addEmployments(response.body.employments))
+      if response.body.external_contacts?
+        dispatch(addContacts(response.body.external_contacts))
 
       if isCurrentMachineQuery(getState, response.body.query)
         dispatch(setCurrentResults(response.body.results))

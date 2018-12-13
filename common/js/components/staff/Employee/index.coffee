@@ -31,7 +31,7 @@ mapDispatchToProps = (dispatch, ownProps) ->
 
 class Employee extends React.Component
 
-  onEmployeeClick: ->
+  onContactClick: ->
     @props.setCurrentEmployee()
 
 
@@ -44,7 +44,7 @@ class Employee extends React.Component
       'employee' : true
       'employee_highlighted' : @props.employment.id == @props.current_employment_id
 
-    div { className: class_names, onClick: @onEmployeeClick.bind(this) },
+    div { className: class_names, onClick: @onContactClick.bind(this) },
       div { className: 'employee__photo' },
         if photo.thumb45.url? || photo.thumb60.url?
           if photo.thumb45.url?

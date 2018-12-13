@@ -5,6 +5,7 @@ import { Request } from '@lib/request'
 import { START_LOAD_UNIT_EXTRA, ADD_UNIT_EXTRAS, SET_UNIT_EXTRA_ERROR } from '@constants/unit_extras'
 import { addPeople } from '@actions/people'
 import { addEmployments } from '@actions/employments'
+import { addContacts } from '@actions/contacts'
 
 
 export loadUnitExtra = (unit_id) ->
@@ -14,8 +15,12 @@ export loadUnitExtra = (unit_id) ->
       dispatch(startLoadUnitExtra(unit_id))
 
       Request.get("/units/#{unit_id}").then (result) ->
-        dispatch(addPeople(result.body.people))
-        dispatch(addEmployments(result.body.employments))
+        if result.body.people?
+          dispatch(addPeople(result.body.people))
+        if result.body.employments?
+          dispatch(addEmployments(result.body.employments))
+        if result.body.external_contacts?
+          dispatch(addContacts(result.body.external_contacts))
         dispatch(addUnitExtras(result.body.unit_extras))
       , (error) ->
 

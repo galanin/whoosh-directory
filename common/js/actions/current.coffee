@@ -2,6 +2,7 @@ import {
   SET_CURRENT_UNIT_ID
   SET_HIGHLIGHTED_UNIT_ID
   SET_CURRENT_EMPLOYMENT_ID
+  SET_CURRENT_CONTACT_ID
   SCROLL_TO_UNIT
   SCROLLED_TO_UNIT
 } from '@constants/current'
@@ -17,6 +18,10 @@ export setHighlightedUnitId = (unit_id) ->
 export setCurrentEmploymentId = (employment_id) ->
   type: SET_CURRENT_EMPLOYMENT_ID
   employment_id: employment_id
+
+export setCurrentContactId = (contact_id) ->
+  type: SET_CURRENT_CONTACT_ID
+  contact_id: contact_id
 
 export scrollToUnit = (unit_id) ->
   type: SCROLL_TO_UNIT

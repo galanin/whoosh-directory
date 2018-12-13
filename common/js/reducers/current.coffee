@@ -2,6 +2,7 @@ import {
   SET_CURRENT_UNIT_ID
   SET_HIGHLIGHTED_UNIT_ID
   SET_CURRENT_EMPLOYMENT_ID
+  SET_CURRENT_CONTACT_ID
   SCROLL_TO_UNIT
   SCROLLED_TO_UNIT
 } from '@constants/current'
@@ -22,6 +23,13 @@ export default (state = {}, action) ->
     when SET_CURRENT_EMPLOYMENT_ID
       new_state = Object.assign({}, state)
       new_state.employment_id = action.employment_id
+      delete new_state.contact_id
+      new_state
+
+    when SET_CURRENT_CONTACT_ID
+      new_state = Object.assign({}, state)
+      new_state.contact_id = action.contact_id
+      delete new_state.employment_id
       new_state
 
     when SCROLL_TO_UNIT

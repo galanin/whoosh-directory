@@ -6,6 +6,7 @@ import units from '@reducers/units'
 import unit_extras from '@reducers/unit_extras'
 import people from '@reducers/people'
 import employments from '@reducers/employments'
+import contacts from '@reducers/contacts'
 import current from '@reducers/current'
 import expanded_units from '@reducers/expand_units'
 import expanded_sub_units from '@reducers/expand_sub_units'
@@ -22,6 +23,7 @@ export default combineReducers
   current:            current
   people:             people
   employments:        employments
+  contacts:           contacts
   expanded_units:     expanded_units
   expanded_sub_units: expanded_sub_units
   initial_state:      initial_state

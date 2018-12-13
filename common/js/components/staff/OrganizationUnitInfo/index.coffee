@@ -13,6 +13,9 @@ employee = React.createFactory(Employee)
 import OrganizationSubUnit from '@components/staff/OrganizationSubUnit'
 sub_unit = React.createFactory(OrganizationSubUnit)
 
+import Contact from '@components/staff/Contact'
+contact = React.createFactory(Contact)
+
 
 mapStateToProps = (state) ->
   unit_id = state.current.unit_id
@@ -47,6 +50,11 @@ class OrganizationUnitInfo extends React.Component
             div { className: 'organization-unit__employees' },
               for employment_id in @props.unit_data.employ_ids
                 employee { key: employment_id, employment_id: employment_id, hide: { unit: true } }
+
+          if isArray(@props.unit_data.contact_ids)
+            div { className: 'organization-unit__contacts' },
+              for contact_id in @props.unit_data.contact_ids
+                contact { key: contact_id, contact_id: contact_id, hide: { unit: true } }
 
           if isArray(@props.unit_data.child_ids)
             div { className: 'organization-unit__sub-units' },

@@ -16,12 +16,20 @@ organization_structure = React.createFactory(OrganizationStructure)
 import EmployeeInfo from '@components/staff/EmployeeInfo'
 employee_info = React.createFactory(EmployeeInfo)
 
+import ContactInfo from '@components/staff/ContactInfo'
+contact_info = React.createFactory(ContactInfo)
+
+import EmployeeDummyInfo from '@components/staff/EmployeeDummyInfo'
+dummy_info = React.createFactory(EmployeeDummyInfo)
+
 import SearchResults from '@components/staff/SearchResults'
 search_results = React.createFactory(SearchResults)
 
 
 mapStateToProps = (state) ->
   pile: state.layout.pile
+  employment_id: state.current.employment_id
+  contact_id: state.current.contact_id
 
 mapDispatchToProps = (dispatch) ->
   {}
@@ -43,7 +51,12 @@ class WorkingArea extends React.Component
         div { className: "working-area__block working-area__structure socket block-index-#{pile_hash['structure']}" },
           organization_structure {}
         div { className: "working-area__block working-area__employee-info socket block-index-#{pile_hash['employee-info']}" },
-          employee_info {}
+          if @props.employment_id?
+            employee_info {}
+          else if @props.contact_id?
+            contact_info {}
+          else
+            dummy_info {}
         div { className: "working-area__block working-area__results socket block-index-#{pile_hash['search-results']}" },
           search_results {}
 
