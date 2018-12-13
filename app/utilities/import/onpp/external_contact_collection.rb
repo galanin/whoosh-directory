@@ -49,7 +49,7 @@ module Utilities
 
         def link_data_to_units(unit_collection)
           @entities.each do |id, external_contact_entity|
-            unit_entity = unit_collection[ external_contact_entity.new_data.unit_external_id ]
+            unit_entity = unit_collection[ external_contact_entity.new_data.unit_external_id.to_s ]
             unit_entity.new_data.contact_ids = [] if unit_entity.new_data.contact_ids.nil?
             unit_entity.new_data.contact_ids << id
           end
@@ -59,7 +59,7 @@ module Utilities
         def link_objects_to_units(unit_collection)
           @entities.each do |id, external_contact_entity|
             if external_contact_entity.new_data.present?
-              unit_entity = unit_collection[ external_contact_entity.new_data.unit_external_id ]
+              unit_entity = unit_collection[ external_contact_entity.new_data.unit_external_id.to_s ]
               external_contact_entity.old_object.unit = unit_entity.old_object
               external_contact_entity.old_object.unit_short_id = unit_entity.old_object.short_id
             end

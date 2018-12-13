@@ -45,7 +45,7 @@ module Utilities
 
 
         def self.new_from_yml(source_data)
-          external_id = source_data["id"]
+          external_id = source_data["id"].to_s
           title = source_data["title"]
 
           hash = {

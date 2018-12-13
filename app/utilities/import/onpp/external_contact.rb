@@ -20,7 +20,7 @@ module Utilities
 
 
         def initialize(source_data, unit_id)
-          @external_id      = source_data['id']
+          @external_id      = source_data['id'].to_s
           @unit_external_id = unit_id
           @first_name       = source_data['first_name']
           @middle_name      = source_data['middle_name']
