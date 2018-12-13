@@ -24,7 +24,7 @@ module Staff
     get :units do
       present :units,
               Unit.
-                only(:short_id, :level, :list_title, :child_ids, :employ_ids).
+                only(:short_id, :level, :list_title, :child_ids, :employ_ids, :contact_ids).
                 where(destroyed_at: nil)
     end
 
