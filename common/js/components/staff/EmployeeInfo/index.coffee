@@ -7,6 +7,7 @@ import Email from '@components/contact_info/Email'
 import OfficeLocation from '@components/contact_info/OfficeLocation'
 import LunchBreak from '@components/contact_info/LunchBreak'
 import Birthday from '@components/contact_info/Birthday'
+import IconedData from '@components/contact_info/IconedData'
 
 import { setCurrentEmploymentId, setCurrentUnitId } from '@actions/current'
 import { sinkEmployeeInfo, popUnitInfo, popStructure } from '@actions/layout'
@@ -25,9 +26,10 @@ email = React.createFactory(Email)
 location = React.createFactory(OfficeLocation)
 lunch_break = React.createFactory(LunchBreak)
 birthday = React.createFactory(Birthday)
+iconed_data = React.createFactory(IconedData)
 
 import CloseButton from '@icons/close_button.svg'
-import Vacation from '@icons/vacation.svg'
+import VacationIcon from '@icons/vacation.svg'
 
 
 mapStateToProps = (state, ownProps) ->
@@ -96,11 +98,8 @@ class EmployeeInfo extends React.Component
             birthday { birthday_formatted: @props.person.birthday_formatted, className: 'employee-info__iconed-data employee-info__birthday' }
 
             if @props.employment.on_vacation
-              div { className: 'employee-info__iconed-data employee-info__vacation' },
-                svg { className: 'employee-info__data-icon employee-info__vacation-icon', svg: Vacation }
-                div { className: 'employee-info__data-container employee-info__vacation-container' },
-                  div { className: 'employee-info__data-data employee-info__vacation-data' },
-                    'В отпуске'
+              iconed_data { className: 'employee-info__iconed-data employee-info__vacation', icon: VacationIcon, align_icon: 'middle' },
+                'В отпуске'
 
 
 export default connect(mapStateToProps, mapDispatchToProps)(EmployeeInfo)
