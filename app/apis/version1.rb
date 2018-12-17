@@ -3,7 +3,7 @@ module Staff
 
     format :json
     prefix :api
-    helpers FetchingHelpers
+    helpers FetchingHelpers, BirthdayHelpers
 
 
     before do
@@ -83,6 +83,23 @@ module Staff
 
       present :employments,       employments
       present :people,            fetch_search_result_people(search_result)
+      present :external_contacts, external_contacts
+    end
+
+    params {
+      requires :begin_date, type: String, regexp: /^[0-9][0-2]?-[0-9][0-9]?$/
+      requires :end_date, type: String, regexp: /^[0-9][0-2]?-[0-9][0-9]?$/
+    }
+    get 'birthday/:begin_date/:end_date' do
+      begin_date = params[:begin_date]
+      end_date = params[:end_date]
+
+      people = get_birthday_entity(Person, begin_date, end_date)
+      employments = Employment.in(person_short_id: people.map(&:short_id))
+      external_contacts = get_birthday_entity(ExternalContact, begin_date, end_date)
+
+      present :people, people
+      present :employment, employments
       present :external_contacts, external_contacts
     end
 
