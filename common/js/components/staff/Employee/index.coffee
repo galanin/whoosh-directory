@@ -62,11 +62,17 @@ class Employee extends React.Component
             @props.person.first_name
           span { className: 'employee__middle-name' },
             @props.person.middle_name
+
         div { className: 'employee__post_title' },
           @props.employment.post_title
+
         unless @props.hide?.unit
           div { className: 'employee__organization_unit_title' },
             @props.unit.list_title
+
+        if @props.employment.on_vacation
+          div { className: 'employee__on-vacation' },
+            'В отпуске'
 
       if isArray(@props.employment.format_phones) and @props.employment.format_phones.length > 0
         div { className: 'employee__phones' },
