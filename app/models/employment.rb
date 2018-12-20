@@ -29,6 +29,9 @@ class Employment < ApplicationRecord
   belongs_to :person
   belongs_to :unit
 
+  index({ destroyed_at: 1 }, {})
+  index({ person_short_id: 1 }, {})
+
 
   def as_json(options = nil)
     result = super.slice(

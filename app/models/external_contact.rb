@@ -36,8 +36,7 @@ class ExternalContact < ApplicationRecord
   mount_uploader :photo, PersonPhotoUploader
   field :photo_updated_at, type: Time
 
-
-  INPUT_BIRTHDAY_FORMAT = '%m-%d'
+  index({ destroyed_at: 1, birthday: 1 }, {})
 
 
   def as_json(options = nil)

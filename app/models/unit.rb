@@ -20,6 +20,8 @@ class Unit < ApplicationRecord
   has_many :employments
   has_many :external_contacts
 
+  index({ destroyed_at: 1 }, {})
+
 
   def as_json(options = nil)
     super.slice(

@@ -30,7 +30,7 @@ class Person < ApplicationRecord
   scope :api_fields, -> { only(:short_id, :first_name, :middle_name, :last_name,
                                :birthday, :gender) }
 
-  INPUT_BIRTHDAY_FORMAT = '%m-%d'
+  index({ destroyed_at: 1, birthday: 1 }, {})
 
 
   def as_json(options = nil)
