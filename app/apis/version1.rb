@@ -94,7 +94,7 @@ module Staff
       dates = params[:when].split(',')
 
       people = get_birthday_entity(Person, dates)
-      employments = Employment.in(person_short_id: people.map(&:short_id))
+      employments = Employment.where(destroyed_at: nil).in(person_short_id: people.map(&:short_id))
       external_contacts = get_birthday_entity(ExternalContact, dates)
 
       people_results = Utilities::SearchResultList.new(people)
