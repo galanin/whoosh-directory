@@ -8,6 +8,7 @@ class ExternalContact < ApplicationRecord
   include ShortId
   include Searchable
   include FormatPhone
+  include FormatBirthday
 
   field :external_id,       type: String
   field :unit_external_id,  type: String
@@ -40,7 +41,7 @@ class ExternalContact < ApplicationRecord
 
 
   def as_json(options = nil)
-    super.slice(
+    json = super.slice(
       'first_name', 'middle_name', 'last_name',
       'birthday', 'post_title', 'post_code', 'office',
       'building', 'phones', 'photo', 'email',
@@ -48,9 +49,14 @@ class ExternalContact < ApplicationRecord
     ).compact.merge(
       'id'          => short_id,
       'unit_id'     => unit_short_id,
-      'birthday_formatted' => (I18n.l(Date.strptime(birthday, INPUT_BIRTHDAY_FORMAT), format: :birthday) unless birthday.nil?),
       'format_phones' => format_phones_with_type,
     )
+
+    if birthday.present?
+      json.merge!('birthday_formatted' => birthday_formatted)
+    end
+
+    json
   end
 
 end

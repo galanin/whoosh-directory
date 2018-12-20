@@ -7,6 +7,7 @@ class Person < ApplicationRecord
   include Mongoid::Timestamps
   include ShortId
   include Searchable
+  include FormatBirthday
 
   field :external_id,     type: String
   field :first_name,      type: String
@@ -33,14 +34,18 @@ class Person < ApplicationRecord
 
 
   def as_json(options = nil)
-    super.slice(
+    json = super.slice(
       'first_name', 'middle_name', 'last_name',
       'birthday', 'gender', 'photo', 'email',
     ).compact.merge(
       'id' => short_id,
-    ).merge(
-       'birthday_formatted' => (I18n.l(Date.strptime(birthday, INPUT_BIRTHDAY_FORMAT), format: :birthday) unless birthday.nil?)
     )
+
+    if birthday.present?
+      json.merge!('birthday_formatted' => birthday_formatted)
+    end
+
+    json
   end
 
 end
