@@ -1,6 +1,5 @@
 require 'carrierwave/mongoid'
 require 'i18n'
-require 'date'
 
 class ExternalContact < ApplicationRecord
   include Mongoid::Document
@@ -8,7 +7,7 @@ class ExternalContact < ApplicationRecord
   include ShortId
   include Searchable
   include FormatPhone
-  include FormatBirthday
+  include FormattableBirthday
 
   field :external_id,       type: String
   field :unit_external_id,  type: String
@@ -52,7 +51,7 @@ class ExternalContact < ApplicationRecord
     )
 
     if birthday.present?
-      json.merge!('birthday_formatted' => birthday_formatted)
+      json.merge!('birthday_formatted' => birthday_formatted(birthday))
     end
 
     json

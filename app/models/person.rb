@@ -1,13 +1,12 @@
 require 'carrierwave/mongoid'
 require 'i18n'
-require 'date'
 
 class Person < ApplicationRecord
   include Mongoid::Document
   include Mongoid::Timestamps
   include ShortId
   include Searchable
-  include FormatBirthday
+  include FormattableBirthday
 
   field :external_id,     type: String
   field :first_name,      type: String
@@ -42,7 +41,7 @@ class Person < ApplicationRecord
     )
 
     if birthday.present?
-      json.merge!('birthday_formatted' => birthday_formatted)
+      json.merge!('birthday_formatted' => birthday_formatted(birthday))
     end
 
     json

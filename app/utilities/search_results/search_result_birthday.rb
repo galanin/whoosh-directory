@@ -1,6 +1,6 @@
 module Utilities
   class SearchResultBirthday
-    include FormatBirthday
+    include FormattableBirthday
 
     attr_reader :birthday
 
@@ -14,7 +14,7 @@ module Utilities
     def as_json(options = nil)
       {
         'birthday'       => birthday,
-        'date_formatted' => birthday_formatted,
+        'date_formatted' => birthday_formatted(birthday),
         'results'        => @results.sort_by { |object| object.sorting_title },
       }
     end

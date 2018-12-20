@@ -74,15 +74,27 @@ module Staff
       optional :max, type: Integer, default: 20
     }
     get :search do
-      search_result = SearchEntry.query(params[:q], params[:max])
-      present :query, params[:q]
-      present :results, search_result
+      search_query = SearchQuery.new(params[:q])
 
-      employments = fetch_search_result_employments(search_result)
-      external_contacts = fetch_search_result_external_contacts(search_result)
+      if search_query.birthday?
+        birthday_period = search_query.birthday_period
+        present :period, birthday_period
 
+        people = get_birthday_entity(Person, birthday_period.first)
+        employments = Employment.in(person_short_id: people.map(&:short_id))
+        external_contacts = get_birthday_entity(ExternalContact, birthday_period.first)
+      elsif search_query.common?
+        search_result = SearchEntry.query(params[:q], params[:max])
+        present :results, search_result
+
+        employments = fetch_search_result_employments(search_result)
+        external_contacts = fetch_search_result_external_contacts(search_result)
+        people = fetch_search_result_people(search_result)
+      end
+
+      present :query,             params[:q]
       present :employments,       employments
-      present :people,            fetch_search_result_people(search_result)
+      present :people,            people
       present :external_contacts, external_contacts
     end
 
