@@ -5,6 +5,7 @@ export LAYOUT_BLOCK_STRUCTURE = 'structure'
 export LAYOUT_BLOCK_UNIT_INFO = 'unit-info'
 export LAYOUT_BLOCK_EMPLOYEE_INFO = 'employee-info'
 export LAYOUT_BLOCK_SEARCH_RESULTS = 'search-results'
+export LAYOUT_BLOCK_BIRTHDAYS = 'birthdays'
 export LAYOUT_BLOCK_FAVORITES = 'favorites'
 export LAYOUT_BLOCK_RECENT = 'recent'
 

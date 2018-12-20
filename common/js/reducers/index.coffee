@@ -14,6 +14,8 @@ import initial_state from '@reducers/initial_state'
 import layout from '@reducers/layout'
 import search from '@reducers/search'
 import search_cache from '@reducers/search_cache'
+import birthdays from '@reducers/birthdays'
+import birthday_period from '@reducers/birthday_period'
 
 
 export default combineReducers
@@ -30,4 +32,6 @@ export default combineReducers
   layout:             layout
   search:             search
   search_cache:       search_cache
+  birthdays:          birthdays
+  birthday_period:    birthday_period
   routing:            routerReducer

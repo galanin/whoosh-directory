@@ -7,6 +7,9 @@ div = React.createFactory('div')
 import SearchPanel from '@components/staff/SearchPanel'
 search_panel = React.createFactory(SearchPanel)
 
+import BirthdayShortcutPanel from '@components/staff/BirthdayShortcutPanel'
+birthday_panel = React.createFactory(BirthdayShortcutPanel)
+
 import OrganizationUnitInfo from '@components/staff/OrganizationUnitInfo'
 organization_unit_info = React.createFactory(OrganizationUnitInfo)
 
@@ -24,6 +27,9 @@ dummy_info = React.createFactory(EmployeeDummyInfo)
 
 import SearchResults from '@components/staff/SearchResults'
 search_results = React.createFactory(SearchResults)
+
+import Birthdays from '@components/staff/Birthdays'
+birthdays = React.createFactory(Birthdays)
 
 
 mapStateToProps = (state) ->
@@ -44,7 +50,8 @@ class WorkingArea extends React.Component
     div { className: 'working-area plug' },
       div { className: 'working-area__search-panel socket' },
         search_panel {}
-      div { className: 'working-area__birthday-panel socket' }
+      div { className: 'working-area__birthday-panel socket' },
+        birthday_panel {}
       div { className: 'working-area__results-panel' },
         div { className: "working-area__block working-area__unit-info socket block-index-#{pile_hash['unit-info']}" },
           organization_unit_info {}
@@ -59,6 +66,8 @@ class WorkingArea extends React.Component
             dummy_info {}
         div { className: "working-area__block working-area__results socket block-index-#{pile_hash['search-results']}" },
           search_results {}
+        div { className: "working-area__block working-area__birthdays socket block-index-#{pile_hash['birthdays']}" },
+          birthdays {}
 
 
 export default connect(mapStateToProps, mapDispatchToProps)(WorkingArea)
