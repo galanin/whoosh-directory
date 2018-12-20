@@ -59,4 +59,30 @@ class ExternalContact < ApplicationRecord
     json
   end
 
+
+  def person?
+    last_name.present?
+  end
+
+
+  def function?
+    function_title.present?
+  end
+
+
+  def location?
+    location_title.present?
+  end
+
+
+  def sorting_title
+    if person?
+      "#{last_name} #{first_name} #{middle_name}".squish
+    elsif function?
+      function_title
+    elsif location?
+      location_title
+    end
+  end
+
 end

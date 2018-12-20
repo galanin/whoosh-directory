@@ -48,4 +48,9 @@ class Person < ApplicationRecord
     json
   end
 
+
+  def sorting_title
+    "#{last_name} #{first_name} #{middle_name}".squish
+  end
+
 end

@@ -86,20 +86,24 @@ module Staff
       present :external_contacts, external_contacts
     end
 
+
     params {
-      requires :begin_date, type: String, regexp: /^[0-9][0-2]?-[0-9][0-9]?$/
-      requires :end_date, type: String, regexp: /^[0-9][0-2]?-[0-9][0-9]?$/
+      requires :when, type: String, regexp: /^\d\d-\d\d(,\d\d-\d\d)*$/
     }
-    get 'birthday/:begin_date/:end_date' do
-      begin_date = params[:begin_date]
-      end_date = params[:end_date]
+    get 'birthday/:when' do
+      dates = params[:when].split(',')
 
-      people = get_birthday_entity(Person, begin_date, end_date)
+      people = get_birthday_entity(Person, dates)
       employments = Employment.in(person_short_id: people.map(&:short_id))
-      external_contacts = get_birthday_entity(ExternalContact, begin_date, end_date)
+      external_contacts = get_birthday_entity(ExternalContact, dates)
 
+      people_results = Utilities::SearchResultList.new(people)
+      contact_results = Utilities::SearchResultList.new(external_contacts)
+      results = people_results + contact_results
+
+      present results: results.group_by_birthday
       present :people, people
-      present :employment, employments
+      present :employments, employments
       present :external_contacts, external_contacts
     end
 
