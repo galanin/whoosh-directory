@@ -4,7 +4,7 @@
 require_relative 'config/boot'
 require 'rake'
 require 'bundler'
-# Bundler.setup
+Bundler.setup
 
 desc 'load the Grape environment.'
 task :environment do
@@ -12,6 +12,8 @@ task :environment do
 end
 
 $LOAD_PATH << File.join(File.dirname(__FILE__), 'lib')
+
+load 'mongoid/tasks/database.rake'
 
 Dir["#{File.dirname(__FILE__)}/lib/**/*.rb"].each { |f| require f }
 Dir["#{File.dirname(__FILE__)}/lib/tasks/**/*.rake"].each { |f| import f }
