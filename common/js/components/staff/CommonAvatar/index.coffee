@@ -36,7 +36,6 @@ AVATARS =
 
 class CommonAvatar extends React.Component
   render: ->
-    console.log @props
     avatar = AVATARS[@props.gender]?[@props.post_code]
 
     if avatar?
