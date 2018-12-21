@@ -80,7 +80,7 @@ module Staff
         birthday_period = search_query.birthday_period
 
         people = get_birthday_entity(Person, birthday_period.first)
-        employments = Employment.in(person_short_id: people.map(&:short_id))
+        employments = Employment.where(destroyed_at: nil).in(person_short_id: people.map(&:short_id))
         external_contacts = get_birthday_entity(ExternalContact, birthday_period.first)
         results = get_birthday_results(people, external_contacts)
 
