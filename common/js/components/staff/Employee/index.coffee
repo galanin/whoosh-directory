@@ -7,6 +7,7 @@ import classNames from 'classnames'
 import { loadUnitInfo } from '@actions/units'
 import { setCurrentEmploymentId } from '@actions/current'
 import { popEmployeeInfo } from '@actions/layout'
+import { loadEmploymentHierarchy } from '@actions/employments'
 
 div = React.createFactory('div')
 span = React.createFactory('span')
@@ -26,6 +27,7 @@ mapStateToProps = (state, ownProps) ->
 mapDispatchToProps = (dispatch, ownProps) ->
   setCurrentEmployee: ->
     dispatch(setCurrentEmploymentId(ownProps.employment_id))
+    dispatch(loadEmploymentHierarchy(ownProps.employment_id))
     dispatch(popEmployeeInfo())
 
 

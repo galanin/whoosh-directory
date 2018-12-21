@@ -8,12 +8,16 @@ import OfficeLocation from '@components/contact_info/OfficeLocation'
 import LunchBreak from '@components/contact_info/LunchBreak'
 import Birthday from '@components/contact_info/Birthday'
 import IconedData from '@components/contact_info/IconedData'
+import Employee from '@components/staff/Employee'
+import SearchResultUnit from '@components/staff/SearchResultUnit'
+import { every, reverse } from 'lodash'
 
 import { setCurrentEmploymentId, setCurrentUnitId } from '@actions/current'
 import { sinkEmployeeInfo, popUnitInfo, popStructure } from '@actions/layout'
 import { resetExpandedSubUnits } from '@actions/expand_sub_units'
 import { loadUnitExtra } from '@actions/unit_extras'
 import { goToUnitInStructure } from '@actions/units'
+import { getParentUnits, getParentEmploys } from '@actions/employments'
 
 div = React.createFactory('div')
 span = React.createFactory('span')
@@ -27,6 +31,8 @@ location = React.createFactory(OfficeLocation)
 lunch_break = React.createFactory(LunchBreak)
 birthday = React.createFactory(Birthday)
 iconed_data = React.createFactory(IconedData)
+employee = React.createFactory(Employee)
+result_unit = React.createFactory(SearchResultUnit)
 
 import CloseButton from '@icons/close_button.svg'
 import VacationIcon from '@icons/vacation.svg'
@@ -35,10 +41,14 @@ import VacationIcon from '@icons/vacation.svg'
 mapStateToProps = (state, ownProps) ->
   employment_id = state.current.employment_id
   employment = state.employments[employment_id]
+
   employment_id: employment_id
   employment: employment
   person: employment && state.people[employment.person_id]
   unit: employment && state.units[employment.unit_id]
+  parent_units: reverse(getParentUnits(state, employment))
+  parent_employments: reverse(getParentEmploys(state, employment))
+
 
 mapDispatchToProps = (dispatch) ->
   unsetCurrentEmployee: ->
@@ -100,6 +110,22 @@ class EmployeeInfo extends React.Component
             if @props.employment.on_vacation
               iconed_data { className: 'employee-info__iconed-data employee-info__vacation', icon: VacationIcon, align_icon: 'middle' },
                 'В отпуске'
+
+        is_bosses_present = every(@props.parent_employments)
+        if @props.parent_units.length > 0
+          div { className: 'employee-info__structure' },
+            div { className: 'employee-info__structure-title' },
+              if is_bosses_present
+                'Руководители'
+              else
+                'Орг. структура'
+            div { className: 'employee-info__structure-units' },
+              if is_bosses_present
+                for employment in @props.parent_employments
+                  employee(key: employment.id, employment_id: employment.id)
+              else
+                for unit in @props.parent_units
+                  result_unit(key: unit.id, unit_id: unit.id)
 
 
 export default connect(mapStateToProps, mapDispatchToProps)(EmployeeInfo)

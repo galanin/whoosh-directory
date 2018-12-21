@@ -120,5 +120,16 @@ module Staff
       present :external_contacts, external_contacts
     end
 
+
+    get 'employments/:who' do
+      employ_ids = params[:who].split(',')
+
+      employments = Employment.in(short_id: employ_ids)
+      present :employments, employments
+
+      people = Person.in(short_id: employments.map(&:person_short_id))
+      present :people, people
+    end
+
   end
 end
