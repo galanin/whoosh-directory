@@ -29,7 +29,8 @@ class Employment < ApplicationRecord
   belongs_to :person
   belongs_to :unit
 
-  index({ destroyed_at: 1 }, {})
+  index({ destroyed_at: 1, person_short_id: 1 }, {})
+  index({ destroyed_at: 1, short_id: 1 }, {})
   index({ person_short_id: 1 }, {})
 
 
