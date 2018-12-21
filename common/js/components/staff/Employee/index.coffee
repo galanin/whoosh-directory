@@ -1,7 +1,6 @@
 import React from 'react'
-import PropTypes from 'prop-types'
-import { connect } from 'react-redux';
-import { isArray } from 'lodash';
+import { connect } from 'react-redux'
+import { isArray } from 'lodash'
 import classNames from 'classnames'
 
 import { loadUnitInfo } from '@actions/units'

@@ -1,6 +1,6 @@
 import React from 'react'
-import { connect } from 'react-redux';
-import { isArray } from 'lodash';
+import { connect } from 'react-redux'
+import { isArray } from 'lodash'
 
 div = React.createFactory('div')
 

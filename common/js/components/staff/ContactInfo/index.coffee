@@ -1,5 +1,5 @@
 import React from 'react'
-import { connect } from 'react-redux';
+import { connect } from 'react-redux'
 import SvgIcon from '@components/common/SvgIcon'
 import Silhouette from '@components/contact_info/CommonSilhouette'
 import Phones from '@components/contact_info/Phones'

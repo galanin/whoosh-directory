@@ -1,9 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
-import { isArray } from 'lodash';
-#import * as UnitActions from '@actions/organization_unit';
+import { connect } from 'react-redux'
+import { isArray } from 'lodash'
 
 div = React.createFactory('div')
 
@@ -28,7 +26,6 @@ mapStateToProps = (state) ->
 
 mapDispatchToProps = (dispatch) ->
   {}
-#  bindActionCreators(UnitActions, dispatch)
 
 
 class OrganizationUnitInfo extends React.Component

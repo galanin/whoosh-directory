@@ -1,7 +1,5 @@
 import React from 'react'
-import PropTypes from 'prop-types'
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
+import { connect } from 'react-redux'
 import classNames from 'classnames'
 import SvgIcon from '@components/common/SvgIcon'
 import { Element as ScrollElement, scroller } from 'react-scroll'
