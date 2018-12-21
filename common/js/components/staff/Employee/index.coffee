@@ -42,11 +42,12 @@ class Employee extends React.Component
 
     photo = @props.person.photo
 
-    class_names = classNames
+    class_names =
       'employee' : true
       'employee_highlighted' : @props.employment.id == @props.current_employment_id
+    class_names[@props.className] = true
 
-    div { className: class_names, onClick: @onContactClick.bind(this) },
+    div { className: classNames(class_names), onClick: @onContactClick.bind(this) },
       div { className: 'employee__photo' },
         if photo.thumb45.url? || photo.thumb60.url?
           if photo.thumb45.url?

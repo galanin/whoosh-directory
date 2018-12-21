@@ -122,7 +122,7 @@ class EmployeeInfo extends React.Component
             div { className: 'employee-info__structure-units' },
               if is_bosses_present
                 for employment in @props.parent_employments
-                  employee(key: employment.id, employment_id: employment.id)
+                  employee key: employment.id, employment_id: employment.id, className: 'hair-border'
               else
                 for unit in @props.parent_units
                   result_unit(key: unit.id, unit_id: unit.id)

@@ -37,7 +37,7 @@ class SearchResults extends React.Component
               else if result.contact_id?
                 contact(key: result.contact_id, contact_id: result.contact_id)
               else if result.person_id?
-                employee({ key: result.person_id, employment_id: result.employ_ids[0] })
+                employee(key: result.person_id, employment_id: result.employ_ids[0], className: 'shadow')
 
         else
           div { className: 'search-results__no-results' },

@@ -1,10 +1,32 @@
 .employee
   display: flex
-  background-color: #fff
-  filter: drop-shadow(0 6px 6px #bbb)
-  margin-bottom: 1rem
   cursor: pointer
   position: relative
+
+  &.shadow
+    background-color: #fff
+    filter: drop-shadow(0 6px 6px #bbb)
+    margin-bottom: 1rem
+
+    .employee__info,
+    .employee__phones
+      padding-top: 4px
+      padding-bottom: 4px
+      padding-right: 8px
+
+  &.hair-border
+    padding: 1rem 0
+    margin: 0 1rem
+
+    & + .employee.hair-border
+      border-top: 1px solid #e0e0e0
+
+    .employee__info,
+    .employee__phones
+      margin-top: -6px
+
+    .employee__phones
+      padding-left: 8px
 
 .employee_highlighted
   .employee__info,
@@ -33,7 +55,7 @@
 
 .employee__info
   flex: 1 1 90%
-  padding: 4px 8px
+  padding-left: 16px
   overflow: hidden
 
 .employee__name
@@ -66,7 +88,6 @@
 
 .employee__phones
   flex: 1 1 auto
-  padding: 4px 8px
 
 .employee__phone
   text-align: right
