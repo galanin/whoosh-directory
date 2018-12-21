@@ -17,6 +17,11 @@ class SearchQuery < ApplicationRecord
   end
 
 
+  def type
+    birthday? ? 'birthday' : 'common'
+  end
+
+
   def birthday_period
     birthdays_array = birthday_scan
     if birthdays_array.count == 1

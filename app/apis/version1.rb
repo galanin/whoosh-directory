@@ -78,11 +78,14 @@ module Staff
 
       if search_query.birthday?
         birthday_period = search_query.birthday_period
-        present :period, birthday_period
 
         people = get_birthday_entity(Person, birthday_period.first)
         employments = Employment.in(person_short_id: people.map(&:short_id))
         external_contacts = get_birthday_entity(ExternalContact, birthday_period.first)
+        results = get_birthday_results(people, external_contacts)
+
+        present :period,  birthday_period
+        present :results, results
       elsif search_query.common?
         search_result = SearchEntry.query(params[:q], params[:max])
         present :results, search_result
@@ -92,6 +95,7 @@ module Staff
         people = fetch_search_result_people(search_result)
       end
 
+      present :type,              search_query.type
       present :query,             params[:q]
       present :employments,       employments
       present :people,            people
@@ -108,12 +112,9 @@ module Staff
       people = get_birthday_entity(Person, dates)
       employments = Employment.where(destroyed_at: nil).in(person_short_id: people.map(&:short_id))
       external_contacts = get_birthday_entity(ExternalContact, dates)
+      results = get_birthday_results(people, external_contacts)
 
-      people_results = Utilities::SearchResultList.new(people)
-      contact_results = Utilities::SearchResultList.new(external_contacts)
-      results = people_results + contact_results
-
-      present results: results.group_by_birthday
+      present results: results
       present :people, people
       present :employments, employments
       present :external_contacts, external_contacts
