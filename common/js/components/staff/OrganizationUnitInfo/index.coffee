@@ -39,7 +39,7 @@ class OrganizationUnitInfo extends React.Component
           if @props.unit_titles.short_title?
             div { className: 'organization-unit__short-title' },
               @props.unit_titles.short_title
-          if @props.unit_titles.long_title? and @props.unit_titles.long_title != @props.unit_titles.short_title
+          if @props.unit_titles.long_title?
             div { className: 'organization-unit__long-title' },
               @props.unit_titles.long_title
 
