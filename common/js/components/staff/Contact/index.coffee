@@ -38,13 +38,14 @@ class Contact extends React.Component
 
     photo = @props.contact.photo
 
-    class_names = classNames
+    class_names =
       'employee' : true
       'contact' : true
       'employee_highlighted' : @props.contact.id == @props.current_contact_id
       'contact_highlighted' : @props.contact.id == @props.current_contact_id
+    class_names[@props.className] = true
 
-    div { className: class_names, onClick: @onContactClick.bind(this) },
+    div { className: classNames(class_names), onClick: @onContactClick.bind(this) },
       div { className: 'employee__photo' },
         if photo.thumb45.url? || photo.thumb60.url?
           if photo.thumb45.url?
