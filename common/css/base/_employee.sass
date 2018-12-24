@@ -3,24 +3,14 @@
   cursor: pointer
   position: relative
 
-  &.shadow
-    background-color: #fff
-    filter: drop-shadow(0 6px 6px #bbb)
-    margin-bottom: 1rem
-
+  &.list-item.shadow
     .employee__info,
     .employee__phones
       padding-top: 4px
       padding-bottom: 4px
       padding-right: 8px
 
-  &.hair-border
-    padding: 1rem 0
-    margin: 0 1rem
-
-    & + .employee.hair-border
-      border-top: 1px solid #e0e0e0
-
+  &.list-item.hair-border
     .employee__info,
     .employee__phones
       margin-top: -6px
@@ -35,7 +25,6 @@
 
     *
       color: #fff
-
 
 .employee__photo
   flex: 0 0 60px

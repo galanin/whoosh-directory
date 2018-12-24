@@ -46,7 +46,7 @@ class OrganizationUnitInfo extends React.Component
           if isArray(@props.unit_data.employ_ids)
             div { className: 'organization-unit__employees' },
               for employment_id in @props.unit_data.employ_ids
-                employee key: employment_id, employment_id: employment_id, hide: { unit: true }, className: 'shadow'
+                employee key: employment_id, employment_id: employment_id, hide: { unit: true }, className: 'list-item shadow'
 
           if isArray(@props.unit_data.contact_ids)
             div { className: 'organization-unit__contacts' },

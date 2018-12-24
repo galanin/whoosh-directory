@@ -33,11 +33,11 @@ class SearchResults extends React.Component
           div { className: 'search-results__results' },
             for result in @props.results
               if result.unit_id?
-                result_unit({ key: result.unit_id, unit_id: result.unit_id })
+                result_unit key: result.unit_id, unit_id: result.unit_id, className: 'list-item shadow'
               else if result.contact_id?
                 contact(key: result.contact_id, contact_id: result.contact_id)
               else if result.person_id?
-                employee(key: result.person_id, employment_id: result.employ_ids[0], className: 'shadow')
+                employee(key: result.person_id, employment_id: result.employ_ids[0], className: 'list-item shadow')
 
         else
           div { className: 'search-results__no-results' },
