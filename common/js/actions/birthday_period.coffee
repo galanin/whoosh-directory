@@ -1,4 +1,9 @@
-import { SET_BIRTHDAY_PERIOD, EXTEND_BIRTHDAY_PERIOD_LEFT, EXTEND_BIRTHDAY_PERIOD_RIGHT } from '@constants/birthday_period'
+import {
+  SET_BIRTHDAY_PERIOD
+  EXTEND_BIRTHDAY_PERIOD_LEFT
+  EXTEND_BIRTHDAY_PERIOD_RIGHT
+  SCROLLED_TO_DATE
+} from '@constants/birthday_period'
 
 
 export setBirthdayPeriod = (key_date, day_offset_left, day_offset_right) ->
@@ -17,3 +22,7 @@ export extendBirthdayPeriodLeft = (days) ->
 export extendBirthdayPeriodRight = (days) ->
   type: EXTEND_BIRTHDAY_PERIOD_RIGHT
   days: days
+
+
+export scrolledToDate = ->
+  type: SCROLLED_TO_DATE

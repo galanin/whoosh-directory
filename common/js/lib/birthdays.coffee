@@ -29,7 +29,7 @@ correctDayNumber = (day_number) ->
     day_number
 
 
-getDateObjFromDayNumber = (day_number) ->
+export getDateObjFromDayNumber = (day_number) ->
   PLAIN_CALENDAR[day_number]
 
 
@@ -68,18 +68,22 @@ export getOffsetsByShortcut = (period_shortcut) ->
       [0, 0]
 
     when 'tomorrow'
-      [0, 6]
+      [1, 6]
 
     when 'recent'
-      [-2, -1]
+      [-3, -1]
+
+
+export getDayNumberByOffset = (key_date, offset) ->
+  key_date_obj = if key_date == 'today' then getTodayObj() else key_date
+  key_day = getDayNumber(key_date_obj)
+  correctDayNumber(key_day + offset)
 
 
 export getBirthdayPeriodDates = (offsets) ->
-  key_date_obj = if offsets.key_date == 'today' then getTodayObj() else offsets.key_date
-  key_day = getDayNumber(key_date_obj)
-  left_day = correctDayNumber(key_day + offsets.day_offset_left)
-  right_day = correctDayNumber(key_day + offsets.day_offset_right)
-  formatDateObj(getDateObjFromDayNumber(d)) for d in [left_day..right_day]
+  left_day_number = getDayNumberByOffset(offsets.key_date, offsets.day_offset_left)
+  right_day_number = getDayNumberByOffset(offsets.key_date, offsets.day_offset_right)
+  formatDateObj(getDateObjFromDayNumber(day_number)) for day_number in [left_day_number..right_day_number]
 
 
 isSuccessiveOffsets = (offsets1, offsets2) ->

@@ -1,4 +1,9 @@
-import { SET_BIRTHDAY_PERIOD, EXTEND_BIRTHDAY_PERIOD_LEFT, EXTEND_BIRTHDAY_PERIOD_RIGHT } from '@constants/birthday_period'
+import {
+  SET_BIRTHDAY_PERIOD
+  EXTEND_BIRTHDAY_PERIOD_LEFT
+  EXTEND_BIRTHDAY_PERIOD_RIGHT
+  SCROLLED_TO_DATE
+} from '@constants/birthday_period'
 
 import { extendPeriodLeft, extendPeriodRight, getOffsetsUnion } from '@lib/birthdays'
 
@@ -20,6 +25,11 @@ export default (state = {}, action) ->
 
     when EXTEND_BIRTHDAY_PERIOD_RIGHT
       extendPeriodRight(state, action.days)
+
+    when SCROLLED_TO_DATE
+      new_state = Object.assign({}, state)
+      delete new_state.day_offset_start
+      new_state
 
     else
       state
