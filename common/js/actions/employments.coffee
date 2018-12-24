@@ -3,6 +3,7 @@ import { filter, join } from 'lodash'
 
 import { ADD_EMPLOYMENTS } from '@constants/employments'
 import { addPeople } from '@actions/people'
+import { addUnitTitles } from '@actions/unit_titles'
 
 export addEmployments = (employments) ->
   type: ADD_EMPLOYMENTS
@@ -23,7 +24,8 @@ export getParentUnits = (state, employment) ->
 
 
 export getParentEmployIds = (state, employment) ->
-  unit.employ_ids?[0] for unit in getParentUnits(state, employment)
+  raw_employ_ids = (unit.employ_ids?[0] for unit in getParentUnits(state, employment))
+  filter(raw_employ_ids)
 
 
 export getParentEmploys = (state, employment) ->
@@ -34,6 +36,16 @@ getMissingParentEmployIds = (state, employment) ->
   parent_employ_ids = getParentEmployIds(state, employment)
   raw_employ_ids = ((if state.employments[e_id] then false else e_id) for e_id in parent_employ_ids)
   filter(raw_employ_ids)
+
+
+export loadUnitHierarchy = (employment_id) ->
+  (dispatch, getState) ->
+    state = getState()
+    employment = state.employments[employment_id]
+    parent_unit_ids = getParentUnitIds(state, employment)
+    if parent_unit_ids.length > 0
+      Request.get('/units/titles/' + join(parent_unit_ids, ',')).then (response) ->
+        dispatch(addUnitTitles(response.body.unit_titles))
 
 
 export loadEmploymentHierarchy = (employment_id) ->

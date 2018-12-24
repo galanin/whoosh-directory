@@ -32,7 +32,7 @@ module Staff
     get 'units/:unit_id' do
       if params.key? :unit_id
         unit = Unit.find_by!(short_id: params[:unit_id])
-        present :unit_extras, [unit.as_json.slice('id', 'long_title', 'short_title')]
+        present :unit_titles, [unit.as_json.slice('id', 'long_title', 'short_title')]
 
         unless unit.employ_ids.nil?
           employments = Employment.in(short_id: unit.employ_ids)
@@ -47,6 +47,13 @@ module Staff
           present :external_contacts, external_contacts
         end
       end
+    end
+
+
+    get 'units/titles/:where' do
+      unit_ids = params[:where].split(',')
+      units = Unit.only(:short_id, :short_title, :long_title).in(short_id: unit_ids)
+      present :unit_titles, units
     end
 
 
@@ -93,6 +100,8 @@ module Staff
         employments = fetch_search_result_employments(search_result)
         external_contacts = fetch_search_result_external_contacts(search_result)
         people = fetch_search_result_people(search_result)
+
+        present :unit_titles, fetch_search_result_unit_extras(search_result, employments)
       end
 
       present :type,              search_query.type

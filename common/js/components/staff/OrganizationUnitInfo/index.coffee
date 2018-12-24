@@ -18,11 +18,11 @@ contact = React.createFactory(Contact)
 mapStateToProps = (state) ->
   unit_id = state.current.unit_id
   extra = state.unit_extras[unit_id]
-  unit_id:    unit_id
-  unit_data:  state.units[unit_id]
-  unit_extra: extra && extra.extra || {}
-  loading:    extra && extra.loading
-  loaded:     extra && extra.loaded
+  unit_id:     unit_id
+  unit_data:   state.units[unit_id]
+  unit_titles: state.unit_titles[unit_id] || {}
+  loading:     extra?.loading
+  loaded:      extra?.loaded
 
 mapDispatchToProps = (dispatch) ->
   {}
@@ -36,12 +36,12 @@ class OrganizationUnitInfo extends React.Component
     if @props.unit_id?
       div { className: 'organization-unit-scroller plug' },
         div { className: 'organization-unit' },
-          if @props.unit_extra.short_title?
+          if @props.unit_titles.short_title?
             div { className: 'organization-unit__short-title' },
-              @props.unit_extra.short_title
-          if @props.unit_extra.long_title? and @props.unit_extra.long_title != @props.unit_extra.short_title
+              @props.unit_titles.short_title
+          if @props.unit_titles.long_title? and @props.unit_titles.long_title != @props.unit_titles.short_title
             div { className: 'organization-unit__long-title' },
-              @props.unit_extra.long_title
+              @props.unit_titles.long_title
 
           if isArray(@props.unit_data.employ_ids)
             div { className: 'organization-unit__employees' },

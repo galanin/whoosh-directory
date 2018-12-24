@@ -3,7 +3,7 @@ module FetchingHelpers
   def fetch_search_result_unit_extras(search_results, employments)
     unit_short_ids = search_results.map(&:unit_id).compact
     unit_short_ids2 = employments.map(&:unit_short_id).compact
-    Unit.only(:short_id, :long_title, :short_title, :employ_ids).in(short_id: (unit_short_ids + unit_short_ids2).uniq).to_a
+    Unit.only(:short_id, :long_title, :short_title).in(short_id: (unit_short_ids + unit_short_ids2).uniq).to_a
   end
 
 

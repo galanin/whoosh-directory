@@ -20,9 +20,9 @@ import Triangle from '@icons/triangle.svg'
 mapStateToProps = (state, ownProps) ->
   extra = state.unit_extras[ownProps.unit_id]
   unit_data:   state.units[ownProps.unit_id]
-  unit_extra:  extra && extra.extra || {}
-  loading:     extra && extra.loading
-  loaded:      extra && extra.loaded
+  unit_titles: state.unit_titles || {}
+  loading:     extra?.loading
+  loaded:      extra?.loaded
   is_expanded: state.expanded_sub_units[ownProps.unit_id]?
 
 mapDispatchToProps = (dispatch, ownProps) ->

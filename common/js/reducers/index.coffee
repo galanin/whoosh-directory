@@ -3,6 +3,7 @@ import { routerReducer } from 'react-router-redux'
 
 import session from '@reducers/session';
 import units from '@reducers/units'
+import unit_titles from '@reducers/unit_titles'
 import unit_extras from '@reducers/unit_extras'
 import people from '@reducers/people'
 import employments from '@reducers/employments'
@@ -21,6 +22,7 @@ import birthday_period from '@reducers/birthday_period'
 export default combineReducers
   session:            session
   units:              units
+  unit_titles:        unit_titles
   unit_extras:        unit_extras
   current:            current
   people:             people
