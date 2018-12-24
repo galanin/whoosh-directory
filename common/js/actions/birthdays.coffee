@@ -21,7 +21,9 @@ export showBirthdayShortcutPeriod = (period_shortcut) ->
     dates = getBirthdayPeriodDates(getState().birthday_period)
     missing_dates = getMissingDates(getState, dates)
     if missing_dates.length > 0
-      dispatch(sendBirthdayQuery(missing_dates))
+      dispatch(sendBirthdayQuery(missing_dates[0..0]))
+      if missing_dates.length > 1
+        setTimeout (-> dispatch(sendBirthdayQuery(missing_dates[1..-1]))), 1
 
 
 export setBirthdayResults = (birthdays) ->
