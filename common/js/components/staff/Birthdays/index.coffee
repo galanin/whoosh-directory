@@ -37,7 +37,6 @@ mapDispatchToProps = (dispatch) ->
 class Birthdays extends React.Component
 
   componentDidUpdate: (prevProps) ->
-    console.log 'DID UPDATE', @props.do_scroll, @props.scroll_to, @props.birthdays[@props.scroll_to]
     if @props.do_scroll
       scroller.scrollTo "date-#{@props.scroll_to}",
         offset:   -200
