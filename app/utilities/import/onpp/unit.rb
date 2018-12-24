@@ -28,6 +28,7 @@ module Utilities
           external_id        = source_data['ID']
           long_title         = source_data['FULLNAME'].gsub(/\s{2,}/, ' ').strip.presence
           short_title        = source_data['NAME'].gsub(/\s{2,}/, ' ').strip.presence
+          long_title = nil if long_title == short_title
           list_title         = short_title || long_title
           path               = source_data['HASH']
           parent_external_id = source_data['UP_ID']
@@ -50,7 +51,6 @@ module Utilities
 
           hash = {
             external_id:  external_id,
-            long_title: title,
             short_title: title,
             list_title: title,
             path: nil,
