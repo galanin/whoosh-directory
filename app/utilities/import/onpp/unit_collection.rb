@@ -7,8 +7,8 @@ module Utilities
 
         include Utilities::Import::Collection
 
-        COMPANY_MANAGMENTS_PREFIX = 'Руководство предприятия'
-        COMPANY_MANAGMENT = [
+        COMPANY_MANAGEMENT_PREFIX = 'Руководство предприятия'
+        COMPANY_MANAGEMENT        = [
           {
             post_title: 'Генеральный директор',
             unit_title: 'Акционерное общество "Обнинское научно-производственное предприятие "Технология" им. А.Г. Ромашина"'
@@ -19,7 +19,7 @@ module Utilities
           }
         ]
 
-        MANAGMENT_PREFIX = [/^Руководство/,/^Рук\./]
+        MANAGEMENT_PREFIX = [/^Руководство/, /^Рук\./]
 
         #The element of constant POST_PRIORITY {post: //,  priority: max_number) must be last
         POST_PRIORITY = [
@@ -191,26 +191,26 @@ module Utilities
         end
 
 
-        def select_company_managment
+        def select_company_management
           @entities.values.find do |unit_entity|
-            unit_entity.new_data.list_title.include?(COMPANY_MANAGMENTS_PREFIX)
+            unit_entity.new_data.title_includes?(COMPANY_MANAGEMENT_PREFIX)
           end
         end
 
 
         def change_company_managment(employment_collection)
-          company_managments_unit_entity = select_company_managment
-          company_managment_employments = employment_collection.entites_by_ids(company_managments_unit_entity.new_data.employment_ids)
+          company_management_unit_entity = select_company_management
+          company_management_employments = employment_collection.entites_by_ids(company_management_unit_entity.new_data.employment_ids)
 
-          COMPANY_MANAGMENT.each do |company_managment|
-            company_managment_employment = company_managment_employments.find do |employment|
-              employment.new_data.post_title.include?(company_managment[:post_title])
+          COMPANY_MANAGEMENT.each do |company_management|
+            company_managment_employment = company_management_employments.find do |employment|
+              employment.new_data.post_title.include?(company_management[:post_title])
             end
-            result = change_employment_unit(company_managment_employment, company_managment[:unit_title])
-            company_managment_employments.delete(company_managment_employment) if result
+            result = change_employment_unit(company_managment_employment, company_management[:unit_title])
+            company_management_employments.delete(company_managment_employment) if result.present?
           end
 
-          company_managment_employments.each do |employment_entity|
+          company_management_employments.each do |employment_entity|
             unit_title_substring = employment_entity.new_data.post_title.split(' ', 2)[1]
             change_employment_unit(employment_entity, unit_title_substring)
           end
@@ -219,24 +219,26 @@ module Utilities
 
         def change_employment_unit(employment_entity, unit_title_substring)
           unit_entity = find_unit_by_partial_title(unit_title_substring)
-          unit_entity.nil? ? (false) : (employment_entity.new_data.unit_external_id = unit_entity.new_data.external_id)
+          if unit_entity.present?
+            employment_entity.new_data.unit_external_id = unit_entity.new_data.external_id
+          end
         end
 
 
-        def find_unit_by_partial_title(title_substring)
-          @entities.values.find { |unit_entity| unit_entity.new_data.list_title.present? && unit_entity.new_data.list_title.include?(title_substring) }
+        def find_unit_by_partial_title(unit_title_substring)
+          @entities.values.find { |unit_entity| unit_entity.new_data.title_includes?(unit_title_substring) }
         end
 
 
-        def select_management_unit
+        def select_management_units
           @entities.values.select do |unit_entity|
-            MANAGMENT_PREFIX.any? { |regex| unit_entity.new_data.list_title =~ (Regexp.new regex)}
+            MANAGEMENT_PREFIX.any? { |regex| unit_entity.new_data.title_matches?(regex)}
           end
         end
 
 
         def change_management_unit(employment_collection)
-          management_units = select_management_unit
+          management_units = select_management_units
 
           management_units.each do |management_unit_entity|
             employments = employment_collection.entites_by_ids(management_unit_entity.new_data.employment_ids)

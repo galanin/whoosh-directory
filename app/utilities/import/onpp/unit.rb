@@ -71,6 +71,16 @@ module Utilities
           }
         end
 
+
+        def title_matches?(pattern)
+          long_title&.match(pattern) || short_title&.match(pattern)
+        end
+
+
+        def title_includes?(substring)
+          long_title&.include?(substring) || short_title&.include?(substring)
+        end
+
       end
     end
   end
