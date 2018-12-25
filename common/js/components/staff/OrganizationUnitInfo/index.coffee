@@ -51,7 +51,7 @@ class OrganizationUnitInfo extends React.Component
           if isArray(@props.unit_data.contact_ids)
             div { className: 'organization-unit__contacts' },
               for contact_id in @props.unit_data.contact_ids
-                contact { key: contact_id, contact_id: contact_id, hide: { unit: true } }
+                contact key: contact_id, contact_id: contact_id, hide: { unit: true }, className: 'list-item shadow'
 
           if isArray(@props.unit_data.child_ids)
             div { className: 'organization-unit__sub-units' },
