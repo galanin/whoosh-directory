@@ -25,16 +25,16 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="31.678384"
-     inkscape:cx="36.812418"
-     inkscape:cy="24.579134"
+     inkscape:zoom="22.4"
+     inkscape:cx="27.61811"
+     inkscape:cy="19.379957"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="true"
      units="px"
-     inkscape:window-width="1280"
-     inkscape:window-height="965"
-     inkscape:window-x="1920"
+     inkscape:window-width="1920"
+     inkscape:window-height="1171"
+     inkscape:window-x="0"
      inkscape:window-y="0"
      inkscape:window-maximized="1"
      showguides="true"
@@ -88,19 +88,20 @@
   <g
      inkscape:label="Layer 1"
      inkscape:groupmode="layer"
-     id="layer1"
-     transform="translate(0,-1004.3622)">
+     id="layer1">
     <path
-       style="fill:none;fill-rule:evenodd;stroke:#c0c0c0;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;stroke-miterlimit:4;stroke-dasharray:none"
-       d="m 13,1017.3622 22,22"
-       id="path4138"
+       style="stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="M 13,13 35,35"
+       id="path4142"
        inkscape:connector-curvature="0"
+       class="l1"
        sodipodi:nodetypes="cc" />
     <path
-       style="fill:none;fill-rule:evenodd;stroke:#c0c0c0;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;stroke-miterlimit:4;stroke-dasharray:none"
-       d="m 13,1039.3622 22,-22"
-       id="path4140"
+       class="l2"
        inkscape:connector-curvature="0"
+       id="path4144"
+       d="M 35,13 13,35"
+       style="stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
        sodipodi:nodetypes="cc" />
   </g>
 </svg>

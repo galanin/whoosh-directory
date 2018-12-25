@@ -33,6 +33,25 @@
   svg
     display: block
 
+    .l1, .l2
+      stroke: #c0c0c0
+      stroke-width: 2px
+      transition: stroke .2s ease-in-out, stroke-width .2s ease-in-out, transform .2s ease-in-out
+      transform-origin: 24px 24px
+
+  &:hover
+    svg
+      .l1, .l2
+        stroke: #111
+        stroke-width: 2px
+
+      .l1
+        transform: rotate3d(0, 0, 1, 180deg)
+
+      .l2
+        transform: rotate3d(0, 0, 1, -180deg)
+
+
 .employee-info__close-button-cross
   display: block
   width: 3rem
