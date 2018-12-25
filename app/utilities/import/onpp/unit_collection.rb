@@ -193,7 +193,7 @@ module Utilities
 
         def select_company_managment
           @entities.values.find do |unit_entity|
-            unit_entity.new_data.long_title.include?(COMPANY_MANAGMENTS_PREFIX)
+            unit_entity.new_data.list_title.include?(COMPANY_MANAGMENTS_PREFIX)
           end
         end
 
@@ -224,13 +224,13 @@ module Utilities
 
 
         def find_unit_by_partial_title(title_substring)
-          @entities.values.find { |unit_entity| unit_entity.new_data.long_title.present? && unit_entity.new_data.long_title.include?(title_substring) }
+          @entities.values.find { |unit_entity| unit_entity.new_data.list_title.present? && unit_entity.new_data.list_title.include?(title_substring) }
         end
 
 
         def select_management_unit
           @entities.values.select do |unit_entity|
-            MANAGMENT_PREFIX.any? { |regex| unit_entity.new_data.long_title =~ (Regexp.new regex)}
+            MANAGMENT_PREFIX.any? { |regex| unit_entity.new_data.list_title =~ (Regexp.new regex)}
           end
         end
 
