@@ -43,7 +43,7 @@ export getDateByDayNumber = (day_number) ->
   PLAIN_CALENDAR[correctDayNumber(day_number)]
 
 
-limitExtension = (offsets, days) ->
+export limitExtension = (offsets, days) ->
   max_extension = 365 - (offsets.day_offset_right - offsets.day_offset_left)
   Math.min(max_extension, days)
 
@@ -109,23 +109,3 @@ export getOffsetsUnion = (offsets1, offsets2) ->
   new_offsets.day_offset_start = Math.min(new_offsets.day_offset_start, new_offsets.day_offset_right)
 
   new_offsets
-
-
-export extendPeriodLeft = (offsets, days) ->
-  max_extension = limitExtension(offsets, days)
-  left = offsets.day_offset_left - max_extension
-
-  key_date: offsets.key_date
-  day_offset_left: left
-  day_offset_right: offsets.day_offset_right
-  day_offset_start: left
-
-
-export extendPeriodRight = (offsets, days) ->
-  max_extension = limitExtension(offsets, days)
-  right = offsets.day_offset_right + max_extension
-
-  key_date: offsets.key_date
-  day_offset_left: offsets.day_offset_left
-  day_offset_right: right
-  day_offset_start: Math.min(right, offsets.day_offset_right + 1)
