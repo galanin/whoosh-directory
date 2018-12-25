@@ -4,11 +4,20 @@
 
 .birthdays
 
+.birthdays__date-head
+  display: flex
+
 .birthdays__title
+  flex: 1 0 auto
   font-size: 24px
   line-height: 1.3
   color: #333
   margin-bottom: 1rem
+
+.birthdays__button-backward
+  flex: 1 0 auto
+  white-space: nowrap
+  text-align: right
 
 .birthdays__date
 
@@ -24,16 +33,18 @@
 
 .birthdays__no-results
 
-
+.birthdays__button-backward,
 .birthdays__button-forward
-  margin-top: 1rem
-  padding: 1rem
   font-size: 18px
   color: #444
   text-decoration: #999 underline
-  text-align: center
   cursor: pointer
 
   &:hover
     color: #000
     text-decoration: #111 underline
+
+.birthdays__button-forward
+  margin-top: 1rem
+  padding: 1rem
+  text-align: center

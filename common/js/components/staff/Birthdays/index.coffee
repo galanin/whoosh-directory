@@ -5,7 +5,7 @@ import { Element as ScrollElement, scroller } from 'react-scroll'
 
 import { getDayNumberByOffset, getDateByDayNumber, getBirthdayPeriodDates } from '@lib/birthdays'
 import { loadBirthdays } from '@actions/birthdays'
-import { scrolledToDate, extendBirthdayPeriodRight } from '@actions/birthday_period'
+import { scrolledToDate, extendBirthdayPeriodRight, extendBirthdayPeriodLeft } from '@actions/birthday_period'
 
 div = React.createFactory('div')
 scroll_element = React.createFactory(ScrollElement)
@@ -36,6 +36,9 @@ mapDispatchToProps = (dispatch) ->
   stepForward: ->
     dispatch(extendBirthdayPeriodRight(7))
     dispatch(loadBirthdays())
+  stepBackward: ->
+    dispatch(extendBirthdayPeriodLeft(7))
+    dispatch(loadBirthdays())
 
 
 class Birthdays extends React.Component
@@ -55,10 +58,15 @@ class Birthdays extends React.Component
     @props.stepForward()
 
 
+  stepBackward: ->
+    @props.stepBackward()
+
+
   render: ->
     return '' unless @props.birthday_period.key_date?
 
     dates = getBirthdayPeriodDates(@props.birthday_period)
+    prev_date_offset_left = getDateByDayNumber(getDayNumberByOffset(@props.birthday_period.key_date, @props.birthday_period.prev_day_offset_left))
 
     div { className: 'birthdays__scroller plug', id: 'birthdays-scroller' },
       div { className: 'birthdays' },
@@ -70,8 +78,12 @@ class Birthdays extends React.Component
 
           if day_obj?
             div { className: 'birthdays__date', key: date },
-              scroll_element { className: 'birthdays__date-title', name: "date-#{date}" },
-                day_obj.date_formatted
+              div { className: 'birthdays__date-head' },
+                scroll_element { className: 'birthdays__date-title', name: "date-#{date}" },
+                  day_obj.date_formatted
+                if date == dates[0] or date == prev_date_offset_left
+                  div { className: 'birthdays__button-backward', onClick: @stepBackward.bind(this) },
+                    'Предыдущая неделя'
 
               if isArray(day_obj.results) and day_obj.results.length > 0
                 div { className: 'birthdays__results' },
