@@ -1,13 +1,23 @@
 import { padStart } from 'lodash'
 
 MONTH_DAYS = [31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
+
 MONTH_OFFSET = [0]
 MONTH_OFFSET[i + 1] = MONTH_OFFSET[i] + MONTH_DAYS[i] for i in [0..10]
 
 PLAIN_CALENDAR = []
+
+formatNumber = (number) ->
+  number_str = number.toString()
+  padStart(number_str, 2, '0')
+
+formatDate = (month, day) ->
+  formatNumber(month + 1) + '-' + formatNumber(day + 1)
+
 fillMonth = (month_number) ->
-  PLAIN_CALENDAR[MONTH_OFFSET[month_number] + i] = { month: month_number, day: i } for i in [0..MONTH_DAYS[month_number]]
-fillMonth(i) for i in [0..12]
+  PLAIN_CALENDAR[MONTH_OFFSET[month_number] + day_number] = formatDate(month_number, day_number) for day_number in [0 .. MONTH_DAYS[month_number] - 1]
+
+fillMonth(month_number) for month_number in [0..11]
 
 
 getTodayObj = ->
@@ -23,43 +33,19 @@ getDayNumber = (date) ->
 correctDayNumber = (day_number) ->
   if day_number < 0
     366 + day_number
-  else if day_number > 366
+  else if day_number >= 366
     day_number - 366
   else
     day_number
 
 
-export getDateObjFromDayNumber = (day_number) ->
-  PLAIN_CALENDAR[day_number]
+export getDateByDayNumber = (day_number) ->
+  PLAIN_CALENDAR[correctDayNumber(day_number)]
 
 
-addDays = (date, days) ->
-  getDateObjFromDayNumber(correctDayNumber(getDayNumber(date) + days))
-
-
-subDates = (date_begin, date_end) ->
-  day_begin = getDayNumber(date_begin)
-  day_end = getDayNumber(date_end)
-  correctDayNumber(day_begin - day_end)
-
-
-getMaxExtension = (date_begin, date_end) ->
-  delta = subDates(date_begin, date_end)
-  365 - delta
-
-
-limitExtension =  (date_begin, date_end, days) ->
-  max_extension = getMaxExtension(date_begin, date_end)
+limitExtension = (offsets, days) ->
+  max_extension = 365 - (offsets.day_offset_right - offsets.day_offset_left)
   Math.min(max_extension, days)
-
-
-formatNumber = (number) ->
-  number_str = number.toString()
-  padStart(number_str, 2, '0')
-
-
-export formatDateObj = (date_obj) ->
-  formatNumber(date_obj.month + 1) + '-' + formatNumber(date_obj.day + 1)
 
 
 export getOffsetsByShortcut = (period_shortcut) ->
@@ -77,13 +63,13 @@ export getOffsetsByShortcut = (period_shortcut) ->
 export getDayNumberByOffset = (key_date, offset) ->
   key_date_obj = if key_date == 'today' then getTodayObj() else key_date
   key_day = getDayNumber(key_date_obj)
-  correctDayNumber(key_day + offset)
+  key_day + offset
 
 
 export getBirthdayPeriodDates = (offsets) ->
   left_day_number = getDayNumberByOffset(offsets.key_date, offsets.day_offset_left)
   right_day_number = getDayNumberByOffset(offsets.key_date, offsets.day_offset_right)
-  formatDateObj(getDateObjFromDayNumber(day_number)) for day_number in [left_day_number..right_day_number]
+  getDateByDayNumber(day_number) for day_number in [left_day_number..right_day_number]
 
 
 isSuccessiveOffsets = (offsets1, offsets2) ->
@@ -126,8 +112,9 @@ export getOffsetsUnion = (offsets1, offsets2) ->
 
 
 export extendPeriodLeft = (offsets, days) ->
-  max_extension = limitExtension(date_begin, date_end, days)
-  left = addDays(offsets.day_offset_left, -max_extension)
+  max_extension = limitExtension(offsets, days)
+  left = offsets.day_offset_left - max_extension
+
   key_date: offsets.key_date
   day_offset_left: left
   day_offset_right: offsets.day_offset_right
@@ -135,8 +122,9 @@ export extendPeriodLeft = (offsets, days) ->
 
 
 export extendPeriodRight = (offsets, days) ->
-  max_extension = limitExtension(date_begin, date_end, days)
-  right = addDays(offsets.day_offset_right, max_extension)
+  max_extension = limitExtension(offsets, days)
+  right = offsets.day_offset_right + max_extension
+
   key_date: offsets.key_date
   day_offset_left: offsets.day_offset_left
   day_offset_right: right

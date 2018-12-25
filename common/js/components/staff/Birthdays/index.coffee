@@ -3,8 +3,9 @@ import { connect } from 'react-redux'
 import { isArray } from 'lodash'
 import { Element as ScrollElement, scroller } from 'react-scroll'
 
-import { getDayNumberByOffset, formatDateObj, getDateObjFromDayNumber, getBirthdayPeriodDates } from '@lib/birthdays'
-import { scrolledToDate } from '@actions/birthday_period'
+import { getDayNumberByOffset, getDateByDayNumber, getBirthdayPeriodDates } from '@lib/birthdays'
+import { loadBirthdays } from '@actions/birthdays'
+import { scrolledToDate, extendBirthdayPeriodRight } from '@actions/birthday_period'
 
 div = React.createFactory('div')
 scroll_element = React.createFactory(ScrollElement)
@@ -21,7 +22,7 @@ mapStateToProps = (state, ownProps) ->
   if do_scroll
     scroll_to_day_offset = state.birthday_period.day_offset_start
     scroll_to_day_number = getDayNumberByOffset(state.birthday_period.key_date, scroll_to_day_offset)
-    scroll_to_date = formatDateObj(getDateObjFromDayNumber(scroll_to_day_number))
+    scroll_to_date = getDateByDayNumber(scroll_to_day_number)
     do_scroll &&= state.birthdays[scroll_to_date]?
 
   birthday_period: state.birthday_period
@@ -32,6 +33,9 @@ mapStateToProps = (state, ownProps) ->
 mapDispatchToProps = (dispatch) ->
   scrolledToDate: ->
     dispatch(scrolledToDate())
+  stepForward: ->
+    dispatch(extendBirthdayPeriodRight(7))
+    dispatch(loadBirthdays())
 
 
 class Birthdays extends React.Component
@@ -45,6 +49,10 @@ class Birthdays extends React.Component
         isDynamic: true
         containerId: 'birthdays-scroller'
       @props.scrolledToDate()
+
+
+  stepForward: ->
+    @props.stepForward()
 
 
   render: ->
@@ -72,6 +80,9 @@ class Birthdays extends React.Component
                       contact(key: result.contact_id, contact_id: result.contact_id)
                     else if result.person_id?
                       employee key: result.person_id, employment_id: result.employ_ids[0], className: 'list-item shadow'
+
+        div { className: 'birthdays__button-forward', onClick: @stepForward.bind(this) },
+          'Смотреть дальше'
 
 
 export default connect(mapStateToProps, mapDispatchToProps)(Birthdays)

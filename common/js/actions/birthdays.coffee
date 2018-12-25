@@ -18,6 +18,10 @@ export showBirthdayShortcutPeriod = (period_shortcut) ->
   (dispatch, getState) ->
     [day_offset_left, day_offset_right] = getOffsetsByShortcut(period_shortcut)
     dispatch(setBirthdayPeriod('today', day_offset_left, day_offset_right))
+
+
+export loadBirthdays = ->
+  (dispatch, getState) ->
     dates = getBirthdayPeriodDates(getState().birthday_period)
     missing_dates = getMissingDates(getState, dates)
     if missing_dates.length > 0
