@@ -1,8 +1,12 @@
-.employee-info-scroller
-  overflow-y: auto
-  overflow-x: hidden
+.employee-info-container
+  position: relative
   background-color: #fff
   filter: drop-shadow(0 6px 6px #bbb)
+
+.employee-info-scroller
+  height: 100%
+  overflow-y: auto
+  overflow-x: hidden
 
 .employee-info
 
@@ -17,11 +21,17 @@
   color: #333
 
 .employee-info__close-button
-  flex: 0 0 3rem
-  width: 3rem
+  position: absolute
+  top: 0
+  right: 1rem
+  width: 2.25rem
   height: 3rem
   box-sizing: border-box
   cursor: pointer
+  overflow: hidden
+
+  svg
+    display: block
 
 .employee-info__close-button-cross
   display: block
@@ -36,7 +46,7 @@
   font-size: 18px
   line-height: 1.2
   color: #444
-  padding: 0 1rem
+  padding: 0 4rem 0 1rem
 
 .employee-info__unit_title
   display: block
