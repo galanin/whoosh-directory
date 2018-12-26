@@ -26,8 +26,8 @@ module Utilities
 
         def self.new_from_xml(source_data)
           external_id        = source_data['ID']
-          long_title         = source_data['FULLNAME'].gsub(/\s{2,}/, ' ').strip.presence
-          short_title        = source_data['NAME'].gsub(/\s{2,}/, ' ').strip.presence
+          long_title         = normalize_any_title(source_data['FULLNAME']).gsub(/\s{2,}/, ' ').strip.presence
+          short_title        = normalize_any_title(source_data['NAME']).gsub(/\s{2,}/, ' ').strip.presence
           long_title = nil if long_title == short_title
           list_title         = short_title || long_title
           path               = source_data['HASH']
@@ -79,6 +79,15 @@ module Utilities
 
         def title_includes?(substring)
           long_title&.include?(substring) || short_title&.include?(substring)
+        end
+
+
+        def self.normalize_any_title(title)
+          new_title = title.upcase_first
+          new_title.gsub!(/(\s+)"(\p{Word})/, '\1«\2')
+          new_title.gsub!(/(\p{Word})"([\s,\.\-$])/, '\1»\2')
+          new_title.gsub!(/"$/, '»')
+          new_title
         end
 
       end
