@@ -87,6 +87,8 @@ module Utilities
           new_title.gsub!(/(\s+)"(\p{Word})/, '\1«\2')
           new_title.gsub!(/(\p{Word})"([\s,\.\-$])/, '\1»\2')
           new_title.gsub!(/"$/, '»')
+
+          new_title.gsub!(/(\p{Lu}\.)\s*(\p{Lu}\.)\s*(\p{Lu})/, '\1 \2 \3')
           new_title
         end
 
