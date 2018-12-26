@@ -40,7 +40,11 @@ module Utilities
       def add_old_object(old_object)
         if old_object.external_id.present?
           @entities[old_object.external_id] ||= Utilities::Import::Entity.new(@object_class)
-          @entities[old_object.external_id].old_object = old_object
+          if @entities[old_object.external_id].old_object.present?
+            old_object.set(destroyed_at: Time.now)
+          else
+            @entities[old_object.external_id].old_object = old_object
+          end
         end
       end
 
