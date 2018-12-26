@@ -11,7 +11,7 @@ module Utilities
         COMPANY_MANAGEMENT        = [
           {
             post_title: 'Генеральный директор',
-            unit_title: 'Акционерное общество "Обнинское научно-производственное предприятие "Технология" им. А.Г. Ромашина"'
+            unit_title: 'Обнинское научно-производственное предприятие'
           },
           {
             post_title: 'Первый заместитель генерального директора',
@@ -140,7 +140,7 @@ module Utilities
 
         def link_objects_to_employment_short_ids(employment_collection)
           @entities.each do |id, unit_entity|
-            if unit_entity.new_data && unit_entity.new_data.employment_ids.present?
+            if unit_entity.new_data
               unit_entity.old_object.employ_ids = employment_collection.short_ids_by_external_ids(unit_entity.new_data.employment_ids).presence
             end
           end
@@ -149,7 +149,7 @@ module Utilities
 
         def link_objects_to_contact_short_ids(contact_collection)
           @entities.each do |id, unit_entity|
-            if unit_entity.new_data && unit_entity.new_data.contact_ids.present?
+            if unit_entity.new_data
               unit_entity.old_object.contact_ids = contact_collection.short_ids_by_external_ids(unit_entity.new_data.contact_ids).presence
             end
           end
@@ -206,8 +206,8 @@ module Utilities
             company_managment_employment = company_management_employments.find do |employment|
               employment.new_data.post_title.include?(company_management[:post_title])
             end
-            result = change_employment_unit(company_managment_employment, company_management[:unit_title])
-            company_management_employments.delete(company_managment_employment) if result.present?
+            has_changed = change_employment_unit(company_managment_employment, company_management[:unit_title])
+            company_management_employments.delete(company_managment_employment) if has_changed
           end
 
           company_management_employments.each do |employment_entity|
@@ -248,6 +248,12 @@ module Utilities
           end
         end
 
+
+        def dump_employment_ids
+          @entities.each do |id, entity|
+            puts "#{entity.new_data.list_title}: [#{entity.new_data.employment_ids&.join(',')}] [#{entity.old_object.employ_ids&.join(',')}]"
+          end
+        end
 
         private
 

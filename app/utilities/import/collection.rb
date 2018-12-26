@@ -56,7 +56,7 @@ module Utilities
 
 
       def short_ids_by_external_ids(external_ids)
-        external_ids.map { |id| short_id_by_external_id(id) }
+        external_ids&.map { |id| short_id_by_external_id(id) }
       end
 
 
