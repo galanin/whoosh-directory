@@ -28,6 +28,7 @@ module Utilities
           external_id        = source_data['ID']
           long_title         = normalize_any_title(source_data['FULLNAME']).gsub(/\s{2,}/, ' ').strip.presence
           short_title        = normalize_any_title(source_data['NAME']).gsub(/\s{2,}/, ' ').strip.presence
+          short_title = nil if banned_short_title?(short_title)
           long_title = nil if long_title == short_title
           list_title         = short_title || long_title
           path               = source_data['HASH']
@@ -90,6 +91,15 @@ module Utilities
 
           new_title.gsub!(/(\p{Lu}\.)\s*(\p{Lu}\.)\s*(\p{Lu})/, '\1 \2 \3')
           new_title
+        end
+
+
+        BANNED_TITLE_MATCHES = [
+          /\p{Ll}\.\s*\p{Ll}/,
+          /-\p{Ll}\p{Ll}[\s$]/,
+        ]
+        def self.banned_short_title?(short_title)
+          BANNED_TITLE_MATCHES.any? { |match| short_title =~ match }
         end
 
       end
