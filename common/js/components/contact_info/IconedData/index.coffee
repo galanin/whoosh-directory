@@ -12,9 +12,10 @@ class IconedData extends React.Component
       'iconed-data' : true
       'iconed-data_icon-align-top' : @props.align_icon == 'top'
       'iconed-data_icon-align-middle' : @props.align_icon == 'middle'
+      'iconed-data_clickable' : !! @props.onClick
     classes[@props.className] = true
 
-    div { className: classNames classes },
+    div { className: classNames(classes), onClick: @props.onClick },
       svg { className: 'iconed-data__icon', svg: @props.icon }
       div { className: 'iconed-data__container' },
         div { className: 'iconed-data__data' },
