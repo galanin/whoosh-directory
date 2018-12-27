@@ -122,6 +122,19 @@ module Utilities
         end
 
 
+        def set_bosses(employment_collection)
+          @entities.each do |id, unit_entity|
+            if unit_entity.new_data.employment_ids.present?
+              first_employment_id = unit_entity.new_data.employment_ids.first
+              first_employment_entity = employment_collection[first_employment_id]
+              if first_employment_entity&.new_data.present? && first_employment_entity.new_data.is_manager
+                first_employment_entity.new_data.is_boss = true
+              end
+            end
+          end
+        end
+
+
         def calc_levels
           @entities.each do |id, unit_entity|
             calc_unit_level(unit_entity)

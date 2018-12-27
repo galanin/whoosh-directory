@@ -28,9 +28,13 @@ module Utilities
           external_id        = source_data['ID']
           long_title         = normalize_any_title(source_data['FULLNAME']).gsub(/\s{2,}/, ' ').strip.presence
           short_title        = normalize_any_title(source_data['NAME']).gsub(/\s{2,}/, ' ').strip.presence
-          short_title = nil if banned_short_title?(short_title)
-          long_title = nil if long_title == short_title
-          list_title         = short_title || long_title
+          short_title        = nil if banned_short_title?(short_title)
+          long_title         = nil if long_title == short_title
+          if short_title.nil? && long_title.present?
+            short_title      = long_title
+            long_title       = nil
+          end
+          list_title         = short_title
           path               = source_data['HASH']
           parent_external_id = source_data['UP_ID']
           hash = {

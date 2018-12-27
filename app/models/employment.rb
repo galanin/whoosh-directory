@@ -11,7 +11,9 @@ class Employment < ApplicationRecord
   field :person_short_id,    type: String
   field :unit_short_id,      type: String
   field :post_title,         type: String
-  field :post_code, type: String
+  field :post_code,          type: String
+  field :is_manager,         type: Boolean
+  field :is_boss,            type: Boolean
   field :office,             type: String
   field :building,           type: String
   field :phones,             type: Array
@@ -36,7 +38,7 @@ class Employment < ApplicationRecord
 
   def as_json(options = nil)
     result = super.slice(
-      'post_title', 'post_code',
+      'post_title', 'post_code', 'is_boss',
       'office', 'building', 'phones',
       'lunch_begin', 'lunch_end',
     ).compact.merge(

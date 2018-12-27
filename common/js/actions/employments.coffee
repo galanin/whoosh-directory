@@ -10,6 +10,17 @@ export addEmployments = (employments) ->
   employments: employments
 
 
+export getParentIds = (state, employment) ->
+  unit_ids = getParentUnitIds(state, employment)
+  for unit_id in unit_ids
+    unit = state.units[unit_id]
+    first_employment_id = unit.employ_ids?[0]
+    first_employment = state.employments[first_employment_id]
+
+    unit_id: unit_id
+    employment_id: if first_employment?.is_boss then first_employment_id else null
+
+
 export getParentUnitIds = (state, employment) ->
   unit = state.units[employment.unit_id]
   is_boss_him_herself = unit.employ_ids[0] == employment.id
@@ -26,10 +37,6 @@ export getParentUnits = (state, employment) ->
 export getParentEmployIds = (state, employment) ->
   raw_employ_ids = (unit.employ_ids?[0] for unit in getParentUnits(state, employment))
   filter(raw_employ_ids)
-
-
-export getParentEmploys = (state, employment) ->
-  state.employments[e_id] for e_id in getParentEmployIds(state, employment)
 
 
 getMissingParentEmployIds = (state, employment) ->

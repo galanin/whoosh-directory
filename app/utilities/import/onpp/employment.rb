@@ -7,7 +7,7 @@ module Utilities
                       :person_external_id,
                       :unit_external_id,
                       :post_title,
-                      :post_code,
+                      :post_code, :is_manager, :is_boss,
                       :office, :building,
                       :phones,
                       :lunch_begin, :lunch_end,
@@ -37,7 +37,8 @@ module Utilities
           @person_external_id = source_data['ID_FL']
           @unit_external_id   = source_data['ID_PODR']
           @post_title         = source_data['POST']
-          @post_code = POST_CATEGORY_CODE[source_data['KAT']] || POST_CATEGORY_CODE['*']
+          @post_code          = POST_CATEGORY_CODE[source_data['KAT']] || POST_CATEGORY_CODE['*']
+          @is_manager         = @post_code == 'head'
           @office             = normalize_office(source_data['ROOM'])
           @building           = normalize_building(source_data['KORP'])
           @phones             = normalize_phones(source_data['PHONE'])
@@ -61,7 +62,9 @@ module Utilities
             person_external_id: person_external_id,
             unit_external_id:   unit_external_id,
             post_title:         post_title,
-            post_code: post_code,
+            post_code:          post_code,
+            is_manager:         is_manager,
+            is_boss:            is_boss,
             building:           building,
             office:             office,
             phones:             phones,
