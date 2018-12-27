@@ -1,6 +1,15 @@
 FIX_TABLE =
   cyrillic:
-    match: /[qwertyuiop\[\]asdfghjkl;'zxcvbnm,\.`QWERTYUIOP\{\}ASDFGHJKL:"ZXCVBNM<>~]/
+    match: /(([qwertyuiop\[\]asdfghjkl;'zxcvbnm,`QWERTYUIOP\{\}ASDFGHJKL:"ZXCVBNM<>~])|(\D)(\.)|^(\.))/
+    func: (replace, match, whole, p11, p21, p22, p31) ->
+          if p11?
+            replace[p11]
+          else if p22?
+            p21 + replace[p22]
+          else if p31?
+            replace[p31]
+          else
+            match
     replace:
       'q': 'й'
       'w': 'ц'
@@ -74,6 +83,7 @@ export fixText = (string) ->
   fix_mode = process.env.KEYBOARD_LAYOUT_FIX
   fix_table = FIX_TABLE[fix_mode]
   if fix_table
-    string.replace(fix_table.match, (matching_char) -> fix_table.replace[matching_char])
+    string.replace fix_table.match, (...args) ->
+      fix_table.func(fix_table.replace, ...args)
   else
     string
