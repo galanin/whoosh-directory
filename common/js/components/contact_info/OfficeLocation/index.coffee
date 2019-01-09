@@ -30,7 +30,6 @@ mapDispatchToProps = (dispatch, ownProps) ->
 class OfficeLocation extends React.Component
 
   onClick: ->
-    console.log @props
     @props.onClick()
 
 
