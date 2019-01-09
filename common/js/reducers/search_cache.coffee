@@ -14,7 +14,12 @@ export default (state = {}, action) ->
 
     when SET_SEARCH_FINISHED
       new_state = Object.assign({}, state)
-      new_state[action.query] = action.results
+      new_cache =
+        type: action.search_type
+        results: action.results
+        birthday_interval: action.birthday_interval
+        birthdays: action.birthdays
+      new_state[action.query] = new_cache
       new_state
 
     else

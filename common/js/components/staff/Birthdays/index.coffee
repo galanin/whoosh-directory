@@ -4,7 +4,7 @@ import { isArray } from 'lodash'
 import { Element as ScrollElement, scroller } from 'react-scroll'
 
 import { getDayNumberByOffset, getDateByDayNumber, getBirthdayPeriodDates } from '@lib/birthdays'
-import { loadBirthdays } from '@actions/birthdays'
+import { loadCurrentBirthdays } from '@actions/birthdays'
 import { scrolledToDate, extendBirthdayPeriodRight, extendBirthdayPeriodLeft } from '@actions/birthday_period'
 
 div = React.createFactory('div')
@@ -35,10 +35,10 @@ mapDispatchToProps = (dispatch) ->
     dispatch(scrolledToDate())
   stepForward: ->
     dispatch(extendBirthdayPeriodRight(7))
-    dispatch(loadBirthdays())
+    dispatch(loadCurrentBirthdays())
   stepBackward: ->
     dispatch(extendBirthdayPeriodLeft(7))
-    dispatch(loadBirthdays())
+    dispatch(loadCurrentBirthdays())
 
 
 class Birthdays extends React.Component

@@ -3,7 +3,7 @@ import classNames from 'classnames'
 import { connect } from 'react-redux'
 
 import { showBirthdayShortcutPeriod, loadBirthdays } from '@actions/birthdays'
-import { popBirthdays } from '@actions/layout'
+import { popSearchResults } from '@actions/layout'
 
 span = React.createFactory('span')
 
@@ -14,8 +14,7 @@ mapStateToProps = (state, ownProps) ->
 mapDispatchToProps = (dispatch, ownProps) ->
   showBirthdayShortcutPeriod: ->
     dispatch(showBirthdayShortcutPeriod(ownProps.shortcut))
-    dispatch(loadBirthdays())
-    dispatch(popBirthdays())
+    dispatch(popSearchResults())
 
 
 class BirthdayShortcut extends React.Component

@@ -28,9 +28,6 @@ mapDispatchToProps = (dispatch, ownProps) ->
     dispatch(setQuery(''))
     dispatch(popSearchResults())
 
-  returnToQuery: ->
-    dispatch(popSearchResults())
-
 
 class SearchPanel extends React.Component
 
@@ -48,10 +45,14 @@ class SearchPanel extends React.Component
     clearInterval(@timer)
 
 
-  onQueryChange: (event) ->
+  setQueryByEvent: (event) ->
     fixed_value = fixText(event.target.value)
     @cursor_position = event.target.selectionStart
     @props.setQuery(fixed_value)
+
+
+  onQueryChange: (event) ->
+    @setQueryByEvent(event)
 
 
   onQueryReset: (event) ->
@@ -72,13 +73,13 @@ class SearchPanel extends React.Component
     , 1000
 
 
-  onQueryExec: ->
-    @props.returnToQuery()
+  onQueryExec: (event) ->
+    @setQueryByEvent(event)
 
 
   onKeyDown: (event) ->
     if event.keyCode == 13
-      @props.returnToQuery()
+      @setQueryByEvent(event)
 
 
   render: ->

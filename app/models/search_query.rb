@@ -22,7 +22,7 @@ class SearchQuery < ApplicationRecord
   end
 
 
-  def birthday_period
+  def birthday_interval
     birthdays_array = birthday_scan
     if birthdays_array.count == 1
       begin_date = search_date_to_db_format(birthdays_array.first.join)

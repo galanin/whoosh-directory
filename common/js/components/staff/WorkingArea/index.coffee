@@ -35,6 +35,7 @@ mapStateToProps = (state) ->
   pile: state.layout.pile
   employment_id: state.current.employment_id
   contact_id: state.current.contact_id
+  results_type: state.search.results_type
 
 mapDispatchToProps = (dispatch) ->
   {}
@@ -64,9 +65,10 @@ class WorkingArea extends React.Component
           else
             dummy_info {}
         div { className: "working-area__block working-area__results socket block-index-#{pile_hash['search-results']}" },
-          search_results {}
-        div { className: "working-area__block working-area__birthdays socket block-index-#{pile_hash['birthdays']}" },
-          birthdays {}
+          if @props.results_type == 'birthday'
+            birthdays {}
+          else
+            search_results {}
 
 
 export default connect(mapStateToProps, mapDispatchToProps)(WorkingArea)

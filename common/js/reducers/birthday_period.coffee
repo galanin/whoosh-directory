@@ -1,11 +1,12 @@
 import {
   SET_BIRTHDAY_PERIOD
+  SET_BIRTHDAY_PERIOD_BY_DATE
   EXTEND_BIRTHDAY_PERIOD_LEFT
   EXTEND_BIRTHDAY_PERIOD_RIGHT
   SCROLLED_TO_DATE
 } from '@constants/birthday_period'
 
-import { limitExtension, getOffsetsUnion } from '@lib/birthdays'
+import { limitExtension, getOffsetsUnion, getDayNumberByDate } from '@lib/birthdays'
 
 
 export default (state = {}, action) ->
@@ -19,6 +20,16 @@ export default (state = {}, action) ->
         day_offset_start: action.day_offset_left
       else
         getOffsetsUnion(state, action)
+
+    when SET_BIRTHDAY_PERIOD_BY_DATE
+      day1 = getDayNumberByDate(action.date1)
+      day2 = getDayNumberByDate(action.date2)
+      if day2 < day1
+        day2 += 366
+      key_date:         day1
+      day_offset_left:  0
+      day_offset_right: day2 - day1
+      day_offset_start: 0
 
     when EXTEND_BIRTHDAY_PERIOD_LEFT
       max_extension = limitExtension(state, action.days)

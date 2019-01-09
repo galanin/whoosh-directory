@@ -20,14 +20,9 @@ fillMonth = (month_number) ->
 fillMonth(month_number) for month_number in [0..11]
 
 
-getTodayObj = ->
+getTodayDay = ->
   now = new Date()
-  month: now.getMonth()
-  day: now.getDate() - 1
-
-
-getDayNumber = (date) ->
-  MONTH_OFFSET[date.month] + date.day
+  MONTH_OFFSET[now.getMonth()] + now.getDate() - 1
 
 
 correctDayNumber = (day_number) ->
@@ -41,6 +36,10 @@ correctDayNumber = (day_number) ->
 
 export getDateByDayNumber = (day_number) ->
   PLAIN_CALENDAR[correctDayNumber(day_number)]
+
+
+export getDayNumberByDate = (date) ->
+  PLAIN_CALENDAR.indexOf(date)
 
 
 export limitExtension = (offsets, days) ->
@@ -61,14 +60,24 @@ export getOffsetsByShortcut = (period_shortcut) ->
 
 
 export getDayNumberByOffset = (key_date, offset) ->
-  key_date_obj = if key_date == 'today' then getTodayObj() else key_date
-  key_day = getDayNumber(key_date_obj)
+  key_day = if key_date == 'today' then getTodayDay() else key_date
   key_day + offset
+
+
+export getBirthdayIntervalDates = (date1, date2) ->
+  left_day_number = getDayNumberByDate(date1)
+  right_day_number = getDayNumberByDate(date2)
+  getBirthdayOffsetsDates(left_day_number, right_day_number)
 
 
 export getBirthdayPeriodDates = (offsets) ->
   left_day_number = getDayNumberByOffset(offsets.key_date, offsets.day_offset_left)
   right_day_number = getDayNumberByOffset(offsets.key_date, offsets.day_offset_right)
+  getBirthdayOffsetsDates(left_day_number, right_day_number)
+
+
+export getBirthdayOffsetsDates = (left_day_number, right_day_number) ->
+  right_day_number += 366 if right_day_number < left_day_number
   getDateByDayNumber(day_number) for day_number in [left_day_number..right_day_number]
 
 

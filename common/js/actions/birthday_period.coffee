@@ -1,5 +1,6 @@
 import {
   SET_BIRTHDAY_PERIOD
+  SET_BIRTHDAY_PERIOD_BY_DATE
   EXTEND_BIRTHDAY_PERIOD_LEFT
   EXTEND_BIRTHDAY_PERIOD_RIGHT
   SCROLLED_TO_DATE
@@ -22,6 +23,12 @@ export extendBirthdayPeriodLeft = (days) ->
 export extendBirthdayPeriodRight = (days) ->
   type: EXTEND_BIRTHDAY_PERIOD_RIGHT
   days: days
+
+
+export setBirthdayPeriodByInterval = (date1, date2) ->
+  type: SET_BIRTHDAY_PERIOD_BY_DATE
+  date1: date1
+  date2: date2
 
 
 export scrolledToDate = ->
