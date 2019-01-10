@@ -16,13 +16,16 @@ class Birthday extends React.Component
 
     classes =
       'contact-data-birthday' : true
+      'contact-data_highlighted' : @props.highlighted
+      'contact-data-birthday_highlighted' : @props.highlighted
     classes[@props.className] = true
 
     iconed_data { className: classNames(classes), icon: BirthdayIcon, align_icon: 'middle' },
       div { className: 'iconed-data__row iconed-data__row-title' },
         'День рождения'
       div { className: 'iconed-data__row iconed-data__row-data' },
-        @props.birthday_formatted
+        div { className: 'iconed-data__row-data-value' },
+          @props.birthday_formatted
 
 
 export default Birthday

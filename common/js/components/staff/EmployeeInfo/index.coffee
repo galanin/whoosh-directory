@@ -17,6 +17,7 @@ import { resetExpandedSubUnits } from '@actions/expand_sub_units'
 import { loadUnitExtra } from '@actions/unit_extras'
 import { goToUnitInStructure } from '@actions/units'
 import { getParentIds } from '@actions/employments'
+import { currentTime, todayDate } from '@lib/datetime'
 
 div = React.createFactory('div')
 span = React.createFactory('span')
@@ -62,6 +63,31 @@ mapDispatchToProps = (dispatch) ->
 
 class EmployeeInfo extends React.Component
 
+  setCurrentTime: ->
+    @setState
+      current_time: currentTime()
+      current_date: todayDate()
+
+
+  isOnLunchNow: ->
+    if @props.employment?.lunch_begin? and @props.employment?.lunch_end? and @state?.current_time?
+      @props.employment.lunch_begin <= @state.current_time < @props.employment.lunch_end
+
+
+  isBirthday: ->
+    if @props.person?.birthday? and @state?.current_date
+      @props.person.birthday == @state.current_date
+
+
+  componentDidMount: ->
+    @setCurrentTime()
+    @interval = setInterval((() => @setCurrentTime()), 10000)
+
+
+  componentWillUnmount: ->
+    clearInterval(@interval)
+
+
   onCloseButtonClick: ->
     @props.unsetCurrentEmployee()
 
@@ -102,9 +128,9 @@ class EmployeeInfo extends React.Component
 
               location { building: @props.employment.building, office: @props.employment.office, className: 'employee-info__iconed-data employee-info__location' }
 
-              lunch_break { lunch_begin: @props.employment.lunch_begin, lunch_end: @props.employment.lunch_end, className: 'employee-info__iconed-data employee-info__lunch-break' }
+              lunch_break { lunch_begin: @props.employment.lunch_begin, lunch_end: @props.employment.lunch_end, highlighted: ! @props.employment.on_vacation and @isOnLunchNow(), className: 'employee-info__iconed-data employee-info__lunch-break' }
 
-              birthday { birthday_formatted: @props.person.birthday_formatted, className: 'employee-info__iconed-data employee-info__birthday' }
+              birthday { birthday_formatted: @props.person.birthday_formatted, highlighted: @isBirthday(), className: 'employee-info__iconed-data employee-info__birthday' }
 
               if @props.employment.on_vacation
                 iconed_data { className: 'employee-info__iconed-data employee-info__vacation', icon: VacationIcon, align_icon: 'middle' },
