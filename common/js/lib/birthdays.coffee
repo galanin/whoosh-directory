@@ -25,6 +25,10 @@ getTodayDay = ->
   MONTH_OFFSET[now.getMonth()] + now.getDate() - 1
 
 
+export getTodayDate = ->
+  getDateByDayNumber(getTodayDay())
+
+
 correctDayNumber = (day_number) ->
   if day_number < 0
     366 + day_number

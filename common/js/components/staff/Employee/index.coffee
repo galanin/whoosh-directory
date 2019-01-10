@@ -7,6 +7,7 @@ import { loadUnitInfo } from '@actions/units'
 import { setCurrentEmploymentId } from '@actions/current'
 import { popEmployeeInfo } from '@actions/layout'
 import { loadEmploymentHierarchy, loadUnitHierarchy } from '@actions/employments'
+import { getTodayDate } from '@lib/birthdays'
 
 div = React.createFactory('div')
 span = React.createFactory('span')
@@ -47,12 +48,18 @@ class Employee extends React.Component
 
 
   setCurrentTime: ->
-    @setState(current_time: @getCurrentTime())
+    @setState
+      current_time: @getCurrentTime()
+      current_date: getTodayDate()
 
 
   isOnLunchNow: ->
     if @props.employment?.lunch_begin? and @props.employment?.lunch_end? and @state?.current_time?
       @props.employment.lunch_begin <= @state.current_time < @props.employment.lunch_end
+
+  isBirthday: ->
+    if @props.person?.birthday? and @state?.current_date
+      @props.person.birthday == @state.current_date
 
 
   componentDidMount: ->
@@ -118,6 +125,9 @@ class Employee extends React.Component
           if @isOnLunchNow()
             div { className: 'employee__status employee__on-lunch' },
               'Обеденный перерыв'
+        if @isBirthday()
+          div { className: 'employee__status employee__birthday' },
+            'День рожденья'
 
 
 ConnectedEmployee = connect(mapStateToProps, mapDispatchToProps)(Employee)
