@@ -3,7 +3,8 @@ import { connect } from 'react-redux'
 import { isArray } from 'lodash'
 import { Element as ScrollElement, scroller } from 'react-scroll'
 
-import { getDayNumberByOffset, getDateByDayNumber, getBirthdayPeriodDates } from '@lib/birthdays'
+import { dateByDayNumber } from '@lib/datetime'
+import { getDayNumberByOffset, getBirthdayPeriodDates } from '@lib/birthdays'
 import { loadCurrentBirthdays } from '@actions/birthdays'
 import { scrolledToDate, extendBirthdayPeriodRight, extendBirthdayPeriodLeft } from '@actions/birthday_period'
 
@@ -22,7 +23,7 @@ mapStateToProps = (state, ownProps) ->
   if do_scroll
     scroll_to_day_offset = state.birthday_period.day_offset_start
     scroll_to_day_number = getDayNumberByOffset(state.birthday_period.key_date, scroll_to_day_offset)
-    scroll_to_date = getDateByDayNumber(scroll_to_day_number)
+    scroll_to_date = dateByDayNumber(scroll_to_day_number)
     do_scroll &&= state.birthdays[scroll_to_date]?
 
   birthday_period: state.birthday_period
@@ -66,7 +67,7 @@ class Birthdays extends React.Component
     return '' unless @props.birthday_period.key_date?
 
     dates = getBirthdayPeriodDates(@props.birthday_period)
-    prev_date_offset_left = getDateByDayNumber(getDayNumberByOffset(@props.birthday_period.key_date, @props.birthday_period.prev_day_offset_left))
+    prev_date_offset_left = dateByDayNumber(getDayNumberByOffset(@props.birthday_period.key_date, @props.birthday_period.prev_day_offset_left))
 
     div { className: 'birthdays__scroller plug', id: 'birthdays-scroller' },
       div { className: 'birthdays' },

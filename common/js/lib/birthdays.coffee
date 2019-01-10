@@ -1,49 +1,4 @@
-import { padStart } from 'lodash'
-
-MONTH_DAYS = [31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
-
-MONTH_OFFSET = [0]
-MONTH_OFFSET[i + 1] = MONTH_OFFSET[i] + MONTH_DAYS[i] for i in [0..10]
-
-PLAIN_CALENDAR = []
-
-formatNumber = (number) ->
-  number_str = number.toString()
-  padStart(number_str, 2, '0')
-
-formatDate = (month, day) ->
-  formatNumber(month + 1) + '-' + formatNumber(day + 1)
-
-fillMonth = (month_number) ->
-  PLAIN_CALENDAR[MONTH_OFFSET[month_number] + day_number] = formatDate(month_number, day_number) for day_number in [0 .. MONTH_DAYS[month_number] - 1]
-
-fillMonth(month_number) for month_number in [0..11]
-
-
-getTodayDay = ->
-  now = new Date()
-  MONTH_OFFSET[now.getMonth()] + now.getDate() - 1
-
-
-export getTodayDate = ->
-  getDateByDayNumber(getTodayDay())
-
-
-correctDayNumber = (day_number) ->
-  if day_number < 0
-    366 + day_number
-  else if day_number >= 366
-    day_number - 366
-  else
-    day_number
-
-
-export getDateByDayNumber = (day_number) ->
-  PLAIN_CALENDAR[correctDayNumber(day_number)]
-
-
-export getDayNumberByDate = (date) ->
-  PLAIN_CALENDAR.indexOf(date)
+import { todayDay, dayNumberByDate, dateByDayNumber } from '@lib/datetime'
 
 
 export limitExtension = (offsets, days) ->
@@ -64,13 +19,13 @@ export getOffsetsByShortcut = (period_shortcut) ->
 
 
 export getDayNumberByOffset = (key_date, offset) ->
-  key_day = if key_date == 'today' then getTodayDay() else key_date
+  key_day = if key_date == 'today' then todayDay() else key_date
   key_day + offset
 
 
 export getBirthdayIntervalDates = (date1, date2) ->
-  left_day_number = getDayNumberByDate(date1)
-  right_day_number = getDayNumberByDate(date2)
+  left_day_number = dayNumberByDate(date1)
+  right_day_number = dayNumberByDate(date2)
   getBirthdayOffsetsDates(left_day_number, right_day_number)
 
 
@@ -82,7 +37,7 @@ export getBirthdayPeriodDates = (offsets) ->
 
 export getBirthdayOffsetsDates = (left_day_number, right_day_number) ->
   right_day_number += 366 if right_day_number < left_day_number
-  getDateByDayNumber(day_number) for day_number in [left_day_number..right_day_number]
+  dateByDayNumber(day_number) for day_number in [left_day_number..right_day_number]
 
 
 isSuccessiveOffsets = (offsets1, offsets2) ->

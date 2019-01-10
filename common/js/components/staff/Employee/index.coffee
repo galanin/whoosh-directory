@@ -1,13 +1,13 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { isArray, padStart } from 'lodash'
+import { isArray } from 'lodash'
 import classNames from 'classnames'
 
 import { loadUnitInfo } from '@actions/units'
 import { setCurrentEmploymentId } from '@actions/current'
 import { popEmployeeInfo } from '@actions/layout'
 import { loadEmploymentHierarchy, loadUnitHierarchy } from '@actions/employments'
-import { getTodayDate } from '@lib/birthdays'
+import { currentTime, todayDate } from '@lib/datetime'
 
 div = React.createFactory('div')
 span = React.createFactory('span')
@@ -32,25 +32,12 @@ mapDispatchToProps = (dispatch, ownProps) ->
     dispatch(popEmployeeInfo())
 
 
-formatNumber = (number) ->
-  number_str = number.toString()
-  padStart(number_str, 2, '0')
-
-formatTime = (hours, minutes) ->
-  formatNumber(hours) + ':' + formatNumber(minutes)
-
-
 class Employee extends React.Component
-
-  getCurrentTime: ->
-    now = new Date()
-    formatTime(now.getHours(), now.getMinutes())
-
 
   setCurrentTime: ->
     @setState
-      current_time: @getCurrentTime()
-      current_date: getTodayDate()
+      current_time: currentTime()
+      current_date: todayDate()
 
 
   isOnLunchNow: ->
