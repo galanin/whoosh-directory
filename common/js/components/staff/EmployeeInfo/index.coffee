@@ -98,7 +98,7 @@ class EmployeeInfo extends React.Component
 
 
   render: ->
-    div { className: 'employee-info-container plug' },
+    div { className: 'employee-info-container soft-shadow plug' },
       div { className: 'employee-info__close-button', onClick: @onCloseButtonClick.bind(this) },
         svg { className: 'employee-info__close-button-cross', svg: CloseButton }
 

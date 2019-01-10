@@ -31,7 +31,7 @@ class OrganizationStructure extends React.Component
       else
         0
 
-    div { className: 'organization-structure-scroller plug', id: 'organization-structure-scroller' },
+    div { className: 'organization-structure-scroller soft-shadow plug', id: 'organization-structure-scroller' },
       div { className: 'organization-structure' },
         for root_id in roots
           organization_unit { key: root_id, unit_id: root_id }

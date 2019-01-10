@@ -86,7 +86,7 @@ class SearchPanel extends React.Component
     div { className: 'search-panel-container plug' },
       div { className: 'search-panel' },
         div { className: 'search-panel__input-container' },
-          div { className: 'search-panel__input-field' },
+          div { className: 'search-panel__input-field soft-shadow' },
 
             input { autoFocus: true, className: 'search-panel__input', ref: @text_input, value: @props.query, onChange: @onQueryChange.bind(this), onBlur: @onQueryBlur.bind(this), onClick: @onQueryExec.bind(this), onKeyUp: @onKeyDown.bind(this) }
             div { className: 'search-panel__reset', onClick: @onQueryReset.bind(this) },
