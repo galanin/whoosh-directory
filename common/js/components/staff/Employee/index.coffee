@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { isArray } from 'lodash'
+import { isArray, padStart } from 'lodash'
 import classNames from 'classnames'
 
 import { loadUnitInfo } from '@actions/units'
@@ -31,7 +31,38 @@ mapDispatchToProps = (dispatch, ownProps) ->
     dispatch(popEmployeeInfo())
 
 
+formatNumber = (number) ->
+  number_str = number.toString()
+  padStart(number_str, 2, '0')
+
+formatTime = (hours, minutes) ->
+  formatNumber(hours) + ':' + formatNumber(minutes)
+
+
 class Employee extends React.Component
+
+  getCurrentTime: ->
+    now = new Date()
+    formatTime(now.getHours(), now.getMinutes())
+
+
+  setCurrentTime: ->
+    @setState(current_time: @getCurrentTime())
+
+
+  isOnLunchNow: ->
+    if @props.employment?.lunch_begin? and @props.employment?.lunch_end? and @state?.current_time?
+      @props.employment.lunch_begin <= @state.current_time < @props.employment.lunch_end
+
+
+  componentDidMount: ->
+    @setCurrentTime()
+    @interval = setInterval((() => @setCurrentTime()), 30000)
+
+
+  componentWillUnmount: ->
+    clearInterval(@interval)
+
 
   onContactClick: ->
     @props.setCurrentEmployee()
@@ -73,15 +104,20 @@ class Employee extends React.Component
           div { className: 'employee__organization_unit_title' },
             @props.unit.list_title
 
-        if @props.employment.on_vacation
-          div { className: 'employee__on-vacation' },
-            'В отпуске'
-
       if isArray(@props.employment.format_phones) and @props.employment.format_phones.length > 0
         div { className: 'employee__phones' },
           for phone in @props.employment.format_phones[0..2]
             div { className: 'employee__phone', key: phone[1] },
               phone[1]
+
+      div { className: 'employee__status-container' },
+        if @props.employment.on_vacation
+          div { className: 'employee__status employee__on-vacation' },
+            'В отпуске'
+        else
+          if @isOnLunchNow()
+            div { className: 'employee__status employee__on-lunch' },
+              'Обеденный перерыв'
 
 
 ConnectedEmployee = connect(mapStateToProps, mapDispatchToProps)(Employee)
