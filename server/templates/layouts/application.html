@@ -27,7 +27,7 @@
 </head>
 <body>
   <div id="app"><%= html %></div>
-  <script>window.__INITIAL_STATE__ = <%= JSON.stringify(initialState) %>;</script>
+  <script>window.__INITIAL_STATE__=<%= JSON.stringify(initialState) %>;try{if(navigator.appVersion.match(/Trident/)){document.getElementsByTagName('body')[0].className+=' ie'}}catch(e){}</script>
   <%= polyJs ? `<script src="${polyJs}"></script>` : '' %>
   <%= vendorJs ? `<script src="${vendorJs}"></script>` : '' %>
   <script src="<%= appJs %>"></script>
