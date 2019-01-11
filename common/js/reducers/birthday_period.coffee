@@ -6,7 +6,8 @@ import {
   SCROLLED_TO_DATE
 } from '@constants/birthday_period'
 
-import { limitExtension, getOffsetsUnion, getDayNumberByDate } from '@lib/birthdays'
+import { dayNumberByDate } from '@lib/datetime'
+import { limitExtension, getOffsetsUnion } from '@lib/birthdays'
 
 
 export default (state = {}, action) ->
@@ -22,8 +23,8 @@ export default (state = {}, action) ->
         getOffsetsUnion(state, action)
 
     when SET_BIRTHDAY_PERIOD_BY_DATE
-      day1 = getDayNumberByDate(action.date1)
-      day2 = getDayNumberByDate(action.date2)
+      day1 = dayNumberByDate(action.date1)
+      day2 = dayNumberByDate(action.date2)
       if day2 < day1
         day2 += 366
       key_date:         day1
