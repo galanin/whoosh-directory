@@ -112,9 +112,10 @@ class Employee extends React.Component
           if @isOnLunchNow()
             div { className: 'employee__status employee__on-lunch' },
               'Обеденный перерыв'
-        if @isBirthday()
-          div { className: 'employee__status employee__birthday' },
-            'День рождения'
+        unless @props.hide?.birthday
+          if @isBirthday()
+            div { className: 'employee__status employee__birthday' },
+              'День рождения'
 
 
 ConnectedEmployee = connect(mapStateToProps, mapDispatchToProps)(Employee)

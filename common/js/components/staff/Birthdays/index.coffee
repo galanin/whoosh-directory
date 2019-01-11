@@ -92,7 +92,7 @@ class Birthdays extends React.Component
                     if result.contact_id?
                       contact(key: result.contact_id, contact_id: result.contact_id)
                     else if result.person_id?
-                      employee key: result.person_id, employment_id: result.employ_ids[0], className: 'list-item shadow'
+                      employee key: result.person_id, employment_id: result.employ_ids[0], hide: { birthday: true }, className: 'list-item shadow'
 
         div { className: 'birthdays__button-forward', onClick: @stepForward.bind(this) },
           'Смотреть дальше'
