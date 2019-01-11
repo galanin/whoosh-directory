@@ -114,7 +114,7 @@ class Employee extends React.Component
               'Обеденный перерыв'
         if @isBirthday()
           div { className: 'employee__status employee__birthday' },
-            'День рожденья'
+            'День рождения'
 
 
 ConnectedEmployee = connect(mapStateToProps, mapDispatchToProps)(Employee)
