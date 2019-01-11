@@ -30,6 +30,10 @@ export getParentUnitIds = (state, employment) ->
     unit.full_path
 
 
+getMissingUnitTitleIds = (state, unit_ids) ->
+  unit_ids.filter (unit_id) -> !state.unit_titles[unit_id]?
+
+
 export getParentUnits = (state, employment) ->
   state.units[u_id] for u_id in getParentUnitIds(state, employment)
 
@@ -50,8 +54,9 @@ export loadUnitHierarchy = (employment_id) ->
     state = getState()
     employment = state.employments[employment_id]
     parent_unit_ids = getParentUnitIds(state, employment)
-    if parent_unit_ids.length > 0
-      Request.get('/units/titles/' + join(parent_unit_ids, ',')).then (response) ->
+    missing_unit_title_ids = getMissingUnitTitleIds(state, parent_unit_ids)
+    if missing_unit_title_ids.length > 0
+      Request.get('/units/titles/' + join(missing_unit_title_ids, ',')).then (response) ->
         dispatch(addUnitTitles(response.body.unit_titles))
 
 
