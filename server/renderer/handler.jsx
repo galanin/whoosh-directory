@@ -5,6 +5,7 @@ import { setMobileDetect, mobileParser } from 'react-responsive-redux';
 import { renderToString } from 'react-dom/server';
 import { getBundles } from 'react-loadable/webpack';
 import Loadable from 'react-loadable';
+import { createMemoryHistory } from 'history';
 import render from './render';
 import routes from '@routes';
 import configureStore from '@store';
@@ -32,8 +33,9 @@ export default function handleRender(req, res) {
     };
   }
 
+  const history = createMemoryHistory();
   // Create a new Redux store instance
-  const store = configureStore(initialState);
+  const store = configureStore(initialState, history);
 
   // Server side responsive detection
   const mobileDetect = mobileParser(req);

@@ -1,7 +1,8 @@
 import { compose, createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
-import rootReducer from '@reducers';
-import { routerMiddleware } from 'react-router-redux';
+import createRootReducer from '@reducers';
+import { routerMiddleware } from 'connected-react-router';
+
 
 export default function configureStore(initialState, history = null) {
   /* Middleware
@@ -22,7 +23,7 @@ export default function configureStore(initialState, history = null) {
   ]);
 
   // create store with enhancers, middleware, reducers, and initialState
-  const store = createStore(rootReducer, initialState, enhancer);
+  const store = createStore(createRootReducer(history), initialState, enhancer);
 
   return store;
 }
