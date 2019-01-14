@@ -139,7 +139,7 @@ class EmployeeInfo extends React.Component
           if @props.parents.length > 0
             div { className: 'employee-info__structure' },
               div { className: 'employee-info__structure-title' },
-                'Орг. структура'
+                'Оргструктура'
               div { className: 'employee-info__structure-units' },
                 for parent in @props.parents
                   combo_unit_employee(key: parent.unit_id, unit_id: parent.unit_id, employment_id: parent.employment_id, className: 'list-item hair-border')
