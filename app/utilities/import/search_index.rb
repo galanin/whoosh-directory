@@ -59,9 +59,9 @@ module Utilities
 
 
       def add_person(person)
-        add_term(person.last_name, PRIORITY_LAST_NAME, person, partial: true)
-        add_term(person.first_name, PRIORITY_FIRST_NAME, person, partial: true)
-        add_term(person.middle_name, PRIORITY_MIDDLE_NAME, person, partial: true)
+        add_term(person.last_name, PRIORITY_LAST_NAME, person, partial: :begin)
+        add_term(person.first_name, PRIORITY_FIRST_NAME, person, partial: :begin)
+        add_term(person.middle_name, PRIORITY_MIDDLE_NAME, person, partial: :begin)
         add_normal_term(person.birthday, PRIORITY_LOWEST, person) if person.birthday
         set_sub_order(person.last_name + ' ' + person.first_name + ' ' + person.middle_name, person)
       end
@@ -69,50 +69,57 @@ module Utilities
 
       def add_unit(unit)
         puts unit.long_title
-        add_term(unit.long_title, PRIORITY_UNIT_TITLE, unit, partial: true)
-        add_term(unit.short_title, PRIORITY_UNIT_TITLE, unit, partial: true)
+        add_term(unit.long_title, PRIORITY_UNIT_TITLE, unit, partial: :begin)
+        add_term(unit.short_title, PRIORITY_UNIT_TITLE, unit, partial: :begin)
         set_sub_order(unit.list_title, unit)
       end
 
 
       def add_employment(employment)
         person = employment.person
-        add_term(employment.post_title, PRIORITY_LOWEST, person, partial: true)
+        add_term(employment.post_title, PRIORITY_LOWEST, person, partial: :begin)
         if employment.office =~ /^(\d+)/
           add_term($~[1], PRIORITY_LOWEST, person)
         end
         add_term(employment.office, PRIORITY_LOWEST, person)
         add_term(employment.building, PRIORITY_LOWEST, person)
-        if Array === employment.phones
-          employment.phones.each do |phone|
-            add_term(phone, PRIORITY_LOWEST, person)
+        if employment.telephones.present?
+          employment.telephones.phone_w_type.each do |phone_type, phone_array|
+            phone_array.each do |phone|
+              partial = (phone_type == "local" or phone_type == "mobile") ? :end : :begin
+              add_term(phone, PRIORITY_LOWEST, person, partial: partial)
+            end
           end
         end
       end
 
 
       def add_external_contact(external_contact)
-        add_term(external_contact.last_name, PRIORITY_LAST_NAME, external_contact, partial: true)
-        add_term(external_contact.first_name, PRIORITY_FIRST_NAME, external_contact, partial: true)
-        add_term(external_contact.middle_name, PRIORITY_MIDDLE_NAME, external_contact, partial: true)
+        add_term(external_contact.last_name, PRIORITY_LAST_NAME, external_contact, partial: :begin)
+        add_term(external_contact.first_name, PRIORITY_FIRST_NAME, external_contact, partial: :begin)
+        add_term(external_contact.middle_name, PRIORITY_MIDDLE_NAME, external_contact, partial: :begin)
         add_normal_term(external_contact.birthday, PRIORITY_LOWEST, external_contact) if external_contact.birthday
         unless external_contact.last_name.nil? && external_contact.first_name.nil? && external_contact.middle_name.nil?
           set_sub_order(external_contact.last_name + ' ' + external_contact.first_name + ' ' + external_contact.middle_name, external_contact)
         end
-        add_term(external_contact.function_title, PRIORITY_EXTERNAL_CONTACT, external_contact, partial: true)
+        add_term(external_contact.function_title, PRIORITY_EXTERNAL_CONTACT, external_contact, partial: :begin)
         unless external_contact.function_title.nil?
           set_sub_order(external_contact.function_title, external_contact)
         end
-        add_term(external_contact.location_title, PRIORITY_EXTERNAL_CONTACT, external_contact, partial: true)
+        add_term(external_contact.location_title, PRIORITY_EXTERNAL_CONTACT, external_contact, partial: :begin)
         unless external_contact.location_title.nil?
           set_sub_order(external_contact.location_title, external_contact)
         end
-        add_term(external_contact.post_title, PRIORITY_LOWEST, external_contact, partial: true)
+        add_term(external_contact.post_title, PRIORITY_LOWEST, external_contact, partial: :begin)
         add_term(external_contact.office, PRIORITY_LOWEST, external_contact)
         add_term(external_contact.building, PRIORITY_LOWEST, external_contact)
-        if Array === external_contact.phones
-          external_contact.phones.each do |phone|
-          add_term(phone, PRIORITY_LOWEST, external_contact)
+
+        if external_contact.telephones.present?
+          external_contact.telephones.phone_w_type.each do |phone_type, phone_array|
+            phone_array.each do |phone|
+              partial = (phone_type == "local" or phone_type == "mobile") ? :end : :begin
+              add_term(phone, PRIORITY_LOWEST, external_contact, partial: partial)
+            end
           end
         end
       end
@@ -149,7 +156,7 @@ module Utilities
 
 
       def add_entry(entry)
-        entity = @entities[get_entity_key(entry.searchable)] ||= SearchEntity.new
+        entity = @entities[entry.searchable_id] ||= SearchEntity.new
         entity.search_entry = entry
       end
 
@@ -166,11 +173,19 @@ module Utilities
       def add_normal_term(term, priority, object, options = {})
         entity = get_or_build_entity(object)
 
-        if options[:partial]
+        if options[:partial] == :begin
           (0 .. term.length - 1).each do |subterm_length|
             subterm = term[0 .. subterm_length]
             entity.add_keyword(subterm, priority + subterm_length)
           end
+        end
+
+        if options[:partial] == :end
+          (1 .. term.length - 4).each do |subterm_length|
+            subterm = term[-subterm_length .. -1]
+            entity.add_keyword(subterm, priority + subterm_length)
+          end
+
         end
 
         entity.add_keyword(term, priority + PRIORITY_FULL_TERM)
@@ -183,12 +198,7 @@ module Utilities
 
 
       def get_or_build_entity(searchable_object)
-        @entities[get_entity_key(searchable_object)] ||= SearchEntity.new(searchable_object)
-      end
-
-
-      def get_entity_key(searchable_object)
-        searchable_object.id.to_s
+        @entities[searchable_object.id] ||= SearchEntity.new(searchable_object)
       end
 
 
