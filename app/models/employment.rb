@@ -11,7 +11,6 @@ class Employment < ApplicationRecord
   field :unit_short_id,      type: String
   field :post_title,         type: String
   field :post_code,          type: String
-  field :post_code,          type: String
   field :is_manager,         type: Boolean
   field :is_boss,            type: Boolean
   field :office,             type: String
