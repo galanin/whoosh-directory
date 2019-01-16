@@ -14,6 +14,9 @@ module Utilities
         }
 
 
+        NOT_IMPORTED_PHONES = %w[74843996868]
+
+
         def initialize(hash)
           @phone_w_type = hash
         end
@@ -35,7 +38,9 @@ module Utilities
             phones = []
             attr_name_array.each do |attr_name|
               unless doc[attr_name].nil? or doc[attr_name].empty?
-                phones << doc[attr_name]
+                unless NOT_IMPORTED_PHONES.include?(doc[attr_name])
+                  phones << doc[attr_name]
+                end
               end
             end
 
