@@ -54,25 +54,26 @@ ru:
     - :month
     - :year
   phones:
-    patterns:
+    types:
+      emergency:
+        name: экстренный
+      emergency_mobile:
+        name: экстренный с мобильного
       internal:
+        name: внутренний
         regexp: '\A(\d{2})(\d{2})\z'
         format: '\1-\2'
-      short_city:
-        regexp: '\A(\d{1,3})(\d{2})(\d{2})\z'
-        format: '\1-\2-\3'
-      russian:
+      local:
+        name: городской
+        regexp: '\A(\d{1})(\d{3})(\d{3})(\d{2})(\d{2})\z'
+        format: '8 (\2) \3-\4-\5'
+      mobile:
+        name: мобильный
         regexp: '\A7(\d{3})(\d{3})(\d{2})(\d{2})\z'
         format: '8-\1-\2-\3-\4'
-      city:
-        regexp: '\A(\d{1})(\d{3})(\d{3})(\d{2})(\d{2})\z'
-        format: '\1-\2-\3-\4-\5'
+      unknown:
+        name: неизвестный
       # TODO: format city codes
-    type:
-      emergency: экстренный
-      internal: внутренний
-      city: городской
-      mobile: мобильный
   birthday:
     interface_format: "%-d %B"
     search_format: "%d.%m"

@@ -9,7 +9,7 @@ module Utilities
                       :post_title,
                       :post_code, :is_manager, :is_boss,
                       :office, :building,
-                      :phones,
+                      :telephones,
                       :lunch_begin, :lunch_end,
                       :parental_leave,
                       :vacation_begin, :vacation_end,
@@ -41,7 +41,7 @@ module Utilities
           @is_manager         = @post_code == 'head'
           @office             = normalize_office(source_data['ROOM'])
           @building           = normalize_building(source_data['KORP'])
-          @phones             = normalize_phones(source_data['PHONE'])
+          @telephones         = Phones.from_xml(source_data)
           @lunch_begin        = normalize_time(source_data['OBED_TIME_B'])
           @lunch_end          = normalize_time(source_data['OBED_TIME_E'])
           @parental_leave     = (source_data['IS_DEKRET'] == '1').presence
@@ -67,12 +67,20 @@ module Utilities
             is_boss:            is_boss,
             building:           building,
             office:             office,
-            phones:             phones,
             lunch_begin:        lunch_begin,
             lunch_end:          lunch_end,
             vacation_begin:     vacation_begin,
             vacation_end:       vacation_end,
             in_unit_rank:       in_unit_rank,
+          }
+        end
+
+
+        def object_attributes
+          {
+            telephones: {
+              attributes: telephones.attributes,
+            },
           }
         end
 
@@ -137,33 +145,6 @@ module Utilities
             result.upcase!
           end
           result.strip.presence
-        end
-
-
-        PHONES_REPLACE = {
-          /[\-\+]/                                               => '',
-          /\s*гор\.$/                                            => '',
-          /\s*моб\.? тел$/                                       => '',
-          /\s*внутр\.$/                                          => '',
-          /(?:39)?96868\s*\(доб\.\s*(\d\d)-?(\d\d)\)/            => '\1\2',
-          /(?:8484)?39968687(\d{4})/                             => '\1',
-          /^[78][\s\(]*(\d{3})[\s\)]*(\d{3})\s*(\d\d)\s*(\d\d)$/ => '7\1\2\3\4',
-          /^76\d{3}$/                                            => '',
-          /^[78]?4843996868$/                                    => '',
-          /^3996868$/                                            => '',
-          /^(9\d{9})$/                                           => '7\1',
-        }.freeze
-
-        def normalize_phones(phones_str)
-          result = phones_str.split(/[,;]\s*/)
-          result.map! do |phone|
-            phone_result = phone
-            PHONES_REPLACE.each do |re, replace|
-              phone_result.gsub!(re, replace)
-            end
-            phone_result.strip
-          end
-          result.uniq.select(&:present?).presence
         end
 
 

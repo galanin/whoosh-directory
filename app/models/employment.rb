@@ -3,7 +3,6 @@ class Employment < ApplicationRecord
   include Mongoid::Timestamps
   include ShortId
   include Searchable
-  include FormatPhone
 
   field :external_id,        type: String
   field :person_external_id, type: String
@@ -12,11 +11,11 @@ class Employment < ApplicationRecord
   field :unit_short_id,      type: String
   field :post_title,         type: String
   field :post_code,          type: String
+  field :post_code,          type: String
   field :is_manager,         type: Boolean
   field :is_boss,            type: Boolean
   field :office,             type: String
   field :building,           type: String
-  field :phones,             type: Array
   field :lunch_begin,        type: String
   field :lunch_end,          type: String
   field :parental_leave,     type: Boolean
@@ -30,6 +29,7 @@ class Employment < ApplicationRecord
 
   belongs_to :person
   belongs_to :unit
+  embeds_one :telephones, as: :phonable,  class_name: 'Phones'
 
   index({ destroyed_at: 1, person_short_id: 1 }, {})
   index({ destroyed_at: 1, short_id: 1 }, {})
@@ -39,14 +39,16 @@ class Employment < ApplicationRecord
   def as_json(options = nil)
     result = super.slice(
       'post_title', 'post_code', 'is_boss',
-      'office', 'building', 'phones',
+      'office', 'building',
       'lunch_begin', 'lunch_end',
     ).compact.merge(
       'id'          => short_id,
       'person_id'   => person_short_id,
       'unit_id'     => unit_short_id,
-      'format_phones' => format_phones_with_type,
     )
+    if telephones.present?
+      result.merge!('format_phones' => telephones.format_phones_with_type)
+    end
     result.merge!('on_vacation' => true) if on_vacation
 
     result

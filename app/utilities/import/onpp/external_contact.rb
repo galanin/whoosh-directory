@@ -15,7 +15,7 @@ module Utilities
                       :gender,
                       :office,
                       :building,
-                      :phones,
+                      :telephones,
                       :email
 
 
@@ -33,7 +33,7 @@ module Utilities
           @birthday         = source_data['birthday']
           @office           = source_data['office']
           @building         = source_data['building']
-          @phones           = source_data['phones'].to_s.gsub(/-/,'').split(',')
+          @telephones       = Phones.from_yml(source_data['phones'])
           @email            = source_data['email']
         end
 
@@ -53,8 +53,15 @@ module Utilities
             birthday:         birthday,
             office:           office,
             building:         building,
-            phones:           phones,
             email:            email,
+          }
+        end
+
+        def object_attributes
+          {
+            telephones: {
+                attributes: telephones.attributes,
+              },
           }
         end
 
