@@ -37,7 +37,7 @@ module Utilities
           XML_PHONE_ATTR_NAME_WITH_TYPE.each do |type, attr_name_array|
             phones = []
             attr_name_array.each do |attr_name|
-              unless doc[attr_name].nil? or doc[attr_name].empty?
+              if doc[attr_name].present?
                 unless NOT_IMPORTED_PHONES.include?(doc[attr_name])
                   phones << doc[attr_name]
                 end
