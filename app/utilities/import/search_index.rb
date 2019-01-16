@@ -86,7 +86,7 @@ module Utilities
         if employment.telephones.present?
           employment.telephones.phone_w_type.each do |phone_type, phone_array|
             phone_array.each do |phone|
-              partial = (phone_type == "local" or phone_type == "mobile") ? :end : :begin
+              partial = (phone_type == "local" or phone_type == "mobile") ? :phone : :false
               add_term(phone, PRIORITY_LOWEST, person, partial: partial)
             end
           end
@@ -117,7 +117,7 @@ module Utilities
         if external_contact.telephones.present?
           external_contact.telephones.phone_w_type.each do |phone_type, phone_array|
             phone_array.each do |phone|
-              partial = (phone_type == "local" or phone_type == "mobile") ? :end : :begin
+              partial = (phone_type == "local" or phone_type == "mobile") ? :phone : :false
               add_term(phone, PRIORITY_LOWEST, external_contact, partial: partial)
             end
           end
@@ -180,12 +180,11 @@ module Utilities
           end
         end
 
-        if options[:partial] == :end
-          (1 .. term.length - 4).each do |subterm_length|
+        if options[:partial] == :phone
+          (4 .. term.length - 4).each do |subterm_length|
             subterm = term[-subterm_length .. -1]
             entity.add_keyword(subterm, priority + subterm_length)
           end
-
         end
 
         entity.add_keyword(term, priority + PRIORITY_FULL_TERM)
