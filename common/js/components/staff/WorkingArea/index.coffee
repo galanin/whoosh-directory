@@ -36,6 +36,7 @@ mapStateToProps = (state) ->
   employment_id: state.current.employment_id
   contact_id: state.current.contact_id
   results_type: state.search.results_type
+  results_source: state.search.results_source
 
 mapDispatchToProps = (dispatch) ->
   {}
@@ -65,7 +66,7 @@ class WorkingArea extends React.Component
           else
             dummy_info {}
         div { className: "working-area__block working-area__results socket block-index-#{pile_hash['search-results']}" },
-          if @props.results_type == 'birthday'
+          if @props.results_source == 'birthday' or @props.results_type == 'birthday'
             birthdays {}
           else
             search_results {}

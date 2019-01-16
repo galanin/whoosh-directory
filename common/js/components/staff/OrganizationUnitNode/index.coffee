@@ -6,8 +6,6 @@ import { Element as ScrollElement, scroller } from 'react-scroll'
 
 import { collapseUnit, saveCollapsedUnit, expandUnit, saveExpandedUnit } from '@actions/expand_units'
 import { setCurrentUnitId, scrolledToUnit } from '@actions/current'
-import { resetExpandedSubUnits } from '@actions/expand_sub_units'
-import { loadUnitExtra } from '@actions/unit_extras'
 import { popUnitInfo } from '@actions/layout'
 
 div = React.createFactory('div')
@@ -35,8 +33,6 @@ mapDispatchToProps = (dispatch, ownProps) ->
     dispatch(saveCollapsedUnit(ownProps.unit_id))
   setCurrentUnit: ->
     dispatch(setCurrentUnitId(ownProps.unit_id))
-    dispatch(loadUnitExtra(ownProps.unit_id))
-    dispatch(resetExpandedSubUnits())
     dispatch(popUnitInfo())
   scrolledToUnit: ->
     dispatch(scrolledToUnit(ownProps.unit_id))

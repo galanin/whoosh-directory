@@ -1,11 +1,12 @@
 MAX_BIRTHDAYS_AT_ONCE = 10
 
-import { join, reject } from 'lodash'
+import { join, reject, difference } from 'lodash'
 import { Request } from '@lib/request'
 
 import { SET_BIRTHDAY_RESULTS } from '@constants/birthdays'
 import { setResultsType } from '@actions/search'
-import { getOffsetsByShortcut, getBirthdayPeriodDates, getBirthdayIntervalDates } from '@lib/birthdays'
+import { dateByDayNumber } from '@lib/datetime'
+import { getDayNumberByOffset, getOffsetsByShortcut, getOffsetsByInterval, getBirthdayPeriodDates, getBirthdayIntervalDates } from '@lib/birthdays'
 import { setBirthdayPeriod } from '@actions/birthday_period'
 import { addPeople } from '@actions/people'
 import { addEmployments } from '@actions/employments'
@@ -17,37 +18,19 @@ getMissingDates = (getState, required_dates) ->
   reject(required_dates, (o) -> birthdays[o]?)
 
 
-export showBirthdayShortcutPeriod = (period_shortcut) ->
-  (dispatch, getState) ->
-    [day_offset_left, day_offset_right] = getOffsetsByShortcut(period_shortcut)
-    dispatch(setBirthdayPeriod('today', day_offset_left, day_offset_right))
-    dispatch(setResultsType('birthday'))
-    dispatch(loadCurrentBirthdays())
-
-
 export loadCurrentBirthdays = ->
   (dispatch, getState) ->
-    dates = getBirthdayPeriodDates(getState().birthday_period)
-    dispatch(loadBirthdaysByDatesAccelerated(dates))
+    state = getState()
 
+    start_day_number = getDayNumberByOffset(state.birthday_period.key_date, state.birthday_period.day_offset_start)
+    start_date = dateByDayNumber(start_day_number)
+    dispatch(loadMissingBirthdays([start_date]))
 
-export loadBirthdaysByInterval = (date1, date2) ->
-  (dispatch, getState) ->
-    dates = getBirthdayIntervalDates(date1, date2)
-    dispatch(loadBirthdaysByDates(dates))
-
-
-export loadBirthdaysByDates = (dates) ->
-  (dispatch, getState) ->
-    dispatch(loadMissingBirthdays(dates))
-
-
-export loadBirthdaysByDatesAccelerated = (dates) ->
-  (dispatch, getState) ->
-    first_date = getMissingDates(getState, dates[0 .. 0])
-    remaining_dates = getMissingDates(getState, dates[1 .. -1])
-    dispatch(loadMissingBirthdays(first_date))
-    dispatch(loadMissingBirthdays(remaining_dates))
+    setTimeout ->
+      dates = getBirthdayPeriodDates(getState().birthday_period)
+      dates = difference(dates, [start_date])
+      dispatch(loadMissingBirthdays(dates))
+    , 10
 
 
 loadMissingBirthdays = (dates) ->

@@ -6,6 +6,7 @@ import {
   SET_HUMAN_QUERY
   SET_MACHINE_QUERY
   SET_RESULTS_TYPE
+  SET_RESULTS_SOURCE
 } from '@constants/search'
 
 
@@ -25,26 +26,10 @@ import {
   getCachedQueryBirthdayInterval
 } from '@actions/search_cache'
 import { setBirthdayPeriodByInterval } from '@actions/birthday_period'
-import { setBirthdayResults, loadBirthdaysByInterval } from '@actions/birthdays'
-
-
-normalizeWhitespace = (string) ->
-  string.replace(/\s+/, ' ').trim()
+import { setBirthdayResults } from '@actions/birthdays'
 
 
 export setQuery = (query_string) ->
-  (dispatch, getState) ->
-    dispatch(setHumanQuery(query_string))
-
-    machine_query_string = normalizeWhitespace(query_string)
-    dispatch(setMachineQuery(machine_query_string))
-    if machine_query_string == ''
-      dispatch(setCurrentResults({}))
-    else
-      dispatch(getQueryResults(machine_query_string))
-
-
-export setHumanQuery = (query_string) ->
   type: SET_HUMAN_QUERY
   query: query_string
 
@@ -54,6 +39,13 @@ export setMachineQuery = (query_string) ->
   query: query_string
 
 
+# 'birthday' or 'query'
+export setResultsSource = (results_source) ->
+  type: SET_RESULTS_SOURCE
+  results_source: results_source
+
+
+# 'birthday' or 'common'
 export setResultsType = (results_type) ->
   type: SET_RESULTS_TYPE
   results_type: results_type
@@ -63,7 +55,12 @@ isCurrentMachineQuery = (getState, query) ->
   query == getState().search.current_machine_query
 
 
-export getQueryResults = (machine_query_string) ->
+export forceQueryResults = ->
+  (dispatch, getState) ->
+    dispatch(fetchQueryResults(getState().search.current_machine_query))
+
+
+export fetchQueryResults = (machine_query_string) ->
   (dispatch, getState) ->
     if hasQuerySent(getState, machine_query_string)
       if hasQueryFinished(getState, machine_query_string)
@@ -113,9 +110,6 @@ export sendQuery = (machine_query_string) ->
 
       if response.body.birthdays?
         dispatch(setBirthdayResults(response.body.birthdays))
-
-      if response.body.type == 'birthday'
-        dispatch(loadBirthdaysByInterval(...response.body.birthday_interval))
 
     , (error) ->
 

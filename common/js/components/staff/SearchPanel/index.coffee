@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import SvgIcon from '@components/common/SvgIcon'
 
-import { setQuery } from '@actions/search'
+import { setQuery, forceQueryResults, setResultsSource } from '@actions/search'
 import { popSearchResults } from '@actions/layout'
 import { fixText } from '@lib/keyboard_layout_fixer'
 
@@ -20,12 +20,20 @@ mapStateToProps = (state, ownProps) ->
 
 
 mapDispatchToProps = (dispatch, ownProps) ->
+
   setQuery: (query) ->
     dispatch(setQuery(query))
+    dispatch(setResultsSource('query'))
+    dispatch(popSearchResults())
+
+  forceQuery: ->
+    dispatch(forceQueryResults())
+    dispatch(setResultsSource('query'))
     dispatch(popSearchResults())
 
   resetQuery: ->
     dispatch(setQuery(''))
+    dispatch(setResultsSource('query'))
     dispatch(popSearchResults())
 
 
@@ -74,7 +82,7 @@ class SearchPanel extends React.Component
 
 
   onQueryExec: (event) ->
-    @setQueryByEvent(event)
+    @props.forceQuery()
 
 
   onKeyDown: (event) ->

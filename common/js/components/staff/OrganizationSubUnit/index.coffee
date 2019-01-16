@@ -5,7 +5,6 @@ import classNames from 'classnames'
 import SvgIcon from '@components/common/SvgIcon'
 
 import { expandSubUnit, collapseSubUnit } from '@actions/expand_sub_units'
-import { loadUnitExtra } from '@actions/unit_extras'
 
 div = React.createFactory('div')
 span = React.createFactory('span')
@@ -28,7 +27,6 @@ mapStateToProps = (state, ownProps) ->
 mapDispatchToProps = (dispatch, ownProps) ->
   expand: ->
     dispatch(expandSubUnit(ownProps.unit_id))
-    dispatch(loadUnitExtra(ownProps.unit_id))
   collapse: ->
     dispatch(collapseSubUnit(ownProps.unit_id))
 

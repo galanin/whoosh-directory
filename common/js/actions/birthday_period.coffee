@@ -6,6 +6,14 @@ import {
   SCROLLED_TO_DATE
 } from '@constants/birthday_period'
 
+import { getOffsetsByShortcut } from '@lib/birthdays'
+
+
+export setBirthdayPeriodByShortcut = (shortcut) ->
+  (dispatch, getState) ->
+    [day_offset_left, day_offset_right] = getOffsetsByShortcut(shortcut)
+    dispatch(setBirthdayPeriod('today', day_offset_left, day_offset_right))
+
 
 export setBirthdayPeriod = (key_date, day_offset_left, day_offset_right) ->
   type: SET_BIRTHDAY_PERIOD

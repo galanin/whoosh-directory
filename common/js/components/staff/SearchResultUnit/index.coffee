@@ -5,8 +5,6 @@ import classNames from 'classnames'
 
 import { highlightUnit, goToUnitInStructure } from '@actions/units'
 import { setHighlightedUnitId } from '@actions/current'
-import { resetExpandedSubUnits } from '@actions/expand_sub_units'
-import { loadUnitExtra } from '@actions/unit_extras'
 import { popUnitInfo } from '@actions/layout'
 
 div = React.createFactory('div')
@@ -19,8 +17,6 @@ mapStateToProps = (state, ownProps) ->
 mapDispatchToProps = (dispatch, ownProps) ->
   click: ->
     dispatch(goToUnitInStructure(ownProps.unit_id))
-    dispatch(loadUnitExtra(ownProps.unit_id))
-    dispatch(resetExpandedSubUnits())
     dispatch(popUnitInfo())
 
 

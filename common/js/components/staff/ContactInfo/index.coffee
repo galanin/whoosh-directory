@@ -8,10 +8,8 @@ import OfficeLocation from '@components/contact_info/OfficeLocation'
 import LunchBreak from '@components/contact_info/LunchBreak'
 import Birthday from '@components/contact_info/Birthday'
 
-import { setCurrentContactId, setCurrentUnitId } from '@actions/current'
+import { setCurrentContactId } from '@actions/current'
 import { sinkEmployeeInfo, popUnitInfo, popStructure } from '@actions/layout'
-import { resetExpandedSubUnits } from '@actions/expand_sub_units'
-import { loadUnitExtra } from '@actions/unit_extras'
 import { goToUnitInStructure } from '@actions/units'
 
 div = React.createFactory('div')
@@ -41,10 +39,7 @@ mapDispatchToProps = (dispatch) ->
     dispatch(sinkEmployeeInfo())
     dispatch(setCurrentContactId(null))
   onUnitClick: (unit_id) ->
-    dispatch(setCurrentUnitId(unit_id))
     dispatch(goToUnitInStructure(unit_id))
-    dispatch(loadUnitExtra(unit_id))
-    dispatch(resetExpandedSubUnits())
     dispatch(popUnitInfo())
     dispatch(popStructure())
 

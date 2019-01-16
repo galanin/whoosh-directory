@@ -3,6 +3,7 @@ import {
   SET_MACHINE_QUERY
   SET_CURRENT_RESULTS
   SET_RESULTS_TYPE
+  SET_RESULTS_SOURCE
 } from '@constants/search'
 
 
@@ -27,6 +28,11 @@ export default (state = {}, action) ->
     when SET_RESULTS_TYPE
       new_state = Object.assign({}, state)
       new_state.results_type = action.results_type
+      new_state
+
+    when SET_RESULTS_SOURCE
+      new_state = Object.assign({}, state)
+      new_state.results_source = action.results_source
       new_state
 
     else

@@ -11,10 +11,8 @@ import IconedData from '@components/contact_info/IconedData'
 import ComboUnitEmployee from '@components/staff/ComboUnitEmployee'
 import { reverse } from 'lodash'
 
-import { setCurrentEmploymentId, setCurrentUnitId } from '@actions/current'
+import { setCurrentEmploymentId } from '@actions/current'
 import { sinkEmployeeInfo, popUnitInfo, popStructure } from '@actions/layout'
-import { resetExpandedSubUnits } from '@actions/expand_sub_units'
-import { loadUnitExtra } from '@actions/unit_extras'
 import { goToUnitInStructure } from '@actions/units'
 import { getParentIds } from '@actions/employments'
 import { currentTime, todayDate } from '@lib/datetime'
@@ -53,10 +51,7 @@ mapDispatchToProps = (dispatch) ->
     dispatch(sinkEmployeeInfo())
     dispatch(setCurrentEmploymentId(null))
   onUnitClick: (unit_id) ->
-    dispatch(setCurrentUnitId(unit_id))
     dispatch(goToUnitInStructure(unit_id))
-    dispatch(loadUnitExtra(unit_id))
-    dispatch(resetExpandedSubUnits())
     dispatch(popUnitInfo())
     dispatch(popStructure())
 

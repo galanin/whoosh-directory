@@ -7,7 +7,7 @@ import {
 } from '@constants/birthday_period'
 
 import { dayNumberByDate } from '@lib/datetime'
-import { limitExtension, getOffsetsUnion } from '@lib/birthdays'
+import { limitExtension, getOffsetsUnion, getOffsetsByShortcut } from '@lib/birthdays'
 
 
 export default (state = {}, action) ->

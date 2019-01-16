@@ -5,7 +5,6 @@ import { Element as ScrollElement, scroller } from 'react-scroll'
 
 import { dateByDayNumber } from '@lib/datetime'
 import { getDayNumberByOffset, getBirthdayPeriodDates } from '@lib/birthdays'
-import { loadCurrentBirthdays } from '@actions/birthdays'
 import { scrolledToDate, extendBirthdayPeriodRight, extendBirthdayPeriodLeft } from '@actions/birthday_period'
 
 div = React.createFactory('div')
@@ -36,10 +35,8 @@ mapDispatchToProps = (dispatch) ->
     dispatch(scrolledToDate())
   stepForward: ->
     dispatch(extendBirthdayPeriodRight(7))
-    dispatch(loadCurrentBirthdays())
   stepBackward: ->
     dispatch(extendBirthdayPeriodLeft(7))
-    dispatch(loadCurrentBirthdays())
 
 
 class Birthdays extends React.Component

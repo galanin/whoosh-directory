@@ -18,6 +18,13 @@ export getOffsetsByShortcut = (period_shortcut) ->
       [-3, -1]
 
 
+export getOffsetsByInterval = (date1, date2) ->
+  left_day_number = dayNumberByDate(date1)
+  right_day_number = dayNumberByDate(date2)
+  right_day_number += 366 if right_day_number < left_day_number
+  [left_day_number, right_day_number - left_day_number]
+
+
 export getDayNumberByOffset = (key_date, offset) ->
   key_day = if key_date == 'today' then todayDay() else key_date
   key_day + offset

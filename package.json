@@ -13,6 +13,7 @@
     "npm": "6.x.x"
   },
   "_moduleAliases": {
+    "@automation": "common/js/automation",
     "@css": "common/css",
     "@fonts": "common/fonts",
     "@icons": "common/icons",
@@ -22,6 +23,7 @@
     "@constants": "common/js/constants",
     "@containers": "common/js/containers",
     "@lib": "common/js/lib",
+    "@loaders": "common/js/loaders",
     "@middleware": "common/js/middleware",
     "@pages": "common/js/pages",
     "@reducers": "common/js/reducers",
