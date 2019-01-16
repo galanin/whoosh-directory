@@ -77,4 +77,4 @@ ru:
   birthday:
     interface_format: "%-d %B"
     search_format: "%d.%m"
-    search_regexp: !ruby/regexp '/(0?[1-9]|[12][0-9]|3[01])(\.)(1[012]|0?[1-9])/'
+    search_regexp: !ruby/regexp '/^((0?[1-9]|[12][0-9]|3[01])(\.)(1[012]|0?[1-9]))$/'
