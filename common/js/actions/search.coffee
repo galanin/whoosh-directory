@@ -39,7 +39,7 @@ export setMachineQuery = (query_string) ->
   query: query_string
 
 
-# 'birthday' or 'query'
+# RESULTS_SOURCE_* -> 'birthday' or 'query'
 export setResultsSource = (results_source) ->
   type: SET_RESULTS_SOURCE
   results_source: results_source

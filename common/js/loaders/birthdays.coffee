@@ -14,4 +14,5 @@ export default (store) ->
       prev_day_offset_left = day_offset_left
       prev_day_offset_right = day_offset_right
 
-      store.dispatch(loadCurrentBirthdays())
+      if day_offset_left? and day_offset_right?
+        store.dispatch(loadCurrentBirthdays())

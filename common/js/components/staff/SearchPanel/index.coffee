@@ -2,6 +2,8 @@ import React from 'react'
 import { connect } from 'react-redux'
 import SvgIcon from '@components/common/SvgIcon'
 
+import { RESULTS_SOURCE_QUERY } from '@lib/search'
+
 import { setQuery, forceQueryResults, setResultsSource } from '@actions/search'
 import { popSearchResults } from '@actions/layout'
 import { fixText } from '@lib/keyboard_layout_fixer'
@@ -23,17 +25,17 @@ mapDispatchToProps = (dispatch, ownProps) ->
 
   setQuery: (query) ->
     dispatch(setQuery(query))
-    dispatch(setResultsSource('query'))
+    dispatch(setResultsSource(RESULTS_SOURCE_QUERY))
     dispatch(popSearchResults())
 
   forceQuery: ->
     dispatch(forceQueryResults())
-    dispatch(setResultsSource('query'))
+    dispatch(setResultsSource(RESULTS_SOURCE_QUERY))
     dispatch(popSearchResults())
 
   resetQuery: ->
     dispatch(setQuery(''))
-    dispatch(setResultsSource('query'))
+    dispatch(setResultsSource(RESULTS_SOURCE_QUERY))
     dispatch(popSearchResults())
 
 

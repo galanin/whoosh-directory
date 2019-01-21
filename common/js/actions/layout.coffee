@@ -5,7 +5,6 @@ import {
   LAYOUT_BLOCK_UNIT_INFO
   LAYOUT_BLOCK_EMPLOYEE_INFO
   LAYOUT_BLOCK_SEARCH_RESULTS
-  LAYOUT_BLOCK_BIRTHDAYS
   LAYOUT_BLOCK_FAVORITES
   LAYOUT_BLOCK_RECENT
 } from '@constants/layout'
@@ -25,10 +24,6 @@ export sinkEmployeeInfo = ->
 export popSearchResults = ->
   type: POP_LAYOUT_BLOCK
   layout_block: LAYOUT_BLOCK_SEARCH_RESULTS
-
-export popBirthdays = ->
-  type: POP_LAYOUT_BLOCK
-  layout_block: LAYOUT_BLOCK_BIRTHDAYS
 
 export popStructure = ->
   type: POP_LAYOUT_BLOCK

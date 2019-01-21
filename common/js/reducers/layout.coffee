@@ -1,26 +1,24 @@
+import { isEqual } from 'lodash'
+
+import { LOCATION_CHANGE } from 'connected-react-router'
+import { getNewUrlParam } from '@lib/url-parsing'
+import { URL_PARAM_LAYOUT } from '@constants/url-parsing'
+
+import { unpackLayout } from '@lib/layout'
+
 import {
-  POP_LAYOUT_BLOCK
+  DEFAULT_LAYOUT,
+  LAYOUT_BLOCK_EMPLOYEE_INFO,
+  LAYOUT_BLOCK_FAVORITES,
+  LAYOUT_BLOCK_RECENT,
+  LAYOUT_BLOCK_SEARCH_RESULTS,
+  LAYOUT_BLOCK_STRUCTURE,
+  LAYOUT_BLOCK_UNIT_INFO,
+  POP_LAYOUT_BLOCK,
   SINK_LAYOUT_BLOCK
-  LAYOUT_BLOCK_STRUCTURE
-  LAYOUT_BLOCK_UNIT_INFO
-  LAYOUT_BLOCK_EMPLOYEE_INFO
-  LAYOUT_BLOCK_SEARCH_RESULTS
-  LAYOUT_BLOCK_BIRTHDAYS
-  LAYOUT_BLOCK_FAVORITES
-  LAYOUT_BLOCK_RECENT
 } from '@constants/layout'
 
-default_layout = [
-  LAYOUT_BLOCK_RECENT
-  LAYOUT_BLOCK_FAVORITES
-  LAYOUT_BLOCK_EMPLOYEE_INFO
-  LAYOUT_BLOCK_UNIT_INFO
-  LAYOUT_BLOCK_BIRTHDAYS
-  LAYOUT_BLOCK_SEARCH_RESULTS
-  LAYOUT_BLOCK_STRUCTURE
-]
-
-export default (state = { pile: default_layout }, action) ->
+export default (state = { pile: DEFAULT_LAYOUT }, action) ->
   switch action.type
 
     when POP_LAYOUT_BLOCK
@@ -42,6 +40,26 @@ export default (state = { pile: default_layout }, action) ->
         new_state = Object.assign({}, state)
         new_state.pile = new_z_order
         new_state
+      else
+        state
+
+    when LOCATION_CHANGE
+      if action.payload.action == 'POP'
+        layout_packed = getNewUrlParam(action.payload, URL_PARAM_LAYOUT)
+
+        new_state = Object.assign({}, state)
+
+        if layout_packed?
+          new_layout = unpackLayout(layout_packed)
+          if isEqual(new_layout, state.pile)
+            state
+          else
+            new_state.pile = new_layout
+        else
+          new_state.pile = DEFAULT_LAYOUT
+
+        new_state
+
       else
         state
 

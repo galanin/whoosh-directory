@@ -82,5 +82,44 @@ export getOffsetsUnion = (offsets1, offsets2) ->
   new_offsets.day_offset_start = offsets2.day_offset_left
   new_offsets.day_offset_start = Math.max(new_offsets.day_offset_start, new_offsets.day_offset_left)
   new_offsets.day_offset_start = Math.min(new_offsets.day_offset_start, new_offsets.day_offset_right)
+  new_offsets.day_scroll_to = new_offsets.day_offset_start
 
   new_offsets
+
+
+export isEqualBirthdayPeriod = (period1, period2) ->
+  !period1? and !period2? or
+  period1? and period2? and
+  period1.key_date == period2.key_date and
+  period1.day_offset_left == period2.day_offset_left and
+  period1.day_offset_right == period2.day_offset_right and
+  period1.day_offset_start == period2.day_offset_start
+
+
+export isPresentBirthdayPeriod = (period) ->
+  period? and period.key_date? and period.day_offset_left? and period.day_offset_right? and period.day_offset_start?
+
+
+export prevBirthdayPeriod = (period) ->
+  Object.assign({}, period)
+
+
+export packBirthdayPeriod = (period) ->
+  start = period.day_offset_start.toString().replace('-', '_')
+  left = period.day_offset_left.toString().replace('-', '_')
+  right = period.day_offset_right.toString().replace('-', '_')
+  "#{period.key_date}-#{start}-#{left}-#{right}"
+
+
+export unpackBirthdayPeriod = (str) ->
+  period_arr = str.split('-')
+  start = +period_arr[1].replace('_', '-')
+  left = +period_arr[2].replace('_', '-')
+  right = +period_arr[3].replace('_', '-')
+  if period_arr[0]? and start? and left? and right? and !isNaN(start) and !isNaN(left) and !isNaN(right)
+    key_date:         period_arr[0]
+    day_offset_left:  left
+    day_offset_right: right
+    day_offset_start: start
+  else
+    {}

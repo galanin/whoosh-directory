@@ -1,6 +1,8 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
+import { RESULTS_SOURCE_BIRTHDAY } from '@constants/search'
+
 div = React.createFactory('div')
 
 import SearchPanel from '@components/staff/SearchPanel'
@@ -66,7 +68,7 @@ class WorkingArea extends React.Component
           else
             dummy_info {}
         div { className: "working-area__block working-area__results socket block-index-#{pile_hash['search-results']}" },
-          if @props.results_source == 'birthday' or @props.results_type == 'birthday'
+          if @props.results_source == RESULTS_SOURCE_BIRTHDAY or @props.results_type == 'birthday'
             birthdays {}
           else
             search_results {}

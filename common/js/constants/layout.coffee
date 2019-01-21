@@ -5,9 +5,17 @@ export LAYOUT_BLOCK_STRUCTURE = 'structure'
 export LAYOUT_BLOCK_UNIT_INFO = 'unit-info'
 export LAYOUT_BLOCK_EMPLOYEE_INFO = 'employee-info'
 export LAYOUT_BLOCK_SEARCH_RESULTS = 'search-results'
-export LAYOUT_BLOCK_BIRTHDAYS = 'birthdays'
 export LAYOUT_BLOCK_FAVORITES = 'favorites'
 export LAYOUT_BLOCK_RECENT = 'recent'
+
+export DEFAULT_LAYOUT = [
+  LAYOUT_BLOCK_RECENT
+  LAYOUT_BLOCK_FAVORITES
+  LAYOUT_BLOCK_EMPLOYEE_INFO
+  LAYOUT_BLOCK_UNIT_INFO
+  LAYOUT_BLOCK_STRUCTURE
+  LAYOUT_BLOCK_SEARCH_RESULTS
+]
 
 # stay synced with  common/css/resources/_layouts.sass
 export ONE_COLUMN_MAX = 959

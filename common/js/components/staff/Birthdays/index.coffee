@@ -18,9 +18,9 @@ contact = React.createFactory(Contact)
 
 
 mapStateToProps = (state, ownProps) ->
-  do_scroll = state.birthday_period.day_offset_start?
+  do_scroll = state.birthday_period.day_scroll_to?
   if do_scroll
-    scroll_to_day_offset = state.birthday_period.day_offset_start
+    scroll_to_day_offset = state.birthday_period.day_scroll_to
     scroll_to_day_number = getDayNumberByOffset(state.birthday_period.key_date, scroll_to_day_offset)
     scroll_to_date = dateByDayNumber(scroll_to_day_number)
     do_scroll &&= state.birthdays[scroll_to_date]?

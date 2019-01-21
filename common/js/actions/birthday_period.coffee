@@ -21,7 +21,7 @@ export setBirthdayPeriod = (key_date, day_offset_left, day_offset_right) ->
   day_offset_left: day_offset_left
   day_offset_right: day_offset_right
   day_offset_start: day_offset_left
-
+  day_scroll_to: day_offset_left
 
 export extendBirthdayPeriodLeft = (days) ->
   type: EXTEND_BIRTHDAY_PERIOD_LEFT
