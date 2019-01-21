@@ -5,6 +5,7 @@ import { ADD_EMPLOYMENTS } from '@constants/employments'
 import { addPeople } from '@actions/people'
 import { addUnitTitles } from '@actions/unit_titles'
 
+
 export addEmployments = (employments) ->
   type: ADD_EMPLOYMENTS
   employments: employments
@@ -49,6 +50,13 @@ getMissingParentEmployIds = (state, employment) ->
   filter(raw_employ_ids)
 
 
+export loadEmployments = (employment_ids) ->
+  (dispatch, getState) ->
+    Request.get('/employments/' + join(employment_ids, ',')).then (response) ->
+      dispatch(addPeople(response.body.people))
+      dispatch(addEmployments(response.body.employments))
+
+
 export loadUnitHierarchy = (employment_id) ->
   (dispatch, getState) ->
     state = getState()
@@ -66,6 +74,4 @@ export loadEmploymentHierarchy = (employment_id) ->
     employment = state.employments[employment_id]
     missing_employ_ids = getMissingParentEmployIds(state, employment)
     if missing_employ_ids.length > 0
-      Request.get('/employments/' + join(missing_employ_ids, ',')).then (response) ->
-        dispatch(addPeople(response.body.people))
-        dispatch(addEmployments(response.body.employments))
+      dispatch(loadEmployments(missing_employ_ids))
