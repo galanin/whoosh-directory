@@ -22,7 +22,7 @@ class Email extends React.Component
       div { className: 'iconed-data__row iconed-data__row-title' },
         'E-mail'
       div { className: 'iconed-data__row iconed-data__row-data' },
-        a { className: 'iconed-data__email-link', href: 'mailto:' + @props.email },
+        a { className: 'iconed-data__row-data-value iconed-data__email-link', href: 'mailto:' + @props.email },
           @props.email
 
 
