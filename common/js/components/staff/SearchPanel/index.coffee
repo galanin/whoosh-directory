@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import SvgIcon from '@components/common/SvgIcon'
 
-import { RESULTS_SOURCE_QUERY } from '@lib/search'
+import { RESULTS_SOURCE_QUERY } from '@constants/search'
 
 import { setQuery, forceQueryResults, setResultsSource } from '@actions/search'
 import { popSearchResults } from '@actions/layout'
