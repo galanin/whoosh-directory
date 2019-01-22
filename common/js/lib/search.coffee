@@ -24,3 +24,11 @@ export packResultsSource = (source) ->
 
 export unpackResultsSource = (source_code) ->
   SOURCE_IDS[source_code]
+
+
+export packQuery = (query) ->
+  encodeURIComponent(query)
+
+
+export unpackQuery = (query_packed) ->
+  decodeURIComponent(query_packed)

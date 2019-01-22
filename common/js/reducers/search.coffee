@@ -2,9 +2,9 @@ import { isEqual } from 'lodash'
 
 import { LOCATION_CHANGE } from 'connected-react-router'
 import { getNewUrlParam } from '@lib/url-parsing'
-import { URL_PARAM_RESULTS_SOURCE } from '@constants/url-parsing'
+import { URL_PARAM_RESULTS_SOURCE, URL_PARAM_QUERY } from '@constants/url-parsing'
 
-import { unpackResultsSource } from '@lib/search'
+import { unpackResultsSource, unpackQuery } from '@lib/search'
 
 import {
   SET_HUMAN_QUERY
@@ -47,6 +47,7 @@ export default (state = { query: '', current_machine_query: '' }, action) ->
     when LOCATION_CHANGE
       if action.payload.action == 'POP'
         results_source_packed = getNewUrlParam(action.payload, URL_PARAM_RESULTS_SOURCE)
+        query = getNewUrlParam(action.payload, URL_PARAM_QUERY)
 
         new_state = Object.assign({}, state)
 
@@ -58,6 +59,11 @@ export default (state = { query: '', current_machine_query: '' }, action) ->
             new_state.results_source = new_results_source
         else
           new_state.results_source = DEFAULT_RESULTS_SOURCE
+
+        if query?
+          new_state.current_machine_query = new_state.query = unpackQuery(query)
+        else
+          new_state.current_machine_query = new_state.query = ''
 
         new_state
 
