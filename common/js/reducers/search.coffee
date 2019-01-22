@@ -16,7 +16,7 @@ import {
 } from '@constants/search'
 
 
-export default (state = {}, action) ->
+export default (state = { query: '', current_machine_query: '' }, action) ->
   switch action.type
 
     when SET_HUMAN_QUERY
