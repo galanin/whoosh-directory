@@ -140,5 +140,98 @@ module Staff
       present :people, people
     end
 
+
+    namespace 'user_information' do
+
+      before { current_session = UserSession.find(params[:session_token]) }
+
+      namespace "expanded" do
+
+        desc 'Add unit_id to expanded_units'
+        post ':unit_id/expand' do
+          #TODO
+        end
+
+        desc 'Remove unit_id from expanded_units'
+        post ':unit_id/collapse' do
+          #TODO
+        end
+
+      end
+
+
+      namespace 'to_call' do
+
+        desc 'Returns all ToCalls'
+        get do
+          #TODO
+        end
+
+
+        desc 'Add ToCall'
+        post ':employ_id' do
+          #TODO
+        end
+
+
+        desc 'Set checked'
+        post ':id/checked' do
+          #TODO
+        end
+
+
+        desc "Set unchecked"
+        post ':id/unchecked' do
+          #TODO
+        end
+
+
+        desc "Delete ToCall"
+        delete ':id' do
+          #TODO
+        end
+
+      end
+
+
+      namespace 'favorites' do
+
+        desc 'Return all Favorites'
+        get do
+          #TODO
+        end
+
+
+        desc 'Add Favorite'
+        post ':type/:id' do
+          #TODO
+        end
+
+
+        desc 'Delete Favorite'
+        delete ':id' do
+          #TODO
+        end
+
+      end
+
+
+      namespace 'history' do
+
+        desc 'Return all History'
+        get do
+          #TODO
+        end
+
+
+        desc 'Add History'
+        post ':type/:id' do
+          #TODO
+        end
+
+      end
+
+    end
+
   end
 end
