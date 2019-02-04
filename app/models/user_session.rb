@@ -11,6 +11,7 @@ class UserSession < ApplicationRecord
 
   cattr_reader :current, instance_reader: false
 
+  belongs_to :user_information
 
   before_create do |session|
     session.token = SecureRandom.urlsafe_base64(TOKEN_LENGTH)
@@ -22,13 +23,18 @@ class UserSession < ApplicationRecord
   end
 
 
+  def self.find!(token)
+    UserSession.find_by!(token: token)
+  end
+
+
   def self.find(token)
     UserSession.where(token: token).first if token.present?
   end
 
 
   def self.find_or_create(token)
-    find(token) || UserSession.create
+    find(token) || UserSession.create(user_information: UserInformation.create)
   end
 
 end

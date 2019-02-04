@@ -59,4 +59,9 @@ class Employment < ApplicationRecord
     vacation_begin && vacation_end && today >= vacation_begin && today <= vacation_end
   end
 
+
+  def self.find(short_id)
+    Employment.where(short_id: short_id).first if short_id.present?
+  end
+
 end

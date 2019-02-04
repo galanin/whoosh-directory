@@ -1,6 +1,11 @@
 module Staff
   class API < Grape::API
 
+    rescue_from Mongoid::Errors::DocumentNotFound do |e|
+      error!(e, 404)
+    end
+
+
     format :json
     prefix :api
     helpers FetchingHelpers, BirthdayHelpers
@@ -143,52 +148,65 @@ module Staff
 
     namespace 'user_information' do
 
-      before { current_session = UserSession.find(params[:session_token]) }
+      before do
+        current_session = UserSession.find!(params[:session_token])
+        @user_information = current_session.user_information
+      end
 
-      namespace "expanded" do
+      after do
+        @user_information.save if @user_information.changed?
+      end
 
-        desc 'Add unit_id to expanded_units'
-        post ':unit_id/expand' do
-          #TODO
+
+      desc 'Returns expanded_units field From UserInformation object'
+      get 'expanded_units' do
+        present :expanded_units, @user_information.expanded_units
+      end
+
+
+      desc 'Add unit_ids to UserInformation object expanded_units field'
+      post ':unit_id/expand' do
+        unit_ids = params[:unit_id].to_s.split(',').presence.compact
+        if unit_ids.present?
+          @user_information.add_to_expanded_units(unit_ids)
         end
+      end
 
-        desc 'Remove unit_id from expanded_units'
-        post ':unit_id/collapse' do
-          #TODO
+      desc 'Remove unit_id from UserInformation object expanded_units field'
+      post ':unit_id/collapse' do
+        if params[:unit_id].present?
+          @user_information.delete_from_expanded_unit(params[:unit_id])
         end
-
       end
 
 
       namespace 'to_call' do
 
-        desc 'Returns all ToCalls'
+        desc 'Returns all ToCalls records from UserInformation'
         get do
-          #TODO
+          present :data, @user_information.to_call.as_json
+          present :unchecked, @user_information.to_call_unchecked_ids
+          present :checked, @user_information.to_call_checked_ids
         end
 
 
-        desc 'Add ToCall'
+        desc 'Create object ToCall class or set checked if object exist '
         post ':employ_id' do
-          #TODO
+          @user_information.create_to_call(params[:employ_id])
         end
 
 
-        desc 'Set checked'
-        post ':id/checked' do
-          #TODO
+        desc "Find object ToCall class by short_id and set unchecked"
+        post ':employ_id/check' do
+          @user_information.check_to_call(params[:employ_id])
         end
 
 
-        desc "Set unchecked"
-        post ':id/unchecked' do
-          #TODO
-        end
-
-
-        desc "Delete ToCall"
-        delete ':id' do
-          #TODO
+        desc "Find object ToCall class and destroy it"
+        delete ':employ_id' do
+          if params[:employ_id].present?
+            @user_information.destroy_to_call(params[:employ_id])
+          end
         end
 
       end
