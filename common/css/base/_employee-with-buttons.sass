@@ -1,0 +1,68 @@
+.employee-with-buttons
+  position: relative
+
+  &.list-item.shadow
+    .employee__info,
+    .employee__phones
+      padding-top: 4px
+      padding-bottom: 4px
+      padding-right: 8px
+
+  &:hover
+    .employee-with-buttons__buttons
+      visibility: visible
+      filter: opacity(1)
+      transition: visibility .3s step-start, filter .3s ease-out
+
+  &.employee-with-buttons_is-to-call-scheduled
+    .employee-with-buttons__to-call
+      svg
+        path
+          fill: #64d57f
+
+
+.employee-with-buttons__horizontal
+  display: flex
+
+.employee-with-buttons__employee
+  flex: 1 1 auto
+
+.employee-with-buttons__buttons
+  visibility: hidden
+  filter: opacity(0)
+  transition: visibility .3s step-end, filter .3s ease-out
+  position: absolute
+  right: 0
+  top: 0
+  bottom: 0
+  background-color: rgba(246, 246, 246, 0.95)
+  overflow: hidden
+  display: flex
+  flex-direction: column
+  flex-wrap: wrap-reverse
+
+.employee-with-buttons__button
+  flex: 0 0 auto
+  width: 40px
+  height: 40px
+  cursor: pointer
+
+  &:hover
+    background-color: #f0f0f0
+
+    svg
+      path
+        fill: #888
+
+  svg
+    path
+      fill: #aaa
+
+.employee-with-buttons__to-call
+  svg
+    display: block
+    width: 24px
+    height: 24px
+    margin: 8px
+
+

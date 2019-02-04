@@ -5,8 +5,8 @@ import { isArray } from 'lodash'
 
 div = React.createFactory('div')
 
-import Employee from '@components/staff/Employee'
-employee = React.createFactory(Employee)
+import EmployeeWithButtons from '@components/staff/EmployeeWithButtons'
+employee = React.createFactory(EmployeeWithButtons)
 
 import OrganizationSubUnit from '@components/staff/OrganizationSubUnit'
 sub_unit = React.createFactory(OrganizationSubUnit)

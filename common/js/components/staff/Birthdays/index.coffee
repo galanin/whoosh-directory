@@ -10,8 +10,8 @@ import { scrolledToDate, extendBirthdayPeriodRight, extendBirthdayPeriodLeft } f
 div = React.createFactory('div')
 scroll_element = React.createFactory(ScrollElement)
 
-import Employee from '@components/staff/Employee'
-employee = React.createFactory(Employee)
+import EmployeeWithButtons from '@components/staff/EmployeeWithButtons'
+employee = React.createFactory(EmployeeWithButtons)
 
 import Contact from '@components/staff/Contact'
 contact = React.createFactory(Contact)

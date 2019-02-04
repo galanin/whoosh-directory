@@ -22,6 +22,7 @@ mapStateToProps = (state, ownProps) ->
   person: employment && state.people[employment.person_id]
   unit: employment && state.units[employment.unit_id]
   current_employment_id: state.current.employment_id
+  is_to_call : state.to_call?.unchecked_employment_index?[ownProps.employment_id]
 
 mapDispatchToProps = (dispatch, ownProps) ->
   setCurrentEmployee: ->
@@ -102,6 +103,9 @@ class Employee extends React.Component
               phone[1]
 
       div { className: 'employee__status-container' },
+        if @props.is_to_call
+          div { className: 'employee__status employee__to-call' },
+            'Позвонить'
         if @props.employment.on_vacation
           div { className: 'employee__status employee__on-vacation' },
             'В отпуске'

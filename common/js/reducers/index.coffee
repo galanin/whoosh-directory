@@ -17,6 +17,7 @@ import search from '@reducers/search'
 import search_cache from '@reducers/search_cache'
 import birthdays from '@reducers/birthdays'
 import birthday_period from '@reducers/birthday_period'
+import to_call from '@reducers/to_call'
 
 
 export default (history) ->
@@ -37,4 +38,5 @@ export default (history) ->
     search_cache:       search_cache
     birthdays:          birthdays
     birthday_period:    birthday_period
+    to_call:            to_call
     router:             connectRouter(history)
