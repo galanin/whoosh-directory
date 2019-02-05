@@ -1,4 +1,4 @@
-import { Request } from '@lib/request'
+import { UserRequest } from '@lib/request'
 
 import {
   LOADED_TO_CALL
@@ -18,7 +18,7 @@ export loadedToCall = (to_call_arr) ->
 export addToCall = (employment_id) ->
   (dispatch, getState) ->
     dispatch(addingToCall(employment_id))
-    Request.post('/to_call/' + employment_id).then (response) ->
+    UserRequest.post(getState().session?.token, '/to_call/' + employment_id).then (response) ->
       dispatch(changedToCall(response.body.to_call, response.body.checked, response.body.unchecked))
 
     , (error) ->
@@ -32,7 +32,7 @@ export addingToCall = (employment_id) ->
 export checkToCall = (employment_id) ->
   (dispatch, getState) ->
     dispatch(checkingToCall(employment_id))
-    Request.post('/to_call/' + employment_id + '/check').then (response) ->
+    UserRequest.post(getState().session?.token, '/to_call/' + employment_id + '/check').then (response) ->
       dispatch(changedToCall(response.body.to_call, response.body.checked, response.body.unchecked))
 
     , (error) ->
@@ -52,7 +52,7 @@ export changedToCall = (to_call, unchecked, checked) ->
 
 export destroyToCall = (to_call_id) ->
   (dispatch, getState) ->
-    Request.delete('/to_call/' + to_call_id).then (response) ->
+    UserRequest.delete(getState().session?.token, '/to_call/' + to_call_id).then (response) ->
 
     , (error) ->
 

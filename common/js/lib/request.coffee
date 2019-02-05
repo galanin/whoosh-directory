@@ -20,3 +20,17 @@ export Request =
 
   post: (url, params = {}) ->
     superagent.post("#{baseURL}#{url}").send(params)
+
+
+export UserRequest =
+  del: (session_token, url, params = {}) ->
+    superagent.del("#{baseURL}/user_information#{url}").query(session_token: session_token).query(params)
+
+  get: (session_token, url, params = {}) ->
+    superagent.get("#{baseURL}/user_information#{url}").query(session_token: session_token).query(params)
+
+  put: (session_token, url, params = {}) ->
+    superagent.put("#{baseURL}/user_information#{url}").send(session_token: session_token).send(params)
+
+  post: (session_token, url, params = {}) ->
+    superagent.post("#{baseURL}/user_information#{url}").query(session_token: session_token).send(params)
