@@ -10,9 +10,19 @@ import {
 } from '@constants/to_call'
 
 
-export loadedToCall = (to_call_arr) ->
+export loadToCall = ->
+  (dispatch, getState) ->
+    UserRequest.get(getState().session?.token, '/to_call').then (response) ->
+      dispatch(loadedToCall(response.body.data, response.body.unchecked, response.body.checked))
+
+    , (error) ->
+
+
+export loadedToCall = (data, unchecked, checked) ->
   type: LOADED_TO_CALL
-  to_call_arr: to_call_arr
+  data: data
+  unchecked: unchecked
+  checked: checked
 
 
 export addToCall = (employment_id) ->
