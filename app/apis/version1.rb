@@ -157,26 +157,30 @@ module Staff
         @user_information.save if @user_information.changed?
       end
 
+      namespace 'expanded_units' do
 
-      desc 'Returns expanded_units field From UserInformation object'
-      get 'expanded_units' do
-        present :expanded_units, @user_information.expanded_units
-      end
-
-
-      desc 'Add unit_ids to UserInformation object expanded_units field'
-      post ':unit_id/expand' do
-        unit_ids = params[:unit_id].to_s.split(',').presence.compact
-        if unit_ids.present?
-          @user_information.add_to_expanded_units(unit_ids)
+        desc 'Returns expanded_units field From UserInformation object'
+        get do
+          present :expanded_units, @user_information.expanded_units
         end
-      end
 
-      desc 'Remove unit_id from UserInformation object expanded_units field'
-      post ':unit_id/collapse' do
-        if params[:unit_id].present?
-          @user_information.delete_from_expanded_unit(params[:unit_id])
+
+        desc 'Add unit_ids to UserInformation object expanded_units field'
+        post ':unit_id' do
+          unit_ids = params[:unit_id].to_s.split(',').presence.compact
+          if unit_ids.present?
+            @user_information.add_to_expanded_units(unit_ids)
+          end
         end
+
+
+        desc 'Remove unit_id from UserInformation object expanded_units field'
+        post ':unit_id/collapse' do
+          if params[:unit_id].present?
+            @user_information.delete_from_expanded_unit(params[:unit_id])
+          end
+        end
+
       end
 
 
