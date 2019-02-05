@@ -64,11 +64,12 @@ class UserInformation < ApplicationRecord
 
 
   def to_call_checked_ids
-    to_call.checked.map(&:short_id)
+    to_call.checked.pluck(:short_id)
   end
 
+
   def to_call_unchecked_ids
-    to_call.unchecked.map(&:short_id)
+    to_call.unchecked.pluck(:short_id)
   end
 
 
