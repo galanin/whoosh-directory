@@ -29,7 +29,7 @@ export addToCall = (employment_id) ->
   (dispatch, getState) ->
     dispatch(addingToCall(employment_id))
     UserRequest.post(getState().session?.token, '/to_call/' + employment_id).then (response) ->
-      dispatch(changedToCall(response.body.to_call, response.body.checked, response.body.unchecked))
+      dispatch(changedToCall(response.body.to_call, response.body.unchecked, response.body.checked))
 
     , (error) ->
 
@@ -43,7 +43,7 @@ export checkToCall = (employment_id) ->
   (dispatch, getState) ->
     dispatch(checkingToCall(employment_id))
     UserRequest.post(getState().session?.token, '/to_call/' + employment_id + '/check').then (response) ->
-      dispatch(changedToCall(response.body.to_call, response.body.checked, response.body.unchecked))
+      dispatch(changedToCall(response.body.to_call, response.body.unchecked, response.body.checked))
 
     , (error) ->
 
