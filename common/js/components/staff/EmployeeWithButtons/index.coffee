@@ -27,6 +27,7 @@ mapDispatchToProps = (dispatch, ownProps) ->
   checkToCall: ->
     dispatch(checkToCall(ownProps.employment_id))
 
+
 class EmployeeWithButtons extends React.Component
 
   onAddToCall: ->
