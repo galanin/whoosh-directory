@@ -8,9 +8,13 @@ import { setCurrentEmploymentId } from '@actions/current'
 import { popEmployeeInfo } from '@actions/layout'
 import { currentTime, todayDate } from '@lib/datetime'
 
+import SvgIcon from '@components/common/SvgIcon'
+import ToCallIcon from '@icons/call.svg'
+
 div = React.createFactory('div')
 span = React.createFactory('span')
 img = React.createFactory('img')
+svg = React.createFactory(SvgIcon)
 
 import CommonAvatar from '@components/staff/CommonAvatar'
 avatar = React.createFactory(CommonAvatar)
@@ -88,6 +92,8 @@ class Employee extends React.Component
             @props.person.first_name
           span { className: 'employee__middle-name' },
             @props.person.middle_name
+          if @props.is_to_call
+            svg { className: 'employee__to-call', svg: ToCallIcon }
 
         div { className: 'employee__post_title' },
           @props.employment.post_title
@@ -103,9 +109,6 @@ class Employee extends React.Component
               phone[1]
 
       div { className: 'employee__status-container' },
-        if @props.is_to_call
-          div { className: 'employee__status employee__to-call' },
-            'Позвонить'
         if @props.employment.on_vacation
           div { className: 'employee__status employee__on-vacation' },
             'В отпуске'
