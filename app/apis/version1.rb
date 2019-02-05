@@ -192,13 +192,21 @@ module Staff
 
         desc 'Create object ToCall class or set checked if object exist '
         post ':employ_id' do
-          @user_information.create_to_call(params[:employ_id])
+          to_call_entity = @user_information.create_to_call(params[:employ_id])
+
+          present :to_call, to_call_entity
+          present :unchecked, @user_information.to_call_unchecked_ids
+          present :checked, @user_information.to_call_checked_ids
         end
 
 
         desc "Find object ToCall class by short_id and set unchecked"
         post ':employ_id/check' do
-          @user_information.check_to_call(params[:employ_id])
+          to_call_entity = @user_information.check_to_call(params[:employ_id])
+
+          present :to_call, to_call_entity
+          present :unchecked, @user_information.to_call_unchecked_ids
+          present :checked, @user_information.to_call_checked_ids
         end
 
 
@@ -207,6 +215,9 @@ module Staff
           if params[:employ_id].present?
             @user_information.destroy_to_call(params[:employ_id])
           end
+
+          present :unchecked, @user_information.to_call_unchecked_ids
+          present :checked, @user_information.to_call_checked_ids
         end
 
       end

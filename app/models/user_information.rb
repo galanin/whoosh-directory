@@ -28,6 +28,7 @@ class UserInformation < ApplicationRecord
     to_call_entity = find_to_call_by_employment(employment_short_id)
     if to_call_entity.present?
       to_call_entity.uncheck if to_call_entity.checked?
+      to_call_entity
     else
       employment = Employment.find(employment_short_id)
       to_call.create(employment: employment, employment_short_id: employment_short_id)
@@ -38,6 +39,7 @@ class UserInformation < ApplicationRecord
   def check_to_call(employment_short_id)
     to_call_entity = find_to_call_by_employment(employment_short_id)
     to_call_entity.check unless to_call_entity.checked?
+    to_call_entity
   end
 
 
