@@ -2,6 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import SvgIcon from '@components/common/SvgIcon'
 import Silhouette from '@components/contact_info/CommonSilhouette'
+import EmployeeButtons from '@components/common/EmployeeButtons'
 import Phones from '@components/contact_info/Phones'
 import Email from '@components/contact_info/Email'
 import OfficeLocation from '@components/contact_info/OfficeLocation'
@@ -23,6 +24,7 @@ a = React.createFactory('a')
 img = React.createFactory('img')
 svg = React.createFactory(SvgIcon)
 silhouette = React.createFactory(Silhouette)
+buttons = React.createFactory(EmployeeButtons)
 phones = React.createFactory(Phones)
 email = React.createFactory(Email)
 location = React.createFactory(OfficeLocation)
@@ -118,6 +120,8 @@ class EmployeeInfo extends React.Component
                   silhouette { className: 'employee-info__avatar', gender: @props.person.gender }
 
               div { className: 'employee-info__data' },
+                buttons { employment_id: @props.employment_id }
+
                 phones { format_phones: @props.employment.format_phones, className: 'employee-info__iconed-data employee-info__phones' }
 
                 email { email: @props.person.email, className: 'employee-info__iconed-data employee-info__email' }
