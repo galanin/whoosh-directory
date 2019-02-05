@@ -186,11 +186,14 @@ module Staff
 
       namespace 'to_call' do
 
+        after do
+          present :unchecked, @user_information.to_call_unchecked_ids
+          present :checked, @user_information.to_call_checked_ids
+        end
+
         desc 'Returns all ToCalls records from UserInformation'
         get do
           present :data, @user_information.to_call.as_json
-          present :unchecked, @user_information.to_call_unchecked_ids
-          present :checked, @user_information.to_call_checked_ids
         end
 
 
@@ -199,8 +202,6 @@ module Staff
           to_call_entity = @user_information.create_to_call(params[:employ_id])
 
           present :to_call, to_call_entity
-          present :unchecked, @user_information.to_call_unchecked_ids
-          present :checked, @user_information.to_call_checked_ids
         end
 
 
@@ -209,8 +210,6 @@ module Staff
           to_call_entity = @user_information.check_to_call(params[:employ_id])
 
           present :to_call, to_call_entity
-          present :unchecked, @user_information.to_call_unchecked_ids
-          present :checked, @user_information.to_call_checked_ids
         end
 
 
@@ -219,9 +218,6 @@ module Staff
           if params[:employ_id].present?
             @user_information.destroy_to_call(params[:employ_id])
           end
-
-          present :unchecked, @user_information.to_call_unchecked_ids
-          present :checked, @user_information.to_call_checked_ids
         end
 
       end
