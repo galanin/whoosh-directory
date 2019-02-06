@@ -178,7 +178,7 @@ module Staff
 
 
         desc 'Remove unit_id from UserInformation object expanded_units field'
-        post ':unit_id/collapse' do
+        delete ':unit_id' do
           if params[:unit_id].present?
             @user_information.delete_from_expanded_unit(params[:unit_id])
           end
