@@ -5,7 +5,7 @@ import classNames from 'classnames'
 
 import { highlightUnit, goToUnitInStructure } from '@actions/units'
 import { setHighlightedUnitId } from '@actions/current'
-import { popUnitInfo } from '@actions/layout'
+import { popUnitInfo, popStructure } from '@actions/layout'
 
 div = React.createFactory('div')
 
@@ -17,6 +17,7 @@ mapDispatchToProps = (dispatch, ownProps) ->
   click: ->
     dispatch(goToUnitInStructure(ownProps.unit_id))
     dispatch(popUnitInfo())
+    dispatch(popStructure())
 
 
 class SearchResultUnit extends React.Component
