@@ -25,7 +25,6 @@ module Staff
     get :session do
       current_session = UserSession.find_or_create(params[:session_token])
       present :session_token, current_session.token
-      present :expanded_units, current_session.data[:expanded_units]
     end
 
 

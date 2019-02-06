@@ -8,7 +8,7 @@ export loadSession = ->
     state = getState()
     Request.get('/session', session_token: state.session?.token).then (result) ->
       dispatch(setSessionToken(result.body.session_token))
-      dispatch(setExpandedUnits(result.body.expanded_units))
+
     , (error) ->
 
 
