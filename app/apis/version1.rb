@@ -17,7 +17,7 @@ module Staff
 
 
     options '*' do
-      header 'Access-Control-Allow-Methods', 'POST, PUT, DELETE'
+      header 'Access-Control-Allow-Methods', 'OPTIONS, GET, POST, PUT, DELETE'
       header 'Access-Control-Allow-Headers', 'Content-Type'
     end
 
