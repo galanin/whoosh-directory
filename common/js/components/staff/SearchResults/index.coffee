@@ -7,8 +7,8 @@ div = React.createFactory('div')
 import SearchResultUnit from '@components/staff/SearchResultUnit'
 result_unit = React.createFactory(SearchResultUnit)
 
-import Employee from '@components/staff/Employee'
-employee = React.createFactory(Employee)
+import EmployeeWithButtons from '@components/staff/EmployeeWithButtons'
+employee = React.createFactory(EmployeeWithButtons)
 
 import Contact from '@components/staff/Contact'
 contact = React.createFactory(Contact)

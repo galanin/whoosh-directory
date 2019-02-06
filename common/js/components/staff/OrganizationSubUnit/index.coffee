@@ -10,8 +10,8 @@ div = React.createFactory('div')
 span = React.createFactory('span')
 svg = React.createFactory(SvgIcon)
 
-import Employee from '@components/staff/Employee'
-employee = React.createFactory(Employee)
+import EmployeeWithButtons from '@components/staff/EmployeeWithButtons'
+employee = React.createFactory(EmployeeWithButtons)
 
 import Triangle from '@icons/triangle.svg'
 
