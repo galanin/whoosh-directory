@@ -10,8 +10,8 @@ class ToCall < ApplicationRecord
   belongs_to :employment
   embedded_in :user_information
 
-  scope :checked, -> { where(:checked_at.ne => nil).order(checked_at: :asc) }
-  scope :unchecked, -> { where(:checked_at => nil).order(update_at: :desc) }
+  scope :checked, -> { where(:checked_at.ne => nil).order(checked_at: :desc) }
+  scope :unchecked, -> { where(:checked_at => nil).order(updated_at: :desc) }
 
 
   def as_json(options = nil)
