@@ -31,7 +31,7 @@ class UserInformation < ApplicationRecord
       to_call_entity.uncheck if to_call_entity.checked?
       to_call_entity
     else
-      employment = Employment.find(employment_short_id)
+      employment = Employment.find_by(short_id: employment_short_id)
       to_call.create(employment: employment, employment_short_id: employment_short_id)
     end
   end
@@ -75,7 +75,7 @@ class UserInformation < ApplicationRecord
   def create_to_favorite(entity_name, entity_short_id)
     favorite_entity = find_favorite_by_entity(entity_short_id)
     if favorite_entity.empty?
-      entity = entity_name.camelize.constantize.find(entity_short_id)
+      entity = entity_name.camelize.constantize.find_by(short_id: entity_short_id)
       favorite.create(favoritable: entity, favorable_short_id: entity_short_id)
     end
   end
