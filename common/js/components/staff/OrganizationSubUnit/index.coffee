@@ -41,7 +41,7 @@ class OrganizationSubUnit extends React.Component
 
 
   render: ->
-    return '' unless @props.unit_data
+    return '' unless @props.unit_data?
 
     sub_unit_class_names = classNames
       'sub-unit': true

@@ -78,8 +78,9 @@ class EmployeeInfo extends React.Component
             div { className: 'employee-info__post_title' },
               @props.contact.post_title
 
-            a { className: 'employee-info__unit_title', onClick: @onUnitClick.bind(this), href: '/' },
-              @props.unit.list_title
+            if @props.unit?
+              a { className: 'employee-info__unit_title', onClick: @onUnitClick.bind(this), href: '/' },
+                @props.unit.list_title
 
             div { className: 'employee-info__two-columns' },
 

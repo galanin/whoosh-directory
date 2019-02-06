@@ -1,4 +1,5 @@
 import { loadToCall } from '@actions/to_call'
+import { loadUnits } from '@actions/units'
 
 initial_info_requested = null
 
@@ -7,4 +8,7 @@ export default (store) ->
     unless initial_info_requested
       initial_info_requested = true
 
-      store.dispatch(loadToCall())
+      store.dispatch(loadUnits())
+
+      setTimeout (-> store.dispatch(loadToCall())),
+        10

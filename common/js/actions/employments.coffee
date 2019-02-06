@@ -1,5 +1,5 @@
 import { Request } from '@lib/request'
-import { filter, join } from 'lodash'
+import { filter, join, isEmpty } from 'lodash'
 
 import { ADD_EMPLOYMENTS } from '@constants/employments'
 import { addPeople } from '@actions/people'
@@ -12,6 +12,8 @@ export addEmployments = (employments) ->
 
 
 export getParentIds = (state, employment) ->
+  return [] if isEmpty(state.units)
+
   unit_ids = getParentUnitIds(state, employment)
   for unit_id in unit_ids
     unit = state.units[unit_id]
@@ -23,6 +25,8 @@ export getParentIds = (state, employment) ->
 
 
 export getParentUnitIds = (state, employment) ->
+  return [] if isEmpty(state.units)
+
   unit = state.units[employment.unit_id]
   is_boss_him_herself = unit.employ_ids[0] == employment.id
   if is_boss_him_herself

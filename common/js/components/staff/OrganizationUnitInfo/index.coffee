@@ -43,17 +43,17 @@ class OrganizationUnitInfo extends React.Component
             div { className: 'organization-unit__long-title' },
               @props.unit_titles.long_title
 
-          if isArray(@props.unit_data.employ_ids)
+          if isArray(@props.unit_data?.employ_ids)
             div { className: 'organization-unit__employees' },
               for employment_id in @props.unit_data.employ_ids
                 employee key: employment_id, employment_id: employment_id, hide: { unit: true }, className: 'list-item shadow'
 
-          if isArray(@props.unit_data.contact_ids)
+          if isArray(@props.unit_data?.contact_ids)
             div { className: 'organization-unit__contacts' },
               for contact_id in @props.unit_data.contact_ids
                 contact key: contact_id, contact_id: contact_id, hide: { unit: true }, className: 'list-item shadow'
 
-          if isArray(@props.unit_data.child_ids)
+          if isArray(@props.unit_data?.child_ids)
             div { className: 'organization-unit__sub-units' },
               for sub_unit_id in @props.unit_data.child_ids
                 sub_unit { key: 'sub-unit-' + sub_unit_id, unit_id: sub_unit_id }

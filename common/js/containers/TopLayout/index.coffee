@@ -1,7 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { loadSession } from '@actions/session'
-import { loadUnits } from '@actions/units'
 
 div = React.createFactory('div')
 
@@ -16,7 +15,6 @@ class TopLayout extends React.Component
   @fetchData: (state) ->
     Promise.all([
       state.store.dispatch(loadSession())
-      state.store.dispatch(loadUnits())
     ])
 
   render: ->

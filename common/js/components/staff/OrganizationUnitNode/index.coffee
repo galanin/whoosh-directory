@@ -68,7 +68,7 @@ class OrganizationUnitNode extends React.Component
 
 
   render: ->
-    return @props.unit_id unless @props.unit_data?
+    return '' unless @props.unit_data?
 
     has_children = @hasChildren()
 

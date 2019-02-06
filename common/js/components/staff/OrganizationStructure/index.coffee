@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import * as UnitActions from '@actions/units'
+import { isEmpty } from 'lodash'
 
 div = React.createFactory('div')
 
@@ -18,10 +19,12 @@ mapDispatchToProps = (dispatch) ->
 
 
 class OrganizationStructure extends React.Component
+
   @propTypes =
     units: PropTypes.object
 
-  render: ->
+
+  getRoots: ->
     roots = (unit.id for _, unit of @props.units when unit.level == 0)
     roots.sort (a, b) ->
       if a.path < b.path
@@ -30,11 +33,15 @@ class OrganizationStructure extends React.Component
         1
       else
         0
+    roots
 
+
+  render: ->
     div { className: 'organization-structure-scroller soft-shadow plug', id: 'organization-structure-scroller' },
       div { className: 'organization-structure' },
-        for root_id in roots
-          organization_unit { key: root_id, unit_id: root_id }
+        unless isEmpty(@props.units)
+          for root_id in @getRoots()
+            organization_unit { key: root_id, unit_id: root_id }
 
 
 export default connect(mapStateToProps, mapDispatchToProps)(OrganizationStructure)

@@ -45,7 +45,7 @@ mapStateToProps = (state, ownProps) ->
   employment: employment
   person: state.people[employment?.person_id]
   unit: state.units[employment?.unit_id]
-  parents: employment? && reverse(getParentIds(state, employment))
+  parent_ids: employment? && reverse(getParentIds(state, employment))
 
 
 mapDispatchToProps = (dispatch) ->
@@ -109,8 +109,10 @@ class EmployeeInfo extends React.Component
                 @props.person.last_name + ' ' + @props.person.first_name + ' ' + @props.person.middle_name
             div { className: 'employee-info__post_title' },
               @props.employment.post_title
-            a { className: 'employee-info__unit_title', onClick: @onUnitClick.bind(this), href: '/' },
-              @props.unit.list_title
+
+            if @props.unit?
+              a { className: 'employee-info__unit_title', onClick: @onUnitClick.bind(this), href: '/' },
+                @props.unit.list_title
 
             div { className: 'employee-info__two-columns' },
               div { className: 'employee-info__photo' },
@@ -136,12 +138,12 @@ class EmployeeInfo extends React.Component
                   iconed_data { className: 'employee-info__iconed-data employee-info__vacation', icon: VacationIcon, align_icon: 'middle' },
                     'В отпуске'
 
-            if @props.parents?.length > 0
+            if @props.parent_ids?.length > 0
               div { className: 'employee-info__structure' },
                 div { className: 'employee-info__structure-title' },
                   'Оргструктура'
                 div { className: 'employee-info__structure-units' },
-                  for parent in @props.parents
+                  for parent in @props.parent_ids
                     combo_unit_employee(key: parent.unit_id, unit_id: parent.unit_id, employment_id: parent.employment_id, className: 'list-item hair-border')
 
 

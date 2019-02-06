@@ -22,6 +22,8 @@ export openFullPath = (unit_id) ->
   (dispatch, getState) ->
     state = getState()
     unit = state.units[unit_id]
+    return unless unit?
+
     parent_ids = []
     current_unit = unit
     while current_unit.parent_id?
