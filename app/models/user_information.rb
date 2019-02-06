@@ -6,6 +6,7 @@ class UserInformation < ApplicationRecord
 
   has_many :user_session
   embeds_many :to_call, cascade_callbacks: true
+  embeds_many :favorite, cascade_callbacks: true
 
 
   def add_to_expanded_units(unit_ids)
@@ -59,6 +60,9 @@ class UserInformation < ApplicationRecord
   end
 
 
+  private :find_to_call, :find_to_call_by_employment
+
+
   def to_call_checked_ids
     to_call.checked.map(&:short_id)
   end
@@ -66,5 +70,28 @@ class UserInformation < ApplicationRecord
   def to_call_unchecked_ids
     to_call.unchecked.map(&:short_id)
   end
+
+
+  def create_to_favorite(entity_name, entity_short_id)
+    favorite_entity = find_favorite_by_entity(entity_short_id)
+    if favorite_entity.empty?
+      entity = entity_name.camelize.constantize.find(entity_short_id)
+      favorite.create(favoritable: entity, favorable_short_id: entity_short_id)
+    end
+  end
+
+
+  def destroy_favorite(entity_short_id)
+    favorite_entity = find_favorite_by_entity(entity_short_id)
+    if favorite_entity.present?
+      favorite_entity.delete
+    end
+  end
+
+
+  def find_favorite_by_entity(entity_short_id)
+    favorite.where(favorable_short_id: entity_short_id).first if entity_short_id.present?
+  end
+
 
 end

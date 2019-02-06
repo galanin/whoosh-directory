@@ -23,6 +23,11 @@ class Unit < ApplicationRecord
   index({ destroyed_at: 1 }, {})
 
 
+  def self.find(short_id)
+    Unit.where(short_id: short_id).first if short_id.present?
+  end
+
+
   def as_json(options = nil)
     super.slice(
       'long_title', 'short_title', 'list_title',

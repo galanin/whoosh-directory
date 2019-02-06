@@ -193,8 +193,8 @@ module Staff
 
         desc 'Returns all ToCalls records from UserInformation'
         get do
-          employments = Employment.where(destroyed_at: nil).in(short_id: @user_information.to_call.map(&:employment_short_id))
-          people = Person.in(short_id: employments.map(&:person_short_id))
+          employments = Employment.where(destroyed_at: nil).in(short_id: @user_information.to_call.pluck(:employment_short_id))
+          people = Person.in(short_id: employments.pluck(:person_short_id))
 
           present :people, people
           present :employments, employments
