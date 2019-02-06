@@ -12,8 +12,15 @@
   flex: 0 0 auto
   z-index: 9
 
-.working-area__birthday-panel
+.working-area__toolbar-panel
   height: 34px
+  flex: 0 0 auto
+  display: flex
+
+.working-area__toolbar + .working-area__toolbar
+  margin-left: 40px
+
+.working-area__toolbar-item
   flex: 0 0 auto
 
 .working-area__results-panel
@@ -64,7 +71,8 @@
   .working-area__results,
   .working-area__birthdays,
   .working-area__favorites,
-  .working-area__recent
+  .working-area__recent,
+  .working-area__to-call
     position: absolute
     left: 50%
     right: 0
@@ -73,7 +81,8 @@
 
   .working-area__unit-info,
   .working-area__results,
-  .working-area__birthdays
+  .working-area__birthdays,
+  .working-area__to-call
     padding: 15px 0
 
   .working-area__structure,
@@ -92,7 +101,8 @@
 
   .working-area__results,
   .working-area__unit-info,
-  .working-area__birthdays
+  .working-area__birthdays,
+  .working-area__to-call
     position: absolute
     left: 33.3%
     right: 33.3%
@@ -108,7 +118,8 @@
 
   .working-area__unit-info,
   .working-area__results,
-  .working-area__birthdays
+  .working-area__birthdays,
+  .working-area__to-call
     padding: 20px 0
 
   .working-area__structure,
@@ -141,7 +152,8 @@
     bottom: 0
 
   .working-area__favorites,
-  .working-area__recent
+  .working-area__recent,
+  .working-area__to-call
     position: absolute
     left: 75%
     right: 0
@@ -149,7 +161,8 @@
     bottom: 0
 
   .working-area__unit-info,
-  .working-area__results
+  .working-area__results,
+  .working-area__to-call
     padding: 20px 0
 
   .working-area__structure,

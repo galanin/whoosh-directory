@@ -9,11 +9,18 @@ import {
   DESTROYED_TO_CALL
 } from '@constants/to_call'
 
+import { addPeople } from '@actions/people'
+import { addEmployments } from '@actions/employments'
+
 
 export loadToCall = ->
   (dispatch, getState) ->
     UserRequest.get(getState().session?.token, '/to_call').then (response) ->
       dispatch(loadedToCall(response.body.data, response.body.unchecked, response.body.checked))
+      if response.body.people?
+        dispatch(addPeople(response.body.people))
+      if response.body.employments?
+        dispatch(addEmployments(response.body.employments))
 
     , (error) ->
 
@@ -60,18 +67,20 @@ export changedToCall = (to_call, unchecked, checked) ->
   checked: checked
 
 
-export destroyToCall = (to_call_id) ->
+export destroyToCall = (employment_id) ->
   (dispatch, getState) ->
-    UserRequest.delete(getState().session?.token, '/to_call/' + to_call_id).then (response) ->
+    UserRequest.delete(getState().session?.token, '/to_call/' + employment_id).then (response) ->
+      dispatch(destroyedToCall(response.body.unchecked, response.body.checked))
 
     , (error) ->
 
 
-export destroyingToCall = (to_call_id) ->
+export destroyingToCall = (employment_id) ->
   type: DESTROYING_TO_CALL
-  to_call_id: to_call_id
+  to_call_id: employment_id
 
 
-export destroyedToCall = (to_call_id) ->
+export destroyedToCall = (unchecked, checked) ->
   type: DESTROYED_TO_CALL
-  to_call_id: to_call_id
+  unchecked: unchecked
+  checked: checked

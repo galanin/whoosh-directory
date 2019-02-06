@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import classNames from 'classnames'
 
 import SvgIcon from '@components/common/SvgIcon'
-import { addToCall, destroyToCall } from '@actions/to_call'
+import { addToCall, checkToCall, destroyToCall } from '@actions/to_call'
 
 
 div = React.createFactory('div')
@@ -18,43 +18,53 @@ import DestroyIcon from '@icons/recycle-bin.svg'
 
 mapStateToProps = (state, ownProps) ->
   to_call = state.to_call?.data?[ownProps.to_call_id]
-  employment   : state.employments[to_call.employment_id]
+
   to_call      : to_call
-  is_unchecked : state.to_call?.unchecked_employment_index?[ownProps.employment_id]
+  is_unchecked : state.to_call?.unchecked_employment_index?[to_call?.employment_id]
 
 
 mapDispatchToProps = (dispatch, ownProps) ->
-  clickAddToCall: ->
-    dispatch(addToCall(ownProps.employment_id))
+  addToCall: (employment_id) ->
+    dispatch(addToCall(employment_id))
 
-  clickDestroyToCall: ->
-    dispatch(destroyToCall(ownProps.employment_id))
+  checkToCall: (employment_id) ->
+    dispatch(checkToCall(employment_id))
+
+  destroyToCall: (employment_id) ->
+    dispatch(destroyToCall(employment_id))
 
 
-class EmployeeWithButtons extends React.Component
+class EmployeeToCall extends React.Component
 
-  onAddToCall: ->
-    @props.clickAddToCall()
+  onCheck: ->
+    if @props.is_unchecked
+      @props.checkToCall(@props.to_call.employment_id)
+    else
+      @props.addToCall(@props.to_call.employment_id)
 
 
   onDestroyToCall: ->
-    @props.clickDestroyToCall()
+    @props.destroyToCall(@props.to_call.employment_id)
 
 
   render: ->
+    return '' unless @props.to_call?
+
     class_names =
-      'employee-with-buttons' : true
+      'employee-to-call' : true
+      'employee-buttons-container' : true
+      'employee-to-call_is-checked' : !@props.is_unchecked
     class_names[@props.className] = true
 
+    hide = Object.assign({ to_call: true }, @props.hide)
+
     div { className: classNames(class_names) },
-      div { className: 'employee-with-buttons__horizontal' },
-        employee employment_id: @props.employment_id, hide: @props.hide, className: 'employee-with-buttons__employee'
-        div { className: 'employee-with-buttons__buttons' },
-          div { className: 'employee-with-buttons__button employee-with-buttons__add-to-call', onClick: @onAddToCall.bind(this) },
-            svg { className: 'employee-with-buttons__icon employee-with-buttons__to-call', svg: CheckIcon }
-          if @props.to_call
-            div { className: 'employee-with-buttons__button employee-with-buttons__destroy-to-call', onClick: @onAddToCall.bind(this) },
-              svg { className: 'employee-with-buttons__icon employee-with-buttons__destroy', svg: DestroyIcon }
+      employee employment_id: @props.to_call.employment_id, hide: hide, className: 'employee-to-call__employee'
+      div { className: 'employee-to-call__buttons employee-buttons-container__buttons' },
+        div { className: 'employee-to-call__button employee-to-call__check-to-call employee-buttons-container__button', onClick: @onCheck.bind(this) },
+          svg { className: 'employee-to-call__icon employee-to-call__check', svg: CheckIcon }
+        div { className: 'employee-to-call__button employee-to-call__destroy-to-call employee-buttons-container__button', onClick: @onDestroyToCall.bind(this) },
+          svg { className: 'employee-to-call__icon employee-to-call__destroy', svg: DestroyIcon }
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(EmployeeWithButtons)
+export default connect(mapStateToProps, mapDispatchToProps)(EmployeeToCall)

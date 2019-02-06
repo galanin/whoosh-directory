@@ -34,3 +34,6 @@ export UserRequest =
 
   post: (session_token, url, params = {}) ->
     superagent.post("#{baseURL}/user_information#{url}").query(session_token: session_token).send(params)
+
+  delete: (session_token, url, params = {}) ->
+      superagent.delete("#{baseURL}/user_information#{url}").query(session_token: session_token).send(params)

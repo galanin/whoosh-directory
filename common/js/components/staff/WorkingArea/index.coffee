@@ -11,6 +11,9 @@ search_panel = React.createFactory(SearchPanel)
 import BirthdayShortcutPanel from '@components/staff/BirthdayShortcutPanel'
 birthday_panel = React.createFactory(BirthdayShortcutPanel)
 
+import ToCallPanel from '@components/staff/ToCallPanel'
+to_call_panel = React.createFactory(ToCallPanel)
+
 import OrganizationUnitInfo from '@components/staff/OrganizationUnitInfo'
 organization_unit_info = React.createFactory(OrganizationUnitInfo)
 
@@ -31,6 +34,9 @@ search_results = React.createFactory(SearchResults)
 
 import Birthdays from '@components/staff/Birthdays'
 birthdays = React.createFactory(Birthdays)
+
+import ToCallList from '@components/staff/ToCallList'
+to_call = React.createFactory(ToCallList)
 
 
 mapStateToProps = (state) ->
@@ -53,8 +59,9 @@ class WorkingArea extends React.Component
     div { className: 'working-area plug' },
       div { className: 'working-area__search-panel socket' },
         search_panel {}
-      div { className: 'working-area__birthday-panel socket' },
-        birthday_panel {}
+      div { className: 'working-area__toolbar-panel' },
+        birthday_panel { className: 'working-area__toolbar' }
+        to_call_panel { className: 'working-area__toolbar' }
       div { className: 'working-area__results-panel' },
         div { className: "working-area__block working-area__unit-info socket block-index-#{pile_hash['unit-info']}" },
           organization_unit_info {}
@@ -72,6 +79,8 @@ class WorkingArea extends React.Component
             birthdays {}
           else
             search_results {}
+        div { className: "working-area__block working-area__to-call socket block-index-#{pile_hash['to-call']}" },
+          to_call {}
 
 
 export default connect(mapStateToProps, mapDispatchToProps)(WorkingArea)

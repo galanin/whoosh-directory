@@ -1,4 +1,5 @@
 import React from 'react'
+import classNames from 'classnames'
 import BirthdayShortcut from '@components/staff/BirthdayShortcut'
 
 
@@ -8,8 +9,13 @@ shortcut = React.createFactory(BirthdayShortcut)
 
 
 class BirthdayShortcutPanel extends React.Component
+
   render: ->
-    div { className: 'birthday-shortcut-panel' },
+    class_names =
+      'birthday-shortcut-panel' : true
+    class_names[@props.className] = true
+
+    div { className: classNames(class_names) },
       span { className: 'birthday-shortcut-panel__title' },
         'Дни рождения'
       shortcut { className: 'birthday-shortcut-panel__shortcut', shortcut: 'today' },

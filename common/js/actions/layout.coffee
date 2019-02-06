@@ -7,6 +7,7 @@ import {
   LAYOUT_BLOCK_SEARCH_RESULTS
   LAYOUT_BLOCK_FAVORITES
   LAYOUT_BLOCK_RECENT
+  LAYOUT_BLOCK_TO_CALL
 } from '@constants/layout'
 
 export popUnitInfo = ->
@@ -36,3 +37,7 @@ export popFavorites = ->
 export popRecent = ->
   type: POP_LAYOUT_BLOCK
   layout_block: LAYOUT_BLOCK_RECENT
+
+export popToCall = ->
+  type: POP_LAYOUT_BLOCK
+  layout_block: LAYOUT_BLOCK_TO_CALL

@@ -40,15 +40,15 @@ class EmployeeWithButtons extends React.Component
   render: ->
     class_names =
       'employee-with-buttons' : true
+      'employee-buttons-container' : true
       'employee-with-buttons_is-to-call-scheduled' : @props.is_to_call
     class_names[@props.className] = true
 
     div { className: classNames(class_names) },
-      div { className: 'employee-with-buttons__horizontal' },
-        employee employment_id: @props.employment_id, hide: @props.hide, className: 'employee-with-buttons__employee'
-        div { className: 'employee-with-buttons__buttons' },
-          div { className: 'employee-with-buttons__button employee-with-buttons__add-to-call', onClick: @onAddToCall.bind(this) },
-            svg { className: 'employee-with-buttons__icon employee-with-buttons__to-call', svg: ToCallIcon }
+      employee employment_id: @props.employment_id, hide: @props.hide, className: 'employee-with-buttons__employee'
+      div { className: 'employee-with-buttons__buttons employee-buttons-container__buttons' },
+        div { className: 'employee-with-buttons__button employee-with-buttons__add-to-call employee-buttons-container__button', onClick: @onAddToCall.bind(this) },
+          svg { className: 'employee-with-buttons__icon employee-with-buttons__to-call', svg: ToCallIcon }
 
 
 export default connect(mapStateToProps, mapDispatchToProps)(EmployeeWithButtons)

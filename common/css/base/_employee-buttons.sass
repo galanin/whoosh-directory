@@ -1,35 +1,40 @@
-.employee-buttons
-  margin-bottom: 1rem
-
-  &.employee-buttons_is-to-call-scheduled
-    .employee-buttons__button
-      .employee-buttons__to-call
-        svg
-          path
-            fill: #64d57f
-
-.employee-buttons__button
-  cursor: pointer
-  margin-bottom: 8px
+.employee-buttons-container
+  position: relative
 
   &:hover
-    .employee-buttons__icon
-      svg
-        path
-          fill: #888
+    .employee-buttons-container__buttons
+      visibility: visible
+      filter: opacity(1)
+      transition: visibility .1s step-start, filter .1s ease-out
 
-.employee-buttons__icon
-  display: inline-block
-  vertical-align: middle
-  width: 24px
-  height: 24px
-  margin-right: 12px
+.employee-buttons-container__buttons
+  visibility: hidden
+  filter: opacity(0)
+  transition: visibility .1s step-end, filter .1s ease-out
+  position: absolute
+  right: 0
+  top: 0
+  bottom: 0
+  background-color: rgba(246, 246, 246, 0.95)
+  overflow: hidden
+  display: flex
+  flex-direction: column
+  flex-wrap: wrap-reverse
+
+.employee-buttons-container__button
+  flex: 0 0 auto
+  width: 40px
+  height: 40px
+  cursor: pointer
+
+  &:hover
+    background-color: #f0f0f0
+
+    svg
+      path
+        fill: #888
 
   svg
     path
       fill: #aaa
 
-.employee-buttons__label
-  line-height: 24px
-  vertical-align: middle
-  text-decoration: underline
