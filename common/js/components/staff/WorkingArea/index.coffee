@@ -60,8 +60,10 @@ class WorkingArea extends React.Component
       div { className: 'working-area__search-panel socket' },
         search_panel {}
       div { className: 'working-area__toolbar-panel' },
-        birthday_panel { className: 'working-area__toolbar' }
-        to_call_panel { className: 'working-area__toolbar' }
+        div { className: 'working-area__toolbar-panel-left' },
+          birthday_panel { className: 'working-area__toolbar' }
+        div { className: 'working-area__toolbar-panel-right' },
+          to_call_panel { className: 'working-area__toolbar' }
       div { className: 'working-area__results-panel' },
         div { className: "working-area__block working-area__unit-info socket block-index-#{pile_hash['unit-info']}" },
           organization_unit_info {}

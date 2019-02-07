@@ -16,9 +16,20 @@
   height: 34px
   flex: 0 0 auto
   display: flex
+  justify-content: space-between
 
-.working-area__toolbar + .working-area__toolbar
-  margin-left: 40px
+.working-area__toolbar-panel-right
+  text-align: right
+
+.working-area__toolbar-panel-left,
+.working-area__toolbar-panel-right
+  flex: 1 1 1%
+
+.working-area__toolbar
+  display: inline-block
+
+  & + .working-area__toolbar
+    margin-left: 40px
 
 .working-area__toolbar-item
   flex: 0 0 auto
