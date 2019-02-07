@@ -14,6 +14,9 @@ birthday_panel = React.createFactory(BirthdayShortcutPanel)
 import ToCallPanel from '@components/staff/ToCallPanel'
 to_call_panel = React.createFactory(ToCallPanel)
 
+import FavoritesPanel from '@components/staff/FavoritesPanel'
+favorites_panel = React.createFactory(FavoritesPanel)
+
 import OrganizationUnitInfo from '@components/staff/OrganizationUnitInfo'
 organization_unit_info = React.createFactory(OrganizationUnitInfo)
 
@@ -37,6 +40,9 @@ birthdays = React.createFactory(Birthdays)
 
 import ToCallList from '@components/staff/ToCallList'
 to_call = React.createFactory(ToCallList)
+
+import FavoritesList from '@components/staff/FavoritesList'
+favorites = React.createFactory(FavoritesList)
 
 
 mapStateToProps = (state) ->
@@ -63,10 +69,11 @@ class WorkingArea extends React.Component
         div { className: 'working-area__toolbar-panel-left' },
           birthday_panel { className: 'working-area__toolbar' }
         div { className: 'working-area__toolbar-panel-right' },
+          favorites_panel { className: 'working-area__toolbar' }
           to_call_panel { className: 'working-area__toolbar' }
       div { className: 'working-area__results-panel' },
         div { className: "working-area__block working-area__unit-info socket block-index-#{pile_hash['unit-info']}" },
-          organization_unit_info {}
+          organization_unit_info { className: 'plug' }
         div { className: "working-area__block working-area__structure socket block-index-#{pile_hash['structure']}" },
           organization_structure {}
         div { className: "working-area__block working-area__employee-info socket block-index-#{pile_hash['employee-info']}" },
@@ -83,6 +90,8 @@ class WorkingArea extends React.Component
             search_results {}
         div { className: "working-area__block working-area__to-call socket block-index-#{pile_hash['to-call']}" },
           to_call {}
+        div { className: "working-area__block working-area__to-call socket block-index-#{pile_hash['favorites']}" },
+          favorites { className: 'plug' }
 
 
 export default connect(mapStateToProps, mapDispatchToProps)(WorkingArea)

@@ -1,6 +1,7 @@
 import { loadUnits } from '@actions/units'
 import { loadExpandedUnits } from '@actions/expand_units'
 import { loadToCall } from '@actions/to_call'
+import { loadFavorites } from '@actions/favorites'
 
 initial_info_requested = null
 
@@ -15,4 +16,6 @@ export default (store) ->
         10
 
       setTimeout (-> store.dispatch(loadToCall())),
-        100
+        30
+      setTimeout (-> store.dispatch(loadFavorites())),
+        31

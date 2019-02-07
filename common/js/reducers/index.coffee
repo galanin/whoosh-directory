@@ -18,6 +18,7 @@ import search_cache from '@reducers/search_cache'
 import birthdays from '@reducers/birthdays'
 import birthday_period from '@reducers/birthday_period'
 import to_call from '@reducers/to_call'
+import favorites from '@reducers/favorites'
 
 
 export default (history) ->
@@ -39,4 +40,5 @@ export default (history) ->
     birthdays:          birthdays
     birthday_period:    birthday_period
     to_call:            to_call
+    favorites:          favorites
     router:             connectRouter(history)

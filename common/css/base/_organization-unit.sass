@@ -1,8 +1,14 @@
-.organization-unit-scroller
-  overflow-y: auto
+.organization-unit
   padding: 0 10px 0 20px
 
-.organization-unit
+  &.organization-unit_is-favorite
+    .organization-unit__favorite
+      svg
+        path
+          fill: #e4dc22
+
+.organization-unit__scroller
+  overflow-y: auto
 
 .organization-unit__short-title
   font-size: 24px
@@ -15,5 +21,18 @@
   line-height: 1.2
   color: #555
   margin-bottom: 1rem
+
+.organization-unit__favorite
+  margin-left: 16px
+  position: relative
+  top: 2px
+  cursor: pointer
+
+  svg
+    overflow: visible
+    width: 24px
+    height: 24px
+    path
+      fill: #aaa
 
 .organization-unit__employees

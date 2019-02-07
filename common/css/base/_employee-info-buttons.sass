@@ -2,11 +2,18 @@
   margin-bottom: 1rem
 
   &.employee-buttons_is-to-call-scheduled
-    .employee-buttons__button
-      .employee-buttons__to-call
+    .employee-buttons__to-call
+      .employee-buttons__icon
         svg
           path
             fill: #64d57f
+
+  &.employee-buttons_is-favorite
+    .employee-buttons__favorite
+      .employee-buttons__icon
+        svg
+          path
+            fill: #e4dc22
 
 .employee-buttons__button
   cursor: pointer
@@ -28,6 +35,10 @@
   svg
     path
       fill: #aaa
+
+.employee-buttons__favorite
+  svg
+    overflow: visible
 
 .employee-buttons__label
   line-height: 24px
