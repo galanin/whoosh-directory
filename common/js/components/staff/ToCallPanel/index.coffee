@@ -37,7 +37,7 @@ class ToCallPanel extends React.Component
     div { className: classNames(class_names), onClick: @onClick.bind(this) },
       svg { className: 'to-call-panel__icon', svg: ToCallIcon }
       span { className: 'to-call-panel__title' },
-        'Планировщик звонков'
+        'Планировщик'
       if @props.counter > 0
         span { className: 'to-call-panel__counter' },
           @props.counter
