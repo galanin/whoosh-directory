@@ -140,7 +140,7 @@ module Staff
     get 'employments/:who' do
       employ_ids = params[:who].split(',')
 
-      employments = Employment.in(short_id: employ_ids)
+      employments = Employment.where(destroyed_at: nil).in(short_id: employ_ids)
       present :employments, employments
 
       people = Person.in(short_id: employments.map(&:person_short_id))
@@ -232,21 +232,42 @@ module Staff
 
       namespace 'favorites' do
 
-        desc 'Return all Favorites'
+        desc 'Returns all Favorites records from UserInformation'
         get do
-          #TODO
+          employments = Employment.where(destroyed_at: nil).in(short_id: @user_information.favorite.with_employment.pluck(:favorable_short_id))
+          people = Person.in(short_id: employments.pluck(:person_short_id))
+          units = Unit.only(:short_id, :short_title, :long_title).where(destroyed_at: nil).in(short_id: @user_information.favorite.with_unit.pluck(:favorable_short_id))
+
+          present :employment_ids, employments.pluck(:short_id)
+          present :unit_ids, units.pluck(:short_id)
+
+          present :employments, employments
+          present :people, people
+          present :unit_titles, units
         end
 
 
-        desc 'Add Favorite'
-        post ':type/:id' do
-          #TODO
+        params do
+          requires :type, type: String, values: ['employment', 'unit']
         end
 
+        namespace ':type' do
 
-        desc 'Delete Favorite'
-        delete ':id' do
-          #TODO
+          after do
+            present :employment_ids, @user_information.favorite.with_employment.pluck(:favorable_short_id) if params[:type] == 'employment'
+            present :unit_ids, @user_information.favorite.with_unit.pluck(:favorable_short_id) if params[:type] == 'unit'
+          end
+
+          desc 'Create object Favorite class'
+          post ':id' do
+            @user_information.create_favorite(params[:type], params[:id])
+          end
+
+          desc 'Find object Favorite class and destroy it'
+          delete ':id' do
+            @user_information.destroy_favorite(params[:type], params[:id])
+          end
+
         end
 
       end

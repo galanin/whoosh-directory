@@ -51,7 +51,7 @@ class UserInformation < ApplicationRecord
 
 
   def find_to_call(short_id)
-    to_call.find_by(short_id: short_id)
+    to_call.find_by(short_id: short_id) if short_id.present?
   end
 
 
@@ -73,26 +73,30 @@ class UserInformation < ApplicationRecord
   end
 
 
-  def create_to_favorite(entity_name, entity_short_id)
-    favorite_entity = find_favorite_by_entity(entity_short_id)
-    if favorite_entity.empty?
-      entity = entity_name.camelize.constantize.find_by(short_id: entity_short_id)
+  def create_favorite(entity_type, entity_short_id)
+    favorite_entity = find_favorite_by_entity(entity_type, entity_short_id)
+    unless favorite_entity.present?
+      entity = entity_type.camelize.constantize.find_by(short_id: entity_short_id)
       favorite.create(favoritable: entity, favorable_short_id: entity_short_id)
     end
   end
 
 
-  def destroy_favorite(entity_short_id)
-    favorite_entity = find_favorite_by_entity(entity_short_id)
-    if favorite_entity.present?
-      favorite_entity.delete
-    end
+  def destroy_favorite(entity_type, entity_short_id)
+    favorite_entity = favorite.find_by(favorable_short_id: entity_short_id, favoritable_type: entity_type.camelize)
+    favorite_entity.delete if favorite_entity.present?
   end
 
 
-  def find_favorite_by_entity(entity_short_id)
-    favorite.where(favorable_short_id: entity_short_id).first if entity_short_id.present?
+  def find_favorite_by_entity(entity_type, entity_short_id)
+    favorite.where(favorable_short_id: entity_short_id, favoritable_type: entity_type.camelize).first entity_short_id.present?
   end
+
+  def find_favorite(entity_short_id)
+    favorite.find_by(short_id: entity_short_id) if entity_short_id.present?
+  end
+
+  private :find_favorite_by_entity, :find_favorite
 
 
 end
