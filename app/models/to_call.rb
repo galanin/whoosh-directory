@@ -8,10 +8,13 @@ class ToCall < ApplicationRecord
   field :employment_short_id, type: String
 
   belongs_to :employment
-  embedded_in :user_information
+  belongs_to :user_information
 
   scope :checked, -> { where(:checked_at.ne => nil).order(checked_at: :desc) }
   scope :unchecked, -> { where(:checked_at => nil).order(updated_at: :desc) }
+
+  index({employment_short_id: 1}, {} )
+  index({checked_at: -1}, {} )
 
 
   def as_json(options = nil)

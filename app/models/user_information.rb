@@ -5,8 +5,8 @@ class UserInformation < ApplicationRecord
   field :expanded_units, type: Array, default: -> { Unit.where(:level.lt => 2, :destroyed_at => nil).pluck(:short_id).compact }
 
   has_many :user_session
-  embeds_many :to_call, cascade_callbacks: true
-  embeds_many :favorite, cascade_callbacks: true
+  has_many :to_call, autosave: true
+  has_many :favorite, autosave: true
 
 
   def add_to_expanded_units(unit_ids)
@@ -29,6 +29,7 @@ class UserInformation < ApplicationRecord
     to_call_entity = find_to_call_by_employment(employment_short_id)
     if to_call_entity.present?
       to_call_entity.uncheck if to_call_entity.checked?
+      to_call_entity.save
       to_call_entity
     else
       employment = Employment.find_by(short_id: employment_short_id)
@@ -38,20 +39,16 @@ class UserInformation < ApplicationRecord
 
 
   def check_to_call(employment_short_id)
-    to_call_entity = find_to_call_by_employment(employment_short_id)
+    to_call_entity = to_call.find_by(employment_short_id: employment_short_id)
     to_call_entity.check unless to_call_entity.checked?
+    to_call_entity.save
     to_call_entity
   end
 
 
   def destroy_to_call(employment_short_id)
-    to_call_entity = find_to_call_by_employment(employment_short_id)
+    to_call_entity = to_call.find_by(employment_short_id: employment_short_id)
     to_call_entity.delete
-  end
-
-
-  def find_to_call(short_id)
-    to_call.find_by(short_id: short_id) if short_id.present?
   end
 
 
@@ -60,7 +57,7 @@ class UserInformation < ApplicationRecord
   end
 
 
-  private :find_to_call, :find_to_call_by_employment
+  private :find_to_call_by_employment
 
 
   def to_call_checked_ids
@@ -89,14 +86,11 @@ class UserInformation < ApplicationRecord
 
 
   def find_favorite_by_entity(entity_type, entity_short_id)
-    favorite.where(favorable_short_id: entity_short_id, favoritable_type: entity_type.camelize).first entity_short_id.present?
+    favorite.where(favorable_short_id: entity_short_id, favoritable_type: entity_type.camelize).first if entity_short_id.present?
   end
 
-  def find_favorite(entity_short_id)
-    favorite.find_by(short_id: entity_short_id) if entity_short_id.present?
-  end
 
-  private :find_favorite_by_entity, :find_favorite
+  private :find_favorite_by_entity
 
 
 end

@@ -234,12 +234,14 @@ module Staff
 
         desc 'Returns all Favorites records from UserInformation'
         get do
-          employments = Employment.where(destroyed_at: nil).in(short_id: @user_information.favorite.with_employment.pluck(:favorable_short_id))
-          people = Person.in(short_id: employments.pluck(:person_short_id))
-          units = Unit.only(:short_id, :short_title, :long_title).where(destroyed_at: nil).in(short_id: @user_information.favorite.with_unit.pluck(:favorable_short_id))
+          employment_ids = @user_information.favorite.with_employment.pluck(:favorable_short_id)
+          employments = Employment.where(destroyed_at: nil).in(short_id: employment_ids)
+          people = Person.in(short_id: employments.map(&:person_short_id))
+          unit_ids = @user_information.favorite.with_unit.pluck(:favorable_short_id)
+          units = Unit.only(:short_id, :short_title, :long_title).where(destroyed_at: nil).in(short_id: unit_ids)
 
-          present :employment_ids, employments.pluck(:short_id)
-          present :unit_ids, units.pluck(:short_id)
+          present :employment_ids, employment_ids
+          present :unit_ids, unit_ids
 
           present :employments, employments
           present :people, people
