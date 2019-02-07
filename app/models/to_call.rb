@@ -11,7 +11,7 @@ class ToCall < ApplicationRecord
   belongs_to :user_information
 
   scope :checked, -> { where(:checked_at.ne => nil).order(checked_at: :desc) }
-  scope :unchecked, -> { where(:checked_at => nil).order(updated_at: :desc) }
+  scope :unchecked, -> { where(:checked_at => nil).order(updated_at: :asc) }
 
   index({employment_short_id: 1}, {} )
   index({checked_at: -1}, {} )
