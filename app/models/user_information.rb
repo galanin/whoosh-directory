@@ -29,7 +29,7 @@ class UserInformation < ApplicationRecord
     to_call_entity = find_to_call_by_employment(employment_short_id)
     if to_call_entity.present?
       to_call_entity.uncheck if to_call_entity.checked?
-      to_call_entity.save
+      to_call_entity.save if to_call_entity.changed?
       to_call_entity
     else
       employment = Employment.find_by(short_id: employment_short_id)
@@ -39,7 +39,7 @@ class UserInformation < ApplicationRecord
 
 
   def check_to_call(employment_short_id)
-    to_call_entity = to_call.find_by(employment_short_id: employment_short_id)
+    to_call_entity = to_call.unchecked.find_by(employment_short_id: employment_short_id)
     to_call_entity.check unless to_call_entity.checked?
     to_call_entity.save
     to_call_entity
@@ -53,15 +53,15 @@ class UserInformation < ApplicationRecord
 
 
   def find_to_call_by_employment(employment_short_id)
-    to_call.where(employment_short_id: employment_short_id).first if employment_short_id.present?
+    to_call.unchecked_and_checked_today.where(employment_short_id: employment_short_id).first if employment_short_id.present?
   end
 
 
   private :find_to_call_by_employment
 
 
-  def to_call_checked_ids
-    to_call.checked.pluck(:short_id)
+  def to_call_checked_today_ids
+    to_call.checked_today.sort_checked.pluck(:short_id)
   end
 
 

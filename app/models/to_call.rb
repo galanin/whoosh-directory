@@ -10,8 +10,11 @@ class ToCall < ApplicationRecord
   belongs_to :employment
   belongs_to :user_information
 
-  scope :checked, -> { where(:checked_at.ne => nil).order(checked_at: :desc) }
+  scope :checked, -> { where(:checked_at.ne => nil) }
+  scope :checked_today, -> { where(checked_at: Time.now.beginning_of_day..Time.now.end_of_day) }
+  scope :sort_checked, -> { order(checked_at: :desc) }
   scope :unchecked, -> { where(:checked_at => nil).order(updated_at: :asc) }
+  scope :unchecked_and_checked_today, -> { any_of([unchecked.selector, checked_today.selector])}
 
   index({employment_short_id: 1}, {} )
   index({checked_at: -1}, {} )

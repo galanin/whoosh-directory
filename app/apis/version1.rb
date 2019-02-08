@@ -190,7 +190,7 @@ module Staff
 
         after do
           present :unchecked, @user_information.to_call_unchecked_ids
-          present :checked, @user_information.to_call_checked_ids
+          present :checked_today, @user_information.to_call_checked_today_ids
         end
 
         desc 'Returns all ToCalls records from UserInformation'
