@@ -1,1900 +1,2357 @@
 short_title: НИИ «Альфа Центавра»
 long_title: Научно-исследовательский институт «Альфа Центавра»
-structure:
+id: 0
+employees:
 - post_title: Директор института
+  id: 1
   building: 13
   office: 201
   employees:
-    - post_title: Заместитель директора института по науке
-      building: 13
-      office: 202
-      units:
+  - post_title: Заместитель директора института по науке
+    id: 11
+    building: 13
+    office: 202
+    units:
 
-      - long_title: Околоземное отделение
-        emplyees:
-        - post_title: Директор околоземного отделения
-          building: 14
-          office: 203
-        - post_title: Помощник директора околоземного отделения
-          building: 14
-          office: 203
-        - post_title: Заместитель директора околоземного отделения по транспортировке
-          building: 14
-          office: 204
-          units:
-
-          - long_title: Отдел верхних слоев атмосферы
-            emplyees:
-            - post_title: Начальник отдела
-              building: 14
-              office: 401
-            - post_title: Заместитель начальника отдела
-              building: 14
-              office: 402
-            units:
-              - long_title: Группа озонового слоя
-                emplyees:
-                - post_title: Ведущий инженер
-                  building: 14
-                  office: 403-410
-                  count: 5
-                - post_title: Инженер по ионным процессам
-                  building: 14
-                  office: 403-410
-                  count: 14
-                - post_title: Техник
-                  building: 14
-                  office: 403-410
-                  count: 5
-              - long_title: Группа северного сияния
-                emplyees:
-                - post_title: Ведущий инженер
-                  building: 14
-                  office: 411-415
-                  count: 6
-                - post_title: Инженер по ионным процессам
-                  building: 14
-                  office: 411-415
-                  count: 16
-                - post_title: Техник
-                  building: 14
-                  office: 411-415
-                  count: 9
-              - long_title: Группа погодных зондов
-                emplyees:
-                - post_title: Ведущий инженер
-                  building: 14
-                  office: 416-419
-                  count: 3
-                - post_title: Инженер-метеоролог
-                  building: 14
-                  office: 416-419
-                  count: 12
-                - post_title: Техник
-                  building: 14
-                  office: 416-419
-                  count: 9
-              - long_title: Группа спутниковой связи
-                emplyees:
-                - post_title: Ведущий инженер
-                  building: 14
-                  office: 420-422
-                  count: 4
-                - post_title: Инженер по телекоммуникациям
-                  building: 14
-                  office: 420-422
-                  count: 10
-                - post_title: Техник
-                  building: 14
-                  office: 420-422
-                  count: 5
-
-          - long_title: Отдел геопозиционирования
-            emplyees:
-            - post_title: Начальник отдела
-              building: 14
-              office: 501
-            - post_title: Заместитель начальника отдела
-              building: 14
-              office: 502
-            units:
-            - long_title: Группа протокола геопозиционирования
-              emplyees:
-              - post_title: Ведущий инженер
-                building: 14
-                office: 511-515
-                count: 1
-              - post_title: Инженер по стандартизации
-                building: 14
-                office: 511-515
-                count: 3
-              - post_title: Техник
-                building: 14
-                office: 511-515
-                count: 5
-            - long_title: Группа разработки приемников сигнала геопозиционирования
-              emplyees:
-              - post_title: Ведущий инженер
-                building: 14
-                office: 516-518
-                count: 2
-              - post_title: Инженер-конструктор
-                building: 14
-                office: 516-518
-                count: 5
-              - post_title: Техник
-                building: 14
-                office: 516-518
-                count: 4
-
-          - long_title: Отдел первой космической скорости
-            emplyees:
-            - post_title: Начальник отдела
-              building: 14
-              office: 520
-            - post_title: Заместитель начальника отдела
-              building: 14
-              office: 521
-            units:
-            - long_title: Группа ракетных ускорителей
-              emplyees:
-              - post_title: Ведущий инженер
-                building: 14
-                office: 522-525
-                count: 5
-              - post_title: Инженер-ракетостроитель
-                building: 14
-                office: 522-525
-                count: 14
-              - post_title: Техник
-                building: 14
-                office: 522-525
-                count: 8
-            - long_title: Группа ракетного топлива и окислителя
-              emplyees:
-              - post_title: Ведущий инженер
-                building: 14
-                office: 526-528
-                count: 7
-              - post_title: Инженер-химик
-                building: 14
-                office: 526-528
-                count: 17
-              - post_title: Техник
-                building: 14
-                office: 526-528
-                count: 9
-            - long_title: Группа возвращаемой первой ступени
-              emplyees:
-              - post_title: Ведущий инженер
-                building: 14
-                office: 529-532
-                count: 7
-              - post_title: Инженер по мягкой управляемой посадке
-                building: 14
-                office: 529-532
-                count: 13
-              - post_title: Техник
-                building: 14
-                office: 529-532
-                count: 9
-            - long_title: Группа космических лифтов
-              emplyees:
-              - post_title: Ведущий инженер
-                building: 14
-                office: 423-426
-                count: 6
-              - post_title: Инженер-конструктор
-                building: 14
-                office: 423-426
-                count: 14
-              - post_title: Техник
-                building: 14
-                office: 423-426
-                count: 8
-            - long_title: Группа высоких эллиптических орбит
-              emplyees:
-              - post_title: Ведущий инженер
-                building: 14
-                office: 427-430
-                count: 5
-              - post_title: Инженер по спутниковой связи
-                building: 14
-                office: 427-430
-                count: 13
-              - post_title: Техник
-                building: 14
-                office: 427-430
-                count: 10
-
-        - post_title: Заместитель директора околоземного отделения по освещению и связи
-          building: 14
-          office: 205
-          units:
-
-          - long_title: Отдел геостационарной орбиты
-            emplyees:
-            - post_title: Начальник отдела
-              building: 14
-              office: 600
-            - post_title: Заместитель начальника отдела
-              building: 14
-              office: 601
-            units:
-            - long_title: Группа спутниковых тарелок
-              emplyees:
-              - post_title: Ведущий инженер
-                building: 14
-                office: 602-605
-                count: 5
-              - post_title: Инженер по параболическим поверхностям
-                building: 14
-                office: 602-605
-                count: 12
-              - post_title: Техник
-                building: 14
-                office: 602-605
-                count: 9
-            - long_title: Группа высокочастотных передатчиков
-              emplyees:
-              - post_title: Ведущий инженер
-                building: 14
-                office: 606-608
-                count: 5
-              - post_title: Инженер-электроник
-                building: 14
-                office: 606-608
-                count: 12
-              - post_title: Техник
-                building: 14
-                office: 606-608
-                count: 9
-            - long_title: Группа высокочастотных приемников
-              emplyees:
-              - post_title: Ведущий инженер
-                building: 14
-                office: 609-612
-                count: 6
-              - post_title: Инженер-электроник
-                building: 14
-                office: 609-612
-                count: 14
-              - post_title: Техник
-                building: 14
-                office: 609-612
-                count: 8
-
-          - long_title: Лунная лаборатория
-            emplyees:
-            - post_title: Начальник отдела
-              building: 14
-              office: 613
-            - post_title: Заместитель начальника отдела
-              building: 14
-              office: 614
-            units:
-            - long_title: Группа искусственных орбитальных зеркал
-              emplyees:
-              - post_title: Ведущий инженер
-                building: 14
-                office: 615-618
-                count: 10
-              - post_title: Инженер-оптик
-                building: 14
-                office: 615-618
-                count: 19
-              - post_title: Техник
-                building: 14
-                office: 615-618
-                count: 12
-            - long_title: Группа полной луны
-              emplyees:
-              - post_title: Ведущий инженер
-                building: 14
-                office: 619-621
-                count: 4
-              - post_title: Инженер-физик
-                building: 14
-                office: 619-621
-                count: 10
-              - post_title: Техник
-                building: 14
-                office: 619-621
-                count: 6
-            - long_title: Группа приливов и отливов
-              emplyees:
-              - post_title: Старший научный сотрудник
-                building: 14
-                office: 622-628
-                count: 10
-              - post_title: Физик-океанолог
-                building: 14
-                office: 622-628
-                count: 22
-              - post_title: Лаборант
-                building: 14
-                office: 622-628
-                count: 11
-            - long_title: Романтическая группа
-              emplyees:
-              - post_title: Старший лирик
-                building: 14
-                office: 629-630
-                count: 2
-              - post_title: Поэт 1-го разряда
-                building: 14
-                office: 629-630
-                count: 3
-              - post_title: Литературовед
-                building: 14
-                office: 629-630
-                count: 5
-
-      - long_title: Отделение Солнечной системы
-        emplyees:
-        - post_title: Директор отделения Солнечной системы
-          building: 14
-          office: 206
-        - post_title: Помощник директора отделения Солнечной системы
-          building: 14
-          office: 206
-        - post_title: Заместитель директора отделения Солнечной системы по крупным объектам
-          building: 14
-          office: 207
-          units:
-
-          - long_title: Отдел планет земной группы
-            emplyees:
-            - post_title: Начальник отдела
-              building: 14
-              office: 700
-            - post_title: Заместитель начальника отдела
-              building: 14
-              office: 701
-            units:
-            - long_title: Группа Земли
-              emplyees:
-              - post_title: Старший геолог
-                building: 14
-                office: 702-705
-                count: 8
-              - post_title: Младший геолог
-                building: 14
-                office: 702-705
-                count: 14
-              - post_title: Помощник геолога
-                building: 14
-                office: 702-705
-                count: 15
-            - long_title: Группа Меркурия
-              emplyees:
-              - post_title: Специалист по градусникам
-                building: 14
-                office: 706-707
-                count: 6
-              - post_title: Специалист по творчеству группы Queen
-                building: 14
-                office: 706-707
-                count: 2
-              - post_title: Специалист по крылатым сандалиям
-                building: 14
-                office: 706-707
-                count: 5
-            - long_title: Группа Венеры
-              emplyees:
-              - post_title: Специалист по урожайности сельскохозяйственных земель
-                building: 14
-                office: 708-711
-                count: 16
-              - post_title: Специалист по кислотным облакам и дождям
-                building: 14
-                office: 708-711
-                count: 12
-              - post_title: Специалист по альтернативнм формам жизни
-                building: 14
-                office: 708-711
-                count: 15
-            - long_title: Группа Марса
-              emplyees:
-              - post_title: Специалист по творчеству Джонатана Свифта
-                building: 14
-                office: 712-713
-                count: 6
-              - post_title: Специалист по гребле в марсианских каналах
-                building: 14
-                office: 712-713
-                count: 4
-              - post_title: Специалист по любопытству
-                building: 14
-                office: 712-713
-                count: 5
-
-          - long_title: Отдел газовых гигантов
-            emplyees:
-            - post_title: Начальник отдела
-              building: 14
-              office: 714
-            - post_title: Заместитель начальника отдела
-              building: 14
-              office: 715
-            units:
-            - long_title: Группа Юпитера
-              emplyees:
-              - post_title: Специалист по Большому красному пятну
-                building: 14
-                office: 716-719
-                count: 6
-              - post_title: Специалист по металлическому водороду
-                building: 14
-                office: 716-719
-                count: 5
-              - post_title: Специалист по верховным божествам
-                building: 14
-                office: 716-719
-                count: 2
-              - post_title: Специалист по ледяным спутникам
-                building: 14
-                office: 716-719
-                count: 7
-            - long_title: Группа Сатурна
-              emplyees:
-              - post_title: Специалист по каменному поясу
-                building: 14
-                office: 720-722
-                count: 6
-              - post_title: Специалист по разреженным планетам
-                building: 14
-                office: 720-722
-                count: 7
-              - post_title: Инженер-гексагонолог
-                building: 14
-                office: 720-722
-                count: 5
-            - long_title: Группа Урана
-              emplyees:
-              - post_title: Ведущий инженер
-                building: 14
-                office: 723-725
-                count: 6
-              - post_title: Инженер
-                building: 14
-                office: 723-725
-                count: 7
-              - post_title: Специалист по древнегреческой мифологии
-                building: 14
-                office: 723-725
-                count: 2
-              - post_title: Специалист по ледяным гигантам
-                building: 14
-                office: 723-725
-                count: 7
-              - post_title: Техник
-                building: 14
-                office: 723-725
-                count: 8
-            - long_title: Группа Нептуна
-              emplyees:
-              - post_title: Ведущий инженер
-                building: 14
-                office: 726-729
-                count: 6
-              - post_title: Инженер
-                building: 14
-                office: 726-729
-                count: 8
-              - post_title: Специалист по предсказанным планетам
-                building: 14
-                office: 726-729
-                count: 2
-              - post_title: Специалист по ледяным гигантам
-                building: 14
-                office: 726-729
-                count: 7
-              - post_title: Техник
-                building: 14
-                office: 726-729
-                count: 9
-
-        - post_title: Заместитель директора отделения Солнечной системы по малым объектам
-          building: 14
-          office: 208
-          units:
-
-          - long_title: Отдел пояса астероидов
-            emplyees:
-            - post_title: Начальник отдела
-              building: 14
-              office: 800
-            - post_title: Заместитель начальника отдела
-              building: 14
-              office: 801
-            - post_title: Ведущий инженер
-              building: 14
-              office: 802-805
-              count: 10
-            - post_title: Инженер по космическим полезным ископаемым
-              building: 14
-              office: 802-805
-              count: 10
-            - post_title: Учётчик
-              building: 14
-              office: 802-805
-              count: 20
-            - post_title: Инженер по противоастероидной защите
-              building: 14
-              office: 802-805
-              count: 30
-
-          - long_title: Отдел карликовых планет, планетоидов, планетных спутников и комет
-            emplyees:
-            - post_title: Начальник отдела
-              building: 14
-              office: 806
-            - post_title: Заместитель начальника отдела
-              building: 14
-              office: 807
-            - post_title: Специалист по приливным силам
-              building: 14
-              office: 808-810
-              count: 10
-            - post_title: Специалист по внеземным источникам воды
-              building: 14
-              office: 808-810
-              count: 10
-            - post_title: Инженер по межпланетным сетям связи
-              building: 14
-              office: 808-810
-              count: 10
-
+    - long_title: Околоземное отделение
+      id: 111
+      emplyees:
+      - post_title: Директор околоземного отделения
+        id: 1111
+        building: 14
+        office: 203
+      - post_title: Помощник директора околоземного отделения
+        id: 1112
+        building: 14
+        office: 203
+      - post_title: Заместитель директора околоземного отделения по транспортировке
+        id: 1113
+        building: 14
+        office: 204
         units:
-        - long_title: Отдел второй космической скорости
+
+        - long_title: Отдел верхних слоев атмосферы
+          id: 11131
           emplyees:
           - post_title: Начальник отдела
+            id: 111311
             building: 14
-            office: 811
+            office: 401
           - post_title: Заместитель начальника отдела
+            id: 11132
             building: 14
-            office: 812
+            office: 402
           units:
-          - long_title: Группа транспортных межпланетных космических аппаратов
+          - long_title: Группа озонового слоя
+            id: 11133
             emplyees:
             - post_title: Ведущий инженер
+              id: 111331
               building: 14
-              office: 813-815
-              count: 6
-            - post_title: Инженер
+              office: 403-410
+              count: 5
+            - post_title: Инженер по ионным процессам
+              id: 111332
               building: 14
-              office: 813-815
-              count: 12
-            - post_title: Техник
-              building: 14
-              office: 813-815
+              office: 403-410
               count: 14
-          - long_title: Группа пассажирских межпланетных космических аппаратов
+            - post_title: Техник
+              id: 111333
+              building: 14
+              office: 403-410
+              count: 5
+          - long_title: Группа северного сияния
+            id: 11134
             emplyees:
             - post_title: Ведущий инженер
+              id: 111341
               building: 14
-              office: 816-818
-              count: 5
-            - post_title: Инженер
+              office: 411-415
+              count: 6
+            - post_title: Инженер по ионным процессам
+              id: 111342
               building: 14
-              office: 816-818
-              count: 18
+              office: 411-415
+              count: 16
             - post_title: Техник
+              id: 111343
               building: 14
-              office: 816-818
-              count: 12
-
-        - long_title: Солнечный отдел
-          emplyees:
-          - post_title: Начальник отдела
-            building: 14
-            office: 819
-          - post_title: Заместитель начальника отдела
-            building: 14
-            office: 820
-          units:
-          - long_title: Группа светимости
+              office: 411-415
+              count: 9
+          - long_title: Группа погодных зондов
+            id: 11135
             emplyees:
             - post_title: Ведущий инженер
+              id: 111351
               building: 14
-              office: 821-824
-              count: 4
-            - post_title: Инженер
+              office: 416-419
+              count: 3
+            - post_title: Инженер-метеоролог
+              id: 111352
               building: 14
-              office: 821-824
-              count: 2
-            - post_title: Специалист по желтым карликам
-              building: 14
-              office: 821-824
-              count: 8
-            - post_title: Специалист по солнечной короне
-              building: 14
-              office: 821-824
-              count: 7
+              office: 416-419
+              count: 12
             - post_title: Техник
+              id: 111353
               building: 14
-              office: 821-824
-              count: 5
-          - long_title: Группа магнитных бурь
+              office: 416-419
+              count: 9
+          - long_title: Группа спутниковой связи
+            id: 11136
             emplyees:
             - post_title: Ведущий инженер
+              id: 111361
               building: 14
-              office: 825-828
-              count: 5
-            - post_title: Инженер
-              building: 14
-              office: 825-828
-              count: 6
-            - post_title: Специалист по солнечному ветру
-              building: 14
-              office: 825-828
-              count: 8
-            - post_title: Техник
-              building: 14
-              office: 825-828
-              count: 7
-          - long_title: Группа исследования истории Солнечной системы
-            emplyees:
-            - post_title: Ведущий инженер
-              building: 14
-              office: 829-832
-              count: 6
-            - post_title: Инженер
-              building: 14
-              office: 829-832
-              count: 6
-            - post_title: Инженер-эволюционограф
-              building: 14
-              office: 829-832
-              count: 7
-            - post_title: Инженер по термоядерным реакциям
-              building: 14
-              office: 829-832
-              count: 5
-            - post_title: Специалист по эволюции звёзд и звёздных систем
-              building: 14
-              office: 829-832
-              count: 7
-            - post_title: Техник
-              building: 14
-              office: 829-832
-              count: 5
-
-      - long_title: Внутригалактическое отделение
-        emplyees:
-        - post_title: Директор внутригалактического отделения
-          building: 14
-          office: 209
-        - post_title: Помощник директора внутригалактического отделения
-          building: 14
-          office: 209
-        - post_title: Заместитель директора внутригалактического отделения
-          building: 14
-          office: 210
-        units:
-        - long_title: Отдел морфологии Галактики
-          emplyees:
-          - post_title: Начальник отдела
-            building: 14
-            office: 900
-          - post_title: Заместитель начальника отдела
-            building: 14
-            office: 901
-          units:
-          - long_title: Группа галактического ядра
-            emplyees:
-            - post_title: Ведущий специалист
-              building: 14
-              office: 902-905
-              count: 6
-            - post_title: Специалист по активным галактическим ядрам
-              building: 14
-              office: 902-905
-              count: 6
-            - post_title: Специалист по аккреционному диску
-              building: 14
-              office: 902-905
-              count: 2
-            - post_title: Специалист по черным дырам
-              building: 14
-              office: 902-905
-              count: 8
-            - post_title: Техник
-              building: 14
-              office: 902-905
-              count: 8
-          - long_title: Группа галактического балджа
-            emplyees:
-            - post_title: Ведущий специалист
-              building: 14
-              office: 906-909
-              count: 6
-            - post_title: Специалист по галактическим ядрам
-              building: 14
-              office: 906-909
+              office: 420-422
               count: 4
-            - post_title: Специалист по сверхмассивным черным дырам
+            - post_title: Инженер по телекоммуникациям
+              id: 111362
               building: 14
-              office: 906-909
-              count: 12
-            - post_title: Техник
-              building: 14
-              office: 906-909
-              count: 8
-          - long_title: Группа галактического рукава
-            emplyees:
-            - post_title: Ведущий специалист
-              building: 14
-              office: 910-913
-              count: 6
-            - post_title: Специалист по вращению звезд в галактике
-              building: 14
-              office: 910-913
-              count: 12
-            - post_title: Специалист по космической пыли
-              building: 14
-              office: 910-913
-              count: 7
-            - post_title: Специалист по космическому газу
-              building: 14
-              office: 910-913
-              count: 8
-            - post_title: Техник
-              building: 14
-              office: 910-913
-              count: 12
-          - long_title: Группа внешних кольцеобразных структур
-            emplyees:
-            - post_title: Старший астроном
-              building: 14
-              office: 914-915
-              count: 4
-            - post_title: Астроном
-              building: 14
-              office: 914-915
-              count: 8
-          - long_title: Группа галактического бара
-            emplyees:
-            - post_title: Старший астроном
-              building: 14
-              office: 916-917
-              count: 4
-            - post_title: Астроном
-              building: 14
-              office: 916-917
-              count: 8
-          - long_title: Группа галактического гало
-            emplyees:
-            - post_title: Ведущий специалист
-              building: 14
-              office: 918-921
-              count: 6
-            - post_title: Специалист по темной материи
-              building: 14
-              office: 918-921
-              count: 12
-            - post_title: Специалист по космическому газу
-              building: 14
-              office: 918-921
+              office: 420-422
               count: 10
             - post_title: Техник
+              id: 11136
               building: 14
-              office: 918-921
-              count: 15
-          - long_title: Группа коричневых карликов
-            emplyees:
-            - post_title: Ведущий специалист
-              building: 14
-              office: 922-925
-              count: 6
-            - post_title: Специалист по термоядерному синтезу
-              building: 14
-              office: 922-925
-              count: 12
-            - post_title: Специалист по литию
-              building: 14
-              office: 922-925
-              count: 4
-            - post_title: Техник
-              building: 14
-              office: 922-925
-              count: 9
+              office: 420-422
+              count: 5
 
-        - long_title: Отдел темной материи
+        - long_title: Отдел геопозиционирования
+          id: 11132
+          emplyees:
+          - post_title: Начальник отдела
+            id: 111321
+            building: 14
+            office: 501
+          - post_title: Заместитель начальника отдела
+            id: 111322
+            building: 14
+            office: 502
+          units:
+          - long_title: Группа протокола геопозиционирования
+            id: 11133
+            emplyees:
+            - post_title: Ведущий инженер
+              id: 111331
+              building: 14
+              office: 511-515
+              count: 1
+            - post_title: Инженер по стандартизации
+              id: 111332
+              building: 14
+              office: 511-515
+              count: 3
+            - post_title: Техник
+              id: 111333
+              building: 14
+              office: 511-515
+              count: 5
+          - long_title: Группа разработки приемников сигнала геопозиционирования
+            id: 11134
+            emplyees:
+            - post_title: Ведущий инженер
+              id: 111341
+              building: 14
+              office: 516-518
+              count: 2
+            - post_title: Инженер-конструктор
+              id: 111342
+              building: 14
+              office: 516-518
+              count: 5
+            - post_title: Техник
+              id: 111343
+              building: 14
+              office: 516-518
+              count: 4
+
+        - long_title: Отдел первой космической скорости
+          id: 11133
           emplyees:
           - post_title: Начальник отдела
             building: 14
-            office: 1000
+            office: 520
           - post_title: Заместитель начальника отдела
             building: 14
-            office: 1001
+            office: 521
           units:
-          - long_title: Группа аномалий небесной механики
+          - long_title: Группа ракетных ускорителей
             emplyees:
-            - post_title: Ведущий специалист
+            - post_title: Ведущий инженер
               building: 14
-              office: 1002-1005
-              count: 6
-            - post_title: Специалист по гравитационным манёврам
+              office: 522-525
+              count: 5
+            - post_title: Инженер-ракетостроитель
               building: 14
-              office: 1002-1005
-              count: 12
-            - post_title: Специалист по отдаче теплового излучения
-              building: 14
-              office: 1002-1005
-              count: 4
+              office: 522-525
+              count: 14
             - post_title: Техник
               building: 14
-              office: 1002-1005
-              count: 9
-          - long_title: Барионная группа
-            emplyees:
-            - post_title: Ведущий специалист
-              building: 14
-              office: 1006-1010
-              count: 6
-            - post_title: Специалист по протонам
-              building: 14
-              office: 1006-1010
-              count: 12
-            - post_title: Специалист по нейтронам
-              building: 14
-              office: 1006-1010
-              count: 12
-            - post_title: Специалист по гиперонам
-              building: 14
-              office: 1006-1010
-              count: 4
-            - post_title: Специалист по резонансам
-              building: 14
-              office: 1006-1010
-              count: 4
-            - post_title: Техник
-              building: 14
-              office: 1006-1010
-              count: 9
-          - long_title: Группа гравитационного линзирования
-            emplyees:
-            - post_title: Ведущий специалист
-              building: 14
-              office: 1011-1014
-              count: 6
-            - post_title: Специалист по общей теории относительности
-              building: 14
-              office: 1011-1014
-              count: 12
-            - post_title: Физик-оптик
-              building: 14
-              office: 1011-1014
-              count: 4
-            - post_title: Техник
-              building: 14
-              office: 1011-1014
-              count: 9
-          - long_title: Группа топологии пространства-времени
-            emplyees:
-            - post_title: Ведущий специалист
-              building: 14
-              office: 1015-1019
-              count: 6
-            - post_title: Специалист по изоморфизму
-              building: 14
-              office: 1015-1019
-              count: 12
-            - post_title: Специалист по изотропии
-              building: 14
-              office: 1015-1019
+              office: 522-525
               count: 8
-            - post_title: Специалист по реликтовому излучению
+          - long_title: Группа ракетного топлива и окислителя
+            emplyees:
+            - post_title: Ведущий инженер
               building: 14
-              office: 1015-1019
-              count: 9
-            - post_title: Физик двух измерений
-              building: 14
-              office: 1015-1019
+              office: 526-528
               count: 7
+            - post_title: Инженер-химик
+              building: 14
+              office: 526-528
+              count: 17
             - post_title: Техник
               building: 14
-              office: 1015-1019
+              office: 526-528
               count: 9
-          - long_title: Группа тяжёлых нейтрино
+          - long_title: Группа возвращаемой первой ступени
             emplyees:
-            - post_title: Ведущий специалист
+            - post_title: Ведущий инженер
               building: 14
-              office: 1020-1022
-              count: 6
-            - post_title: Физик слабого взаимодействия
+              office: 529-532
+              count: 7
+            - post_title: Инженер по мягкой управляемой посадке
               building: 14
-              office: 1020-1022
-              count: 12
-            - post_title: Инженер нейтринных детекторов
-              building: 14
-              office: 1020-1022
-              count: 6
+              office: 529-532
+              count: 13
             - post_title: Техник
               building: 14
-              office: 1020-1022
+              office: 529-532
               count: 9
-          - long_title: Группа проблемы сингулярного гало
+          - long_title: Группа космических лифтов
             emplyees:
-            - post_title: Ведущий специалист
+            - post_title: Ведущий инженер
               building: 14
-              office: 1023-1025
-              count: 6
-            - post_title: Специалист по карликовым галактикам
-              building: 14
-              office: 1023-1025
-              count: 12
-            - post_title: Математик-астроном
-              building: 14
-              office: 1023-1025
-              count: 8
-            - post_title: Техник
-              building: 14
-              office: 1023-1025
-              count: 9
-
-        - long_title: Отдел вращения Галактики
-          emplyees:
-          - post_title: Начальник отдела
-            building: 14
-            office: 1026
-          - post_title: Заместитель начальника отдела
-            building: 14
-            office: 1027
-          units:
-          - long_title: Группа красного смещения
-            emplyees:
-            - post_title: Ведущий специалист
-              building: 14
-              office: 1028-1030
-              count: 6
-            - post_title: Физик-оптик
-              building: 14
-              office: 1028-1030
-              count: 12
-            - post_title: Специалист по спектрографии
-              building: 14
-              office: 1028-1030
-              count: 4
-            - post_title: Техник
-              building: 14
-              office: 1028-1030
-              count: 9
-          - long_title: Группа галактик с низкой поверхностной яркостью
-            emplyees:
-            - post_title: Ведущий специалист
-              building: 14
-              office: 1124-1127
-              count: 6
-            - post_title: Специалист по нейтральному водороду
-              building: 14
-              office: 1124-1127
-              count: 12
-            - post_title: Специалист по галактическим взаимодействиям
-              building: 14
-              office: 1124-1127
-              count: 4
-            - post_title: Техник
-              building: 14
-              office: 1124-1127
-              count: 9
-          - long_title: Группа модифицированной ньютоновской динамики
-            emplyees:
-            - post_title: Ведущий специалист
-              building: 14
-              office: 1128-1130
-              count: 6
-            - post_title: Математик
-              building: 14
-              office: 1128-1130
-              count: 12
-            - post_title: Ассистент по расчетам вращения
-              building: 14
-              office: 1128-1130
-              count: 4
-            - post_title: Техник
-              building: 14
-              office: 1128-1130
-              count: 9
-          - long_title: Группа наблюдений в инфракрасном диапазоне
-            emplyees:
-            - post_title: Ведущий специалист
-              building: 14
-              office: 926-928
-              count: 6
-            - post_title: Оператор спектрофотометра
-              building: 14
-              office: 926-928
-              count: 12
-            - post_title: Регулировщик измерительной аппаратуры
-              building: 14
-              office: 926-928
-              count: 4
-            - post_title: Техник
-              building: 14
-              office: 926-928
-              count: 9
-
-        - long_title: Отдел наблюдения и исследования Галактики
-          emplyees:
-          - post_title: Начальник отдела
-            building: 14
-            office: 1100
-          - post_title: Заместитель начальника отдела
-            building: 14
-            office: 1101
-          units:
-          - long_title: Группа наземных наблюдательных средств
-            emplyees:
-            - post_title: Ведущий специалист
-              building: 14
-              office: 1102-1104
-              count: 6
-            - post_title: Астроном-наблюдатель
-              building: 14
-              office: 1102-1104
-              count: 12
-            - post_title: Оператор-регистратор
-              building: 14
-              office: 1102-1104
-              count: 4
-            - post_title: Техник
-              building: 14
-              office: 1102-1104
-              count: 9
-          - long_title: Группа внеземных наблюдательных средств
-            emplyees:
-            - post_title: Ведущий специалист
-              building: 14
-              office: 1105-1107
-              count: 6
-            - post_title: Программист модулей управления космической аппаратурой
-              building: 14
-              office: 1105-1107
-              count: 12
-            - post_title: Оператор управления космической аппаратурой
-              building: 14
-              office: 1105-1107
-              count: 4
-            - post_title: Техник
-              building: 14
-              office: 1105-1107
-              count: 9
-          - long_title: Группа подземных исследовательских устройств
-            emplyees:
-            - post_title: Ведущий специалист
-              building: 14
-              office: 1108-1110
-              count: 6
-            - post_title: Физик-специалист по нейтрино
-              building: 14
-              office: 1108-1110
-              count: 12
-            - post_title: Монтажник бочек с керосином
-              building: 14
-              office: 1108-1110
-              count: 4
-            - post_title: Техник
-              building: 14
-              office: 1108-1110
-              count: 9
-          - long_title: Группа разработки новых средств измерения, наблюдения и исследования
-            emplyees:
-            - post_title: Ведущий специалист
-              building: 14
-              office: 1111-1115
+              office: 423-426
               count: 6
             - post_title: Инженер-конструктор
               building: 14
-              office: 1111-1115
-              count: 12
-            - post_title: Физик
-              building: 14
-              office: 1111-1115
+              office: 423-426
               count: 14
-            - post_title: Математик
-              building: 14
-              office: 1111-1115
-              count: 14
-            - post_title: Инженер-схемотехник
-              building: 14
-              office: 1111-1115
-              count: 4
             - post_title: Техник
               building: 14
-              office: 1111-1115
-              count: 9
-          - long_title: Группа пролетной аномалии
+              office: 423-426
+              count: 8
+          - long_title: Группа высоких эллиптических орбит
             emplyees:
-            - post_title: Ведущий специалист
+            - post_title: Ведущий инженер
               building: 14
-              office: 1116-1118
-              count: 6
-            - post_title: Физик-экспериментатор
+              office: 427-430
+              count: 5
+            - post_title: Инженер по спутниковой связи
               building: 14
-              office: 1116-1118
-              count: 12
-            - post_title: Математик по расчету гравитационных маневров
-              building: 14
-              office: 1116-1118
-              count: 4
+              office: 427-430
+              count: 13
             - post_title: Техник
               building: 14
-              office: 1116-1118
-              count: 9
+              office: 427-430
+              count: 10
 
-      - long_title: Межгалактическое отделение
-        emplyees:
-        - post_title: Директор межгалактического отделения
-          building: 14
-          office: 211
+      - post_title: Заместитель директора околоземного отделения по освещению и связи
+        id: 1114
+        building: 14
+        office: 205
         units:
 
-        - long_title: Отдел возникновения и эволюции Вселенной
+        - long_title: Отдел геостационарной орбиты
           emplyees:
           - post_title: Начальник отдела
-            building: 15
-            office: 101
+            building: 14
+            office: 600
           - post_title: Заместитель начальника отдела
-            building: 15
-            office: 102
+            building: 14
+            office: 601
           units:
-          - long_title: Группа Большого взрыва
+          - long_title: Группа спутниковых тарелок
             emplyees:
-            - post_title: Ведущий специалист
-              building: 15
-              office: 103-105
-              count: 6
-            - post_title: Специалист по реликтовому излучению
-              building: 15
-              office: 103-105
-              count: 12
-            - post_title: Специалист по сингулярному состоянию
-              building: 15
-              office: 103-105
-              count: 4
-            - post_title: Техник
-              building: 15
-              office: 103-105
-              count: 9
-          - long_title: Группа стационарной Вселенной
-            emplyees:
-            - post_title: Ведущий специалист
-              building: 15
-              office: 106-108
-              count: 6
-            - post_title: Специалист по самозарождению материи
-              building: 15
-              office: 106-108
+            - post_title: Ведущий инженер
+              building: 14
+              office: 602-605
+              count: 5
+            - post_title: Инженер по параболическим поверхностям
+              building: 14
+              office: 602-605
               count: 12
             - post_title: Техник
-              building: 15
-              office: 106-108
+              building: 14
+              office: 602-605
               count: 9
-          - long_title: Группа нуклеосинтеза
+          - long_title: Группа высокочастотных передатчиков
             emplyees:
-            - post_title: Ведущий специалист
-              building: 15
-              office: 109-113
-              count: 6
-            - post_title: Специалист по первичному нуклеосинтезу
-              building: 15
-              office: 109-113
+            - post_title: Ведущий инженер
+              building: 14
+              office: 606-608
+              count: 5
+            - post_title: Инженер-электроник
+              building: 14
+              office: 606-608
               count: 12
-            - post_title: Специалист по звездному нуклеосинтезу
-              building: 15
-              office: 109-113
+            - post_title: Техник
+              building: 14
+              office: 606-608
+              count: 9
+          - long_title: Группа высокочастотных приемников
+            emplyees:
+            - post_title: Ведущий инженер
+              building: 14
+              office: 609-612
+              count: 6
+            - post_title: Инженер-электроник
+              building: 14
+              office: 609-612
+              count: 14
+            - post_title: Техник
+              building: 14
+              office: 609-612
               count: 8
-            - post_title: Инженер термоядерных реакторов
-              building: 15
-              office: 109-113
-              count: 9
-            - post_title: Физик ядерного горения
-              building: 15
-              office: 109-113
-              count: 7
-            - post_title: Техник
-              building: 15
-              office: 109-113
-              count: 9
-          - long_title: Группа горячей Вселенной
-            emplyees:
-            - post_title: Ведущий специалист
-              building: 15
-              office: 114-117
-              count: 6
-            - post_title: Специалист по плазме
-              building: 15
-              office: 114-117
-              count: 12
-            - post_title: Специалист по реликтовому излучению
-              building: 15
-              office: 114-117
-              count: 8
-            - post_title: Техник
-              building: 15
-              office: 114-117
-              count: 9
-          - long_title: Группа космической инфляции
-            emplyees:
-            - post_title: Ведущий специалист
-              building: 15
-              office: 118-121
-              count: 6
-            - post_title: Специалист по крупномасштабной структуре Вселенной
-              building: 15
-              office: 118-121
-              count: 12
-            - post_title: Специалист по флуктуациям плотности
-              building: 15
-              office: 118-121
-              count: 4
-            - post_title: Техник
-              building: 15
-              office: 118-121
-              count: 9
-          - long_title: Группа космологического принципа
-            emplyees:
-            - post_title: Ведущий специалист
-              building: 15
-              office: 122-125
-              count: 6
-            - post_title: Специалист по изотропии
-              building: 15
-              office: 122-125
-              count: 12
-            - post_title: Специалист по однородности
-              building: 15
-              office: 122-125
-              count: 7
-            - post_title: Техник
-              building: 15
-              office: 122-125
-              count: 9
-          - long_title: Группа Вселенной Фридмана
-            emplyees:
-            - post_title: Ведущий специалист
-              building: 15
-              office: 126-128
-              count: 6
-            - post_title: Математик
-              building: 15
-              office: 126-128
-              count: 12
-            - post_title: Техник
-              building: 15
-              office: 126-128
-              count: 9
-          - long_title: Группа космологической сингулярности
-            emplyees:
-            - post_title: Ведущий специалист
-              building: 15
-              office: 129-131
-              count: 6
-            - post_title: Специалист по бесконечной плотности и температуре
-              building: 15
-              office: 129-131
-              count: 12
-            - post_title: Специалист по квантовой гравитации
-              building: 15
-              office: 129-131
-              count: 4
-            - post_title: Техник
-              building: 15
-              office: 129-131
-              count: 9
 
-        - long_title: Отдел материи и гравитации
+        - long_title: Лунная лаборатория
           emplyees:
           - post_title: Начальник отдела
-            building: 15
-            office: 201
+            building: 14
+            office: 613
           - post_title: Заместитель начальника отдела
-            building: 15
-            office: 202
+            building: 14
+            office: 614
           units:
-          - long_title: Группа гравитационного взаимодействия
+          - long_title: Группа искусственных орбитальных зеркал
             emplyees:
-            - post_title: Ведущий специалист
-              building: 15
-              office: 203-206
-              count: 6
-            - post_title: Физик-механик
-              building: 15
-              office: 203-206
-              count: 12
-            - post_title: Физик общей теории относительности
-              building: 15
-              office: 203-206
+            - post_title: Ведущий инженер
+              building: 14
+              office: 615-618
               count: 10
+            - post_title: Инженер-оптик
+              building: 14
+              office: 615-618
+              count: 19
+            - post_title: Техник
+              building: 14
+              office: 615-618
+              count: 12
+          - long_title: Группа полной луны
+            emplyees:
+            - post_title: Ведущий инженер
+              building: 14
+              office: 619-621
+              count: 4
+            - post_title: Инженер-физик
+              building: 14
+              office: 619-621
+              count: 10
+            - post_title: Техник
+              building: 14
+              office: 619-621
+              count: 6
+          - long_title: Группа приливов и отливов
+            emplyees:
+            - post_title: Старший научный сотрудник
+              building: 14
+              office: 622-628
+              count: 10
+            - post_title: Физик-океанолог
+              building: 14
+              office: 622-628
+              count: 22
             - post_title: Лаборант
-              building: 15
-              office: 203-206
-              count: 9
-          - long_title: Группа элементарных частиц
-            emplyees:
-            - post_title: Ведущий специалист
-              building: 15
-              office: 203-211
-              count: 6
-            - post_title: Специалист по кваркам
-              building: 15
-              office: 203-211
-              count: 12
-            - post_title: Специалист по лептонам
-              building: 15
-              office: 203-211
-              count: 10
-            - post_title: Специалист по фотонам
-              building: 15
-              office: 203-211
-              count: 12
-            - post_title: Специалист по глюонам
-              building: 15
-              office: 203-211
-              count: 8
-            - post_title: Специалист по мезонам
-              building: 15
-              office: 203-211
-              count: 7
-            - post_title: Специалист по бозонам
-              building: 15
-              office: 203-211
+              building: 14
+              office: 622-628
               count: 11
-            - post_title: Специалист по сильному взаимодействию
-              building: 15
-              office: 203-211
-              count: 12
-            - post_title: Специалист по слабому взаимодействию
-              building: 15
-              office: 203-211
-              count: 10
-            - post_title: Специалист по электромагнитному взаимодействию
-              building: 15
-              office: 203-211
-              count: 8
-            - post_title: Специалист по гравитационному взаимодействию
-              building: 15
-              office: 203-211
-              count: 11
-          - long_title: Группа тяготения Ньютона
+          - long_title: Романтическая группа
             emplyees:
-            - post_title: Ведущий специалист
-              building: 15
-              office: 212-215
-              count: 6
-            - post_title: Специалист по яблокам
-              building: 15
-              office: 212-215
-              count: 12
-            - post_title: Специалист по гравитационному потенциалу
-              building: 15
-              office: 212-215
-              count: 4
-            - post_title: Техник
-              building: 15
-              office: 212-215
-              count: 9
-          - long_title: Группа общей теории относительности
-            emplyees:
-            - post_title: Ведущий специалист
-              building: 15
-              office: 216-219
-              count: 6
-            - post_title: Специалист по свету
-              building: 15
-              office: 216-219
-              count: 12
-            - post_title: Специалист по инерции
-              building: 15
-              office: 216-219
-              count: 4
-            - post_title: Техник
-              building: 15
-              office: 216-219
-              count: 9
-
-        - long_title: Отдел пространственно-временных парадоксов
-          emplyees:
-          - post_title: Начальник отдела
-            building: 15
-            office: 220
-          - post_title: Заместитель начальника отдела
-            building: 15
-            office: 221
-          units:
-          - long_title: Группа петли времени
-            emplyees:
-            - post_title: Ведущий специалист
-              building: 15
-              office: 222-225
-              count: 6
-            - post_title: Физик-хронолог
-              building: 15
-              office: 222-225
-              count: 12
-            - post_title: Юрист
-              building: 15
-              office: 222-225
-              count: 4
-            - post_title: Техник
-              building: 15
-              office: 222-225
-              count: 9
-          - long_title: Группа кротовых нор
-            emplyees:
-            - post_title: Ведущий специалист
-              building: 15
-              office: 226-229
-              count: 6
-            - post_title: Специалист по искривлениям пространства-времени
-              building: 15
-              office: 226-229
-              count: 12
-            - post_title: Специалист по временным парадоксам
-              building: 15
-              office: 226-229
-              count: 12
-            - post_title: Физик
-              building: 15
-              office: 226-229
-              count: 12
-            - post_title: Техник
-              building: 15
-              office: 226-229
-              count: 9
-          - long_title: Группа параллельных вселенных
-            emplyees:
-            - post_title: Ведущий специалист
-              building: 15
-              office: 230-232
-              count: 6
-            - post_title: Специалист по перпендикулярным мирам
-              building: 15
-              office: 230-232
-              count: 12
-            - post_title: Таможенник
-              building: 15
-              office: 230-232
-              count: 4
-            - post_title: Техник
-              building: 15
-              office: 230-232
+            - post_title: Старший лирик
+              building: 14
+              office: 629-630
+              count: 2
+            - post_title: Поэт 1-го разряда
+              building: 14
+              office: 629-630
+              count: 3
+            - post_title: Литературовед
+              building: 14
+              office: 629-630
               count: 5
 
-        - long_title: Отдел альтернативных теорий
+    - long_title: Отделение Солнечной системы
+      id: 112
+      emplyees:
+      - post_title: Директор отделения Солнечной системы
+        id: 1121
+        building: 14
+        office: 206
+      - post_title: Помощник директора отделения Солнечной системы
+        id: 1122
+        building: 14
+        office: 206
+      - post_title: Заместитель директора отделения Солнечной системы по крупным объектам
+        id: 1123
+        building: 14
+        office: 207
+        units:
+
+        - long_title: Отдел планет земной группы
+          id: 11231
           emplyees:
           - post_title: Начальник отдела
-            building: 15
-            office: 301
+            id: 112311
+            building: 14
+            office: 700
           - post_title: Заместитель начальника отдела
-            building: 15
-            office: 302
+            id: 112312
+            building: 14
+            office: 701
           units:
-          - long_title: Группа множественных Вселенных
+          - long_title: Группа Земли
+            id: 112313
             emplyees:
-            - post_title: Ведущий специалист
-              building: 15
-              office: 303-305
-              count: 6
-            - post_title: Физик
-              building: 15
-              office: 303-305
-              count: 12
-            - post_title: Лаборант
-              building: 15
-              office: 303-305
-              count: 9
-          - long_title: Группа симуляции Вселенной
+            - post_title: Старший геолог
+              id: 1123131
+              building: 14
+              office: 702-705
+              count: 8
+            - post_title: Младший геолог
+              id: 1123132
+              building: 14
+              office: 702-705
+              count: 14
+            - post_title: Помощник геолога
+              id: 1123133
+              building: 14
+              office: 702-705
+              count: 15
+          - long_title: Группа Меркурия
+            id: 112314
             emplyees:
-            - post_title: Ведущий специалист
-              building: 15
-              office: 306-308
+            - post_title: Специалист по градусникам
+              id: 1123141
+              building: 14
+              office: 706-707
               count: 6
-            - post_title: Физик
-              building: 15
-              office: 306-308
-              count: 12
-            - post_title: Лаборант
-              building: 15
-              office: 306-308
-              count: 9
-          - long_title: Группа бесконечной Вселенной
+            - post_title: Специалист по творчеству группы Queen
+              id: 1123142
+              building: 14
+              office: 706-707
+              count: 2
+            - post_title: Специалист по крылатым сандалиям
+              id: 1123143
+              building: 14
+              office: 706-707
+              count: 5
+          - long_title: Группа Венеры
+            id: 112315
             emplyees:
-            - post_title: Ведущий специалист
-              building: 15
-              office: 309-311
-              count: 6
-            - post_title: Физик
-              building: 15
-              office: 309-311
+            - post_title: Специалист по урожайности сельскохозяйственных земель
+              id: 1123151
+              building: 14
+              office: 708-711
+              count: 16
+            - post_title: Специалист по кислотным облакам и дождям
+              id: 1123152
+              building: 14
+              office: 708-711
               count: 12
-            - post_title: Лаборант
-              building: 15
-              office: 309-311
-              count: 9
+            - post_title: Специалист по альтернативнм формам жизни
+              id: 1123153
+              building: 14
+              office: 708-711
+              count: 15
+          - long_title: Группа Марса
+            id: 112316
+            emplyees:
+            - post_title: Специалист по творчеству Джонатана Свифта
+              id: 1123161
+              building: 14
+              office: 712-713
+              count: 6
+            - post_title: Специалист по гребле в марсианских каналах
+              id: 1123162
+              building: 14
+              office: 712-713
+              count: 4
+            - post_title: Специалист по любопытству
+              id: 1123163
+              building: 14
+              office: 712-713
+              count: 5
 
-        - long_title: Отдел крупномасштабной структуры Вселенной
+        - long_title: Отдел газовых гигантов
+          id: 11232
           emplyees:
           - post_title: Начальник отдела
-            building: 15
-            office: 312
+            id: 112321
+            building: 14
+            office: 714
           - post_title: Заместитель начальника отдела
-            building: 15
-            office: 313
+            id: 112322
+            building: 14
+            office: 715
           units:
-          - long_title: Группа галактических нитей
+          - long_title: Группа Юпитера
+            id: 112323
             emplyees:
-            - post_title: Ведущий специалист
-              building: 15
-              office: 314-317
+            - post_title: Специалист по Большому красному пятну
+              id: 1123231
+              building: 14
+              office: 716-719
               count: 6
-            - post_title: Специалист по барионной материи
-              building: 15
-              office: 314-317
-              count: 12
-            - post_title: Астроном-наблюдатель
-              building: 15
-              office: 314-317
-              count: 4
-            - post_title: Специалист по Великому аттрактору
-              building: 15
-              office: 314-317
-              count: 4
-            - post_title: Техник
-              building: 15
-              office: 314-317
-              count: 9
-          - long_title: Группа войдов
+            - post_title: Специалист по металлическому водороду
+              id: 1123232
+              building: 14
+              office: 716-719
+              count: 5
+            - post_title: Специалист по верховным божествам
+              id: 1123233
+              building: 14
+              office: 716-719
+              count: 2
+            - post_title: Специалист по ледяным спутникам
+              id: 1123234
+              building: 14
+              office: 716-719
+              count: 7
+          - long_title: Группа Сатурна
+            id: 112324
             emplyees:
-            - post_title: Ведущий специалист
-              building: 15
-              office: 318-322
+            - post_title: Специалист по каменному поясу
+              id: 1123241
+              building: 14
+              office: 720-722
               count: 6
-            - post_title: Специалист по Гауссовому полю
-              building: 15
-              office: 318-322
-              count: 12
-            - post_title: Специалист по реликтовому холодному пятну
-              building: 15
-              office: 318-322
-              count: 4
-            - post_title: Специалист по квантовым флуктуациям
-              building: 15
-              office: 318-322
-              count: 4
-            - post_title: Физик-оптик
-              building: 15
-              office: 318-322
-              count: 4
-            - post_title: Техник
-              building: 15
-              office: 318-322
-              count: 9
-          - long_title: Группа пузыря Хаббла
+            - post_title: Специалист по разреженным планетам
+              id: 1123242
+              building: 14
+              office: 720-722
+              count: 7
+            - post_title: Инженер-гексагонолог
+              id: 1123243
+              building: 14
+              office: 720-722
+              count: 5
+          - long_title: Группа Урана
+            id: 112325
             emplyees:
-            - post_title: Ведущий специалист
-              building: 15
-              office: 323-326
+            - post_title: Ведущий инженер
+              id: 1123251
+              building: 14
+              office: 723-725
               count: 6
-            - post_title: Специалист по расширению Вселенной
-              building: 15
-              office: 323-326
-              count: 12
-            - post_title: Специалист по сверхновым типа Ia
-              building: 15
-              office: 323-326
-              count: 4
-            - post_title: Специалист по термодинамическому равновесию
-              building: 15
-              office: 323-326
-              count: 4
+            - post_title: Инженер
+              id: 1123252
+              building: 14
+              office: 723-725
+              count: 7
+            - post_title: Специалист по древнегреческой мифологии
+              id: 1123253
+              building: 14
+              office: 723-725
+              count: 2
+            - post_title: Специалист по ледяным гигантам
+              id: 1123254
+              building: 14
+              office: 723-725
+              count: 7
             - post_title: Техник
-              building: 15
-              office: 323-326
+              id: 1123255
+              building: 14
+              office: 723-725
+              count: 8
+          - long_title: Группа Нептуна
+            id: 112326
+            emplyees:
+            - post_title: Ведущий инженер
+              id: 1123261
+              building: 14
+              office: 726-729
+              count: 6
+            - post_title: Инженер
+              id: 1123262
+              building: 14
+              office: 726-729
+              count: 8
+            - post_title: Специалист по предсказанным планетам
+              id: 1123263
+              building: 14
+              office: 726-729
+              count: 2
+            - post_title: Специалист по ледяным гигантам
+              id: 1123264
+              building: 14
+              office: 726-729
+              count: 7
+            - post_title: Техник
+              id: 1123265
+              building: 14
+              office: 726-729
               count: 9
 
-      - long_title: Отдел научно-технической информации
-        short_title: ОНТИ
+      - post_title: Заместитель директора отделения Солнечной системы по малым объектам
+        id: 1124
+        building: 14
+        office: 208
+        units:
+
+        - long_title: Отдел пояса астероидов
+          id: 11241
+          emplyees:
+          - post_title: Начальник отдела
+            id: 112411
+            building: 14
+            office: 800
+          - post_title: Заместитель начальника отдела
+            id: 112412
+            building: 14
+            office: 801
+          - post_title: Ведущий инженер
+            id: 112413
+            building: 14
+            office: 802-805
+            count: 10
+          - post_title: Инженер по космическим полезным ископаемым
+            id: 112414
+            building: 14
+            office: 802-805
+            count: 10
+          - post_title: Учётчик
+            id: 112415
+            building: 14
+            office: 802-805
+            count: 20
+          - post_title: Инженер по противоастероидной защите
+            id: 112416
+            building: 14
+            office: 802-805
+            count: 30
+
+        - long_title: Отдел карликовых планет, планетоидов, планетных спутников и комет
+          id: 11242
+          emplyees:
+          - post_title: Начальник отдела
+            id: 112421
+            building: 14
+            office: 806
+          - post_title: Заместитель начальника отдела
+            id: 112422
+            building: 14
+            office: 807
+          - post_title: Специалист по приливным силам
+            id: 112423
+            building: 14
+            office: 808-810
+            count: 10
+          - post_title: Специалист по внеземным источникам воды
+            id: 112424
+            building: 14
+            office: 808-810
+            count: 10
+          - post_title: Инженер по межпланетным сетям связи
+            id: 112425
+            building: 14
+            office: 808-810
+            count: 10
+
+      units:
+      - long_title: Отдел второй космической скорости
+        id: 1125
         emplyees:
         - post_title: Начальник отдела
+          id: 11251
           building: 14
-          office: 300
+          office: 811
         - post_title: Заместитель начальника отдела
+          id: 11252
           building: 14
+          office: 812
+        units:
+        - long_title: Группа транспортных межпланетных космических аппаратов
+          id: 11253
+          emplyees:
+          - post_title: Ведущий инженер
+            id: 112531
+            building: 14
+            office: 813-815
+            count: 6
+          - post_title: Инженер
+            id: 112532
+            building: 14
+            office: 813-815
+            count: 12
+          - post_title: Техник
+            id: 112533
+            building: 14
+            office: 813-815
+            count: 14
+        - long_title: Группа пассажирских межпланетных космических аппаратов
+          id: 11254
+          emplyees:
+          - post_title: Ведущий инженер
+            id: 112541
+            building: 14
+            office: 816-818
+            count: 5
+          - post_title: Инженер
+            id: 112542
+            building: 14
+            office: 816-818
+            count: 18
+          - post_title: Техник
+            id: 112543
+            building: 14
+            office: 816-818
+            count: 12
+
+      - long_title: Солнечный отдел
+        id: 1126
+        emplyees:
+        - post_title: Начальник отдела
+          id: 11261
+          building: 14
+          office: 819
+        - post_title: Заместитель начальника отдела
+          id: 11262
+          building: 14
+          office: 820
+        units:
+        - long_title: Группа светимости
+          id: 11263
+          emplyees:
+          - post_title: Ведущий инженер
+            id: 112631
+            building: 14
+            office: 821-824
+            count: 4
+          - post_title: Инженер
+            id: 112632
+            building: 14
+            office: 821-824
+            count: 2
+          - post_title: Специалист по желтым карликам
+            id: 112633
+            building: 14
+            office: 821-824
+            count: 8
+          - post_title: Специалист по солнечной короне
+            id: 112634
+            building: 14
+            office: 821-824
+            count: 7
+          - post_title: Техник
+            id: 112635
+            building: 14
+            office: 821-824
+            count: 5
+        - long_title: Группа магнитных бурь
+          id: 11264
+          emplyees:
+          - post_title: Ведущий инженер
+            id: 112641
+            building: 14
+            office: 825-828
+            count: 5
+          - post_title: Инженер
+            id: 112642
+            building: 14
+            office: 825-828
+            count: 6
+          - post_title: Специалист по солнечному ветру
+            id: 112643
+            building: 14
+            office: 825-828
+            count: 8
+          - post_title: Техник
+            id: 112644
+            building: 14
+            office: 825-828
+            count: 7
+        - long_title: Группа исследования истории Солнечной системы
+          id: 11265
+          emplyees:
+          - post_title: Ведущий инженер
+            id: 112651
+            building: 14
+            office: 829-832
+            count: 6
+          - post_title: Инженер
+            id: 112652
+            building: 14
+            office: 829-832
+            count: 6
+          - post_title: Инженер-эволюционограф
+            id: 112653
+            building: 14
+            office: 829-832
+            count: 7
+          - post_title: Инженер по термоядерным реакциям
+            id: 112654
+            building: 14
+            office: 829-832
+            count: 5
+          - post_title: Специалист по эволюции звёзд и звёздных систем
+            id: 112655
+            building: 14
+            office: 829-832
+            count: 7
+          - post_title: Техник
+            id: 112656
+            building: 14
+            office: 829-832
+            count: 5
+
+    - long_title: Внутригалактическое отделение
+      id: 113
+      emplyees:
+      - post_title: Директор внутригалактического отделения
+        id: 1131
+        building: 14
+        office: 209
+      - post_title: Помощник директора внутригалактического отделения
+        id: 1132
+        building: 14
+        office: 209
+      - post_title: Заместитель директора внутригалактического отделения
+        id: 1133
+        building: 14
+        office: 210
+      units:
+      - long_title: Отдел морфологии Галактики
+        id: 1134
+        emplyees:
+        - post_title: Начальник отдела
+          id: 11341
+          building: 14
+          office: 900
+        - post_title: Заместитель начальника отдела
+          id: 11342
+          building: 14
+          office: 901
+        units:
+        - long_title: Группа галактического ядра
+          id: 11343
+          emplyees:
+          - post_title: Ведущий специалист
+            id: 113431
+            building: 14
+            office: 902-905
+            count: 6
+          - post_title: Специалист по активным галактическим ядрам
+            id: 113432
+            building: 14
+            office: 902-905
+            count: 6
+          - post_title: Специалист по аккреционному диску
+            id: 113433
+            building: 14
+            office: 902-905
+            count: 2
+          - post_title: Специалист по черным дырам
+            id: 113434
+            building: 14
+            office: 902-905
+            count: 8
+          - post_title: Техник
+            id: 113435
+            building: 14
+            office: 902-905
+            count: 8
+        - long_title: Группа галактического балджа
+          id: 11344
+          emplyees:
+          - post_title: Ведущий специалист
+            id: 113441
+            building: 14
+            office: 906-909
+            count: 6
+          - post_title: Специалист по галактическим ядрам
+            id: 113442
+            building: 14
+            office: 906-909
+            count: 4
+          - post_title: Специалист по сверхмассивным черным дырам
+            id: 113443
+            building: 14
+            office: 906-909
+            count: 12
+          - post_title: Техник
+            id: 113444
+            building: 14
+            office: 906-909
+            count: 8
+        - long_title: Группа галактического рукава
+          id: 11345
+          emplyees:
+          - post_title: Ведущий специалист
+            id: 113451
+            building: 14
+            office: 910-913
+            count: 6
+          - post_title: Специалист по вращению звезд в галактике
+            id: 113452
+            building: 14
+            office: 910-913
+            count: 12
+          - post_title: Специалист по космической пыли
+            id: 113453
+            building: 14
+            office: 910-913
+            count: 7
+          - post_title: Специалист по космическому газу
+            id: 113454
+            building: 14
+            office: 910-913
+            count: 8
+          - post_title: Техник
+            id: 113455
+            building: 14
+            office: 910-913
+            count: 12
+        - long_title: Группа внешних кольцеобразных структур
+          id: 11346
+          emplyees:
+          - post_title: Старший астроном
+            id: 113461
+            building: 14
+            office: 914-915
+            count: 4
+          - post_title: Астроном
+            id: 113462
+            building: 14
+            office: 914-915
+            count: 8
+        - long_title: Группа галактического бара
+          id: 11347
+          emplyees:
+          - post_title: Старший астроном
+            id: 113471
+            building: 14
+            office: 916-917
+            count: 4
+          - post_title: Астроном
+            id: 113472
+            building: 14
+            office: 916-917
+            count: 8
+        - long_title: Группа галактического гало
+          id: 11348
+          emplyees:
+          - post_title: Ведущий специалист
+            id: 113481
+            building: 14
+            office: 918-921
+            count: 6
+          - post_title: Специалист по темной материи
+            id: 113482
+            building: 14
+            office: 918-921
+            count: 12
+          - post_title: Специалист по космическому газу
+            id: 113483
+            building: 14
+            office: 918-921
+            count: 10
+          - post_title: Техник
+            id: 113484
+            building: 14
+            office: 918-921
+            count: 15
+        - long_title: Группа коричневых карликов
+          id: 11349
+          emplyees:
+          - post_title: Ведущий специалист
+            id: 113491
+            building: 14
+            office: 922-925
+            count: 6
+          - post_title: Специалист по термоядерному синтезу
+            id: 113492
+            building: 14
+            office: 922-925
+            count: 12
+          - post_title: Специалист по литию
+            id: 113493
+            building: 14
+            office: 922-925
+            count: 4
+          - post_title: Техник
+            id: 113494
+            building: 14
+            office: 922-925
+            count: 9
+
+      - long_title: Отдел темной материи
+        id: 1135
+        emplyees:
+        - post_title: Начальник отдела
+          id: 11351
+          building: 14
+          office: 1000
+        - post_title: Заместитель начальника отдела
+          id: 11352
+          building: 14
+          office: 1001
+        units:
+        - long_title: Группа аномалий небесной механики
+          id: 11353
+          emplyees:
+          - post_title: Ведущий специалист
+            id: 113531
+            building: 14
+            office: 1002-1005
+            count: 6
+          - post_title: Специалист по гравитационным манёврам
+            id: 113532
+            building: 14
+            office: 1002-1005
+            count: 12
+          - post_title: Специалист по отдаче теплового излучения
+            id: 113533
+            building: 14
+            office: 1002-1005
+            count: 4
+          - post_title: Техник
+            id: 113534
+            building: 14
+            office: 1002-1005
+            count: 9
+        - long_title: Барионная группа
+          id: 11354
+          emplyees:
+          - post_title: Ведущий специалист
+            id: 113541
+            building: 14
+            office: 1006-1010
+            count: 6
+          - post_title: Специалист по протонам
+            id: 113542
+            building: 14
+            office: 1006-1010
+            count: 12
+          - post_title: Специалист по нейтронам
+            id: 113543
+            building: 14
+            office: 1006-1010
+            count: 12
+          - post_title: Специалист по гиперонам
+            id: 113544
+            building: 14
+            office: 1006-1010
+            count: 4
+          - post_title: Специалист по резонансам
+            id: 113545
+            building: 14
+            office: 1006-1010
+            count: 4
+          - post_title: Техник
+            id: 113546
+            building: 14
+            office: 1006-1010
+            count: 9
+        - long_title: Группа гравитационного линзирования
+          id: 11355
+          emplyees:
+          - post_title: Ведущий специалист
+            id: 113551
+            building: 14
+            office: 1011-1014
+            count: 6
+          - post_title: Специалист по общей теории относительности
+            id: 113552
+            building: 14
+            office: 1011-1014
+            count: 12
+          - post_title: Физик-оптик
+            id: 113553
+            building: 14
+            office: 1011-1014
+            count: 4
+          - post_title: Техник
+            id: 113554
+            building: 14
+            office: 1011-1014
+            count: 9
+        - long_title: Группа топологии пространства-времени
+          id: 11356
+          emplyees:
+          - post_title: Ведущий специалист
+            id: 113561
+            building: 14
+            office: 1015-1019
+            count: 6
+          - post_title: Специалист по изоморфизму
+            id: 113562
+            building: 14
+            office: 1015-1019
+            count: 12
+          - post_title: Специалист по изотропии
+            id: 113563
+            building: 14
+            office: 1015-1019
+            count: 8
+          - post_title: Специалист по реликтовому излучению
+            id: 113564
+            building: 14
+            office: 1015-1019
+            count: 9
+          - post_title: Физик двух измерений
+            id: 113565
+            building: 14
+            office: 1015-1019
+            count: 7
+          - post_title: Техник
+            id: 113566
+            building: 14
+            office: 1015-1019
+            count: 9
+        - long_title: Группа тяжёлых нейтрино
+          id: 11357
+          emplyees:
+          - post_title: Ведущий специалист
+            id: 113571
+            building: 14
+            office: 1020-1022
+            count: 6
+          - post_title: Физик слабого взаимодействия
+            id: 113572
+            building: 14
+            office: 1020-1022
+            count: 12
+          - post_title: Инженер нейтринных детекторов
+            id: 113573
+            building: 14
+            office: 1020-1022
+            count: 6
+          - post_title: Техник
+            id: 113574
+            building: 14
+            office: 1020-1022
+            count: 9
+        - long_title: Группа проблемы сингулярного гало
+          id: 11358
+          emplyees:
+          - post_title: Ведущий специалист
+            id: 113581
+            building: 14
+            office: 1023-1025
+            count: 6
+          - post_title: Специалист по карликовым галактикам
+            id: 113582
+            building: 14
+            office: 1023-1025
+            count: 12
+          - post_title: Математик-астроном
+            id: 113583
+            building: 14
+            office: 1023-1025
+            count: 8
+          - post_title: Техник
+            id: 113584
+            building: 14
+            office: 1023-1025
+            count: 9
+
+      - long_title: Отдел вращения Галактики
+        id: 1136
+        emplyees:
+        - post_title: Начальник отдела
+          id: 11361
+          building: 14
+          office: 1026
+        - post_title: Заместитель начальника отдела
+          id: 11362
+          building: 14
+          office: 1027
+        units:
+        - long_title: Группа красного смещения
+          id: 11363
+          emplyees:
+          - post_title: Ведущий специалист
+            id: 113631
+            building: 14
+            office: 1028-1030
+            count: 6
+          - post_title: Физик-оптик
+            id: 113632
+            building: 14
+            office: 1028-1030
+            count: 12
+          - post_title: Специалист по спектрографии
+            id: 113633
+            building: 14
+            office: 1028-1030
+            count: 4
+          - post_title: Техник
+            id: 113634
+            building: 14
+            office: 1028-1030
+            count: 9
+        - long_title: Группа галактик с низкой поверхностной яркостью
+          id: 11364
+          emplyees:
+          - post_title: Ведущий специалист
+            id: 113641
+            building: 14
+            office: 1124-1127
+            count: 6
+          - post_title: Специалист по нейтральному водороду
+            id: 113642
+            building: 14
+            office: 1124-1127
+            count: 12
+          - post_title: Специалист по галактическим взаимодействиям
+            id: 113643
+            building: 14
+            office: 1124-1127
+            count: 4
+          - post_title: Техник
+            id: 113644
+            building: 14
+            office: 1124-1127
+            count: 9
+        - long_title: Группа модифицированной ньютоновской динамики
+          id: 11365
+          emplyees:
+          - post_title: Ведущий специалист
+            id: 113651
+            building: 14
+            office: 1128-1130
+            count: 6
+          - post_title: Математик
+            id: 113652
+            building: 14
+            office: 1128-1130
+            count: 12
+          - post_title: Ассистент по расчетам вращения
+            id: 113653
+            building: 14
+            office: 1128-1130
+            count: 4
+          - post_title: Техник
+            id: 113654
+            building: 14
+            office: 1128-1130
+            count: 9
+        - long_title: Группа наблюдений в инфракрасном диапазоне
+          id: 11366
+          emplyees:
+          - post_title: Ведущий специалист
+            id: 113661
+            building: 14
+            office: 926-928
+            count: 6
+          - post_title: Оператор спектрофотометра
+            id: 113662
+            building: 14
+            office: 926-928
+            count: 12
+          - post_title: Регулировщик измерительной аппаратуры
+            id: 113663
+            building: 14
+            office: 926-928
+            count: 4
+          - post_title: Техник
+            id: 113664
+            building: 14
+            office: 926-928
+            count: 9
+
+      - long_title: Отдел наблюдения и исследования Галактики
+        id: 1137
+        emplyees:
+        - post_title: Начальник отдела
+          id: 11371
+          building: 14
+          office: 1100
+        - post_title: Заместитель начальника отдела
+          id: 11372
+          building: 14
+          office: 1101
+        units:
+        - long_title: Группа наземных наблюдательных средств
+          id: 11373
+          emplyees:
+          - post_title: Ведущий специалист
+            id: 113731
+            building: 14
+            office: 1102-1104
+            count: 6
+          - post_title: Астроном-наблюдатель
+            id: 113732
+            building: 14
+            office: 1102-1104
+            count: 12
+          - post_title: Оператор-регистратор
+            id: 113733
+            building: 14
+            office: 1102-1104
+            count: 4
+          - post_title: Техник
+            id: 113734
+            building: 14
+            office: 1102-1104
+            count: 9
+        - long_title: Группа внеземных наблюдательных средств
+          id: 11374
+          emplyees:
+          - post_title: Ведущий специалист
+            id: 113741
+            building: 14
+            office: 1105-1107
+            count: 6
+          - post_title: Программист модулей управления космической аппаратурой
+            id: 113742
+            building: 14
+            office: 1105-1107
+            count: 12
+          - post_title: Оператор управления космической аппаратурой
+            id: 113743
+            building: 14
+            office: 1105-1107
+            count: 4
+          - post_title: Техник
+            id: 113744
+            building: 14
+            office: 1105-1107
+            count: 9
+        - long_title: Группа подземных исследовательских устройств
+          id: 11375
+          emplyees:
+          - post_title: Ведущий специалист
+            id: 113751
+            building: 14
+            office: 1108-1110
+            count: 6
+          - post_title: Физик-специалист по нейтрино
+            id: 113752
+            building: 14
+            office: 1108-1110
+            count: 12
+          - post_title: Монтажник бочек с керосином
+            id: 113753
+            building: 14
+            office: 1108-1110
+            count: 4
+          - post_title: Техник
+            id: 113754
+            building: 14
+            office: 1108-1110
+            count: 9
+        - long_title: Группа разработки новых средств измерения, наблюдения и исследования
+          id: 11376
+          emplyees:
+          - post_title: Ведущий специалист
+            id: 113761
+            building: 14
+            office: 1111-1115
+            count: 6
+          - post_title: Инженер-конструктор
+            id: 113762
+            building: 14
+            office: 1111-1115
+            count: 12
+          - post_title: Физик
+            id: 113763
+            building: 14
+            office: 1111-1115
+            count: 14
+          - post_title: Математик
+            id: 113764
+            building: 14
+            office: 1111-1115
+            count: 14
+          - post_title: Инженер-схемотехник
+            id: 113765
+            building: 14
+            office: 1111-1115
+            count: 4
+          - post_title: Техник
+            id: 113766
+            building: 14
+            office: 1111-1115
+            count: 9
+        - long_title: Группа пролетной аномалии
+          id: 11377
+          emplyees:
+          - post_title: Ведущий специалист
+            id: 113771
+            building: 14
+            office: 1116-1118
+            count: 6
+          - post_title: Физик-экспериментатор
+            id: 113772
+            building: 14
+            office: 1116-1118
+            count: 12
+          - post_title: Математик по расчету гравитационных маневров
+            id: 113773
+            building: 14
+            office: 1116-1118
+            count: 4
+          - post_title: Техник
+            id: 113774
+            building: 14
+            office: 1116-1118
+            count: 9
+
+    - long_title: Межгалактическое отделение
+      id: 114
+      emplyees:
+      - post_title: Директор межгалактического отделения
+        id: 1141
+        building: 14
+        office: 211
+      units:
+      - long_title: Отдел возникновения и эволюции Вселенной
+        id: 1142
+        emplyees:
+        - post_title: Начальник отдела
+          id: 11421
+          building: 15
+          office: 101
+        - post_title: Заместитель начальника отдела
+          id: 11422
+          building: 15
+          office: 102
+        units:
+        - long_title: Группа Большого взрыва
+          id: 11423
+          emplyees:
+          - post_title: Ведущий специалист
+            id: 114231
+            building: 15
+            office: 103-105
+            count: 6
+          - post_title: Специалист по реликтовому излучению
+            id: 114232
+            building: 15
+            office: 103-105
+            count: 12
+          - post_title: Специалист по сингулярному состоянию
+            id: 114233
+            building: 15
+            office: 103-105
+            count: 4
+          - post_title: Техник
+            id: 114234
+            building: 15
+            office: 103-105
+            count: 9
+        - long_title: Группа стационарной Вселенной
+          id: 11424
+          emplyees:
+          - post_title: Ведущий специалист
+            id: 114241
+            building: 15
+            office: 106-108
+            count: 6
+          - post_title: Специалист по самозарождению материи
+            id: 114242
+            building: 15
+            office: 106-108
+            count: 12
+          - post_title: Техник
+            id: 114243
+            building: 15
+            office: 106-108
+            count: 9
+        - long_title: Группа нуклеосинтеза
+          id: 11425
+          emplyees:
+          - post_title: Ведущий специалист
+            id: 114251
+            building: 15
+            office: 109-113
+            count: 6
+          - post_title: Специалист по первичному нуклеосинтезу
+            id: 114252
+            building: 15
+            office: 109-113
+            count: 12
+          - post_title: Специалист по звездному нуклеосинтезу
+            id: 114253
+            building: 15
+            office: 109-113
+            count: 8
+          - post_title: Инженер термоядерных реакторов
+            id: 114254
+            building: 15
+            office: 109-113
+            count: 9
+          - post_title: Физик ядерного горения
+            id: 114255
+            building: 15
+            office: 109-113
+            count: 7
+          - post_title: Техник
+            id: 114256
+            building: 15
+            office: 109-113
+            count: 9
+        - long_title: Группа горячей Вселенной
+          id: 11426
+          emplyees:
+          - post_title: Ведущий специалист
+            id: 114261
+            building: 15
+            office: 114-117
+            count: 6
+          - post_title: Специалист по плазме
+            id: 114262
+            building: 15
+            office: 114-117
+            count: 12
+          - post_title: Специалист по реликтовому излучению
+            id: 114263
+            building: 15
+            office: 114-117
+            count: 8
+          - post_title: Техник
+            id: 114264
+            building: 15
+            office: 114-117
+            count: 9
+        - long_title: Группа космической инфляции
+          id: 11427
+          emplyees:
+          - post_title: Ведущий специалист
+            id: 114271
+            building: 15
+            office: 118-121
+            count: 6
+          - post_title: Специалист по крупномасштабной структуре Вселенной
+            id: 114272
+            building: 15
+            office: 118-121
+            count: 12
+          - post_title: Специалист по флуктуациям плотности
+            id: 114273
+            building: 15
+            office: 118-121
+            count: 4
+          - post_title: Техник
+            id: 114274
+            building: 15
+            office: 118-121
+            count: 9
+        - long_title: Группа космологического принципа
+          id: 11428
+          emplyees:
+          - post_title: Ведущий специалист
+            id: 114281
+            building: 15
+            office: 122-125
+            count: 6
+          - post_title: Специалист по изотропии
+            id: 114282
+            building: 15
+            office: 122-125
+            count: 12
+          - post_title: Специалист по однородности
+            id: 114283
+            building: 15
+            office: 122-125
+            count: 7
+          - post_title: Техник
+            id: 114284
+            building: 15
+            office: 122-125
+            count: 9
+        - long_title: Группа Вселенной Фридмана
+          id: 11429
+          emplyees:
+          - post_title: Ведущий специалист
+            id: 114291
+            building: 15
+            office: 126-128
+            count: 6
+          - post_title: Математик
+            id: 114292
+            building: 15
+            office: 126-128
+            count: 123
+          - post_title: Техник
+            id: 11429
+            building: 15
+            office: 126-128
+            count: 9
+        - long_title: Группа космологической сингулярности
+          id: 11420
+          emplyees:
+          - post_title: Ведущий специалист
+            id: 114201
+            building: 15
+            office: 129-131
+            count: 6
+          - post_title: Специалист по бесконечной плотности и температуре
+            id: 114202
+            building: 15
+            office: 129-131
+            count: 12
+          - post_title: Специалист по квантовой гравитации
+            id: 114203
+            building: 15
+            office: 129-131
+            count: 4
+          - post_title: Техник
+            id: 114204
+            building: 15
+            office: 129-131
+            count: 9
+
+      - long_title: Отдел материи и гравитации
+        id: 1143
+        emplyees:
+        - post_title: Начальник отдела
+          id: 11431
+          building: 15
+          office: 201
+        - post_title: Заместитель начальника отдела
+          id: 11432
+          building: 15
+          office: 202
+        units:
+        - long_title: Группа гравитационного взаимодействия
+          id: 11433
+          emplyees:
+          - post_title: Ведущий специалист
+            id: 114331
+            building: 15
+            office: 203-206
+            count: 6
+          - post_title: Физик-механик
+            id: 114332
+            building: 15
+            office: 203-206
+            count: 12
+          - post_title: Физик общей теории относительности
+            id: 114333
+            building: 15
+            office: 203-206
+            count: 10
+          - post_title: Лаборант
+            id: 114334
+            building: 15
+            office: 203-206
+            count: 9
+        - long_title: Группа элементарных частиц
+          id: 11434
+          emplyees:
+          - post_title: Ведущий специалист
+            id: 114341
+            building: 15
+            office: 203-211
+            count: 6
+          - post_title: Специалист по кваркам
+            id: 114342
+            building: 15
+            office: 203-211
+            count: 12
+          - post_title: Специалист по лептонам
+            id: 114343
+            building: 15
+            office: 203-211
+            count: 10
+          - post_title: Специалист по фотонам
+            id: 114344
+            building: 15
+            office: 203-211
+            count: 12
+          - post_title: Специалист по глюонам
+            id: 114345
+            building: 15
+            office: 203-211
+            count: 8
+          - post_title: Специалист по мезонам
+            id: 114346
+            building: 15
+            office: 203-211
+            count: 7
+          - post_title: Специалист по бозонам
+            id: 114347
+            building: 15
+            office: 203-211
+            count: 11
+          - post_title: Специалист по сильному взаимодействию
+            id: 114348
+            building: 15
+            office: 203-211
+            count: 12
+          - post_title: Специалист по слабому взаимодействию
+            id: 114349
+            building: 15
+            office: 203-211
+            count: 10
+          - post_title: Специалист по электромагнитному взаимодействию
+            id: 114340
+            building: 15
+            office: 203-211
+            count: 8
+          - post_title: Специалист по гравитационному взаимодействию
+            id: 1143410
+            building: 15
+            office: 203-211
+            count: 11
+        - long_title: Группа тяготения Ньютона
+          id: 11435
+          emplyees:
+          - post_title: Ведущий специалист
+            id: 11435
+            building: 15
+            office: 212-215
+            count: 6
+          - post_title: Специалист по яблокам
+            id: 11435
+            building: 15
+            office: 212-215
+            count: 12
+          - post_title: Специалист по гравитационному потенциалу
+            id: 11435
+            building: 15
+            office: 212-215
+            count: 4
+          - post_title: Техник
+            id: 11435
+            building: 15
+            office: 212-215
+            count: 9
+        - long_title: Группа общей теории относительности
+          id: 11436
+          emplyees:
+          - post_title: Ведущий специалист
+            id: 114361
+            building: 15
+            office: 216-219
+            count: 6
+          - post_title: Специалист по свету
+            id: 114362
+            building: 15
+            office: 216-219
+            count: 12
+          - post_title: Специалист по инерции
+            id: 114363
+            building: 15
+            office: 216-219
+            count: 4
+          - post_title: Техник
+            id: 114364
+            building: 15
+            office: 216-219
+            count: 9
+
+      - long_title: Отдел пространственно-временных парадоксов
+        id: 1144
+        emplyees:
+        - post_title: Начальник отдела
+          id: 11441
+          building: 15
+          office: 220
+        - post_title: Заместитель начальника отдела
+          id: 11442
+          building: 15
+          office: 221
+        units:
+        - long_title: Группа петли времени
+          id: 11443
+          emplyees:
+          - post_title: Ведущий специалист
+            id: 114431
+            building: 15
+            office: 222-225
+            count: 6
+          - post_title: Физик-хронолог
+            id: 114432
+            building: 15
+            office: 222-225
+            count: 12
+          - post_title: Юрист
+            id: 114433
+            building: 15
+            office: 222-225
+            count: 4
+          - post_title: Техник
+            id: 114434
+            building: 15
+            office: 222-225
+            count: 9
+        - long_title: Группа кротовых нор
+          id: 11444
+          emplyees:
+          - post_title: Ведущий специалист
+            id: 114441
+            building: 15
+            office: 226-229
+            count: 6
+          - post_title: Специалист по искривлениям пространства-времени
+            id: 114442
+            building: 15
+            office: 226-229
+            count: 12
+          - post_title: Специалист по временным парадоксам
+            id: 114443
+            building: 15
+            office: 226-229
+            count: 12
+          - post_title: Физик
+            id: 114444
+            building: 15
+            office: 226-229
+            count: 12
+          - post_title: Техник
+            id: 114445
+            building: 15
+            office: 226-229
+            count: 9
+        - long_title: Группа параллельных вселенных
+          id: 11445
+          emplyees:
+          - post_title: Ведущий специалист
+            id: 114451
+            building: 15
+            office: 230-232
+            count: 6
+          - post_title: Специалист по перпендикулярным мирам
+            id: 114452
+            building: 15
+            office: 230-232
+            count: 12
+          - post_title: Таможенник
+            id: 114453
+            building: 15
+            office: 230-232
+            count: 4
+          - post_title: Техник
+            id: 114454
+            building: 15
+            office: 230-232
+            count: 5
+
+      - long_title: Отдел альтернативных теорий
+        id: 1145
+        emplyees:
+        - post_title: Начальник отдела
+          id: 11451
+          building: 15
           office: 301
-        units:
-        - long_title: Архив
-          emplyees:
-          - post_title: Специалист по научно-технической информации
-            building: 14
-            office: 302-306
-            count: 15
-          - post_title: Техник
-            building: 14
-            office: 302-306
-            count: 5
-        - long_title: Бюро технической документации
-          emplyees:
-          - post_title: Специалист по технической документации
-            building: 14
-            office: 307-309
-            count: 15
-          - post_title: Техник
-            building: 14
-            office: 307-309
-            count: 5
-        - long_title: Группа информационно-справочного фонда
-          emplyees:
-          - post_title: Специалист по научно-технической информации
-            building: 14
-            office: 310-312
-            count: 15
-          - post_title: Библиотекарь
-            building: 14
-            office: 313-316
-            count: 5
-
-      - long_title: Патентный отдел
-        emplyees:
-        - post_title: Начальник отдела
-          building: 14
-          office: 317
         - post_title: Заместитель начальника отдела
-          building: 14
-          office: 318
-        - post_title: Специалист по патентной работе
-          building: 14
-          office: 319-322
-          count: 15
-        - post_title: Специалист по изобретательской работе
-          building: 14
-          office: 319-322
-          count: 15
-
-      - long_title: Метрологический отдел
-        emplyees:
-        - post_title: Начальник отдела
-          building: 14
-          office: 323
-        - post_title: Заместитель начальника отдела
-          building: 14
-          office: 324
+          id: 11452
+          building: 15
+          office: 302
         units:
-        - long_title: Группа поверки средств измерений
+        - long_title: Группа множественных Вселенных
+          id: 11453
           emplyees:
           - post_title: Ведущий специалист
-            building: 14
-            office: 325-326
+            id: 114531
+            building: 15
+            office: 303-305
             count: 6
-          - post_title: Инженер-метролог
-            building: 14
-            office: 325-326
-            count: 6
-        - long_title: Группа ремонта и технического обслуживания средств измерений
+          - post_title: Физик
+            id: 114532
+            building: 15
+            office: 303-305
+            count: 12
+          - post_title: Лаборант
+            id: 114533
+            building: 15
+            office: 303-305
+            count: 9
+        - long_title: Группа симуляции Вселенной
+          id: 11454
           emplyees:
           - post_title: Ведущий специалист
-            building: 14
-            office: 328-329
+            id: 114541
+            building: 15
+            office: 306-308
             count: 6
-          - post_title: Инженер-электроник
-            building: 14
-            office: 328-329
+          - post_title: Физик
+            id: 114542
+            building: 15
+            office: 306-308
+            count: 12
+          - post_title: Лаборант
+            id: 114543
+            building: 15
+            office: 306-308
+            count: 9
+        - long_title: Группа бесконечной Вселенной
+          id: 11455
+          emplyees:
+          - post_title: Ведущий специалист
+            id: 114551
+            building: 15
+            office: 309-311
             count: 6
+          - post_title: Физик
+            id: 114552
+            building: 15
+            office: 309-311
+            count: 12
+          - post_title: Лаборант
+            id: 114553
+            building: 15
+            office: 309-311
+            count: 9
 
-    - post_title: Заместитель директора института по опытному производству
-      people_count: 1
-      building: 13
-      office: 212
+      - long_title: Отдел крупномасштабной структуры Вселенной
+        id: 1146
+        emplyees:
+        - post_title: Начальник отдела
+          id: 11461
+          building: 15
+          office: 312
+        - post_title: Заместитель начальника отдела
+          id: 11462
+          building: 15
+          office: 313
+        units:
+        - long_title: Группа галактических нитей
+          id: 11463
+          emplyees:
+          - post_title: Ведущий специалист
+            id: 114631
+            building: 15
+            office: 314-317
+            count: 6
+          - post_title: Специалист по барионной материи
+            id: 114632
+            building: 15
+            office: 314-317
+            count: 12
+          - post_title: Астроном-наблюдатель
+            id: 114633
+            building: 15
+            office: 314-317
+            count: 4
+          - post_title: Специалист по Великому аттрактору
+            id: 114634
+            building: 15
+            office: 314-317
+            count: 4
+          - post_title: Техник
+            id: 114635
+            building: 15
+            office: 314-317
+            count: 9
+        - long_title: Группа войдов
+          id: 11464
+          emplyees:
+          - post_title: Ведущий специалист
+            id: 114641
+            building: 15
+            office: 318-322
+            count: 6
+          - post_title: Специалист по Гауссовому полю
+            id: 114642
+            building: 15
+            office: 318-322
+            count: 12
+          - post_title: Специалист по реликтовому холодному пятну
+            id: 114643
+            building: 15
+            office: 318-322
+            count: 4
+          - post_title: Специалист по квантовым флуктуациям
+            id: 114644
+            building: 15
+            office: 318-322
+            count: 4
+          - post_title: Физик-оптик
+            id: 114645
+            building: 15
+            office: 318-322
+            count: 4
+          - post_title: Техник
+            id: 114646
+            building: 15
+            office: 318-322
+            count: 9
+        - long_title: Группа пузыря Хаббла
+          id: 11465
+          emplyees:
+          - post_title: Ведущий специалист
+            id: 114651
+            building: 15
+            office: 323-326
+            count: 6
+          - post_title: Специалист по расширению Вселенной
+            id: 114652
+            building: 15
+            office: 323-326
+            count: 12
+          - post_title: Специалист по сверхновым типа Ia
+            id: 114653
+            building: 15
+            office: 323-326
+            count: 4
+          - post_title: Специалист по термодинамическому равновесию
+            id: 114654
+            building: 15
+            office: 323-326
+            count: 4
+          - post_title: Техник
+            id: 114655
+            building: 15
+            office: 323-326
+            count: 9
+
+    - long_title: Отдел научно-технической информации
+      short_title: ОНТИ
+      id: 115
+      emplyees:
+      - post_title: Начальник отдела
+        id: 1151
+        building: 14
+        office: 300
+      - post_title: Заместитель начальника отдела
+        id: 1152
+        building: 14
+        office: 301
       units:
-        
-      - long_title: Отделение опытного производства
+      - long_title: Архив
+        id: 1153
         emplyees:
-        units:
-        - long_title: Цех высокоточных средств измерения и наблюдения
-          emplyees:
-          units:
-          - long_title: Участок
-          - employees:
-            - post_title:
-              building:
-              office:
-              count:
-            - post_title:
-              building:
-              office:
-              count:
-            - post_title:
-              building:
-              office:
-              count:
-            - post_title:
-              building:
-              office:
-              count:
-          - long_title: Участок
-          - employees:
-            - post_title:
-              building:
-              office:
-              count:
-            - post_title:
-              building:
-              office:
-              count:
-            - post_title:
-              building:
-              office:
-              count:
-            - post_title:
-              building:
-              office:
-              count:
-          - long_title: Участок
-          - employees:
-            - post_title:
-              building:
-              office:
-              count:
-            - post_title:
-              building:
-              office:
-              count:
-            - post_title:
-              building:
-              office:
-              count:
-            - post_title:
-              building:
-              office:
-              count:
-          - long_title: Участок
-          - employees:
-            - post_title:
-              building:
-              office:
-              count:
-            - post_title:
-              building:
-              office:
-              count:
-            - post_title:
-              building:
-              office:
-              count:
-            - post_title:
-              building:
-              office:
-              count:
-          - long_title: Участок
-          - employees:
-            - post_title:
-              building:
-              office:
-              count:
-            - post_title:
-              building:
-              office:
-              count:
-            - post_title:
-              building:
-              office:
-              count:
-            - post_title:
-              building:
-              office:
-              count:
-
-        - long_title: Цех производства средств связи
-          emplyees:
-          units:
-
-        - long_title: Цех космической энергетики
-          emplyees:
-          units:
-
-        - long_title: Цех космической транспортировки
-          emplyees:
-          units:
-
-      - long_title: Отделение главного технолога
-        emplyees:
-        - post_title: Начальник отдела
+        - post_title: Специалист по научно-технической информации
           building: 14
-          office:
-        - post_title: Заместитель начальника отдела
+          office: 302-306
+          count: 15
+        - post_title: Техник
           building: 14
-          office:
-        units:
-
-      - long_title: Отделение главного инженера
+          office: 302-306
+          count: 5
+      - long_title: Бюро технической документации
+        id: 1154
         emplyees:
-        units:
+        - post_title: Специалист по технической документации
+          building: 14
+          office: 307-309
+          count: 15
+        - post_title: Техник
+          building: 14
+          office: 307-309
+          count: 5
+      - long_title: Группа информационно-справочного фонда
+        id: 1155
+        emplyees:
+        - post_title: Специалист по научно-технической информации
+          building: 14
+          office: 310-312
+          count: 15
+        - post_title: Библиотекарь
+          building: 14
+          office: 313-316
+          count: 5
 
-    - post_title: Заместитель директора института по коммерции
-      people_count: 1
-      building: 13
-      office: 213
+    - long_title: Патентный отдел
+      id: 116
+      emplyees:
+      - post_title: Начальник отдела
+        id: 1161
+        building: 14
+        office: 317
+      - post_title: Заместитель начальника отдела
+        id: 1162
+        building: 14
+        office: 318
+      - post_title: Специалист по патентной работе
+        id: 1163
+        building: 14
+        office: 319-322
+        count: 15
+      - post_title: Специалист по изобретательской работе
+        id: 1164
+        building: 14
+        office: 319-322
+        count: 15
+
+    - long_title: Метрологический отдел
+      id: 117
+      emplyees:
+      - post_title: Начальник отдела
+        id: 1171
+        building: 14
+        office: 323
+      - post_title: Заместитель начальника отдела
+        id: 1172
+        building: 14
+        office: 324
       units:
-      - long_title: Маркетинговый отдел
+      - long_title: Группа поверки средств измерений
+        id: 1173
         emplyees:
-        - post_title: Начальник отдела
+        - post_title: Ведущий специалист
           building: 14
-          office:
-        - post_title: Заместитель начальника отдела
+          office: 325-326
+          count: 6
+        - post_title: Инженер-метролог
           building: 14
-          office:
+          office: 325-326
+          count: 6
+      - long_title: Группа ремонта и технического обслуживания средств измерений
+        id: 1174
+        emplyees:
+        - post_title: Ведущий специалист
+          building: 14
+          office: 328-329
+          count: 6
+        - post_title: Инженер-электроник
+          building: 14
+          office: 328-329
+          count: 6
+
+  - post_title: Заместитель директора института по опытному производству
+    id: 12
+    people_count: 1
+    building: 13
+    office: 212
+    units:
+
+    - long_title: Отделение опытного производства
+      id: 121
+      emplyees:
+      units:
+      - long_title: Цех высокоточных средств измерения и наблюдения
+        id: 1211
+        emplyees:
+        units:
+        - long_title: Участок
+          id: 12111
+          employees:
+          - post_title:
+            id: 121111
+            building:
+            office:
+            count:
+          - post_title:
+            id: 121112
+            building:
+            office:
+            count:
+          - post_title:
+            id: 121113
+            building:
+            office:
+            count:
+          - post_title:
+            id: 121114
+            building:
+            office:
+            count:
+        - long_title: Участок
+          id: 12112
+          employees:
+          - post_title:
+            id: 121121
+            building:
+            office:
+            count:
+          - post_title:
+            id: 121122
+            building:
+            office:
+            count:
+          - post_title:
+            id: 121123
+            building:
+            office:
+            count:
+          - post_title:
+            id: 121124
+            building:
+            office:
+            count:
+        - long_title: Участок
+          id: 12113
+          employees:
+          - post_title:
+            id: 121131
+            building:
+            office:
+            count:
+          - post_title:
+            id: 121132
+            building:
+            office:
+            count:
+          - post_title:
+            id: 121133
+            building:
+            office:
+            count:
+          - post_title:
+            id: 121134
+            building:
+            office:
+            count:
+        - long_title: Участок
+          id: 12114
+          employees:
+          - post_title:
+            id: 121141
+            building:
+            office:
+            count:
+          - post_title:
+            id: 121142
+            building:
+            office:
+            count:
+          - post_title:
+            id: 121143
+            building:
+            office:
+            count:
+          - post_title:
+            id: 121144
+            building:
+            office:
+            count:
+        - long_title: Участок
+          id: 12115
+          employees:
+          - post_title:
+            id: 121151
+            building:
+            office:
+            count:
+          - post_title:
+            id: 121152
+            building:
+            office:
+            count:
+          - post_title:
+            id: 121153
+            building:
+            office:
+            count:
+          - post_title:
+            id: 121154
+            building:
+            office:
+            count:
+
+      - long_title: Цех производства средств связи
+        id: 1212
+        emplyees:
         units:
 
-      - long_title: Отдел патентных отчислений и роялти
+      - long_title: Цех космической энергетики
+        id: 1213
         emplyees:
-        - post_title: Начальник отдела
-          building: 14
-          office:
-        - post_title: Заместитель начальника отдела
-          building: 14
-          office:
         units:
 
-      - long_title:
+      - long_title: Цех космической транспортировки
+        id: 1214
         emplyees:
-        - post_title: Начальник отдела
-          building: 14
-          office:
-        - post_title: Заместитель начальника отдела
-          building: 14
-          office:
         units:
 
-    - post_title: Заместитель директора института по финансам
-      people_count: 1
-      building: 13
-      office: 214
+    - long_title: Отделение главного технолога
+      id: 122
+      emplyees:
+      - post_title: Начальник отдела
+        building: 14
+        office:
+      - post_title: Заместитель начальника отдела
+        building: 14
+        office:
+      units:
 
-    - post_title: Заместитель директора института по административным вопросам
-      people_count: 1
-      building: 13
-      office: 215
+    - long_title: Отделение главного инженера
+      id: 123
+      emplyees:
+      units:
+
+  - post_title: Заместитель директора института по коммерции
+    id: 13
+    people_count: 1
+    building: 13
+    office: 213
+    units:
+    - long_title: Маркетинговый отдел
+      id: 131
+      emplyees:
+      - post_title: Начальник отдела
+        id: 1311
+        building: 14
+        office:
+      - post_title: Заместитель начальника отдела
+        id: 1312
+        building: 14
+        office:
+      units:
+
+    - long_title: Отдел патентных отчислений и роялти
+      id: 132
+      emplyees:
+      - post_title: Начальник отдела
+        id: 1321
+        building: 14
+        office:
+      - post_title: Заместитель начальника отдела
+        id: 1322
+        building: 14
+        office:
+      units:
+
+    - long_title:
+      id: 133
+      emplyees:
+      - post_title: Начальник отдела
+        id: 1331
+        building: 14
+        office:
+      - post_title: Заместитель начальника отдела
+        id: 1332
+        building: 14
+        office:
+      units:
+
+  - post_title: Заместитель директора института по финансам
+    id: 14
+    people_count: 1
+    building: 13
+    office: 214
+
+  - post_title: Заместитель директора института по административным вопросам
+    id: 15
+    people_count: 1
+    building: 13
+    office: 215
 
   units:
-    - long_title: Отдел труда и зарплаты
-      emplyees:
-      - post_title: Начальник отдела
-        building: 14
-        office:
-      - post_title: Заместитель начальника отдела
-        building: 14
-        office:
-      units:
+  - long_title: Отдел труда и зарплаты
+    id: 16
+    emplyees:
+    - post_title: Начальник отдела
+      building: 14
+      office:
+    - post_title: Заместитель начальника отдела
+      building: 14
+      office:
+    units:
 
-    - long_title: Отдел кадров
-      emplyees:
-      - post_title: Начальник отдела
-        building: 14
-        office:
-      - post_title: Заместитель начальника отдела
-        building: 14
-        office:
-      units:
+  - long_title: Отдел кадров
+    id: 17
+    emplyees:
+    - post_title: Начальник отдела
+      building: 14
+      office:
+    - post_title: Заместитель начальника отдела
+      building: 14
+      office:
+    units:
 
-    - long_title: Бухгалтерия
-      emplyees:
-      - post_title: Главный бухгалтер
-        building: 14
-        office:
-      - post_title: Заместитель главного бухгалтера
-        building: 14
-        office:
-      units:
+  - long_title: Бухгалтерия
+    id: 18
+    emplyees:
+    - post_title: Главный бухгалтер
+      building: 14
+      office:
+    - post_title: Заместитель главного бухгалтера
+      building: 14
+      office:
+    units:
 
-    - long_title: Канцелярия
-      emplyees:
-      - post_title: Начальник канцелярии
-        building: 14
-        office:
-      - post_title: Заместитель начальника канцелярии
-        building: 14
-        office:
-      units:
+  - long_title: Канцелярия
+    id: 19
+    emplyees:
+    - post_title: Начальник канцелярии
+      building: 14
+      office:
+    - post_title: Заместитель начальника канцелярии
+      building: 14
+      office:
+    units:
