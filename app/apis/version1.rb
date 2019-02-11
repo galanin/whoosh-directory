@@ -8,7 +8,7 @@ module Staff
 
     format :json
     prefix :api
-    helpers FetchingHelpers, BirthdayHelpers
+    helpers FetchingHelpers, BirthdayHelpers, ToCallHelpers
 
 
     before do
@@ -188,19 +188,16 @@ module Staff
 
       namespace 'to_call' do
 
-        after do
-          present :unchecked, @user_information.to_call_unchecked_ids
-          present :checked_today, @user_information.to_call_checked_today_ids
-        end
-
-        desc 'Returns all ToCalls records from UserInformation'
+        desc 'Returns unchecked and today checked ToCalls records from UserInformation'
         get do
-          employments = Employment.where(destroyed_at: nil).in(short_id: @user_information.to_call.pluck(:employment_short_id))
+          to_call = @user_information.to_call.unchecked_and_checked_today
+          employments = Employment.where(destroyed_at: nil).in(short_id: to_call.map(&:employment_short_id))
           people = Person.in(short_id: employments.pluck(:person_short_id))
 
           present :people, people
           present :employments, employments
-          present :data, @user_information.to_call.as_json
+          present :data, to_call.as_json
+          present_unchecked_and_checked_today(@user_information)
         end
 
 
@@ -209,6 +206,7 @@ module Staff
           to_call_entity = @user_information.create_to_call(params[:employ_id])
 
           present :to_call, to_call_entity
+          present_unchecked_and_checked_today(@user_information)
         end
 
 
@@ -217,14 +215,33 @@ module Staff
           to_call_entity = @user_information.check_to_call(params[:employ_id])
 
           present :to_call, to_call_entity
+          present_unchecked_and_checked_today(@user_information)
         end
 
 
         desc "Find object ToCall class and destroy it"
         delete ':employ_id' do
-          if params[:employ_id].present?
-            @user_information.destroy_to_call(params[:employ_id])
-          end
+          @user_information.destroy_to_call(params[:employ_id])
+
+          present_unchecked_and_checked_today(@user_information)
+        end
+
+
+        params do
+          requires :year, type: Integer, regexp: /\d{4}/
+          requires :month, type: Integer, values: 0..12
+          optional :day, type: Integer, values: 0..31
+        end
+
+        desc 'Return checked ToCalls records from day or from month.'
+        get '/history' do
+          to_call = @user_information.get_checked_to_call_history(params[:year], params[:month], params[:day])
+          employments = Employment.where(destroyed_at: nil).in(short_id: to_call.map(&:employment_short_id))
+          people = Person.in(short_id: employments.pluck(:person_short_id))
+
+          present :people, people
+          present :employments, employments
+          present :data_checked, to_call.as_json
         end
 
       end

@@ -52,6 +52,17 @@ class UserInformation < ApplicationRecord
   end
 
 
+  def get_checked_to_call_history(year, month, day)
+    if day.present?
+      date = Date.new(year, month, day)
+      to_call.checked.where(checked_at: date.beginning_of_day..date.end_of_day).sort_checked
+    else
+      date = Date.new(year, month)
+      to_call.checked.where(checked_at: date.beginning_of_month.beginning_of_day..date.end_of_month.end_of_day).sort_checked
+    end
+  end
+
+
   def find_to_call_by_employment(employment_short_id)
     to_call.unchecked_and_checked_today.where(employment_short_id: employment_short_id).first if employment_short_id.present?
   end
