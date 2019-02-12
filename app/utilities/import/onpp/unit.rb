@@ -9,6 +9,7 @@ module Utilities
                       :child_ids,
                       :employment_ids,
                       :contact_ids,
+                      :alpha_sort,
                       :path, :level
 
 
@@ -19,7 +20,7 @@ module Utilities
           @list_title         = hash[:list_title]
           @path               = hash[:path]
           @parent_external_id = hash[:parent_external_id]
-
+          @alpha_sort         = hash[:short_title]
           @child_ids      = []
         end
 
@@ -73,6 +74,7 @@ module Utilities
             short_title:    short_title,
             list_title:     list_title,
             level:          level,
+            alpha_sort:     alpha_sort,
           }
         end
 

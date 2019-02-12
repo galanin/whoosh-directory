@@ -12,6 +12,7 @@ class Unit < ApplicationRecord
   field :employ_ids,   type: Array
   field :contact_ids,  type: Array
   field :level,        type: Integer
+  field :alpha_sort,   type: String
   field :destroyed_at, type: Time
 
 

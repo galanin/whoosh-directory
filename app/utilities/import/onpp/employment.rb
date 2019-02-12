@@ -14,6 +14,7 @@ module Utilities
                       :parental_leave,
                       :vacation_begin, :vacation_end,
                       :for_person_rank,
+                      :alpha_sort,
                       :in_unit_rank
 
 
@@ -48,6 +49,7 @@ module Utilities
           @vacation_begin     = source_data['DATE_B_OTP'].presence
           @vacation_end       = source_data['DATE_E_OTP'].presence
           @for_person_rank    = WORKING_TYPE_RANK[source_data['VID_ZAN']] || 99
+          @alpha_sort         = source_data['F'] + source_data['I'] + source_data['O']
         end
 
 
@@ -71,6 +73,7 @@ module Utilities
             lunch_end:          lunch_end,
             vacation_begin:     vacation_begin,
             vacation_end:       vacation_end,
+            alpha_sort:         alpha_sort,
             in_unit_rank:       in_unit_rank,
           }
         end

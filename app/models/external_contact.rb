@@ -23,6 +23,7 @@ class ExternalContact < ApplicationRecord
   field :office,            type: String
   field :building,          type: String
   field :email,             type: String
+  field :alpha_sort,        type: String
   field :destroyed_at,      type: Time
 
 
