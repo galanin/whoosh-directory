@@ -6,7 +6,8 @@ class UserInformation < ApplicationRecord
 
   has_many :user_session
   has_many :to_call, autosave: true
-  has_many :favorite, autosave: true
+  embeds_many :favorite_person, cascade_callbacks: true
+  embeds_many :favorite_unit, cascade_callbacks: true
 
 
   def add_to_expanded_units(unit_ids)
@@ -81,27 +82,64 @@ class UserInformation < ApplicationRecord
   end
 
 
-  def create_favorite(entity_type, entity_short_id)
-    favorite_entity = find_favorite_by_entity(entity_type, entity_short_id)
-    unless favorite_entity.present?
-      entity = entity_type.camelize.constantize.find_by(short_id: entity_short_id)
-      favorite.create(favoritable: entity, favorable_short_id: entity_short_id)
+  def create_favorite_unit(unit_short_id)
+    favorite_unit_entity = find_favorite_unit(unit_short_id)
+    unless favorite_unit_entity.present?
+      unit = Unit.find_by(short_id: unit_short_id)
+      favorite_unit_entity = favorite_unit.create(unit: unit, unit_short_id: unit.short_id, alpha_sort: unit.alpha_sort)
+      sort_favorite_unit
+      favorite_unit_entity
     end
   end
 
 
-  def destroy_favorite(entity_type, entity_short_id)
-    favorite_entity = favorite.find_by(favorable_short_id: entity_short_id, favoritable_type: entity_type.camelize)
+  def sort_favorite_unit
+    self.favorite_unit  = self.favorite_unit.sort_by{|x| x.alpha_sort}
+  end
+
+
+  def find_favorite_unit(unit_short_id)
+    favorite_unit.where(unit_short_id: unit_short_id).first if unit_short_id.present?
+  end
+
+
+  private :find_favorite_unit, :sort_favorite_unit
+
+
+  def destroy_favorite_unit(unit_short_id)
+    favorite_unit_entity = favorite_unit.find_by(unit_short_id: unit_short_id)
+    favorite_unit_entity.destroy
+  end
+
+
+  def create_favorite_person(entity_type, entity_short_id)
+    favorite_entity = find_favorite_person_by_entity(entity_type, entity_short_id)
+    unless favorite_entity.present?
+      entity = entity_type.camelize.constantize.find_by(short_id: entity_short_id)
+      favorite_person_entity = favorite_person.create(favoritable: entity, favorable_short_id: entity_short_id, alpha_sort: entity.alpha_sort)
+      sort_favorite_unit
+      favorite_person_entity
+    end
+  end
+
+
+  def destroy_favorite_person(entity_type, entity_short_id)
+    favorite_entity = favorite_person.find_by(favorable_short_id: entity_short_id, favoritable_type: entity_type.camelize)
     favorite_entity.delete if favorite_entity.present?
   end
 
 
-  def find_favorite_by_entity(entity_type, entity_short_id)
-    favorite.where(favorable_short_id: entity_short_id, favoritable_type: entity_type.camelize).first if entity_short_id.present?
+  def sort_favorite_person
+    self.favorite_person = self.favorite_person.sort_by{|x| x.alpha_sort}
   end
 
 
-  private :find_favorite_by_entity
+  def find_favorite_person_by_entity(entity_type, entity_short_id)
+    favorite_person.where(favorable_short_id: entity_short_id, favoritable_type: entity_type.camelize).first if entity_short_id.present?
+  end
+
+
+  private :find_favorite_person_by_entity, :sort_favorite_person
 
 
 end

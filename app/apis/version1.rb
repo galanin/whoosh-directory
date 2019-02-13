@@ -196,7 +196,7 @@ module Staff
 
           present :people, people
           present :employments, employments
-          present :data, to_call.as_json
+          present :data, to_call
           present_unchecked_and_checked_today(@user_information)
         end
 
@@ -241,7 +241,7 @@ module Staff
 
           present :people, people
           present :employments, employments
-          present :data_checked, to_call.as_json
+          present :data_checked, to_call
         end
 
       end
@@ -249,42 +249,95 @@ module Staff
 
       namespace 'favorites' do
 
-        desc 'Returns all Favorites records from UserInformation'
-        get do
-          employment_ids = @user_information.favorite.with_employment.pluck(:favorable_short_id)
-          employments = Employment.where(destroyed_at: nil).in(short_id: employment_ids)
-          people = Person.in(short_id: employments.map(&:person_short_id))
-          unit_ids = @user_information.favorite.with_unit.pluck(:favorable_short_id)
-          units = Unit.only(:short_id, :short_title, :long_title).where(destroyed_at: nil).in(short_id: unit_ids)
+        namespace 'units' do
 
-          present :employment_ids, employment_ids
-          present :unit_ids, unit_ids
+          desc 'Returns all FavoriteUnits records from UserInformation'
+          get do
+            unit_ids = @user_information.favorite_unit.pluck(:unit_short_id)
+            units = Unit.only(:short_id, :short_title, :long_title).where(destroyed_at: nil).in(short_id: unit_ids)
 
-          present :employments, employments
-          present :people, people
-          present :unit_titles, units
-        end
-
-
-        params do
-          requires :type, type: String, values: ['employment', 'unit']
-        end
-
-        namespace ':type' do
-
-          after do
-            present :employment_ids, @user_information.favorite.with_employment.pluck(:favorable_short_id) if params[:type] == 'employment'
-            present :unit_ids, @user_information.favorite.with_unit.pluck(:favorable_short_id) if params[:type] == 'unit'
+            present :favorite_units, @user_information.favorite_unit
+            present :unit_titles, units
           end
 
-          desc 'Create object Favorite class'
+
+          desc 'Create object FavoriteUnits class if not exist. After sort all FavoriteUnits records'
           post ':id' do
-            @user_information.create_favorite(params[:type], params[:id])
+            favorite_unit = @user_information.create_favorite_unit(params[:id])
+            if favorite_unit.present?
+              unit = Unit.only(:short_id, :short_title, :long_title).where(destroyed_at: nil).find_by(short_id: favorite_unit.unit_short_id)
+
+              present :favorite_units, favorite_unit
+              present :units, unit
+            end
           end
 
-          desc 'Find object Favorite class and destroy it'
+
+          desc 'Find object FavoriteUnit class and destroy it'
           delete ':id' do
-            @user_information.destroy_favorite(params[:type], params[:id])
+            @user_information.destroy_favorite_unit(params[:id])
+          end
+
+        end
+
+
+        namespace 'people' do
+
+          desc 'Returns all FavoritePersons records from UserInformation'
+          get do
+            employment_ids = @user_information.favorite_person.with_employment.pluck(:favorable_short_id)
+            employments = Employment.where(destroyed_at: nil).in(short_id: employment_ids)
+            people = Person.in(short_id: employments.map(&:person_short_id))
+            external_contact_ids = @user_information.favorite_person.with_external_contact.pluck(:favorable_short_id)
+            external_contacts = ExternalContact.where(destroyed_at: nil).in(short_id: external_contact_ids)
+
+            present :favorite_people, @user_information.favorite_person
+            present :employments, employments
+            present :people, people
+            present :external_contacts, external_contacts
+          end
+
+          namespace 'employments' do
+
+            desc 'Create object FavoritePerson class if not exist. After sort all FavoritePerson records'
+            post ':id' do
+              favorite_person = @user_information.create_favorite_person('employment', params[:id])
+              if favorite_person.present?
+                employment = Employment.where(destroyed_at: nil).find_by(short_id: params[:id])
+                people = Person.find_by(short_id: employment.person_short_id)
+
+                present :favorite_people, favorite_person
+                present :employments, employment
+                present :people, people
+              end
+            end
+
+            desc 'Find object FavoritePersons class by Employment id and destroy it'
+            delete ':id' do
+              @user_information.destroy_favorite_person('employment', params[:id])
+            end
+
+          end
+
+
+          namespace 'external_contacts' do
+
+            desc 'Create object FavoritePerson class if not exist. After sort all FavoritePerson records'
+            post ':id' do
+              favorite_person = @user_information.create_favorite_person('external_contact', params[:id])
+              if favorite_person.present?
+                external_contact = ExternalContact.where(destroyed_at: nil).find_by(short_id: params[:id])
+
+                present :favorite_people, favorite_person
+                present :external_contacts, external_contact
+              end
+            end
+
+            desc 'Find object FavoritePersons by ExternalContact id and destroy it'
+            delete ':id' do
+              @user_information.destroy_favorite_person('external_contact', params[:id])
+            end
+
           end
 
         end
