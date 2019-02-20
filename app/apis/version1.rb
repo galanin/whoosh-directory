@@ -39,7 +39,7 @@ module Staff
     get 'units/:unit_id' do
       if params.key? :unit_id
         unit = Unit.find_by!(short_id: params[:unit_id])
-        present :unit_titles, [unit.as_json.slice('id', 'long_title', 'short_title')]
+        present :unit_titles, [unit.as_json.slice('id', 'long_title', 'short_title', 'alpha_sort')]
 
         unless unit.employ_ids.nil?
           employments = Employment.in(short_id: unit.employ_ids)
@@ -59,7 +59,7 @@ module Staff
 
     get 'units/titles/:where' do
       unit_ids = params[:where].split(',')
-      units = Unit.only(:short_id, :short_title, :long_title).in(short_id: unit_ids)
+      units = Unit.only(:short_id, :short_title, :long_title, :alpha_sort).in(short_id: unit_ids)
       present :unit_titles, units
     end
 
@@ -254,7 +254,7 @@ module Staff
           desc 'Returns all FavoriteUnits records from UserInformation'
           get do
             unit_ids = @user_information.favorite_unit.pluck(:unit_short_id)
-            units = Unit.only(:short_id, :short_title, :long_title).where(destroyed_at: nil).in(short_id: unit_ids)
+            units = Unit.only(:short_id, :short_title, :long_title, :alpha_sort).where(destroyed_at: nil).in(short_id: unit_ids)
 
             present :favorite_units, @user_information.favorite_unit
             present :unit_titles, units
@@ -263,19 +263,15 @@ module Staff
 
           desc 'Create object FavoriteUnits class if not exist. After sort all FavoriteUnits records'
           post ':id' do
-            favorite_unit = @user_information.create_favorite_unit(params[:id])
-            if favorite_unit.present?
-              unit = Unit.only(:short_id, :short_title, :long_title).where(destroyed_at: nil).find_by(short_id: favorite_unit.unit_short_id)
-
-              present :favorite_units, favorite_unit
-              present :units, unit
-            end
+            @user_information.create_favorite_unit(params[:id])
+            present :favorite_units, @user_information.favorite_unit
           end
 
 
           desc 'Find object FavoriteUnit class and destroy it'
           delete ':id' do
             @user_information.destroy_favorite_unit(params[:id])
+            present :favorite_units, @user_information.favorite_unit
           end
 
         end
@@ -301,20 +297,14 @@ module Staff
 
             desc 'Create object FavoritePerson class if not exist. After sort all FavoritePerson records'
             post ':id' do
-              favorite_person = @user_information.create_favorite_person('employment', params[:id])
-              if favorite_person.present?
-                employment = Employment.where(destroyed_at: nil).find_by(short_id: params[:id])
-                people = Person.find_by(short_id: employment.person_short_id)
-
-                present :favorite_people, favorite_person
-                present :employments, employment
-                present :people, people
-              end
+              @user_information.create_favorite_person('employment', params[:id])
+              present :favorite_people, @user_information.favorite_person
             end
 
             desc 'Find object FavoritePersons class by Employment id and destroy it'
             delete ':id' do
               @user_information.destroy_favorite_person('employment', params[:id])
+              present :favorite_people, @user_information.favorite_person
             end
 
           end
@@ -324,18 +314,14 @@ module Staff
 
             desc 'Create object FavoritePerson class if not exist. After sort all FavoritePerson records'
             post ':id' do
-              favorite_person = @user_information.create_favorite_person('external_contact', params[:id])
-              if favorite_person.present?
-                external_contact = ExternalContact.where(destroyed_at: nil).find_by(short_id: params[:id])
-
-                present :favorite_people, favorite_person
-                present :external_contacts, external_contact
-              end
+              @user_information.create_favorite_person('external_contact', params[:id])
+              present :favorite_people, @user_information.favorite_person
             end
 
             desc 'Find object FavoritePersons by ExternalContact id and destroy it'
             delete ':id' do
               @user_information.destroy_favorite_person('external_contact', params[:id])
+              present :favorite_people, @user_information.favorite_person
             end
 
           end

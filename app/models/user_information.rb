@@ -118,7 +118,7 @@ class UserInformation < ApplicationRecord
     unless favorite_entity.present?
       entity = entity_type.camelize.constantize.find_by(short_id: entity_short_id)
       favorite_person_entity = favorite_person.create(favoritable: entity, favorable_short_id: entity_short_id, alpha_sort: entity.alpha_sort)
-      sort_favorite_unit
+      sort_favorite_person
       favorite_person_entity
     end
   end

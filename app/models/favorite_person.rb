@@ -17,7 +17,7 @@ class FavoritePerson < ApplicationRecord
 
 
   def as_json(options = nil)
-    json = super.slice('alpha_sort').compact
+    json = { 'alpha_sort' => alpha_sort }
     json.merge!('employment_id' => favorable_short_id) if favoritable_type == 'Employment'
     json.merge!('external_contact_id' => favorable_short_id) if favoritable_type == 'ExternalContact'
     json

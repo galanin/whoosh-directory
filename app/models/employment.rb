@@ -38,7 +38,7 @@ class Employment < ApplicationRecord
 
   def as_json(options = nil)
     result = super.slice(
-      'post_title', 'post_code', 'is_boss',
+      'post_title', 'alpha_sort', 'post_code', 'is_boss',
       'office', 'building',
       'lunch_begin', 'lunch_end',
     ).compact.merge(

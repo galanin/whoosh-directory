@@ -13,7 +13,10 @@ class FavoriteUnit < ApplicationRecord
 
 
   def as_json(options = nil)
-    super.slice('unit_short_id', 'alpha_sort').compact
+    {
+      'alpha_sort' => alpha_sort,
+      'unit_id' => unit_short_id,
+    }
   end
 
 end

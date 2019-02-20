@@ -26,7 +26,7 @@ class Unit < ApplicationRecord
 
   def as_json(options = nil)
     super.slice(
-      'long_title', 'short_title', 'list_title',
+      'long_title', 'short_title', 'alpha_sort', 'list_title',
       'child_ids', 'employ_ids', 'contact_ids', 'level',
     ).compact.merge(
       'id' => short_id,
