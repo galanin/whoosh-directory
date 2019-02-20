@@ -35,7 +35,7 @@ export default (state = default_state, action) ->
 
       data       : new_data
       unchecked  : action.unchecked
-      checked    : action.checked
+      checked_today    : action.checked_today
       employment_index : new_employment_index
       unchecked_employment_index : new_unchecked_employment_index
 
@@ -45,12 +45,12 @@ export default (state = default_state, action) ->
 
       to_call = state.employment_index[action.employment_id]
       if to_call?.id?
-        new_unchecked = [to_call.id, state.unchecked...]
-        new_checked = without(state.checked, to_call.id)
+        new_unchecked = [state.unchecked..., to_call.id]
+        new_checked_today = without(state.checked_today, to_call.id)
 
       data      : state.data
       unchecked : new_unchecked || state.unchecked
-      checked   : new_checked || state.checked
+      checked_today    : new_checked_today || state.checked_today
       employment_index : state.employment_index
       unchecked_employment_index : new_unchecked_employment_index
 
@@ -61,11 +61,11 @@ export default (state = default_state, action) ->
       to_call = state.employment_index[action.employment_id]
       if to_call?.id?
         new_unchecked = without(state.unchecked, to_call.id)
-        new_checked = [to_call.id, state.checked...]
+        new_checked_today = [to_call.id, state.checked_today...]
 
       data      : state.data
       unchecked : new_unchecked || state.unchecked
-      checked   : new_checked || state.checked
+      checked_today    : new_checked_today || state.checked_today
       employment_index : state.employment_index
       unchecked_employment_index : new_unchecked_employment_index
 
@@ -82,7 +82,7 @@ export default (state = default_state, action) ->
 
       data       : new_data
       unchecked  : action.unchecked
-      checked    : action.checked
+      checked_today    : action.checked_today
       employment_index : new_employment_index
       unchecked_employment_index : new_unchecked_employment_index
 
@@ -90,18 +90,18 @@ export default (state = default_state, action) ->
       to_call = state.employment_index[action.employment_id]
       if to_call?.id?
         new_unchecked = without(state.unchecked, to_call.id)
-        new_checked = without(state.checked, to_call.id)
+        new_checked_today = without(state.checked_today, to_call.id)
 
       data      : state.data
       unchecked : new_unchecked || state.unchecked
-      checked   : new_checked || state.checked
+      checked_today    : new_checked_today || state.checked_today
       employment_index : state.employment_index
       unchecked_employment_index : state.unchecked_employment_index
 
     when DESTROYED_TO_CALL
       data      : state.data
       unchecked : action.unchecked
-      checked   : action.checked
+      checked_today    : action.checked_today
       employment_index : state.employment_index
       unchecked_employment_index : state.unchecked_employment_index
 

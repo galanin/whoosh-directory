@@ -16,7 +16,7 @@ employee = React.createFactory(EmployeeToCall)
 mapStateToProps = (state, ownProps) ->
   data: state.to_call?.data
   unchecked: state.to_call?.unchecked
-  checked: state.to_call?.checked
+  checked_today: state.to_call?.checked_today
 
 
 mapDispatchToProps = (dispatch) ->
@@ -49,17 +49,17 @@ class ToCallList extends React.Component
         div { className: 'to-call-list__subtitle' },
           'Выполнено'
 
-        if isEmpty(@props.checked)
+        if isEmpty(@props.checked_today)
           div { className: 'to-call-list__empty-note' },
-            'Этот список нужен, чтобы хранить историю сделанный работы. Перемещайте в него коллег с помощью кнопки '
+            'Этот список нужен, чтобы видеть, как хорошо вы сегодня поработали. Перемещайте в него выполненные планы с помощью кнопки '
             svg { className: 'to-call-list__button-icon', svg: CheckedIcon }
             ' или повторного нажатия кнопки '
             svg { className: 'to-call-list__button-icon', svg: ToCallIcon }
-            '.'
+            '. Записи из этого списка не удаляются — позже они будут доступны в архиве.'
 
-        if isArray(@props.checked) and !isEmpty(@props.checked)
+        if isArray(@props.checked_today) and !isEmpty(@props.checked_today)
           div { className: 'to-call-list__checked' },
-            for to_call_id in @props.checked
+            for to_call_id in @props.checked_today
               to_call = @props.data[to_call_id]
               if to_call?
                 employee { key: to_call.id, to_call_id: to_call.id, className: 'list-item shadow' }
