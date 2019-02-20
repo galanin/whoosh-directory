@@ -13,8 +13,8 @@ svg = React.createFactory(SvgIcon)
 
 
 mapStateToProps = (state, ownProps) ->
-  employee_counter: state.favorites?.employment_ids?.length || 0
-  unit_counter: state.favorites?.unit_ids?.length || 0
+  employee_counter: state.favorites.favorite_people.length
+  unit_counter: state.favorites.favorite_units.length
 
 
 mapDispatchToProps = (dispatch, ownProps) ->

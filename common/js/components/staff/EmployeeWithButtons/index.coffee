@@ -21,7 +21,7 @@ import StarIcon from '@icons/star.svg'
 
 mapStateToProps = (state, ownProps) ->
   is_to_call  : state.to_call?.unchecked_employment_index?[ownProps.employment_id]
-  is_favorite : includes(state.favorites.employment_ids, ownProps.employment_id)
+  is_favorite : state.favorites.employment_index[ownProps.employment_id]
 
 
 mapDispatchToProps = (dispatch, ownProps) ->

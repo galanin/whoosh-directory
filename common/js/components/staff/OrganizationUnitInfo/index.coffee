@@ -31,7 +31,7 @@ mapStateToProps = (state) ->
   unit_titles: state.unit_titles[unit_id] || {}
   loading:     extra?.loading
   loaded:      extra?.loaded
-  is_favorite: includes(state.favorites.unit_ids, unit_id)
+  is_favorite: state.favorites.unit_index[unit_id]
 
 
 mapDispatchToProps = (dispatch) ->
@@ -68,11 +68,13 @@ class OrganizationUnitInfo extends React.Component
       if @props.unit_titles.short_title?
         div { className: 'organization-unit__short-title' },
           @props.unit_titles.short_title
+
           svg { className: 'organization-unit__favorite', svg: StarIcon, onClick: @onClickFavorite.bind(this) }
 
       if @props.unit_titles.long_title?
         div { className: 'organization-unit__long-title' },
           @props.unit_titles.long_title
+
           unless @props.unit_titles.short_title?
             svg { className: 'organization-unit__favorite', svg: StarIcon, onClick: @onClickFavorite.bind(this) }
 

@@ -10,6 +10,7 @@ import { currentTime, todayDate } from '@lib/datetime'
 
 import SvgIcon from '@components/common/SvgIcon'
 import ToCallIcon from '@icons/call.svg'
+import StarIcon from '@icons/star.svg'
 
 div = React.createFactory('div')
 span = React.createFactory('span')
@@ -27,6 +28,7 @@ mapStateToProps = (state, ownProps) ->
   unit: employment && state.units[employment.unit_id]
   current_employment_id: state.current.employment_id
   is_to_call : state.to_call?.unchecked_employment_index?[ownProps.employment_id]
+  is_favorite : state.favorites.employment_index[ownProps.employment_id]
 
 mapDispatchToProps = (dispatch, ownProps) ->
   setCurrentEmployee: ->
@@ -92,8 +94,12 @@ class Employee extends React.Component
             @props.person.first_name
           span { className: 'employee__middle-name' },
             @props.person.middle_name
+
           if @props.is_to_call
             svg { className: 'employee__to-call', svg: ToCallIcon }
+
+          if @props.is_favorite
+            svg { className: 'employee__favorite', svg: StarIcon }
 
         div { className: 'employee__post_title' },
           @props.employment.post_title
