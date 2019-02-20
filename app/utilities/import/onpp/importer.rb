@@ -48,6 +48,11 @@ module Utilities
 
           @units.build_structure
 
+          yaml_replace_list = YAML.load_file ENV['STAFF_IMPORT_REPLACEMENT_RULES']
+          replace_list = Utilities::Import::ReplaceList.new
+          replace_list.import(yaml_replace_list)
+          replace_list.replace(@employments)
+
           @employments.link_data_to_people(@people)
           @people.cleanup_excess_employments(@employments)
           @people.reset_employments_link
