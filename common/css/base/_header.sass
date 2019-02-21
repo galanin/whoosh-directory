@@ -1,10 +1,23 @@
 .header-title
   display: block
-  padding: 10px 20px
-  font-size: 18px
-  font-weight: bold
-  color: #888
+  padding-top: 15px
+  padding-bottom: 8px
+  font-size: 22px
+  line-height: 22px
+  color: #999
   text-decoration: none
 
   &:hover
     text-decoration: underline
+
+  @media (max-width: $one-column-max)
+    padding-left: 10px
+
+  @media (min-width: $two-column-min) and (max-width: $two-column-max)
+    padding-left: 10px
+
+  @media (min-width: $three-column-min) and (max-width: $three-column-max)
+    padding-left: 20px
+
+  @media (min-width: $four-column-min)
+    padding-left: 20px
