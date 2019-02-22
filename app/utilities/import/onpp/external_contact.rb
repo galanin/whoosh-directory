@@ -37,7 +37,7 @@ module Utilities
           @telephones       = Phones.from_yml(source_data['phones'])
           @email            = source_data['email']
           @alpha_sort       = source_data['function_title'] || source_data['location_title'] ||
-                              (source_data['first_name'] + source_data['middle_name'] + source_data['last_name'])
+                              (source_data['last_name'] + source_data['middle_name'] + source_data['first_name'])
         end
 
 
