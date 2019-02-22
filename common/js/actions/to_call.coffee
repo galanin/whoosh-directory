@@ -7,7 +7,8 @@ import {
   CHECKING_EMPLOYMENT_TO_CALL
   CHECKING_CONTACT_TO_CALL
   CHANGED_TO_CALL
-  DESTROYING_TO_CALL
+  DESTROYING_EMPLOYMENT_TO_CALL
+  DESTROYING_CONTACT_TO_CALL
   DESTROYED_TO_CALL
 } from '@constants/to_call'
 
@@ -99,7 +100,7 @@ export changedToCall = (to_call, unchecked, checked_today) ->
 
 export destroyEmploymentToCall = (employment_id) ->
   (dispatch, getState) ->
-    dispatch(destroyingEmploymentToCall(contact_id))
+    dispatch(destroyingEmploymentToCall(employment_id))
     UserRequest.delete(getState().session?.token, '/to_call/' + employment_id).then (response) ->
       dispatch(destroyedToCall(response.body.unchecked, response.body.checked_today))
 
