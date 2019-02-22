@@ -14,6 +14,7 @@ import {
 
 import { addPeople } from '@actions/people'
 import { addEmployments } from '@actions/employments'
+import { addContacts } from '@actions/contacts'
 
 
 export loadToCall = ->
@@ -24,6 +25,8 @@ export loadToCall = ->
         dispatch(addPeople(response.body.people))
       if response.body.employments?
         dispatch(addEmployments(response.body.employments))
+      if response.body.contacts?
+        dispatch(addContacts(response.body.contacts))
 
     , (error) ->
 
