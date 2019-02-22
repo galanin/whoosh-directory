@@ -152,7 +152,7 @@ export default (state = default_state, action) ->
       new_unchecked_contact_index = {}
 
       for unchecked_to_call_id in action.unchecked
-        unchecked_to_call = new_data[unchecked_to_call_id]
+        unchecked_to_call = state.data[unchecked_to_call_id]
         new_unchecked_employment_index[unchecked_to_call.employment_id] = 1 if unchecked_to_call.employment_id?
         new_unchecked_contact_index[unchecked_to_call.contact_id] = 1 if unchecked_to_call.contact_id?
 

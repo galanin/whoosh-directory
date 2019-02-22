@@ -101,7 +101,7 @@ export changedToCall = (to_call, unchecked, checked_today) ->
 export destroyEmploymentToCall = (employment_id) ->
   (dispatch, getState) ->
     dispatch(destroyingEmploymentToCall(employment_id))
-    UserRequest.delete(getState().session?.token, '/to_call/' + employment_id).then (response) ->
+    UserRequest.delete(getState().session?.token, '/to_call/employment/' + employment_id).then (response) ->
       dispatch(destroyedToCall(response.body.unchecked, response.body.checked_today))
 
     , (error) ->
@@ -110,7 +110,7 @@ export destroyEmploymentToCall = (employment_id) ->
 export destroyContactToCall = (contact_id) ->
   (dispatch, getState) ->
     dispatch(destroyingContactToCall(contact_id))
-    UserRequest.delete(getState().session?.token, '/to_call/' + contact_id).then (response) ->
+    UserRequest.delete(getState().session?.token, '/to_call/contact/' + contact_id).then (response) ->
       dispatch(destroyedToCall(response.body.unchecked, response.body.checked_today))
 
     , (error) ->
