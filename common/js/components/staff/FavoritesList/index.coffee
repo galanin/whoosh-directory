@@ -12,11 +12,8 @@ import { showFavoriteEmployments, showFavoriteUnits } from '@actions/favorites'
 div = React.createFactory('div')
 span = React.createFactory('span')
 
-import EmployeeWithButtons from '@components/staff/EmployeeWithButtons'
-employee = React.createFactory(EmployeeWithButtons)
-
-import Contact from '@components/staff/Contact'
-contact = React.createFactory(Contact)
+import SomeoneWithButtons from '@components/staff/SomeoneWithButtons'
+someone = React.createFactory(SomeoneWithButtons)
 
 import SearchResultUnit from '@components/staff/SearchResultUnit'
 unit = React.createFactory(SearchResultUnit)
@@ -70,9 +67,9 @@ class FavoritesList extends React.Component
               div { className: 'favorite-list__employments' },
                 for favorite_people in @props.people
                   if favorite_people.employment_id?
-                    employee { key: favorite_people.employment_id, employment_id: favorite_people.employment_id, className: 'list-item shadow' }
+                    someone { key: favorite_people.employment_id, employment_id: favorite_people.employment_id, className: 'list-item shadow' }
                   else if favorite_people.contact_id?
-                    contact { key: favorite_people.contact_id, contact_id: favorite_people.contact_id, className: 'list-item shadow' }
+                    someone { key: favorite_people.contact_id, contact_id: favorite_people.contact_id, className: 'list-item shadow' }
 
           when FAVORITE_UNITS
             if isArray(@props.units) and !isEmpty(@props.units)

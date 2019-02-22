@@ -10,11 +10,8 @@ import { scrolledToDate, extendBirthdayPeriodRight, extendBirthdayPeriodLeft } f
 div = React.createFactory('div')
 scroll_element = React.createFactory(ScrollElement)
 
-import EmployeeWithButtons from '@components/staff/EmployeeWithButtons'
-employee = React.createFactory(EmployeeWithButtons)
-
-import Contact from '@components/staff/Contact'
-contact = React.createFactory(Contact)
+import SomeoneWithButtons from '@components/staff/SomeoneWithButtons'
+someone = React.createFactory(SomeoneWithButtons)
 
 
 mapStateToProps = (state, ownProps) ->
@@ -87,9 +84,9 @@ class Birthdays extends React.Component
                 div { className: 'birthdays__results' },
                   for result in day_obj.results
                     if result.contact_id?
-                      contact(key: result.contact_id, contact_id: result.contact_id)
+                      someone key: result.contact_id, contact_id: result.contact_id, className: 'list-item shadow'
                     else if result.person_id?
-                      employee key: result.person_id, employment_id: result.employ_ids[0], hide: { birthday: true }, className: 'list-item shadow'
+                      someone key: result.person_id, employment_id: result.employ_ids[0], hide: { birthday: true }, className: 'list-item shadow'
 
         div { className: 'birthdays__button-forward', onClick: @stepForward.bind(this) },
           'Смотреть дальше'

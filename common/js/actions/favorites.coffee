@@ -9,11 +9,11 @@ import {
   LOADED_FAVORITE_PEOPLE
   LOADED_FAVORITE_UNITS
   ADDING_FAVORITE_EMPLOYMENT
+  ADDING_FAVORITE_CONTACT
   ADDING_FAVORITE_UNIT
   REMOVING_FAVORITE_EMPLOYMENT
+  REMOVING_FAVORITE_CONTACT
   REMOVING_FAVORITE_UNIT
-  CHANGED_FAVORITE_EMPLOYMENTS
-  CHANGED_FAVORITE_UNITS
   SHOW_FAVORITE_PEOPLE
   SHOW_FAVORITE_UNITS
 } from '@constants/favorites'
@@ -59,9 +59,24 @@ export addFavoriteEmployment = (employment_id) ->
     , (error) ->
 
 
+export addFavoriteContact = (contact_id) ->
+  (dispatch, getState) ->
+    state = getState()
+    dispatch(addingFavoriteContact(state.contacts[contact_id]))
+    UserRequest.post(getState().session?.token, "/favorites/people/contacts/#{contact_id}").then (response) ->
+      dispatch(loadedFavoritePeople(response.body.favorite_people))
+
+    , (error) ->
+
+
 export addingFavoriteEmployment = (employment) ->
   type: ADDING_FAVORITE_EMPLOYMENT
   employment: employment
+
+
+export addingFavoriteContact = (contact) ->
+  type: ADDING_FAVORITE_CONTACT
+  contact: contact
 
 
 export addFavoriteUnit = (unit_id) ->
@@ -88,9 +103,23 @@ export removeFavoriteEmployment = (employment_id) ->
     , (error) ->
 
 
+export removeFavoriteContact = (contact_id) ->
+  (dispatch, getState) ->
+    dispatch(removingFavoriteContact(contact_id))
+    UserRequest.delete(getState().session?.token, "/favorites/people/contacts/#{contact_id}").then (response) ->
+      dispatch(loadedFavoritePeople(response.body.favorite_people))
+
+    , (error) ->
+
+
 export removingFavoriteEmployment = (employment_id) ->
   type: REMOVING_FAVORITE_EMPLOYMENT
   employment_id: employment_id
+
+
+export removingFavoriteContact = (contact_id) ->
+  type: REMOVING_FAVORITE_CONTACT
+  contact_id: contact_id
 
 
 export removeFavoriteUnit = (unit_id) ->

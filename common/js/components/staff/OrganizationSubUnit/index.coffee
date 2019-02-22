@@ -10,8 +10,8 @@ div = React.createFactory('div')
 span = React.createFactory('span')
 svg = React.createFactory(SvgIcon)
 
-import EmployeeWithButtons from '@components/staff/EmployeeWithButtons'
-employee = React.createFactory(EmployeeWithButtons)
+import SomeoneWithButtons from '@components/staff/SomeoneWithButtons'
+someone = React.createFactory(SomeoneWithButtons)
 
 import Triangle from '@icons/triangle.svg'
 
@@ -59,7 +59,7 @@ class OrganizationSubUnit extends React.Component
         if @props.is_expanded && isArray(@props.unit_data?.employ_ids)
           div { className: 'sub-unit__employees' },
             for employment_id in @props.unit_data.employ_ids
-              employee key: employment_id, employment_id: employment_id, hide: { unit: true }, className: 'list-item shadow'
+              someone key: employment_id, employment_id: employment_id, hide: { unit: true }, className: 'list-item shadow'
 
         if @props.is_expanded && isArray(@props.unit_data?.child_ids)
           div { className: 'sub-unit__sub-units' },

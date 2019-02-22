@@ -27,50 +27,8 @@ class UserInformation < ApplicationRecord
   end
 
 
-  def create_to_call(employment_short_id)
-    to_call_entity = find_to_call_by_employment(employment_short_id)
-    if to_call_entity.present?
-      to_call_entity.uncheck if to_call_entity.checked?
-      to_call_entity.save if to_call_entity.changed?
-      to_call_entity
-    else
-      employment = Employment.find_by(short_id: employment_short_id)
-      to_call.create(employment: employment, employment_short_id: employment_short_id)
-    end
-  end
-
-
-  def check_to_call(employment_short_id)
-    to_call_entity = to_call.unchecked.find_by(employment_short_id: employment_short_id)
-    to_call_entity.check unless to_call_entity.checked?
-    to_call_entity.save
-    to_call_entity
-  end
-
-
-  def destroy_to_call(employment_short_id)
-    to_call_entity = to_call.find_by(employment_short_id: employment_short_id)
-    to_call_entity.delete
-  end
-
-
   def get_checked_to_call_history(year, month, day)
-    if day.present?
-      date = Date.new(year, month, day)
-      to_call.checked.where(checked_at: date.beginning_of_day..date.end_of_day).sort_checked
-    else
-      date = Date.new(year, month)
-      to_call.checked.where(checked_at: date.beginning_of_month.beginning_of_day..date.end_of_month.end_of_day).sort_checked
-    end
   end
-
-
-  def find_to_call_by_employment(employment_short_id)
-    to_call.unchecked_and_checked_today.where(employment_short_id: employment_short_id).first if employment_short_id.present?
-  end
-
-
-  private :find_to_call_by_employment
 
 
   def to_call_checked_today_ids

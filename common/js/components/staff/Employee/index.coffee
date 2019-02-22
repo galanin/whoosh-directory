@@ -23,12 +23,14 @@ avatar = React.createFactory(CommonAvatar)
 
 mapStateToProps = (state, ownProps) ->
   employment = state.employments[ownProps.employment_id]
+
   employment: employment
   person: employment && state.people[employment.person_id]
   unit: employment && state.units[employment.unit_id]
   current_employment_id: state.current.employment_id
-  is_to_call : state.to_call?.unchecked_employment_index?[ownProps.employment_id]
-  is_favorite : state.favorites.employment_index[ownProps.employment_id]
+  is_to_call  : state.to_call.unchecked_employment_index[ownProps.employment_id]?
+  is_favorite : state.favorites.employment_index[ownProps.employment_id]?
+
 
 mapDispatchToProps = (dispatch, ownProps) ->
   setCurrentEmployee: ->
@@ -47,6 +49,7 @@ class Employee extends React.Component
   isOnLunchNow: ->
     if @props.employment?.lunch_begin? and @props.employment?.lunch_end? and @state?.current_time?
       @props.employment.lunch_begin <= @state.current_time < @props.employment.lunch_end
+
 
   isBirthday: ->
     if @props.person?.birthday? and @state?.current_date

@@ -7,11 +7,8 @@ div = React.createFactory('div')
 import SearchResultUnit from '@components/staff/SearchResultUnit'
 result_unit = React.createFactory(SearchResultUnit)
 
-import EmployeeWithButtons from '@components/staff/EmployeeWithButtons'
-employee = React.createFactory(EmployeeWithButtons)
-
-import Contact from '@components/staff/Contact'
-contact = React.createFactory(Contact)
+import SomeoneWithButtons from '@components/staff/SomeoneWithButtons'
+someone = React.createFactory(SomeoneWithButtons)
 
 
 mapStateToProps = (state, ownProps) ->
@@ -35,9 +32,9 @@ class SearchResults extends React.Component
               if result.unit_id?
                 result_unit key: result.unit_id, unit_id: result.unit_id, className: 'list-item shadow'
               else if result.contact_id?
-                contact key: result.contact_id, contact_id: result.contact_id, className: 'list-item shadow'
+                someone key: result.contact_id, contact_id: result.contact_id, className: 'list-item shadow'
               else if result.person_id?
-                employee key: result.person_id, employment_id: result.employ_ids[0], className: 'list-item shadow'
+                someone key: result.person_id, employment_id: result.employ_ids[0], className: 'list-item shadow'
 
         else
           div { className: 'search-results__no-results' },

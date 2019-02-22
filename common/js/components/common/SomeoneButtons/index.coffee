@@ -5,8 +5,8 @@ import { includes } from 'lodash'
 
 import SvgIcon from '@components/common/SvgIcon'
 
-import { addToCall, checkToCall } from '@actions/to_call'
-import { addFavoriteEmployment, removeFavoriteEmployment } from '@actions/favorites'
+import { addEmploymentToCall, addContactToCall, checkEmploymentToCall, checkContactToCall } from '@actions/to_call'
+import { addFavoriteEmployment, addFavoriteContact, removeFavoriteEmployment, removeFavoriteContact } from '@actions/favorites'
 
 div = React.createFactory('div')
 span = React.createFactory('span')
@@ -17,26 +17,43 @@ import StarIcon from '@icons/star.svg'
 
 
 mapStateToProps = (state, ownProps) ->
-  employment  : state.employments[ownProps.employment_id]
-  is_to_call  : state.to_call?.unchecked_employment_index?[ownProps.employment_id]
-  is_favorite : state.favorites.employment_index[ownProps.employment_id]
+  if ownProps.employment_id?
+    employment  : state.employments[ownProps.employment_id]
+    is_to_call  : state.to_call.unchecked_employment_index[ownProps.employment_id]
+    is_favorite : state.favorites.employment_index[ownProps.employment_id]
+  else if ownProps.contact_id?
+    contact     : state.contacts[ownProps.contact_id]
+    is_to_call  : state.to_call.unchecked_contact_index[ownProps.contact_id]
+    is_favorite : state.favorites.contact_index[ownProps.contact_id]
 
 
 mapDispatchToProps = (dispatch, ownProps) ->
   addToCall: ->
-    dispatch(addToCall(ownProps.employment_id))
+    if ownProps.employment_id?
+      dispatch(addEmploymentToCall(ownProps.employment_id))
+    else if ownProps.contact_id?
+      dispatch(addContactToCall(ownProps.contact_id))
 
   checkToCall: ->
-    dispatch(checkToCall(ownProps.employment_id))
+    if ownProps.employment_id?
+      dispatch(checkEmploymentToCall(ownProps.employment_id))
+    else if ownProps.contact_id?
+      dispatch(checkContactToCall(ownProps.contact_id))
 
   favorite: ->
-    dispatch(addFavoriteEmployment(ownProps.employment_id))
+    if ownProps.employment_id?
+      dispatch(addFavoriteEmployment(ownProps.employment_id))
+    else if ownProps.contact_id?
+      dispatch(addFavoriteContact(ownProps.contact_id))
 
   unfavorite: ->
-    dispatch(removeFavoriteEmployment(ownProps.employment_id))
+    if ownProps.employment_id?
+      dispatch(removeFavoriteEmployment(ownProps.employment_id))
+    else if ownProps.contact_id?
+      dispatch(removeFavoriteContact(ownProps.contact_id))
 
 
-class EmployeeButtons extends React.Component
+class SomeoneButtons extends React.Component
 
   onAddToCall: ->
     if @props.is_to_call
@@ -77,4 +94,4 @@ class EmployeeButtons extends React.Component
             'Добавить в избранное'
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(EmployeeButtons)
+export default connect(mapStateToProps, mapDispatchToProps)(SomeoneButtons)

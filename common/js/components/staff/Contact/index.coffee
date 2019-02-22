@@ -7,9 +7,14 @@ import { loadUnitInfo } from '@actions/units'
 import { setCurrentContactId } from '@actions/current'
 import { popEmployeeInfo } from '@actions/layout'
 
+import SvgIcon from '@components/common/SvgIcon'
+import ToCallIcon from '@icons/call.svg'
+import StarIcon from '@icons/star.svg'
+
 div = React.createFactory('div')
 span = React.createFactory('span')
 img = React.createFactory('img')
+svg = React.createFactory(SvgIcon)
 
 import CommonAvatar from '@components/staff/CommonAvatar'
 avatar = React.createFactory(CommonAvatar)
@@ -20,6 +25,9 @@ mapStateToProps = (state, ownProps) ->
   contact: contact
   unit: contact && state.units[contact.unit_id]
   current_contact_id: state.current.contact_id
+  is_to_call  : state.to_call.unchecked_contact_index[ownProps.contact_id]?
+  is_favorite : state.favorites.contact_index[ownProps.contact_id]?
+
 
 mapDispatchToProps = (dispatch, ownProps) ->
   setCurrentContact: ->
@@ -70,6 +78,12 @@ class Contact extends React.Component
             @props.contact.function_title
           else if @props.contact.location_title
             @props.contact.location_title
+
+          if @props.is_to_call
+            svg { className: 'employee__to-call', svg: ToCallIcon }
+
+          if @props.is_favorite
+            svg { className: 'employee__favorite', svg: StarIcon }
 
         if @props.contact.post_title
           div { className: 'employee__post_title' },

@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import SvgIcon from '@components/common/SvgIcon'
 import Silhouette from '@components/contact_info/CommonSilhouette'
-import EmployeeButtons from '@components/common/EmployeeButtons'
+import SomeoneButtons from '@components/common/SomeoneButtons'
 import Phones from '@components/contact_info/Phones'
 import Email from '@components/contact_info/Email'
 import OfficeLocation from '@components/contact_info/OfficeLocation'
@@ -24,7 +24,7 @@ a = React.createFactory('a')
 img = React.createFactory('img')
 svg = React.createFactory(SvgIcon)
 silhouette = React.createFactory(Silhouette)
-buttons = React.createFactory(EmployeeButtons)
+buttons = React.createFactory(SomeoneButtons)
 phones = React.createFactory(Phones)
 email = React.createFactory(Email)
 location = React.createFactory(OfficeLocation)

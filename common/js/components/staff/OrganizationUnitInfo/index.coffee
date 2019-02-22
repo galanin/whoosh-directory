@@ -11,14 +11,11 @@ import SvgIcon from '@components/common/SvgIcon'
 div = React.createFactory('div')
 svg = React.createFactory(SvgIcon)
 
-import EmployeeWithButtons from '@components/staff/EmployeeWithButtons'
-employee = React.createFactory(EmployeeWithButtons)
+import SomeoneWithButtons from '@components/staff/SomeoneWithButtons'
+someone = React.createFactory(SomeoneWithButtons)
 
 import OrganizationSubUnit from '@components/staff/OrganizationSubUnit'
 sub_unit = React.createFactory(OrganizationSubUnit)
-
-import Contact from '@components/staff/Contact'
-contact = React.createFactory(Contact)
 
 import StarIcon from '@icons/star.svg'
 
@@ -81,12 +78,12 @@ class OrganizationUnitInfo extends React.Component
       if isArray(@props.unit_data?.employ_ids)
         div { className: 'organization-unit__employees' },
           for employment_id in @props.unit_data.employ_ids
-            employee key: employment_id, employment_id: employment_id, hide: { unit: true }, className: 'list-item shadow'
+            someone key: employment_id, employment_id: employment_id, hide: { unit: true }, className: 'list-item shadow'
 
       if isArray(@props.unit_data?.contact_ids)
         div { className: 'organization-unit__contacts' },
           for contact_id in @props.unit_data.contact_ids
-            contact key: contact_id, contact_id: contact_id, hide: { unit: true }, className: 'list-item shadow'
+            someone key: contact_id, contact_id: contact_id, hide: { unit: true }, className: 'list-item shadow'
 
       if isArray(@props.unit_data?.child_ids)
         div { className: 'organization-unit__sub-units' },

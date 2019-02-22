@@ -5,12 +5,12 @@ import { isArray, isEmpty } from 'lodash'
 import SvgIcon from '@components/common/SvgIcon'
 import ToCallIcon from '@icons/call.svg'
 import CheckedIcon from '@icons/checked.svg'
-import EmployeeToCall from '@components/staff/EmployeeToCall'
+import ToCall from '@components/staff/ToCall'
 
 div = React.createFactory('div')
 svg = React.createFactory(SvgIcon)
 
-employee = React.createFactory(EmployeeToCall)
+employee = React.createFactory(ToCall)
 
 
 mapStateToProps = (state, ownProps) ->

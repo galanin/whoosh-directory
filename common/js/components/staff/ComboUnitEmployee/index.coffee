@@ -2,11 +2,11 @@ import React from 'react'
 import classNames from 'classnames'
 
 import SearchResultUnit from '@components/staff/SearchResultUnit'
-import EmployeeWithButtons from '@components/staff/EmployeeWithButtons'
+import SomeoneWithButtons from '@components/staff/SomeoneWithButtons'
 
 div = React.createFactory('div')
 unit = React.createFactory(SearchResultUnit)
-employee = React.createFactory(EmployeeWithButtons)
+employee = React.createFactory(SomeoneWithButtons)
 
 
 class ComboUnitEmployee extends React.Component

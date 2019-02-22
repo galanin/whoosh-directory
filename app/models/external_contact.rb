@@ -40,7 +40,7 @@ class ExternalContact < ApplicationRecord
 
   def as_json(options = nil)
     json = super.slice(
-      'first_name', 'middle_name', 'last_name',
+      'first_name', 'middle_name', 'last_name', 'alpha_sort',
       'birthday', 'post_title', 'post_code', 'office',
       'building', 'photo', 'email',
       'gender', 'function_title', 'location_title',
