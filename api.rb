@@ -11,6 +11,9 @@ require_relative 'config/boot'
 # require "action_cable/engine"
 # require "sprockets/railtie"
 
+require 'i18n/backend/fallbacks'
+I18n::Backend::Simple.send(:include, I18n::Backend::Fallbacks)
+
 require 'mongoid'
 require 'autoinc'
 require 'hashids'
