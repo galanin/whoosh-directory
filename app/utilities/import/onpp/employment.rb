@@ -79,10 +79,10 @@ module Utilities
         end
 
 
-        def object_attributes
+        def embedded_attributes
           {
             telephones: {
-              attributes: telephones.attributes,
+              attributes: telephones&.attributes,
             },
           }
         end

@@ -3,8 +3,8 @@ class Unit < ApplicationRecord
   include Mongoid::Timestamps
   include ShortId
   include Searchable
+  include Importable
 
-  field :external_id,  type: String
   field :long_title,   type: String
   field :short_title,  type: String
   field :list_title,   type: String

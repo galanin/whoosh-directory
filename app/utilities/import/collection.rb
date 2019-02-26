@@ -2,8 +2,9 @@ module Utilities
   module Import
     module Collection
 
-      def initialize(object_class)
+      def initialize(object_class, entity_class = Utilities::Import::Entity)
         @object_class = object_class
+        @entity_class = entity_class
         @entities     = {}
         @black_list   = Utilities::Import::BlackList.new
       end
@@ -11,6 +12,11 @@ module Utilities
 
       def [](external_id)
         @entities[external_id]
+      end
+
+
+      def count
+        @entities.count
       end
 
 
@@ -32,19 +38,15 @@ module Utilities
 
 
       def add_new_data(new_data)
-        @entities[new_data.external_id] ||= Utilities::Import::Entity.new(@object_class)
-        @entities[new_data.external_id].new_data = new_data
+        entity = sure_entity_exists(new_data.external_id)
+        entity.add_new_data(new_data)
       end
 
 
       def add_old_object(old_object)
         if old_object.external_id.present?
-          @entities[old_object.external_id] ||= Utilities::Import::Entity.new(@object_class)
-          if @entities[old_object.external_id].old_object.present?
-            old_object.set(destroyed_at: Time.now)
-          else
-            @entities[old_object.external_id].old_object = old_object
-          end
+          entity = sure_entity_exists(old_object.external_id)
+          entity.add_old_object(old_object)
         end
       end
 
@@ -89,8 +91,16 @@ module Utilities
       end
 
 
-      def entites_by_ids(external_ids)
+      def entities_by_ids(external_ids)
         @entities.slice(*external_ids).values
+      end
+
+
+      private
+
+
+      def sure_entity_exists(external_id)
+        @entities[external_id] ||= @entity_class.new(@object_class)
       end
 
     end

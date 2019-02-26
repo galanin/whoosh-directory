@@ -7,8 +7,8 @@ class Person < ApplicationRecord
   include ShortId
   include Searchable
   include FormattableBirthday
+  include Importable
 
-  field :external_id,     type: String
   field :first_name,      type: String
   field :middle_name,     type: String
   field :last_name,       type: String
@@ -18,7 +18,7 @@ class Person < ApplicationRecord
   field :employ_ids,      type: Array # employment_short_ids
   field :destroyed_at,    type: Time
 
-  validates :external_id, :first_name, :last_name, presence: true
+  validates :first_name, :last_name, presence: true
 
   has_many :employments
 

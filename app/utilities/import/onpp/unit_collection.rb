@@ -108,8 +108,8 @@ module Utilities
         def sort_employments(employment_collection)
           @entities.each do |id, unit_entity|
             unless unit_entity.new_data.employment_ids.nil?
-              employmet_ids = unit_entity.new_data.employment_ids
-              employments = employment_collection.entites_by_ids(employmet_ids)
+              employment_ids = unit_entity.new_data.employment_ids
+              employments = employment_collection.entities_by_ids(employment_ids)
 
               employments_with_priority = employments.map do |employment_unit|
                 set_priority(employment_unit)
@@ -213,7 +213,7 @@ module Utilities
 
         def change_company_managment(employment_collection)
           company_management_unit_entity = select_company_management
-          company_management_employments = employment_collection.entites_by_ids(company_management_unit_entity.new_data.employment_ids)
+          company_management_employments = employment_collection.entities_by_ids(company_management_unit_entity.new_data.employment_ids)
 
           COMPANY_MANAGEMENT.each do |company_management|
             company_managment_employment = company_management_employments.find do |employment|
@@ -254,7 +254,7 @@ module Utilities
           management_units = select_management_units
 
           management_units.each do |management_unit_entity|
-            employments = employment_collection.entites_by_ids(management_unit_entity.new_data.employment_ids)
+            employments = employment_collection.entities_by_ids(management_unit_entity.new_data.employment_ids)
             employments.each do |employment|
               employment.new_data.unit_external_id = management_unit_entity.new_data.parent_external_id
             end

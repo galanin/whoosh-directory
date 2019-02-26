@@ -3,8 +3,8 @@ class Employment < ApplicationRecord
   include Mongoid::Timestamps
   include ShortId
   include Searchable
+  include Importable
 
-  field :external_id,        type: String
   field :person_external_id, type: String
   field :unit_external_id,   type: String
   field :person_short_id,    type: String
@@ -25,11 +25,13 @@ class Employment < ApplicationRecord
   field :alpha_sort,         type: String
   field :destroyed_at,       type: Time
 
-  validates :external_id, :person_external_id, :unit_external_id, :person_short_id, :unit_short_id, :post_title, presence: true
+  validates :person_external_id, :unit_external_id, :person_short_id, :unit_short_id, :post_title, presence: true
 
   belongs_to :person
   belongs_to :unit
   embeds_one :telephones, as: :phonable,  class_name: 'Phones'
+
+  scope :people, -> { Person.in(id: all.map(&:id)) }
 
   index({ destroyed_at: 1, person_short_id: 1 }, {})
   index({ destroyed_at: 1, short_id: 1 }, {})

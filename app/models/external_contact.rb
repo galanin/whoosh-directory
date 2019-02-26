@@ -7,8 +7,8 @@ class ExternalContact < ApplicationRecord
   include ShortId
   include Searchable
   include FormattableBirthday
+  include Importable
 
-  field :external_id,       type: String
   field :unit_external_id,  type: String
   field :unit_short_id,     type: String
   field :first_name,        type: String
