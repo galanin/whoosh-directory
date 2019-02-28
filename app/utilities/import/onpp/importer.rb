@@ -19,11 +19,6 @@ module Utilities
 
         def import
 
-          yaml_str = YAML.load_file ENV['STAFF_IMPORT_EXTERNAL_CONTACTS_FILE_PATH']
-
-          @units.import_from_yaml(yaml_str)
-          @external_contact.import(yaml_str)
-
           blacklist_xml_str = IO.read ENV['STAFF_IMPORT_BLACKLIST_FILE_PATH']
           blacklist_doc = ::Nokogiri::XML(blacklist_xml_str, nil, 'UTF-8')
 
@@ -36,6 +31,11 @@ module Utilities
           @units.import_from_xml(doc)
           @employments.import(doc, @units)
           @people.import(doc, @units)
+
+          yaml_str = YAML.load_file ENV['STAFF_IMPORT_EXTERNAL_CONTACTS_FILE_PATH']
+
+          @units.import_from_yaml(yaml_str)
+          @external_contact.import(yaml_str)
 
           host = ENV['STAFF_IMPORT_LDAP_HOST']
           base = ENV['STAFF_IMPORT_LDAP_USERS_PATH']
