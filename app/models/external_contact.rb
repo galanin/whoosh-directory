@@ -28,6 +28,7 @@ class ExternalContact < ApplicationRecord
 
 
   validates :external_id, presence: true
+  validates :short_id, uniqueness: true
 
   belongs_to :unit
   embeds_one :telephones, as: :phonable,  class_name: 'Phones'
