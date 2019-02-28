@@ -15,6 +15,7 @@ class Unit < ApplicationRecord
   field :alpha_sort,   type: String
   field :destroyed_at, type: Time
 
+  validates :short_id, uniqueness: true
 
   belongs_to :parent, class_name: 'Unit', optional: true
 

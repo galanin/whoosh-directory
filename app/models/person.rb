@@ -19,6 +19,7 @@ class Person < ApplicationRecord
   field :destroyed_at,    type: Time
 
   validates :external_id, :first_name, :last_name, presence: true
+  validates :short_id, uniqueness: true
 
   has_many :employments
 

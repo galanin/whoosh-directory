@@ -26,6 +26,7 @@ class Employment < ApplicationRecord
   field :destroyed_at,       type: Time
 
   validates :external_id, :person_external_id, :unit_external_id, :person_short_id, :unit_short_id, :post_title, presence: true
+  validates :short_id, uniqueness: true
 
   belongs_to :person
   belongs_to :unit
