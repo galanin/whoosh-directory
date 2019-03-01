@@ -5,7 +5,7 @@ module Importable
   class_methods do
 
     def build_new_object(new_data)
-      new_object = new(new_data.attributes)
+      new_object = create(new_data.attributes)
       new_object.build_new_embedded_objects(new_data.embedded_attributes) if new_data.respond_to?(:embedded_attributes)
       new_object
     end
@@ -33,12 +33,11 @@ module Importable
 
 
     def flush_to_db(new_data)
-      p new_data
       attributes = new_data.attributes # do not compact here coz need to unset the nil fields below
 
       assign_attributes(attributes.compact)
       update_embedded_attributes(new_data.embedded_attributes) if new_data.respond_to?(:embedded_attributes)
-      save
+      save!
 
       unset_nil_attributes(attributes)
     end

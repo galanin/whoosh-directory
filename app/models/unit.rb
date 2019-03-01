@@ -8,20 +8,13 @@ class Unit < ApplicationRecord
   field :long_title,   type: String
   field :short_title,  type: String
   field :list_title,   type: String
-  field :child_ids,    type: Array
-  field :employ_ids,   type: Array
-  field :contact_ids,  type: Array
-  field :level,        type: Integer
+  field :node_short_id,type: String
   field :alpha_sort,   type: String
   field :destroyed_at, type: Time
 
+  belongs_to :node
 
-  belongs_to :parent, class_name: 'Unit', optional: true
-
-  has_many :employments
-  has_many :external_contacts
-
-  index({ destroyed_at: 1 }, {})
+  index({ destroyed_at: 1, short_id: 1 }, {})
 
 
   def as_json(options = nil)

@@ -5,10 +5,9 @@ class Employment < ApplicationRecord
   include Searchable
   include Importable
 
-  field :person_external_id, type: String
-  field :unit_external_id,   type: String
   field :person_short_id,    type: String
-  field :unit_short_id,      type: String
+  field :node_short_id,      type: String
+  field :parent_node_short_id, type: String
   field :post_title,         type: String
   field :post_code,          type: String
   field :is_manager,         type: Boolean
@@ -25,13 +24,17 @@ class Employment < ApplicationRecord
   field :alpha_sort,         type: String
   field :destroyed_at,       type: Time
 
-  validates :person_external_id, :unit_external_id, :person_short_id, :unit_short_id, :post_title, presence: true
+  validates :person_short_id, :post_title, presence: true
 
   belongs_to :person
-  belongs_to :unit
+  belongs_to :node, optional: true
+  belongs_to :parent_node, class_name: 'Node', optional: true
+
   embeds_one :telephones, as: :phonable,  class_name: 'Phones'
 
-  scope :people, -> { Person.in(id: all.map(&:id)) }
+  def self.people
+    Person.where(destroyed_at: nil).in(short_id: all.map(&:person_short_id))
+  end
 
   index({ destroyed_at: 1, person_short_id: 1 }, {})
   index({ destroyed_at: 1, short_id: 1 }, {})
@@ -46,7 +49,7 @@ class Employment < ApplicationRecord
     ).compact.merge(
       'id'          => short_id,
       'person_id'   => person_short_id,
-      'unit_id'     => unit_short_id,
+      'node_id'     => node_short_id,
     )
     if telephones.present?
       result.merge!('format_phones' => telephones.format_phones_with_type)

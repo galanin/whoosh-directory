@@ -36,6 +36,7 @@ class ExternalContact < ApplicationRecord
   field :photo_updated_at, type: Time
 
   index({ destroyed_at: 1, birthday: 1 }, {})
+  index({ destroyed_at: 1, short_id: 1 }, {})
 
 
   def as_json(options = nil)

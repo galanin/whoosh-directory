@@ -16,12 +16,17 @@ module ShortId
 
 
     def incrementor
-      @@incrementor ||= Mongoid::Autoinc::Incrementor.new(self.class.name, 'short_id', {})
+      @@incrementor ||= create_incrementor
     end
 
 
     def hashids
       @@hashids ||= Hashids.new(self.class.name)
+    end
+
+
+    def create_incrementor
+      Mongoid::Autoinc::Incrementor.new(self.class.name, 'short_id', {})
     end
 
   end
