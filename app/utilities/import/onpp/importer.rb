@@ -32,6 +32,8 @@ module Utilities
           @employments.import(doc, @units)
           @people.import(doc, @units)
 
+          @units.get_structure_unit(@employments)
+
           yaml_str = YAML.load_file ENV['STAFF_IMPORT_EXTERNAL_CONTACTS_FILE_PATH']
 
           @units.import_from_yaml(yaml_str)

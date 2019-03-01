@@ -71,6 +71,15 @@ module Utilities
           end
         end
 
+
+        def get_department_unit_array()
+          department_unit_array = []
+          @entities.each_value do |employment_entity|
+            department_unit_array << employment_entity.new_data.department_unit_id
+          end
+          department_unit_array.uniq.compact
+        end
+
       end
     end
   end

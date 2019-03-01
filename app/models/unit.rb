@@ -13,6 +13,7 @@ class Unit < ApplicationRecord
   field :contact_ids,  type: Array
   field :level,        type: Integer
   field :alpha_sort,   type: String
+  field :type,         type: String # one of [org, div, dep, sec, nil]
   field :destroyed_at, type: Time
 
   validates :short_id, uniqueness: true
@@ -28,7 +29,7 @@ class Unit < ApplicationRecord
   def as_json(options = nil)
     super.slice(
       'long_title', 'short_title', 'alpha_sort', 'list_title',
-      'child_ids', 'employ_ids', 'contact_ids', 'level',
+      'child_ids', 'employ_ids', 'contact_ids', 'level', "type"
     ).compact.merge(
       'id' => short_id,
     )

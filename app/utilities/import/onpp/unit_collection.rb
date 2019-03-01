@@ -68,6 +68,14 @@ module Utilities
         end
 
 
+        def get_structure_unit(employment_collection)
+          department_unit_array = employment_collection.get_department_unit_array
+          department_unit_array.each do |unit_id|
+            @entities[unit_id].new_data.type = "dep"
+          end
+        end
+
+
         def reset_structure
           @entities.each do |id, unit_entity|
             unit_entity.new_data.child_ids = []
