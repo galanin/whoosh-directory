@@ -413,5 +413,8 @@ module Staff
 
     end
 
+
+    mount Staff::NodesAPI
+
   end
 end
