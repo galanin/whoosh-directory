@@ -3,17 +3,20 @@ long_title: Научно-исследовательский институт «�
 id: 0
 employees:
 - post_title: Директор института
+  type: pr
   id: 1
   building: 13
   office: 201
   employees:
   - post_title: Заместитель директора института по науке
+    type: vp
     id: 11
     building: 13
     office: 202
     units:
 
     - long_title: Околоземное отделение
+      type: div
       id: 111
       employees:
       - post_title: Директор околоземного отделения
@@ -25,12 +28,14 @@ employees:
         building: 14
         office: 203
       - post_title: Заместитель директора околоземного отделения по транспортировке
+        type: vd
         id: 1113
         building: 14
         office: 204
         units:
 
         - long_title: Отдел верхних слоев атмосферы
+          type: dep
           id: 11131
           employees:
           - post_title: Начальник отдела
@@ -43,6 +48,7 @@ employees:
             office: 402
           units:
           - long_title: Группа озонового слоя
+            type: section
             id: 11133
             employees:
             - post_title: Ведущий инженер
@@ -61,6 +67,7 @@ employees:
               office: 403-410
               count: 5
           - long_title: Группа северного сияния
+            type: section
             id: 11134
             employees:
             - post_title: Ведущий инженер
@@ -79,6 +86,7 @@ employees:
               office: 411-415
               count: 9
           - long_title: Группа погодных зондов
+            type: section
             id: 11135
             employees:
             - post_title: Ведущий инженер
@@ -97,6 +105,7 @@ employees:
               office: 416-419
               count: 9
           - long_title: Группа спутниковой связи
+            type: section
             id: 11136
             employees:
             - post_title: Ведущий инженер
@@ -116,6 +125,7 @@ employees:
               count: 5
 
         - long_title: Отдел геопозиционирования
+          type: dep
           id: 11132
           employees:
           - post_title: Начальник отдела
@@ -128,6 +138,7 @@ employees:
             office: 502
           units:
           - long_title: Группа протокола геопозиционирования
+            type: section
             id: 11133
             employees:
             - post_title: Ведущий инженер
@@ -146,6 +157,7 @@ employees:
               office: 511-515
               count: 5
           - long_title: Группа разработки приемников сигнала геопозиционирования
+            type: section
             id: 11134
             employees:
             - post_title: Ведущий инженер
@@ -165,6 +177,7 @@ employees:
               count: 4
 
         - long_title: Отдел первой космической скорости
+          type: dep
           id: 11133
           employees:
           - post_title: Начальник отдела
@@ -177,6 +190,7 @@ employees:
             office: 521
           units:
           - long_title: Группа ракетных ускорителей
+            type: section
             id: 111333
             employees:
             - post_title: Ведущий инженер
@@ -195,6 +209,7 @@ employees:
               office: 522-525
               count: 8
           - long_title: Группа ракетного топлива и окислителя
+            type: section
             id: 111334
             employees:
             - post_title: Ведущий инженер
@@ -213,6 +228,7 @@ employees:
               office: 526-528
               count: 9
           - long_title: Группа возвращаемой первой ступени
+            type: section
             id: 111335
             employees:
             - post_title: Ведущий инженер
@@ -231,6 +247,7 @@ employees:
               office: 529-532
               count: 9
           - long_title: Группа космических лифтов
+            type: section
             id: 111336
             employees:
             - post_title: Ведущий инженер
@@ -249,6 +266,7 @@ employees:
               office: 423-426
               count: 8
           - long_title: Группа высоких эллиптических орбит
+            type: section
             id: 111337
             employees:
             - post_title: Ведущий инженер
@@ -268,12 +286,14 @@ employees:
               count: 10
 
       - post_title: Заместитель директора околоземного отделения по освещению и связи
+        type: vd
         id: 1114
         building: 14
         office: 205
         units:
 
         - long_title: Отдел геостационарной орбиты
+          type: dep
           id: 11141
           employees:
           - post_title: Начальник отдела
@@ -286,6 +306,7 @@ employees:
             office: 601
           units:
           - long_title: Группа спутниковых тарелок
+            type: section
             id: 111413
             employees:
             - post_title: Ведущий инженер
@@ -304,6 +325,7 @@ employees:
               office: 602-605
               count: 9
           - long_title: Группа высокочастотных передатчиков
+            type: section
             id: 111414
             employees:
             - post_title: Ведущий инженер
@@ -322,6 +344,7 @@ employees:
               office: 606-608
               count: 9
           - long_title: Группа высокочастотных приемников
+            type: section
             id: 111415
             employees:
             - post_title: Ведущий инженер
@@ -341,18 +364,20 @@ employees:
               count: 8
 
         - long_title: Лунная лаборатория
+          type: div
           id: 11142
           employees:
-          - post_title: Начальник отдела
+          - post_title: Начальник лаборатории
             id: 111421
             building: 14
             office: 613
-          - post_title: Заместитель начальника отдела
+          - post_title: Заместитель начальника лаборатории
             id: 111422
             building: 14
             office: 614
           units:
           - long_title: Группа искусственных орбитальных зеркал
+            type: section
             id: 111423
             employees:
             - post_title: Ведущий инженер
@@ -371,6 +396,7 @@ employees:
               office: 615-618
               count: 12
           - long_title: Группа полной луны
+            type: section
             id: 111424
             employees:
             - post_title: Ведущий инженер
@@ -389,6 +415,7 @@ employees:
               office: 619-621
               count: 6
           - long_title: Группа приливов и отливов
+            type: section
             id: 111425
             employees:
             - post_title: Старший научный сотрудник
@@ -407,9 +434,10 @@ employees:
               office: 622-628
               count: 11
           - long_title: Романтическая группа
+            type: section
             id: 111426
             employees:
-            - post_title: Старший лирик
+            - post_title: Старший лирик-лауреат
               id: 1114261
               building: 14
               office: 629-630
@@ -419,13 +447,14 @@ employees:
               building: 14
               office: 629-630
               count: 3
-            - post_title: Литературовед
+            - post_title: Литературовед-критик
               id: 1114263
               building: 14
               office: 629-630
               count: 5
 
     - long_title: Отделение Солнечной системы
+      type: div
       id: 112
       employees:
       - post_title: Директор отделения Солнечной системы
@@ -443,6 +472,7 @@ employees:
         units:
 
         - long_title: Отдел планет земной группы
+          type: dep
           id: 11231
           employees:
           - post_title: Начальник отдела
@@ -455,6 +485,7 @@ employees:
             office: 701
           units:
           - long_title: Группа Земли
+            type: section
             id: 112313
             employees:
             - post_title: Старший геолог
@@ -473,6 +504,7 @@ employees:
               office: 702-705
               count: 15
           - long_title: Группа Меркурия
+            type: section
             id: 112314
             employees:
             - post_title: Специалист по градусникам
@@ -491,6 +523,7 @@ employees:
               office: 706-707
               count: 5
           - long_title: Группа Венеры
+            type: section
             id: 112315
             employees:
             - post_title: Специалист по урожайности сельскохозяйственных земель
@@ -509,6 +542,7 @@ employees:
               office: 708-711
               count: 15
           - long_title: Группа Марса
+            type: section
             id: 112316
             employees:
             - post_title: Специалист по творчеству Джонатана Свифта
@@ -528,6 +562,7 @@ employees:
               count: 5
 
         - long_title: Отдел газовых гигантов
+          type: dep
           id: 11232
           employees:
           - post_title: Начальник отдела
@@ -540,6 +575,7 @@ employees:
             office: 715
           units:
           - long_title: Группа Юпитера
+            type: section
             id: 112323
             employees:
             - post_title: Специалист по Большому красному пятну
@@ -563,6 +599,7 @@ employees:
               office: 716-719
               count: 7
           - long_title: Группа Сатурна
+            type: section
             id: 112324
             employees:
             - post_title: Специалист по каменному поясу
@@ -581,6 +618,7 @@ employees:
               office: 720-722
               count: 5
           - long_title: Группа Урана
+            type: section
             id: 112325
             employees:
             - post_title: Ведущий инженер
@@ -609,6 +647,7 @@ employees:
               office: 723-725
               count: 8
           - long_title: Группа Нептуна
+            type: section
             id: 112326
             employees:
             - post_title: Ведущий инженер
@@ -644,6 +683,7 @@ employees:
         units:
 
         - long_title: Отдел пояса астероидов
+          type: dep
           id: 11241
           employees:
           - post_title: Начальник отдела
@@ -676,6 +716,7 @@ employees:
             count: 30
 
         - long_title: Отдел карликовых планет, планетоидов, планетных спутников и комет
+          type: dep
           id: 11242
           employees:
           - post_title: Начальник отдела
@@ -704,6 +745,7 @@ employees:
 
       units:
       - long_title: Отдел второй космической скорости
+        type: dep
         id: 1125
         employees:
         - post_title: Начальник отдела
@@ -716,6 +758,7 @@ employees:
           office: 812
         units:
         - long_title: Группа транспортных межпланетных космических аппаратов
+          type: section
           id: 11253
           employees:
           - post_title: Ведущий инженер
@@ -734,6 +777,7 @@ employees:
             office: 813-815
             count: 14
         - long_title: Группа пассажирских межпланетных космических аппаратов
+          type: section
           id: 11254
           employees:
           - post_title: Ведущий инженер
@@ -753,6 +797,7 @@ employees:
             count: 12
 
       - long_title: Солнечный отдел
+        type: dep
         id: 1126
         employees:
         - post_title: Начальник отдела
@@ -765,6 +810,7 @@ employees:
           office: 820
         units:
         - long_title: Группа светимости
+          type: section
           id: 11263
           employees:
           - post_title: Ведущий инженер
@@ -793,6 +839,7 @@ employees:
             office: 821-824
             count: 5
         - long_title: Группа магнитных бурь
+          type: section
           id: 11264
           employees:
           - post_title: Ведущий инженер
@@ -816,6 +863,7 @@ employees:
             office: 825-828
             count: 7
         - long_title: Группа исследования истории Солнечной системы
+          type: section
           id: 11265
           employees:
           - post_title: Ведущий инженер
@@ -850,6 +898,7 @@ employees:
             count: 5
 
     - long_title: Внутригалактическое отделение
+      type: div
       id: 113
       employees:
       - post_title: Директор внутригалактического отделения
@@ -866,6 +915,7 @@ employees:
         office: 210
       units:
       - long_title: Отдел морфологии Галактики
+        type: dep
         id: 1134
         employees:
         - post_title: Начальник отдела
@@ -878,6 +928,7 @@ employees:
           office: 901
         units:
         - long_title: Группа галактического ядра
+          type: section
           id: 11343
           employees:
           - post_title: Ведущий специалист
@@ -906,6 +957,7 @@ employees:
             office: 902-905
             count: 8
         - long_title: Группа галактического балджа
+          type: section
           id: 11344
           employees:
           - post_title: Ведущий специалист
@@ -929,6 +981,7 @@ employees:
             office: 906-909
             count: 8
         - long_title: Группа галактического рукава
+          type: section
           id: 11345
           employees:
           - post_title: Ведущий специалист
@@ -957,6 +1010,7 @@ employees:
             office: 910-913
             count: 12
         - long_title: Группа внешних кольцеобразных структур
+          type: section
           id: 11346
           employees:
           - post_title: Старший астроном
@@ -970,6 +1024,7 @@ employees:
             office: 914-915
             count: 8
         - long_title: Группа галактического бара
+          type: section
           id: 11347
           employees:
           - post_title: Старший астроном
@@ -983,6 +1038,7 @@ employees:
             office: 916-917
             count: 8
         - long_title: Группа галактического гало
+          type: section
           id: 11348
           employees:
           - post_title: Ведущий специалист
@@ -1006,6 +1062,7 @@ employees:
             office: 918-921
             count: 15
         - long_title: Группа коричневых карликов
+          type: section
           id: 11349
           employees:
           - post_title: Ведущий специалист
@@ -1030,6 +1087,7 @@ employees:
             count: 9
 
       - long_title: Отдел темной материи
+        type: dep
         id: 1135
         employees:
         - post_title: Начальник отдела
@@ -1042,6 +1100,7 @@ employees:
           office: 1001
         units:
         - long_title: Группа аномалий небесной механики
+          type: section
           id: 11353
           employees:
           - post_title: Ведущий специалист
@@ -1065,6 +1124,7 @@ employees:
             office: 1002-1005
             count: 9
         - long_title: Барионная группа
+          type: section
           id: 11354
           employees:
           - post_title: Ведущий специалист
@@ -1098,6 +1158,7 @@ employees:
             office: 1006-1010
             count: 9
         - long_title: Группа гравитационного линзирования
+          type: section
           id: 11355
           employees:
           - post_title: Ведущий специалист
@@ -1121,6 +1182,7 @@ employees:
             office: 1011-1014
             count: 9
         - long_title: Группа топологии пространства-времени
+          type: section
           id: 11356
           employees:
           - post_title: Ведущий специалист
@@ -1154,6 +1216,7 @@ employees:
             office: 1015-1019
             count: 9
         - long_title: Группа тяжёлых нейтрино
+          type: section
           id: 11357
           employees:
           - post_title: Ведущий специалист
@@ -1177,6 +1240,7 @@ employees:
             office: 1020-1022
             count: 9
         - long_title: Группа проблемы сингулярного гало
+          type: section
           id: 11358
           employees:
           - post_title: Ведущий специалист
@@ -1201,6 +1265,7 @@ employees:
             count: 9
 
       - long_title: Отдел вращения Галактики
+        type: dep
         id: 1136
         employees:
         - post_title: Начальник отдела
@@ -1213,6 +1278,7 @@ employees:
           office: 1027
         units:
         - long_title: Группа красного смещения
+          type: section
           id: 11363
           employees:
           - post_title: Ведущий специалист
@@ -1236,6 +1302,7 @@ employees:
             office: 1028-1030
             count: 9
         - long_title: Группа галактик с низкой поверхностной яркостью
+          type: section
           id: 11364
           employees:
           - post_title: Ведущий специалист
@@ -1259,6 +1326,7 @@ employees:
             office: 1124-1127
             count: 9
         - long_title: Группа модифицированной ньютоновской динамики
+          type: section
           id: 11365
           employees:
           - post_title: Ведущий специалист
@@ -1282,6 +1350,7 @@ employees:
             office: 1128-1130
             count: 9
         - long_title: Группа наблюдений в инфракрасном диапазоне
+          type: section
           id: 11366
           employees:
           - post_title: Ведущий специалист
@@ -1306,6 +1375,7 @@ employees:
             count: 9
 
       - long_title: Отдел наблюдения и исследования Галактики
+        type: dep
         id: 1137
         employees:
         - post_title: Начальник отдела
@@ -1318,6 +1388,7 @@ employees:
           office: 1101
         units:
         - long_title: Группа наземных наблюдательных средств
+          type: section
           id: 11373
           employees:
           - post_title: Ведущий специалист
@@ -1341,6 +1412,7 @@ employees:
             office: 1102-1104
             count: 9
         - long_title: Группа внеземных наблюдательных средств
+          type: section
           id: 11374
           employees:
           - post_title: Ведущий специалист
@@ -1364,6 +1436,7 @@ employees:
             office: 1105-1107
             count: 9
         - long_title: Группа подземных исследовательских устройств
+          type: section
           id: 11375
           employees:
           - post_title: Ведущий специалист
@@ -1387,6 +1460,7 @@ employees:
             office: 1108-1110
             count: 9
         - long_title: Группа разработки новых средств измерения, наблюдения и исследования
+          type: section
           id: 11376
           employees:
           - post_title: Ведущий специалист
@@ -1420,6 +1494,7 @@ employees:
             office: 1111-1115
             count: 9
         - long_title: Группа пролетной аномалии
+          type: section
           id: 11377
           employees:
           - post_title: Ведущий специалист
@@ -1444,6 +1519,7 @@ employees:
             count: 9
 
     - long_title: Межгалактическое отделение
+      type: div
       id: 114
       employees:
       - post_title: Директор межгалактического отделения
@@ -1452,6 +1528,7 @@ employees:
         office: 211
       units:
       - long_title: Отдел возникновения и эволюции Вселенной
+        type: dep
         id: 1142
         employees:
         - post_title: Начальник отдела
@@ -1464,6 +1541,7 @@ employees:
           office: 102
         units:
         - long_title: Группа Большого взрыва
+          type: section
           id: 11423
           employees:
           - post_title: Ведущий специалист
@@ -1487,6 +1565,7 @@ employees:
             office: 103-105
             count: 9
         - long_title: Группа стационарной Вселенной
+          type: section
           id: 11424
           employees:
           - post_title: Ведущий специалист
@@ -1505,6 +1584,7 @@ employees:
             office: 106-108
             count: 9
         - long_title: Группа нуклеосинтеза
+          type: section
           id: 11425
           employees:
           - post_title: Ведущий специалист
@@ -1538,6 +1618,7 @@ employees:
             office: 109-113
             count: 9
         - long_title: Группа горячей Вселенной
+          type: section
           id: 11426
           employees:
           - post_title: Ведущий специалист
@@ -1561,6 +1642,7 @@ employees:
             office: 114-117
             count: 9
         - long_title: Группа космической инфляции
+          type: section
           id: 11427
           employees:
           - post_title: Ведущий специалист
@@ -1584,6 +1666,7 @@ employees:
             office: 118-121
             count: 9
         - long_title: Группа космологического принципа
+          type: section
           id: 11428
           employees:
           - post_title: Ведущий специалист
@@ -1607,6 +1690,7 @@ employees:
             office: 122-125
             count: 9
         - long_title: Группа Вселенной Фридмана
+          type: section
           id: 11429
           employees:
           - post_title: Ведущий специалист
@@ -1625,6 +1709,7 @@ employees:
             office: 126-128
             count: 9
         - long_title: Группа космологической сингулярности
+          type: section
           id: 11420
           employees:
           - post_title: Ведущий специалист
@@ -1649,6 +1734,7 @@ employees:
             count: 9
 
       - long_title: Отдел материи и гравитации
+        type: dep
         id: 1143
         employees:
         - post_title: Начальник отдела
@@ -1661,6 +1747,7 @@ employees:
           office: 202
         units:
         - long_title: Группа гравитационного взаимодействия
+          type: section
           id: 11433
           employees:
           - post_title: Ведущий специалист
@@ -1684,6 +1771,7 @@ employees:
             office: 203-206
             count: 9
         - long_title: Группа элементарных частиц
+          type: section
           id: 11434
           employees:
           - post_title: Ведущий специалист
@@ -1742,6 +1830,7 @@ employees:
             office: 203-211
             count: 11
         - long_title: Группа тяготения Ньютона
+          type: section
           id: 11435
           employees:
           - post_title: Ведущий специалист
@@ -1765,6 +1854,7 @@ employees:
             office: 212-215
             count: 9
         - long_title: Группа общей теории относительности
+          type: section
           id: 11436
           employees:
           - post_title: Ведущий специалист
@@ -1789,6 +1879,7 @@ employees:
             count: 9
 
       - long_title: Отдел пространственно-временных парадоксов
+        type: dep
         id: 1144
         employees:
         - post_title: Начальник отдела
@@ -1801,6 +1892,7 @@ employees:
           office: 221
         units:
         - long_title: Группа петли времени
+          type: section
           id: 11443
           employees:
           - post_title: Ведущий специалист
@@ -1824,6 +1916,7 @@ employees:
             office: 222-225
             count: 9
         - long_title: Группа кротовых нор
+          type: section
           id: 11444
           employees:
           - post_title: Ведущий специалист
@@ -1852,6 +1945,7 @@ employees:
             office: 226-229
             count: 9
         - long_title: Группа параллельных вселенных
+          type: section
           id: 11445
           employees:
           - post_title: Ведущий специалист
@@ -1876,6 +1970,7 @@ employees:
             count: 5
 
       - long_title: Отдел альтернативных теорий
+        type: dep
         id: 1145
         employees:
         - post_title: Начальник отдела
@@ -1888,6 +1983,7 @@ employees:
           office: 302
         units:
         - long_title: Группа множественных Вселенных
+          type: section
           id: 11453
           employees:
           - post_title: Ведущий специалист
@@ -1906,6 +2002,7 @@ employees:
             office: 303-305
             count: 9
         - long_title: Группа симуляции Вселенной
+          type: section
           id: 11454
           employees:
           - post_title: Ведущий специалист
@@ -1924,6 +2021,7 @@ employees:
             office: 306-308
             count: 9
         - long_title: Группа бесконечной Вселенной
+          type: section
           id: 11455
           employees:
           - post_title: Ведущий специалист
@@ -1943,6 +2041,7 @@ employees:
             count: 9
 
       - long_title: Отдел крупномасштабной структуры Вселенной
+        type: div
         id: 1146
         employees:
         - post_title: Начальник отдела
@@ -1955,6 +2054,7 @@ employees:
           office: 313
         units:
         - long_title: Группа галактических нитей
+          type: section
           id: 11463
           employees:
           - post_title: Ведущий специалист
@@ -1983,6 +2083,7 @@ employees:
             office: 314-317
             count: 9
         - long_title: Группа войдов
+          type: section
           id: 11464
           employees:
           - post_title: Ведущий специалист
@@ -2016,6 +2117,7 @@ employees:
             office: 318-322
             count: 9
         - long_title: Группа пузыря Хаббла
+          type: section
           id: 11465
           employees:
           - post_title: Ведущий специалист
@@ -2046,6 +2148,7 @@ employees:
 
     - long_title: Отдел научно-технической информации
       short_title: ОНТИ
+      type: dep
       id: 115
       employees:
       - post_title: Начальник отдела
@@ -2058,6 +2161,7 @@ employees:
         office: 301
       units:
       - long_title: Архив
+        type: section
         id: 1153
         employees:
         - post_title: Специалист по научно-технической информации
@@ -2071,6 +2175,7 @@ employees:
           office: 302-306
           count: 5
       - long_title: Бюро технической документации
+        type: section
         id: 1154
         employees:
         - post_title: Специалист по технической документации
@@ -2084,6 +2189,7 @@ employees:
           office: 307-309
           count: 5
       - long_title: Группа информационно-справочного фонда
+        type: section
         id: 1155
         employees:
         - post_title: Специалист по научно-технической информации
@@ -2098,6 +2204,7 @@ employees:
           count: 5
 
     - long_title: Патентный отдел
+      type: dep
       id: 116
       employees:
       - post_title: Начальник отдела
@@ -2120,6 +2227,7 @@ employees:
         count: 15
 
     - long_title: Метрологический отдел
+      type: dep
       id: 117
       employees:
       - post_title: Начальник отдела
@@ -2132,6 +2240,7 @@ employees:
         office: 324
       units:
       - long_title: Группа поверки средств измерений
+        type: section
         id: 1173
         employees:
         - post_title: Ведущий специалист
@@ -2145,6 +2254,7 @@ employees:
           office: 325-326
           count: 6
       - long_title: Группа ремонта и технического обслуживания средств измерений
+        type: section
         id: 1174
         employees:
         - post_title: Ведущий специалист
@@ -2159,6 +2269,7 @@ employees:
           count: 6
 
   - post_title: Заместитель директора института по опытному производству
+    type: vp
     id: 12
     people_count: 1
     building: 13
@@ -2166,14 +2277,17 @@ employees:
     units:
 
     - long_title: Отделение опытного производства
+      type: div
       id: 121
       employees:
       units:
       - long_title: Цех высокоточных средств измерения и наблюдения
+        type: dep
         id: 1211
         employees:
         units:
         - long_title: Участок
+          type: section
           id: 12111
           employees:
           - post_title:
@@ -2197,6 +2311,7 @@ employees:
             office:
             count:
         - long_title: Участок
+          type: section
           id: 12112
           employees:
           - post_title:
@@ -2220,6 +2335,7 @@ employees:
             office:
             count:
         - long_title: Участок
+          type: section
           id: 12113
           employees:
           - post_title:
@@ -2243,6 +2359,7 @@ employees:
             office:
             count:
         - long_title: Участок
+          type: section
           id: 12114
           employees:
           - post_title:
@@ -2266,6 +2383,7 @@ employees:
             office:
             count:
         - long_title: Участок
+          type: section
           id: 12115
           employees:
           - post_title:
@@ -2290,21 +2408,25 @@ employees:
             count:
 
       - long_title: Цех производства средств связи
+        type: dep
         id: 1212
         employees:
         units:
 
       - long_title: Цех космической энергетики
+        type: dep
         id: 1213
         employees:
         units:
 
       - long_title: Цех космической транспортировки
+        type: dep
         id: 1214
         employees:
         units:
 
     - long_title: Отделение главного технолога
+      type: div
       id: 122
       employees:
       - post_title: Начальник отдела
@@ -2318,17 +2440,20 @@ employees:
       units:
 
     - long_title: Отделение главного инженера
+      type: div
       id: 123
       employees:
       units:
 
   - post_title: Заместитель директора института по коммерции
+    type: vp
     id: 13
     people_count: 1
     building: 13
     office: 213
     units:
     - long_title: Маркетинговый отдел
+      type: dep
       id: 131
       employees:
       - post_title: Начальник отдела
@@ -2342,6 +2467,7 @@ employees:
       units:
 
     - long_title: Отдел патентных отчислений и роялти
+      type: dep
       id: 132
       employees:
       - post_title: Начальник отдела
@@ -2368,12 +2494,14 @@ employees:
       units:
 
   - post_title: Заместитель директора института по финансам
+    type: vp
     id: 14
     people_count: 1
     building: 13
     office: 214
 
   - post_title: Заместитель директора института по административным вопросам
+    type: vp
     id: 15
     people_count: 1
     building: 13
@@ -2381,6 +2509,7 @@ employees:
 
   units:
   - long_title: Отдел труда и зарплаты
+    type: dep
     id: 16
     employees:
     - post_title: Начальник отдела
@@ -2394,6 +2523,7 @@ employees:
     units:
 
   - long_title: Отдел кадров
+    type: dep
     id: 17
     employees:
     - post_title: Начальник отдела
@@ -2407,6 +2537,7 @@ employees:
     units:
 
   - long_title: Бухгалтерия
+    type: dep
     id: 18
     employees:
     - post_title: Главный бухгалтер
@@ -2420,6 +2551,7 @@ employees:
     units:
 
   - long_title: Канцелярия
+    type: dep
     id: 19
     employees:
     - post_title: Начальник канцелярии
