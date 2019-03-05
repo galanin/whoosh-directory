@@ -101,7 +101,7 @@ module Staff
         present :birthday_interval, birthday_interval
         present :birthdays, results
       elsif search_query.common?
-        search_result = SearchEntry.query(params[:q], params[:max])
+        search_result = search_query.execute(params[:max])
         present :results, search_result
 
         employments = fetch_search_result_employments(search_result)
