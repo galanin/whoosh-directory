@@ -8,6 +8,7 @@ class Employment < ApplicationRecord
   field :person_external_id, type: String
   field :unit_external_id,   type: String
   field :person_short_id,    type: String
+  field :department_short_id,type: String
   field :unit_short_id,      type: String
   field :post_title,         type: String
   field :post_code,          type: String
@@ -30,6 +31,7 @@ class Employment < ApplicationRecord
 
   belongs_to :person
   belongs_to :unit
+  belongs_to :department, class_name: 'Unit', optional: true
   embeds_one :telephones, as: :phonable,  class_name: 'Phones'
 
   index({ destroyed_at: 1, person_short_id: 1 }, {})

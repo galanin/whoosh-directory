@@ -106,6 +106,7 @@ module Utilities
           @people.link_objects_to_employment_short_ids(@employments)
           @employments.link_objects_to_people(@people)
           @employments.link_objects_to_units(@units)
+          @employments.link_objects_to_department(@units)
           @external_contact.link_objects_to_units(@units)
 
           @people.flush_to_db
