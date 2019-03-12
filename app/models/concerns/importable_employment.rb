@@ -3,7 +3,6 @@ module ImportableEmployment
 
   included do
 
-
     def link_node(node)
       self.node          = node
       self.node_short_id = node&.short_id

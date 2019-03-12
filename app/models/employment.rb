@@ -4,7 +4,7 @@ class Employment < ApplicationRecord
   include ShortId
   include Searchable
   include Importable
-  prepend Importable::ImportableEmployment
+  include ImportableEmployment
 
   field :person_short_id,    type: String
   field :node_short_id,      type: String

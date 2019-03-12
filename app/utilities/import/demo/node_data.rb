@@ -53,8 +53,8 @@ module Utilities
 
 
         def add_child_node_data(child_node_data)
-          m = 'BROKEN ID HIERARCHY' unless proper_child_id?(child_node_data)
-          puts " add #{ child_node_data.external_id } to #{ external_id } #{ m }"
+          # m = 'BROKEN ID HIERARCHY' unless proper_child_id?(child_node_data)
+          # puts " add #{ child_node_data.external_id } to #{ external_id } #{ m }"
           @child_node_external_ids << child_node_data.external_id
           child_node_data.parent_node_external_id = @external_id
         end
