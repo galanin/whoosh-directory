@@ -18,19 +18,21 @@ import NurseWoman from '@icons/common-avatars/nurse.svg'
 
 AVATARS =
   M:
-    head:       LeaderMan
-    specialist: SpecialistMan
-    employee:   EmployeeMan
-    worker:     WorkerMan
-    aux_worker: AuxiliaryWorkerMan
+    manager:      LeaderMan
+    engineer:     SpecialistMan
+    employee:     EmployeeMan
+    aux_employee: EmployeeMan
+    worker:       WorkerMan
+    aux_worker:   AuxiliaryWorkerMan
 
   F:
-    head:       LeaderWoman
-    specialist: SpecialistWoman
-    employee:   EmployeeWoman
-    worker:     WorkerWoman
-    aux_worker: AuxiliaryWorkerWoman
-    nurse:      NurseWoman
+    manager:      LeaderWoman
+    engineer:     SpecialistWoman
+    employee:     EmployeeWoman
+    aux_employee: EmployeeWoman
+    worker:       WorkerWoman
+    aux_worker:   AuxiliaryWorkerWoman
+    nurse:        NurseWoman
 
 
 class CommonAvatar extends React.Component

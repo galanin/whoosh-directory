@@ -28,57 +28,10 @@ module Staff
     end
 
 
-    get :units do
-      present :units,
-              Unit.
-                only(:short_id, :level, :list_title, :child_ids, :employ_ids, :contact_ids).
-                where(destroyed_at: nil)
-    end
-
-
     get 'units/:unit_id' do
       if params.key? :unit_id
-        unit = Unit.find_by!(short_id: params[:unit_id])
-        present :unit_titles, [unit.as_json.slice('id', 'long_title', 'short_title', 'alpha_sort')]
-
-        unless unit.employ_ids.nil?
-          employments = Employment.in(short_id: unit.employ_ids)
-          present :employments, employments
-
-          people = Person.in(short_id: employments.map(&:person_short_id))
-          present :people, people
-        end
-
-        unless unit.contact_ids.nil?
-          external_contacts = ExternalContact.in(short_id: unit.contact_ids)
-          present :external_contacts, external_contacts
-        end
-      end
-    end
-
-
-    get 'units/titles/:where' do
-      unit_ids = params[:where].split(',')
-      units = Unit.only(:short_id, :short_title, :long_title, :alpha_sort).in(short_id: unit_ids)
-      present :unit_titles, units
-    end
-
-
-    post 'units/:unit_id/expand' do
-      current_session = UserSession.find(params[:session_token])
-      unit_ids = params[:unit_id].to_s.split(',').presence.compact
-      if unit_ids.present? && current_session && (new_unit_ids = unit_ids - current_session.data[:expanded_units]).present?
-        current_session.data[:expanded_units] += new_unit_ids
-        current_session.save
-      end
-    end
-
-
-    post 'units/:unit_id/collapse' do
-      current_session = UserSession.find(params[:session_token])
-      if params[:unit_id].present? && current_session && current_session.data[:expanded_units].include?(params[:unit_id])
-        current_session.data[:expanded_units].delete(params[:unit_id])
-        current_session.save
+        unit = Unit.api_fields.find_by!(short_id: params[:unit_id])
+        present :units, [unit]
       end
     end
 
@@ -100,6 +53,7 @@ module Staff
 
         present :birthday_interval, birthday_interval
         present :birthdays, results
+
       elsif search_query.common?
         search_result = SearchEntry.query(params[:q], params[:max])
         present :results, search_result
@@ -108,7 +62,7 @@ module Staff
         external_contacts = fetch_search_result_external_contacts(search_result)
         people = fetch_search_result_people(search_result)
 
-        present :unit_titles, fetch_search_result_unit_extras(search_result, employments)
+        present :units, fetch_search_result_unit_extras(search_result, employments)
       end
 
       present :type,              search_query.type
@@ -159,27 +113,28 @@ module Staff
         @user_information.save if @user_information.changed?
       end
 
-      namespace 'expanded_units' do
 
-        desc 'Returns expanded_units field From UserInformation object'
+      namespace 'expanded_nodes' do
+
+        desc 'Get all expanded node ids'
         get do
-          present :expanded_units, @user_information.expanded_units
+          present :expanded_nodes, @user_information.expanded_node_ids
         end
 
 
-        desc 'Add unit_ids to UserInformation object expanded_units field'
-        post ':unit_id' do
-          unit_ids = params[:unit_id].to_s.split(',').presence.compact
-          if unit_ids.present?
-            @user_information.add_to_expanded_units(unit_ids)
+        desc 'Add the new node ids to the list of expanded nodes'
+        post ':node_ids' do
+          node_ids = params[:node_ids].to_s.split(',').presence.compact
+          if node_ids.present?
+            @user_information.expand_nodes(node_ids)
           end
         end
 
 
-        desc 'Remove unit_id from UserInformation object expanded_units field'
-        delete ':unit_id' do
-          if params[:unit_id].present?
-            @user_information.delete_from_expanded_unit(params[:unit_id])
+        desc 'Remove the single node id from the list of expanded nodes'
+        delete ':node_id' do
+          if params[:node_id].present?
+            @user_information.collapse_node(params[:node_id])
           end
         end
 
@@ -284,10 +239,10 @@ module Staff
           desc 'Returns all FavoriteUnits records from UserInformation'
           get do
             unit_ids = @user_information.favorite_unit.pluck(:unit_short_id)
-            units = Unit.only(:short_id, :short_title, :long_title, :alpha_sort).where(destroyed_at: nil).in(short_id: unit_ids)
+            units = Unit.api_fields.where(destroyed_at: nil).in(short_id: unit_ids)
 
             present :favorite_units, @user_information.favorite_unit
-            present :unit_titles, units
+            present :units, units
           end
 
 
@@ -377,7 +332,7 @@ module Staff
 
           employments = Employment.where(destroyed_at: nil).in(short_id: employment_ids)
           people = Person.in(short_id: employments.map(&:person_short_id))
-          units = Unit.only(:short_id, :short_title, :long_title).where(destroyed_at: nil).in(short_id: unit_ids)
+          units = Unit.api_fields.where(destroyed_at: nil).in(short_id: unit_ids)
 
           present :histories, histories
           present :employment, employments

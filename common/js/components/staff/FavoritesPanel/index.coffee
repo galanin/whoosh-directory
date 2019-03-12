@@ -35,7 +35,7 @@ class FavoritesPanel extends React.Component
     class_names[@props.className] = true
 
     div { className: classNames(class_names), onClick: @onClick.bind(this) },
-      svg { className: 'favorites-panel__icon', svg: StarIcon }
+      svg { className: 'medium-icon favorites-panel__icon', svg: StarIcon }
       span { className: 'favorites-panel__title' },
         'Избранное'
       span { className: 'favorites-panel__counter' },

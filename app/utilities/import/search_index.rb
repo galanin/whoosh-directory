@@ -71,7 +71,7 @@ module Utilities
         # puts unit.long_title
         add_term(unit.long_title, PRIORITY_UNIT_TITLE, unit, partial: :begin)
         add_term(unit.short_title, PRIORITY_UNIT_TITLE, unit, partial: :begin)
-        set_sub_order(unit.list_title, unit)
+        set_sub_order(unit.alpha_sort, unit)
       end
 
 

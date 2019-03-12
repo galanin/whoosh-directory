@@ -90,10 +90,10 @@ class ToCall extends React.Component
 
       div { className: 'to-call__buttons employee-buttons-container__buttons' },
         div { className: 'to-call__button to-call__check-to-call employee-buttons-container__button', onClick: @onCheck.bind(this) },
-          svg { className: 'to-call__icon to-call__check', svg: CheckIcon }
+          svg { className: 'medium-icon to-call__icon to-call__check', svg: CheckIcon }
 
         div { className: 'to-call__button to-call__destroy-to-call employee-buttons-container__button', onClick: @onDestroyToCall.bind(this) },
-          svg { className: 'to-call__icon to-call__destroy', svg: DestroyIcon }
+          svg { className: 'medium-icon to-call__icon to-call__destroy', svg: DestroyIcon }
 
 
 export default connect(mapStateToProps, mapDispatchToProps)(ToCall)

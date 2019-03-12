@@ -1,5 +1,5 @@
-import { loadUnits } from '@actions/units'
-import { loadExpandedUnits } from '@actions/expand_units'
+import { loadNodeTree } from '@actions/nodes'
+import { loadExpandedNodes } from '@actions/nodes'
 import { loadToCall } from '@actions/to_call'
 import { loadFavoritePeople, loadFavoriteUnits } from '@actions/favorites'
 
@@ -10,9 +10,9 @@ export default (store) ->
     unless initial_info_requested
       initial_info_requested = true
 
-      store.dispatch(loadUnits())
+      store.dispatch(loadNodeTree())
 
-      setTimeout (-> store.dispatch(loadExpandedUnits())),
+      setTimeout (-> store.dispatch(loadExpandedNodes())),
         10
 
       setTimeout (-> store.dispatch(loadToCall())),

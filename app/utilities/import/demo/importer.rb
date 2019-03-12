@@ -37,8 +37,13 @@ module Utilities
 
           # @employments.import_photos
 
+          @employments.assign_head_id(@nodes)
+          @nodes.assign_head_id(@units)
+
+          # link the objects using external ids
           @employments.link_node_objects(@nodes)
           @units.link_node_objects(@nodes)
+          @units.link_employment_objects(@employments)
           @nodes.link_node_objects
           @nodes.link_employment_objects(@employments)
           @nodes.link_unit_objects(@units)
@@ -57,12 +62,15 @@ module Utilities
             node_data = Utilities::Import::Demo::NodeData.new(employment_template_data, yaml_node)
             @nodes.add_new_data(node_data)
 
-            parent_node_data.add_child_node_data(node_data)
+            parent_node_data.add_child_node_data(node_data) if parent_node_data.present?
             node_data.add_node_employment_data(employment_template_data)
 
-            parse_yaml_descendants(yaml_node, node_data)
+            # puts "[#{ parent_node_data&.external_id }] #{ node_data.external_id } '#{ node_data.title }'"
+
+            parse_yaml_descendants(node_data, yaml_node)
           else
             parent_node_data.add_child_employment_data(employment_template_data)
+            # puts "[#{ parent_node_data&.external_id }] #{ employment_template_data.external_id } {#{ employment_template_data.post_title }}"
           end
 
           node_data
@@ -79,13 +87,15 @@ module Utilities
           parent_node_data.add_child_node_data(node_data) if parent_node_data.present?
           node_data.add_node_unit_data(unit_data)
 
-          parse_yaml_descendants(yaml_node, node_data)
+          # puts "[#{ parent_node_data&.external_id }] #{ node_data.external_id } '#{ node_data.title }'"
+
+          parse_yaml_descendants(node_data, yaml_node)
 
           node_data
         end
 
 
-        def parse_yaml_descendants(yaml_node, parent_node_data)
+        def parse_yaml_descendants(parent_node_data, yaml_node)
           if yaml_node['employees'].present?
             yaml_node['employees'].each do |yaml_child_node|
               parse_yaml_employee(parent_node_data, yaml_child_node)

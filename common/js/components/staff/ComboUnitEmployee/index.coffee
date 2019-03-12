@@ -12,6 +12,7 @@ employee = React.createFactory(SomeoneWithButtons)
 class ComboUnitEmployee extends React.Component
 
   render: ->
+
     class_names =
       'combo-unit-employee' : true
     class_names[@props.className] = true

@@ -3,7 +3,7 @@ import { filter, join, isEmpty } from 'lodash'
 
 import { ADD_EMPLOYMENTS } from '@constants/employments'
 import { addPeople } from '@actions/people'
-import { addUnitTitles } from '@actions/unit_titles'
+import { addUnits } from '@actions/units'
 
 
 export addEmployments = (employments) ->
@@ -11,32 +11,43 @@ export addEmployments = (employments) ->
   employments: employments
 
 
-export getParentIds = (state, employment) ->
-  return [] if isEmpty(state.units)
+export getNodeParents = (state, employment) ->
+  return [] if isEmpty(state.nodes.tree)
 
-  unit_ids = getParentUnitIds(state, employment)
-  for unit_id in unit_ids
-    unit = state.units[unit_id]
-    first_employment_id = unit.employ_ids?[0]
-    first_employment = state.employments[first_employment_id]
+  node_ids = getNodeParentIds(state, employment)
 
-    unit_id: unit_id
-    employment_id: if first_employment?.is_boss then first_employment_id else null
+  for node_id in node_ids
+    node = state.nodes.data[node_id]
+    unit = state.units[node?.unit_id]
+    head = state.employments[unit?.head_id]
+    employment = state.employments[node?.employment_id]
+
+    node: node
+    unit: unit
+    head: head
+    employment: employment
 
 
-export getParentUnitIds = (state, employment) ->
-  return [] if isEmpty(state.units)
+export getNodeParentIds = (state, employment) ->
+  return [] if isEmpty(state.nodes.tree)
 
-  unit = state.units[employment.unit_id]
-  is_boss_him_herself = unit.employ_ids[0] == employment.id
-  if is_boss_him_herself
-    unit.path
+  if employment.parent_node_id?
+    tree_node = state.nodes.tree[employment.parent_node_id]
+    if employment.is_head
+      tree_node.path
+    else
+      tree_node.full_path
+
+  else if employment.node_id?
+    tree_node = state.nodes.tree[employment.node_id]
+    tree_node.path
+
   else
-    unit.full_path
+    []
 
 
-getMissingUnitTitleIds = (state, unit_ids) ->
-  unit_ids.filter (unit_id) -> !state.unit_titles[unit_id]?
+getMissingUnitIds = (state, unit_ids) ->
+  unit_ids.filter (unit_id) -> !state.units[unit_id]?
 
 
 export getParentUnits = (state, employment) ->
@@ -69,7 +80,7 @@ export loadUnitHierarchy = (employment_id) ->
     missing_unit_title_ids = getMissingUnitTitleIds(state, parent_unit_ids)
     if missing_unit_title_ids.length > 0
       Request.get('/units/titles/' + join(missing_unit_title_ids, ',')).then (response) ->
-        dispatch(addUnitTitles(response.body.unit_titles))
+        dispatch(addUnits(response.body.units))
 
 
 export loadEmploymentHierarchy = (employment_id) ->

@@ -5,7 +5,7 @@ module Utilities
         include Utilities::Import::Data
 
         attr_reader   :long_title, :short_title, :alpha_sort
-        attr_accessor :node_external_id
+        attr_accessor :node_external_id, :head_external_id
 
 
         def initialize(hash)

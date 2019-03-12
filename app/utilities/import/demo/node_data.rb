@@ -4,27 +4,24 @@ module Utilities
       class NodeData
         include Utilities::Import::Data
 
-        UNIT = 'unit'
-        EMPLOYMENT = 'employment'
+        COLLAPSED_NODE_TYPES = %w(section dep)
 
-        attr_reader :variant, :title, :type
+        attr_reader :title, :node_type
         attr_accessor :unit_external_id, :employment_external_id
-        attr_accessor :parent_node_external_id
+        attr_accessor :parent_node_external_id, :head_external_id
         attr_reader :child_node_external_ids
         attr_reader :child_employment_external_ids
 
 
         def initialize(encapsulated_data, hash)
           @external_id = encapsulated_data.external_id
-          @type        = hash['type']
+          @node_type   = hash['node_type']
 
           case encapsulated_data
           when Utilities::Import::Demo::UnitData
-            @variant = UNIT
             @title   = encapsulated_data.short_title || encapsulated_data.long_title
 
           when Utilities::Import::Demo::EmploymentTemplateData
-            @variant = EMPLOYMENT
             @title   = encapsulated_data.post_title
           end
 
@@ -33,20 +30,12 @@ module Utilities
         end
 
 
-        def unit?
-          variant == UNIT
-        end
-
-
-        def employment?
-          variant == EMPLOYMENT
-        end
-
-
         def attributes
           {
-            external_id:         external_id,
-            title:               title,
+            external_id:      external_id,
+            title:            title,
+            node_type:        node_type,
+            default_expanded: !node_type.in?(COLLAPSED_NODE_TYPES)
           }
         end
 
@@ -64,6 +53,8 @@ module Utilities
 
 
         def add_child_node_data(child_node_data)
+          m = 'BROKEN ID HIERARCHY' unless proper_child_id?(child_node_data)
+          puts " add #{ child_node_data.external_id } to #{ external_id } #{ m }"
           @child_node_external_ids << child_node_data.external_id
           child_node_data.parent_node_external_id = @external_id
         end
@@ -75,9 +66,24 @@ module Utilities
         end
 
 
+        def proper_child_id?(child_node_data)
+          external_id.size + 1 == child_node_data.external_id.size and
+            child_node_data.external_id.start_with?(external_id)
+        end
+
+
+        def assign_head_id(unit_collection)
+          if @unit_external_id.present?
+            unit_entity = unit_collection[@unit_external_id]
+            if unit_entity.present?
+              unit_entity.new_data.head_external_id = @head_external_id
+            end
+          end
+        end
+
 
         def inspect
-          "NodeData #{ @variant } '#{ title }'>"
+          "NodeData #{ @variant } #{ @external_id } <#{ child_node_external_ids.join(', ') }> '#{ title }'"
         end
 
       end

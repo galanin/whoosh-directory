@@ -7,7 +7,7 @@ module Utilities
                       :person_external_id,
                       :unit_external_id,
                       :post_title,
-                      :post_code, :is_manager, :is_boss,
+                      :post_code, :is_manager, :is_head,
                       :office, :building,
                       :telephones,
                       :lunch_begin, :lunch_end,
@@ -25,9 +25,9 @@ module Utilities
         }.freeze
 
         POST_CATEGORY_CODE = {
-          'Руководители'            => 'head',
-          'Специалисты'             => 'specialist',
-          'Прочие служащие'         => 'employee',
+          'Руководители'            => 'manager',
+          'Специалисты'             => 'engineer',
+          'Прочие служащие'         => 'aux_employee',
           '*'                       => 'employee',
           'Основные рабочие'        => 'worker',
           'Вспомогательные рабочие' => 'aux_worker',
@@ -39,7 +39,7 @@ module Utilities
           @unit_external_id   = source_data['ID_PODR']
           @post_title         = source_data['POST']
           @post_code          = POST_CATEGORY_CODE[source_data['KAT']] || POST_CATEGORY_CODE['*']
-          @is_manager         = @post_code == 'head'
+          @is_manager         = @post_code == 'manager'
           @office             = normalize_office(source_data['ROOM'])
           @building           = normalize_building(source_data['KORP'])
           @telephones         = Phones.from_xml(source_data)
@@ -66,7 +66,7 @@ module Utilities
             post_title:         post_title,
             post_code:          post_code,
             is_manager:         is_manager,
-            is_boss:            is_boss,
+            is_head:            is_head,
             building:           building,
             office:             office,
             lunch_begin:        lunch_begin,

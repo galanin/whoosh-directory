@@ -5,6 +5,8 @@ module Utilities
         include Utilities::Import::Data
 
         attr_reader   :post_title,
+                      :post_type,
+                      :is_head,
                       :building, :office,
                       :count
         attr_accessor :node_external_id
@@ -18,6 +20,8 @@ module Utilities
           end
           @external_id = hash['id'].to_s
           @post_title  = hash['post_title'].presence || '-'
+          @post_type   = hash['post_type']
+          @is_head     = hash['is_head']
           @building    = hash['building']
           @office      = hash['office']
           @count       = hash['count'] || 1
@@ -27,11 +31,22 @@ module Utilities
         def attributes
           {
             external_id: external_id,
-            post_title: post_title,
-            building: building,
-            office: office,
-            alpha_sort: post_title,
+            post_title:  post_title,
+            post_code:   post_type,
+            is_head:     is_head,
+            building:    building,
+            alpha_sort:  post_title,
           }
+        end
+
+
+        def assign_head_id(node_collection)
+          if @parent_node_external_id.present? && @is_head
+            parent_node_entity = node_collection[@parent_node_external_id]
+            if parent_node_entity.present?
+              parent_node_entity.new_data.head_external_id = @external_id
+            end
+          end
         end
 
 

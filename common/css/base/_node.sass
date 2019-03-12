@@ -1,21 +1,21 @@
-.organization-unit-node
+.node
   position: relative
   display: flex
 
-  & + .organization-unit-node
+  & + .node
     margin-top: 0
 
-  &.organization-unit-node_expanded
-    & > .organization-unit-node__button
-      & > .organization-unit-node__button-open
+  &.node_expanded
+    & > .node__button
+      & > .node__button-open
         display: none
 
-  &.organization-unit-node_collapsed
-    & > .organization-unit-node__button
-      & > .organization-unit-node__button-close
+  &.node_collapsed
+    & > .node__button
+      & > .node__button-close
         display: none
 
-    .organization-unit-node__children
+    .node__children
       display: none
 
 
@@ -28,7 +28,7 @@
     z-index: 0
     content: ''
 
-  &.organization-unit-node_has_children.organization-unit-node_expanded
+  &.node_has_children.node_expanded
     &:after
       position: absolute
       left: 48px
@@ -40,7 +40,7 @@
       content: ''
 
   &:last-child
-    & > .organization-unit-node__content
+    & > .node__content
       position: relative
 
       &:before
@@ -52,39 +52,39 @@
         background-color: #fff
         content: ''
 
-.organization-unit-node__button,
-.organization-unit-node__button-stub
+.node__button,
+.node__button-stub
   flex: 0 0 32px
   height: 32px
   z-index: 2
 
-.organization-unit-node__button
+.node__button
   cursor: pointer
   position: relative
 
   &:hover
 
-    .organization-unit-node__button-border
+    .node__button-border
       fill: #6e0d59
 
-    .organization-unit-node__button-sign
+    .node__button-sign
       fill: #6e0d59
 
-.organization-unit-node__button-bg
+.node__button-bg
   fill: #fff
 
-.organization-unit-node__button-border
+.node__button-border
   fill: #ccc
 
-.organization-unit-node__button-sign
+.node__button-sign
   fill: #bbb
 
-.organization-unit-node__content
+.node__content
   position: relative
   flex: 0 1 100%
   z-index: 1
 
-.organization-unit-node__title
+.node__title
   margin: 0 0 4px 8px
   padding: 5px 0 0 2px
   color: #444
@@ -97,13 +97,13 @@
     color: #150a10
     font-weight: 600
 
-.organization-unit-node__title_highlighted
+.node__title_highlighted
   margin: 0
   padding: 5px 4px 4px 10px
   color: #150a10
   background-color: #ddd
 
-.organization-unit-node__title_current
+.node__title_current
   margin: 0
   padding: 5px 4px 4px 10px
   font-weight: bold

@@ -3,7 +3,10 @@ import { connect } from 'react-redux'
 import classNames from 'classnames'
 import { isArray } from 'lodash'
 
+import { RESULTS_SOURCE_QUERY } from '@constants/search'
+
 import { setQuery } from '@actions/search'
+import { setResultsSource } from '@actions/search'
 import { popSearchResults } from '@actions/layout'
 
 div = React.createFactory('div')
@@ -17,6 +20,7 @@ mapStateToProps = (state, ownProps) ->
 mapDispatchToProps = (dispatch, ownProps) ->
   onClick: (phone) ->
     dispatch(setQuery(new String(phone)))
+    dispatch(setResultsSource(RESULTS_SOURCE_QUERY))
     dispatch(popSearchResults())
 
 

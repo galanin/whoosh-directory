@@ -27,7 +27,7 @@ class Person < ApplicationRecord
 
 
   scope :api_fields, -> { only(:short_id, :first_name, :middle_name, :last_name,
-                               :birthday, :gender) }
+                               :birthday, :gender, :employ_ids) }
 
   index({ destroyed_at: 1, birthday: 1 }, {})
   index({ destroyed_at: 1, short_id: 1 }, {})
@@ -36,7 +36,7 @@ class Person < ApplicationRecord
   def as_json(options = nil)
     json = super.slice(
       'first_name', 'middle_name', 'last_name',
-      'birthday', 'gender', 'photo', 'email',
+      'birthday', 'gender', 'photo', 'email', 'employ_ids'
     ).compact.merge(
       'id' => short_id,
     )

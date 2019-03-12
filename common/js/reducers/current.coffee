@@ -59,15 +59,9 @@ export default (state = {}, action) ->
 
     when LOCATION_CHANGE
       if action.payload.action == 'POP'
-        unit_id = getNewUrlParam(action.payload, URL_PARAM_UNIT)
         employment_id = getNewUrlParam(action.payload, URL_PARAM_EMPLOYMENT)
         contact_id = getNewUrlParam(action.payload, URL_PARAM_CONTACT)
         new_state = Object.assign({}, state)
-
-        if unit_id?
-          new_state.unit_id = unit_id
-        else
-          delete new_state.unit_id
 
         if employment_id?
           new_state.employment_id = employment_id

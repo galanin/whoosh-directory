@@ -3,20 +3,18 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import classNames from 'classnames'
 
-import { highlightUnit, goToUnitInStructure } from '@actions/units'
-import { setHighlightedUnitId } from '@actions/current'
-import { popUnitInfo, popStructure } from '@actions/layout'
+import { goToNodeInStructure } from '@actions/nodes'
+import { popNodeInfo, popStructure } from '@actions/layout'
 
 div = React.createFactory('div')
 
 mapStateToProps = (state, ownProps) ->
-  unit_id = ownProps.unit_id
-  unit_titles: state.unit_titles[unit_id] || {}
+  unit: state.units[ownProps.unit_id]
 
 mapDispatchToProps = (dispatch, ownProps) ->
-  click: ->
-    dispatch(goToUnitInStructure(ownProps.unit_id))
-    dispatch(popUnitInfo())
+  goToNode: (node_id) ->
+    dispatch(goToNodeInStructure(node_id))
+    dispatch(popNodeInfo())
     dispatch(popStructure())
 
 
@@ -25,20 +23,22 @@ class SearchResultUnit extends React.Component
     unit_id: PropTypes.integer
 
   onUnitClick: ->
-    @props.click()
+    @props.goToNode(@props.unit.node_id)
 
   render: ->
+    return '' unless @props.unit?
+
     class_names =
       'search-result-unit' : true
     class_names[@props.className] = true
 
     div { className: classNames(class_names), onClick: @onUnitClick.bind(this) },
-      if @props.unit_titles?.short_title?
+      if @props.unit?.short_title?
         div { className: 'search-result-unit__short-title' },
-          @props.unit_titles.short_title
-      if @props.unit_titles?.long_title?
+          @props.unit.short_title
+      if @props.unit?.long_title?
         div { className: 'search-result-unit__long-title' },
-          @props.unit_titles.long_title
+          @props.unit.long_title
 
 
 export default connect(mapStateToProps, mapDispatchToProps)(SearchResultUnit)

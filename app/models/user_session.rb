@@ -15,11 +15,6 @@ class UserSession < ApplicationRecord
 
   before_create do |session|
     session.token = SecureRandom.urlsafe_base64(TOKEN_LENGTH)
-
-    default_expanded_unit_ids = Unit.where(:level.lt => 2, :destroyed_at => nil).pluck(:short_id).compact
-    session.data = {
-      expanded_units: default_expanded_unit_ids,
-    }
   end
 
 

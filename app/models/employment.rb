@@ -4,6 +4,7 @@ class Employment < ApplicationRecord
   include ShortId
   include Searchable
   include Importable
+  prepend Importable::ImportableEmployment
 
   field :person_short_id,    type: String
   field :node_short_id,      type: String
@@ -11,7 +12,7 @@ class Employment < ApplicationRecord
   field :post_title,         type: String
   field :post_code,          type: String
   field :is_manager,         type: Boolean
-  field :is_boss,            type: Boolean
+  field :is_head,            type: Boolean
   field :office,             type: String
   field :building,           type: String
   field :lunch_begin,        type: String
@@ -43,14 +44,16 @@ class Employment < ApplicationRecord
 
   def as_json(options = nil)
     result = super.slice(
-      'post_title', 'alpha_sort', 'post_code', 'is_boss',
+      'post_title', 'alpha_sort', 'post_code', 'is_head',
       'office', 'building',
       'lunch_begin', 'lunch_end',
     ).compact.merge(
       'id'          => short_id,
       'person_id'   => person_short_id,
-      'node_id'     => node_short_id,
     )
+    result.merge!('node_id' => node_short_id) if node_short_id.present?
+    result.merge!('parent_node_id' => parent_node_short_id) if parent_node_short_id.present?
+
     if telephones.present?
       result.merge!('format_phones' => telephones.format_phones_with_type)
     end

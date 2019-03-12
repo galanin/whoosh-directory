@@ -10,8 +10,8 @@ import LunchBreak from '@components/contact_info/LunchBreak'
 import Birthday from '@components/contact_info/Birthday'
 
 import { setCurrentContactId } from '@actions/current'
-import { sinkEmployeeInfo, popUnitInfo, popStructure } from '@actions/layout'
-import { goToUnitInStructure } from '@actions/units'
+import { sinkEmployeeInfo, popNodeInfo, popStructure } from '@actions/layout'
+import { goToNodeInStructure } from '@actions/nodes'
 
 div = React.createFactory('div')
 span = React.createFactory('span')
@@ -32,6 +32,7 @@ import CloseButton from '@icons/close_button.svg'
 mapStateToProps = (state, ownProps) ->
   contact_id = state.current.contact_id
   contact = state.contacts[contact_id]
+
   contact_id: contact_id
   contact: contact
   unit: state.units[contact?.unit_id]
@@ -40,9 +41,10 @@ mapDispatchToProps = (dispatch) ->
   unsetCurrentContact: ->
     dispatch(sinkEmployeeInfo())
     dispatch(setCurrentContactId(null))
-  onUnitClick: (unit_id) ->
-    dispatch(goToUnitInStructure(unit_id))
-    dispatch(popUnitInfo())
+
+  goToNode: (node_id) ->
+    dispatch(goToNodeInStructure(node_id))
+    dispatch(popNodeInfo())
     dispatch(popStructure())
 
 
@@ -54,7 +56,7 @@ class EmployeeInfo extends React.Component
 
   onUnitClick: (e) ->
     e.preventDefault()
-    @props.onUnitClick(@props.contact.unit_id)
+    @props.goToNode(@props.contact.parent_node_id)
 
 
   render: ->
@@ -77,7 +79,7 @@ class EmployeeInfo extends React.Component
                 else if @props.contact.location_title
                   @props.contact.location_title
 
-            div { className: 'employee-info__post_title' },
+            div { className: 'employee-info__post-title' },
               @props.contact.post_title
 
             if @props.unit?

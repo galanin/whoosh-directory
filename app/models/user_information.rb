@@ -2,7 +2,8 @@ class UserInformation < ApplicationRecord
   include Mongoid::Document
   include Mongoid::Timestamps
 
-  field :expanded_units, type: Array, default: -> { Unit.where(:level.lt => 2, :destroyed_at => nil).pluck(:short_id).compact }
+  field :expanded_units, type: Array
+  field :expanded_node_ids, type: Array, default: -> { UserInformation.default_expanded_node_ids }
 
   has_many :user_session
   has_many :to_call, autosave: true
@@ -11,19 +12,19 @@ class UserInformation < ApplicationRecord
   embeds_many :favorite_unit, cascade_callbacks: true
 
 
-  def add_to_expanded_units(unit_ids)
-    new_unit_ids = unit_ids - self.expanded_units
-
-    if new_unit_ids.present?
-      self.expanded_units += new_unit_ids
-    end
+  def self.default_expanded_node_ids
+    Node.where(default_expanded: true).pluck(:short_id)
   end
 
 
-  def delete_from_expanded_unit(unit_id)
-    if self.expanded_units.include?(unit_id)
-      self.expanded_units.delete(unit_id)
-    end
+  def expand_nodes(node_ids)
+    new_node_ids = node_ids - expanded_node_ids
+    self.expanded_node_ids += node_ids if new_node_ids.present?
+  end
+
+
+  def collapse_node(node_id)
+    expanded_node_ids.delete(node_id)
   end
 
 

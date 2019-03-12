@@ -80,10 +80,10 @@ class Contact extends React.Component
             @props.contact.location_title
 
           if @props.is_to_call
-            svg { className: 'employee__to-call', svg: ToCallIcon }
+            svg { className: 'small-icon employee__to-call', svg: ToCallIcon }
 
           if @props.is_favorite
-            svg { className: 'employee__favorite', svg: StarIcon }
+            svg { className: 'small-icon employee__favorite', svg: StarIcon }
 
         if @props.contact.post_title
           div { className: 'employee__post_title' },

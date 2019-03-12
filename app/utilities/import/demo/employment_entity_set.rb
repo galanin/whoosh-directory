@@ -8,11 +8,17 @@ module Utilities
 
         def generate_missing
           generate_missing_objects do |employment|
+            update_employment_fields(employment)
             employment.person = generate_person(employment.external_id)
-            employment.person_short_id = employment.person.short_id
-            employment.person.employments << employment
-            employment.person.employ_ids ||= []
-            employment.person.employ_ids << employment.short_id
+            employment.link_person_and_employment
+            # puts "EMPLOY IDS #{ employment.person.employ_ids }"
+          end
+        end
+
+
+        def update_existing
+          update_existing_objects do |employment|
+            update_employment_fields(employment)
           end
         end
 
@@ -24,24 +30,32 @@ module Utilities
         end
 
 
+        def assign_head_id(node_collection)
+          new_data.assign_head_id(node_collection)
+        end
+
+
         def link_node_objects(node_collection)
           old_objects.each do |old_object|
-            old_object.node = node_collection.object_by_external_id(new_data.node_external_id)
-            old_object.node_short_id = old_object.node&.short_id
-            old_object.parent_node = node_collection.object_by_external_id(new_data.parent_node_external_id)
-            old_object.parent_node_short_id = old_object.parent_node&.short_id
+            old_object.link_node(node_collection.object_by_external_id(new_data.node_external_id))
+            old_object.link_parent_node(node_collection.object_by_external_id(new_data.parent_node_external_id))
           end
         end
 
 
-        def update_office(object, new_office)
-          if random_office?
+        def update_employment_fields(employment)
+          update_office(employment, new_data.office)
+        end
+
+
+        def update_office(employment, new_office)
+          if random_office?(new_office)
             office_range = get_office_range(new_office)
-            unless office_range.include?(object.office.to_i)
-              object.office = rand(office_range).to_s
+            unless office_range.include?(employment.office.to_i)
+              employment.office = rand(office_range).to_s
             end
           else
-            object.office = new_office
+            employment.office = new_office
           end
         end
 
@@ -53,14 +67,13 @@ module Utilities
 
         def get_office_range(office)
           from, to = office.split('-').map(&:to_i)
-          from..to
+          from .. to
         end
 
 
 
         def make_object_by_attributes(attributes)
-          new_object = @object_class.new(attributes)
-
+          @object_class.new(attributes)
         end
 
 

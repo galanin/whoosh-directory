@@ -12,6 +12,13 @@ module Utilities
         self.object_class = ::Node
 
 
+        def assign_head_id(unit_collection)
+          fresh_entities.each do |node_entity|
+            node_entity.assign_head_id(unit_collection)
+          end
+        end
+
+
         def link_node_objects
           fresh_entities.each do |node_entity|
             node_entity.link_node_objects(self)

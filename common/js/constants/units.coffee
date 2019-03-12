@@ -1,1 +1,1 @@
-export SET_UNITS = 'SET_UNITS'
+export ADD_UNITS = 'ADD_UNITS'

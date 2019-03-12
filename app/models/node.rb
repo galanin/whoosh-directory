@@ -7,15 +7,16 @@ class Node < ApplicationRecord
   include Mongoid::Paranoia
   include ShortId
   include Importable
-  include Importable::Node
+  include ImportableNode
 
   field :title,           type: String
-  field :variant, type: String
+  field :node_type,       type: String
   field :parent_short_id, type: String
   field :child_short_ids, type: Array
   field :employment_short_id, type: String
   field :unit_short_id,   type: String
   field :employ_ids,      type: Array
+  field :default_expanded,type: Boolean
 
   belongs_to :employment, optional: true
   belongs_to :unit, optional: true
@@ -24,9 +25,12 @@ class Node < ApplicationRecord
 
   scope :tree_fields, -> { only(:short_id, :title, :variant, :child_short_ids) }
   scope :info_fields, -> { only(:short_id, :employment_short_id, :unit_short_id, :employ_ids) }
+  scope :root_fields, -> { only(:child_short_ids) }
+  scope :with_children, ->(node_ids) { all.or({:short_id.in => node_ids}, {:parent_short_id.in => node_ids}) }
 
 
   index({ destroyed_at: 1, short_id: 1 })
+  index({ destroyed_at: 1, parent_short_id: 1 })
 
 
   def as_json(options = nil)
@@ -45,12 +49,22 @@ class Node < ApplicationRecord
 
 
   def self.employments
-    Employment.where(destroyed_at: nil).in(short_id: all.map(&:employment_short_id).compact + all.map(&:employ_ids).compact.flatten)
+    Employment.where(destroyed_at: nil).in(short_id: all.map(&:employment_short_id).compact)
+  end
+
+
+  def self.child_employments
+    Employment.where(destroyed_at: nil).in(short_id: all.map(&:employ_ids).compact.flatten)
   end
 
 
   def self.units
     Unit.where(destroyed_at: nil).in(short_id: all.map(&:unit_short_id).compact)
+  end
+
+
+  def root_ids
+    Unit.where(destroyed_at: nil, parent_short_id: nil).pluck(:short_id)
   end
 
 end

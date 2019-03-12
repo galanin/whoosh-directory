@@ -36,7 +36,7 @@ class ToCallList extends React.Component
         if isEmpty(@props.unchecked)
           div { className: 'to-call-list__empty-note' },
             'Этот список нужен для того, чтобы никому не забыть позвонить. Добавляйте в него коллег с помощью кнопки '
-            svg { className: 'to-call-list__button-icon', svg: ToCallIcon }
+            svg { className: 'medium-icon to-call-list__button-icon', svg: ToCallIcon }
             '.'
 
         if isArray(@props.unchecked) and !isEmpty(@props.unchecked)
@@ -52,9 +52,9 @@ class ToCallList extends React.Component
         if isEmpty(@props.checked_today)
           div { className: 'to-call-list__empty-note' },
             'Этот список нужен, чтобы видеть, как хорошо вы сегодня поработали. Перемещайте в него выполненные планы с помощью кнопки '
-            svg { className: 'to-call-list__button-icon', svg: CheckedIcon }
+            svg { className: 'medium-icon to-call-list__button-icon', svg: CheckedIcon }
             ' или повторного нажатия кнопки '
-            svg { className: 'to-call-list__button-icon', svg: ToCallIcon }
+            svg { className: 'medium-icon to-call-list__button-icon', svg: ToCallIcon }
             '. Записи из этого списка не удаляются — позже они будут доступны в архиве.'
 
         if isArray(@props.checked_today) and !isEmpty(@props.checked_today)

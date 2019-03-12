@@ -19,6 +19,13 @@ module Utilities
           end
         end
 
+
+        def link_employment_objects(employment_collection)
+          fresh_entities.each do |entity|
+            entity.link_employment_objects(employment_collection)
+          end
+        end
+
       end
     end
   end

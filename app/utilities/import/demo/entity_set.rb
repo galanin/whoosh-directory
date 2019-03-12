@@ -58,10 +58,20 @@ module Utilities
           end
 
 
+          def update_existing_objects
+            existing_objects.each do |object|
+              yield object
+            end
+          end
+
+
           def flush_to_db
             generate_missing
             drop_excessive
-            proper_objects.each { |object| object.flush_to_db(new_data) }
+            update_existing
+            proper_objects.each do |object|
+              object.flush_to_db(new_data)
+            end
           end
 
 
@@ -103,6 +113,11 @@ module Utilities
           end
 
 
+          def existing_count
+            [present_count, need_count].min
+          end
+
+
           def proper_objects
             if present_count > need_count
               @old_objects.slice(0, need_count)
@@ -118,6 +133,11 @@ module Utilities
             else
               []
             end
+          end
+
+
+          def existing_objects
+            @old_objects.slice(0, existing_count)
           end
 
         end

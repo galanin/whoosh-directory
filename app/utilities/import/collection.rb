@@ -51,6 +51,7 @@ module Utilities
 
 
         def add_new_data(new_data)
+          puts "DUPLICATE ID #{ new_data.external_id }" if already_present?(new_data.external_id)
           entity = sure_entity_exists(new_data.external_id)
           entity.add_new_data(new_data)
         end
@@ -137,7 +138,17 @@ module Utilities
         end
 
 
+        def inspect
+          @entities.map { |id, entity| entity.inspect }.join("\n")
+        end
+
+
         private
+
+
+        def already_present?(external_id)
+          @entities.key?(external_id)
+        end
 
 
         def sure_entity_exists(external_id)

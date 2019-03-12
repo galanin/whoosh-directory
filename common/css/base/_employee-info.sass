@@ -58,24 +58,44 @@
     width: 3rem
     height: 3rem
 
-.employee-info__post_title
+.employee-info__post-title-link
+  color: #bbb
+  text-decoration: underline
+  cursor: pointer
+
+  &:hover
+    color: #444
+
+.employee-info__post-title
+  display: block
   margin-top: 1rem
   font-size: 18px
   line-height: 1.2
   color: #444
   padding: 0 4rem 0 1rem
 
-.employee-info__unit_title
-  display: block
-  margin-top: 1rem
-  font-size: 18px
-  line-height: 1.2
-  color: #777
-  padding: 0 1rem
-  text-decoration: none
+.employee-info__unit-title-link
+  color: #ccc
+  text-decoration: underline
+  cursor: pointer
 
   &:hover
-    text-decoration: underline
+    color: #777
+
+.employee-info__unit-long-title,
+.employee-info__unit-short-title
+  display: block
+  margin-top: 1rem
+  color: #777
+  padding: 0 1rem
+
+.employee-info__unit-short-title
+  font-size: 22px
+  line-height: 1.2
+
+.employee-info__unit-long-title
+  font-size: 18px
+  line-height: 1.2
 
 .employee-info__two-columns
   margin-top: 2rem
@@ -117,4 +137,15 @@
   color: #666
   padding: 0 1rem
   margin-bottom: .5rem
+
+.employee-info__structure-unit
+  &.search-result-unit
+    padding: .5rem 0 .75rem
+
+  .search-result-unit__long-title
+    font-size: 16px
+    line-height: 19px
+
+.employee-info__structure-unit + .employee-info__structure-employment
+  margin-top: 10px
 

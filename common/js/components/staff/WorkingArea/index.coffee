@@ -17,8 +17,8 @@ to_call_panel = React.createFactory(ToCallPanel)
 import FavoritesPanel from '@components/staff/FavoritesPanel'
 favorites_panel = React.createFactory(FavoritesPanel)
 
-import OrganizationUnitInfo from '@components/staff/OrganizationUnitInfo'
-organization_unit_info = React.createFactory(OrganizationUnitInfo)
+import NodeInfo from '@components/staff/NodeInfo'
+node_info = React.createFactory(NodeInfo)
 
 import OrganizationStructure from '@components/staff/OrganizationStructure'
 organization_structure = React.createFactory(OrganizationStructure)
@@ -72,8 +72,8 @@ class WorkingArea extends React.Component
           favorites_panel { className: 'working-area__toolbar' }
           to_call_panel { className: 'working-area__toolbar' }
       div { className: 'working-area__results-panel' },
-        div { className: "working-area__block working-area__unit-info socket block-index-#{pile_hash['unit-info']}" },
-          organization_unit_info { className: 'plug' }
+        div { className: "working-area__block working-area__node-info socket block-index-#{pile_hash['node-info']}" },
+          node_info { className: 'plug' }
         div { className: "working-area__block working-area__structure socket block-index-#{pile_hash['structure']}" },
           organization_structure {}
         div { className: "working-area__block working-area__employee-info socket block-index-#{pile_hash['employee-info']}" },
@@ -90,7 +90,7 @@ class WorkingArea extends React.Component
             search_results {}
         div { className: "working-area__block working-area__to-call socket block-index-#{pile_hash['to-call']}" },
           to_call {}
-        div { className: "working-area__block working-area__to-call socket block-index-#{pile_hash['favorites']}" },
+        div { className: "working-area__block working-area__favorites socket block-index-#{pile_hash['favorites']}" },
           favorites { className: 'plug' }
 
 

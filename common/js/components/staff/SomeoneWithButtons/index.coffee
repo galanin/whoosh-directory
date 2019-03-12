@@ -100,10 +100,10 @@ class SomeoneWithButtons extends React.Component
 
       div { className: 'employee-with-buttons__buttons employee-buttons-container__buttons' },
         div { className: 'employee-with-buttons__button employee-with-buttons__to-call employee-buttons-container__button', onClick: @onAddToCall.bind(this) },
-          svg { className: 'employee-with-buttons__icon', svg: ToCallIcon }
+          svg { className: 'medium-icon employee-with-buttons__icon', svg: ToCallIcon }
 
         div { className: 'employee-with-buttons__button employee-with-buttons__favorite employee-buttons-container__button', onClick: @onFavorite.bind(this) },
-          svg { className: 'employee-with-buttons__icon', svg: StarIcon }
+          svg { className: 'medium-icon employee-with-buttons__icon', svg: StarIcon }
 
 
 export default connect(mapStateToProps, mapDispatchToProps)(SomeoneWithButtons)

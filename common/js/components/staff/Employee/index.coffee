@@ -70,7 +70,7 @@ class Employee extends React.Component
 
 
   render: ->
-    return '' unless @props.employment
+    return '' unless @props.employment? and @props.person?
 
     photo = @props.person.photo
 
@@ -99,13 +99,14 @@ class Employee extends React.Component
             @props.person.middle_name
 
           if @props.is_to_call
-            svg { className: 'employee__to-call', svg: ToCallIcon }
+            svg { className: 'small-icon employee__to-call', svg: ToCallIcon }
 
           if @props.is_favorite
-            svg { className: 'employee__favorite', svg: StarIcon }
+            svg { className: 'small-icon employee__favorite', svg: StarIcon }
 
-        div { className: 'employee__post_title' },
-          @props.employment.post_title
+        unless @props.hide?.post
+          div { className: 'employee__post_title' },
+            @props.employment.post_title
 
         unless @props.hide?.unit
           if @props.unit?
