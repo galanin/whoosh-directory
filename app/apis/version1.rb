@@ -1,4 +1,9 @@
-Dir[File.join(__dir__, 'modules', '*.rb')].each { |file| require_relative file }
+require_relative './modules/birthday.rb'
+require_relative './modules/employment.rb'
+require_relative './modules/session.rb'
+require_relative './modules/search.rb'
+require_relative './modules/unit.rb'
+require_relative './modules/user_information.rb'
 
 module Staff
   class API < Grape::API
@@ -25,11 +30,8 @@ module Staff
 
     mount Staff::BirthdayAPI
     mount Staff::EmploymentAPI
-    mount Staff::FavoriteAPI
-    mount Staff::HistoryAPI
     mount Staff::SessionAPI
     mount Staff::SearchAPI
-    mount Staff::ToCallAPI
     mount Staff::UnitAPI
     mount Staff::UserInformationAPI
 

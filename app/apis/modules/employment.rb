@@ -1,6 +1,10 @@
 module Staff
   class EmploymentAPI < Grape::API
 
+    params {
+      requires :who, type: String
+    }
+
     get 'employments/:who' do
       employ_ids = params[:who].split(',')
 

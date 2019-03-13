@@ -18,6 +18,10 @@ module Staff
       end
 
 
+      params {
+        requires :employ_id, type: String
+      }
+
       desc 'Create new or set checked whom-to-call if one already exists'
       post '/employment/:employ_id' do
         employment_to_call = @user_information.to_call.add_employment(params[:employ_id])
@@ -26,6 +30,10 @@ module Staff
         present_unchecked_and_checked_today(@user_information)
       end
 
+
+      params {
+        requires :contact_id, type: String
+      }
 
       desc 'Create object ToCall class or set checked if object exist '
       post '/contact/:contact_id' do
@@ -36,6 +44,10 @@ module Staff
       end
 
 
+      params {
+        requires :employ_id, type: String
+      }
+
       desc "Find object ToCall class by short_id and set unchecked"
       post '/employment/:employ_id/check' do
         employment_to_call = @user_information.to_call.check_employment(params[:employ_id])
@@ -44,6 +56,10 @@ module Staff
         present_unchecked_and_checked_today(@user_information)
       end
 
+
+      params {
+        requires :contact_id, type: String
+      }
 
       desc "Find object ToCall class by short_id and set unchecked"
       post '/contact/:contact_id/check' do
@@ -54,6 +70,10 @@ module Staff
       end
 
 
+      params {
+        requires :employ_id, type: String
+      }
+
       desc "Find object ToCall class and destroy it"
       delete '/employment/:employ_id' do
         @user_information.to_call.destroy_employment(params[:employ_id])
@@ -61,6 +81,10 @@ module Staff
         present_unchecked_and_checked_today(@user_information)
       end
 
+
+      params {
+        requires :contact_id, type: String
+      }
 
       desc "Find object ToCall class and destroy it"
       delete '/contact/:contact_id' do

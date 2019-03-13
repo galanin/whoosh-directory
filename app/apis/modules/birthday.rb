@@ -4,6 +4,7 @@ module Staff
     params {
       requires :when, type: String, regexp: /^\d\d-\d\d(,\d\d-\d\d)*$/
     }
+
     get 'birthday/:when' do
       dates = params[:when].split(',')
 

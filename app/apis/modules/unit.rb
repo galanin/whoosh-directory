@@ -9,6 +9,10 @@ module Staff
     end
 
 
+    params {
+      requires :unit_id, type: String
+    }
+
     get 'units/:unit_id' do
       if params.key? :unit_id
         unit = Unit.find_by!(short_id: params[:unit_id])
@@ -30,12 +34,20 @@ module Staff
     end
 
 
+    params {
+      requires :where, type: String
+    }
+
     get 'units/titles/:where' do
       unit_ids = params[:where].split(',')
       units = Unit.only(:short_id, :short_title, :long_title, :alpha_sort).in(short_id: unit_ids)
       present :unit_titles, units
     end
 
+
+    params {
+      requires :unit_id, type: String
+    }
 
     post 'units/:unit_id/expand' do
       current_session = UserSession.find(params[:session_token])
@@ -46,6 +58,10 @@ module Staff
       end
     end
 
+
+    params {
+      requires :unit_id, type: String
+    }
 
     post 'units/:unit_id/collapse' do
       current_session = UserSession.find(params[:session_token])

@@ -15,12 +15,20 @@ module Staff
         end
 
 
+        params {
+          requires :id, type: String
+        }
+
         desc 'Create object FavoriteUnits class if not exist. After sort all FavoriteUnits records'
         post ':id' do
           @user_information.create_favorite_unit(params[:id])
           present :favorite_units, @user_information.favorite_unit
         end
 
+
+        params {
+          requires :id, type: String
+        }
 
         desc 'Find object FavoriteUnit class and destroy it'
         delete ':id' do
@@ -49,11 +57,20 @@ module Staff
 
         namespace 'employments' do
 
+          params {
+            requires :id, type: String
+          }
+
           desc 'Create object FavoritePerson class if not exist. After sort all FavoritePerson records'
           post ':id' do
             @user_information.create_favorite_person('employment', params[:id])
             present :favorite_people, @user_information.favorite_person
           end
+
+
+          params {
+            requires :id, type: String
+          }
 
           desc 'Find object FavoritePersons class by Employment id and destroy it'
           delete ':id' do
@@ -66,11 +83,20 @@ module Staff
 
         namespace 'contacts' do
 
+          params {
+            requires :id, type: String
+          }
+
           desc 'Create object FavoritePerson class if not exist. After sort all FavoritePerson records'
           post ':id' do
             @user_information.create_favorite_person('external_contact', params[:id])
             present :favorite_people, @user_information.favorite_person
           end
+
+
+          params {
+            requires :id, type: String
+          }
 
           desc 'Find object FavoritePersons by ExternalContact id and destroy it'
           delete ':id' do

@@ -26,11 +26,19 @@ module Staff
       end
 
 
+      params {
+        requires :id, type: String
+      }
+
       desc 'Create object HistoryPerson class if today was not created or touch updated_at field if exist'
       post 'people/:id' do
         @user_information.create_or_update_history_person(params[:id])
       end
 
+
+      params {
+        requires :id, type: String
+      }
 
       desc 'Create object HistoryUnit class if today was not created or touch updated_at field if exist'
       post 'units/:id' do
@@ -38,11 +46,19 @@ module Staff
       end
 
 
+      params {
+        requires :search_query, type: String
+      }
+
       desc 'Create object HistorySearch class if today was not created or touch updated_at field if exist'
       post 'search/:search_query' do
         @user_information.create_or_update_history_search(params[:search_query])
       end
 
+
+      params {
+        requires :id, type: String
+      }
 
       desc 'Destroy History by id'
       delete ':id' do
