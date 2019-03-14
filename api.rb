@@ -16,6 +16,7 @@ require 'autoinc'
 require 'hashids'
 require 'grape'
 require 'json'
+require_relative 'version'
 
 $: << File.join(File.dirname(__FILE__), 'app')
 

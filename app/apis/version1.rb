@@ -13,6 +13,7 @@ module Staff
     end
 
 
+    version VERSION, using: :header, vendor: 'whoosh-directory', cascade: false #application/vnd.whoosh-directory-v1+json
     format :json
     prefix :api
     helpers FetchingHelpers, BirthdayHelpers, ToCallHelpers
@@ -27,6 +28,11 @@ module Staff
       header 'Access-Control-Allow-Methods', 'OPTIONS, GET, POST, PUT, DELETE'
       header 'Access-Control-Allow-Headers', 'Content-Type'
     end
+
+    get 'check_version' do
+      {}
+    end
+
 
     mount Staff::BirthdayAPI
     mount Staff::EmploymentAPI
