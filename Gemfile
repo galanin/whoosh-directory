@@ -51,6 +51,9 @@ gem 'write_xlsx'
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
+  gem 'rack-test'
+  gem 'faker'
+  gem "minitest"
 end
 
 group :development do
@@ -70,13 +73,10 @@ group :development do
   gem 'capistrano3-puma', require: false
   gem 'capistrano-rails-console', require: false
   gem 'airbrussh', require: false
-
-  gem 'faker'
 end
 
 group :test do
   gem 'rspec'
-  gem 'rack-test'
   gem 'factory_bot'
   gem 'mongoid_cleaner'
   gem 'mongoid-rspec'
