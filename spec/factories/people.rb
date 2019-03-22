@@ -7,7 +7,7 @@ FactoryBot.define do
     first_name { Faker::Name.first_name }
     middle_name {Faker::Name.middle_name}
     last_name { Faker::Name.last_name }
-    birthday { Faker::Date.birthday(18, 80).strftime('%d-%m') }
+    birthday { Faker::Date.birthday(18, 80).strftime('%m-%d') }
     gender { %w(F M).sample}
     email { Faker::Internet.email }
     employ_ids { [] }
