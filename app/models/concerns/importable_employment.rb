@@ -15,11 +15,9 @@ module ImportableEmployment
     end
 
 
-    def link_person_and_employment
-      self.person_short_id = self.person.short_id
-      self.person.employments << self
-      self.person.employ_ids ||= []
-      self.person.employ_ids << self.short_id
+    def link_person(person)
+      self.person          = person
+      self.person_short_id = person&.short_id
     end
 
   end

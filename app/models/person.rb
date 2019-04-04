@@ -8,6 +8,7 @@ class Person < ApplicationRecord
   include Searchable
   include FormattableBirthday
   include Importable
+  include ImportablePerson
 
   field :first_name,      type: String
   field :middle_name,     type: String

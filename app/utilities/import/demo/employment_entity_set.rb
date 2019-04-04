@@ -8,9 +8,11 @@ module Utilities
 
         def generate_missing
           generate_missing_objects do |employment|
+            new_person = generate_person(employment.external_id)
+            employment.link_person(new_person)
+            new_person.link_employment(employment)
+
             update_employment_fields(employment)
-            employment.person = generate_person(employment.external_id)
-            employment.link_person_and_employment
             # puts "EMPLOY IDS #{ employment.person.employ_ids }"
           end
         end
