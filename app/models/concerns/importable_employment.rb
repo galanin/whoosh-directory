@@ -20,5 +20,13 @@ module ImportableEmployment
       self.person_short_id = person&.short_id
     end
 
+
+    # TODO refactor
+    alias_method :importable_flush_to_db, :flush_to_db
+    def flush_to_db(new_data)
+      person&.save!
+      importable_flush_to_db(new_data)
+    end
+
   end
 end
