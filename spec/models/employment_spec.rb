@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe Employment, type: :model do
-  let(:employment) { FactoryBot.create :employment, :with_unit, :with_person  }
+  let(:employment) { FactoryBot.create :employment, :with_unit, :with_person, unit_callback: false  }
 
   it { is_expected.to be_mongoid_document }
   it { is_expected.to have_timestamps }

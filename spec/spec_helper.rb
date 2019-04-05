@@ -6,26 +6,26 @@ require 'mongoid_cleaner'
 require 'carrierwave/mongoid'
 require 'faker'
 require 'mongoid-rspec'
+require 'rack/test'
 
 Mongoid.load!('config/mongoid.yml')
 
 # Load our application
 require_relative '../api.rb'
 # Load factories
-require_relative './factories/employments.rb'
-require_relative './factories/external_contacts.rb'
-require_relative './factories/people.rb'
-require_relative './factories/telephones.rb'
-require_relative './factories/units.rb'
-# Load helper
-require_relative './support/helpers.rb'
+Dir["./spec/factories/*.rb"].sort.each { |f| require f }
+# Load helpers
+Dir["./spec/support/**/*.rb"].sort.each { |f| require f }
 
 RSpec.configure do |config|
 
   config.include Helpers
+  config.include StructureHelper
 
   config.before(:suite) do
     I18n.available_locales = [:en, :ru]
+    I18n.default_locale = :ru
+    I18n.reload!
     Faker::Config.locale = :en
   end
 
