@@ -33,6 +33,7 @@ module Utilities
           { post: /\bглавный механик\z/, priority: 50 },
           { post: /\bглавный метролог\z/, priority: 50 },
           { post: /\bначальник\b/, priority: 60 },
+          { post: /\bзаведующий центральным складом\b/, priority: 60 },
           { post: /\bруководитель\b/, priority: 60 },
           { post: /\bпервый заместитель\b/, priority: 70 },
           { post: /\bзаместитель\b/, priority: 80 },
