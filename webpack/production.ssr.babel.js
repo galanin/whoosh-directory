@@ -27,7 +27,7 @@ export default merge.strategy({
   optimization: 'replace'
 })(baseConfig, {
   context: null,
-  mode: 'development',
+  mode: 'production',
   optimization: {
     splitChunks: {
       chunks: 'all',

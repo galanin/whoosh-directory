@@ -1,0 +1,42 @@
+version: '3.7'
+services:
+  web:
+    restart: always
+    build: docker/web
+    ports:
+      - '4000:80'
+    depends_on:
+      - app
+      - api
+  app:
+    restart: always
+    build: docker/app
+    environment:
+      SSR: 'true'
+    env_file:
+      - docker/app/.env
+    ports:
+      - '4003:4003'
+    depends_on:
+      - api
+  import:
+    build: docker/import
+    depends_on:
+      - db
+  api:
+    restart: always
+    build: docker/api
+    environment:
+      API_PORT: '4002'
+    ports:
+      - '4002:4002'
+    depends_on:
+      - db
+  db:
+    restart: always
+    build: docker/db
+    volumes:
+      - 'db_data:/data/db'
+volumes:
+  db_data:
+  # photos:

@@ -38,3 +38,9 @@ npm-debug.log*
 /webpack-assets.json
 /webpack-stats.json
 /react-loadable.json
+
+/docker/web/public/
+/docker/api/api/
+/docker/import/api/
+/docker/import/data/
+/docker/app/app/

@@ -23,6 +23,7 @@ if (isDev) {
 }
 
 export const isSSR = yn(process.env.SSR) || false;
+export const isClient = yn(process.env.CLIENT) || false;
 export const analyzeBundle = yn(process.env.ANALYZE) || false;
 export const basePlugins = {
   reactLoadablePlugin: new ReactLoadablePlugin({
@@ -48,6 +49,8 @@ const allowedPlugin = (plugin, key) => {
       return !isSSR;
     case 'bundleAnalyzerPlugin':
       return analyzeBundle;
+    case 'definePlugin':
+      return isClient;
     default:
       return true;
   }
