@@ -44,3 +44,4 @@ npm-debug.log*
 /docker/import/api/
 /docker/import/data/
 /docker/app/app/
+/docker/app/.env.client

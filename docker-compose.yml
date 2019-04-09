@@ -1,37 +1,52 @@
 version: '3.7'
+
+x-common-variables: &common-variables
+  NODE_ENV: production
+  RACK_ENV: production
+  SSR: 'true'
+
+  API_PORT: 4002
+  APPLICATION_PORT: 4003
+
+  CLIENT_SIDE_API_BASE_URL: /api
+  SERVER_SIDE_API_BASE_URL: http://api:4002/api
+  PHOTO_BASE_URL: ''
+
+  STAFF_PHOTOS_PATH: /public/photos
+  STAFF_PHOTOS_CACHE_PATH: /tmp/photos
+  CARRIERWAVE_PUBLIC_PATH: /public/
+
+
 services:
   web:
     restart: always
     build: docker/web
     ports:
       - '4000:80'
+    volumes:
+      - 'photos:/public/photos'
     depends_on:
       - app
       - api
   app:
     restart: always
     build: docker/app
-    environment:
-      SSR: 'true'
-    env_file:
-      - docker/app/.env
+    environment: *common-variables
     ports:
       - '4003:4003'
     depends_on:
       - api
-  import:
-    build: docker/import
-    depends_on:
-      - db
   api:
     restart: always
     build: docker/api
-    environment:
-      API_PORT: '4002'
+    environment: *common-variables
     ports:
       - '4002:4002'
+    volumes:
+      - 'photos:/public/photos'
     depends_on:
       - db
+    command: puma -C /api/config/puma.rb
   db:
     restart: always
     build: docker/db
@@ -39,4 +54,4 @@ services:
       - 'db_data:/data/db'
 volumes:
   db_data:
-  # photos:
+  photos:

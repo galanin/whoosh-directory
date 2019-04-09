@@ -44,7 +44,7 @@
     "dev:start:server": "better-npm-run dev:start:server",
     "dev:start:client": "better-npm-run dev:start:client",
     "prod:build": "better-npm-run prod:build",
-    "prod:build:client": "better-npm-run prod:build:client",
+    "prod:build:client": "better-npm-run --path=docker/app/.env.client prod:build:client",
     "prod:build:ssr": "better-npm-run prod:build:ssr",
     "prod:build:server": "better-npm-run prod:build:server",
     "test": "better-npm-run test",
@@ -86,9 +86,7 @@
       "command": "$(npm bin)/webpack --config webpack/production.client.babel.js --progress",
       "env": {
         "NODE_ENV": "production",
-        "CLIENT_SIDE_API_BASE_URL": "/api",
-        "CLIENT": true,
-        "PHOTO_BASE_URL": "/photos"
+        "CLIENT": true
       }
     },
     "prod:build:ssr": {
