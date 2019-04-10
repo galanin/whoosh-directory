@@ -17,6 +17,8 @@ A more complex test run on a dev machine
 ``` 
 
 ```bash
+  mkdir -p /var/staff/import
+  rsync -avz ./import/* /var/staff/import/
   docker-compose run --rm --no-deps import rake full_import[ONPP,ru]
 ```
 
@@ -48,13 +50,18 @@ Run this on a dev machine:
   docker tag staff_api docker:5000/staff_api
   docker tag staff_app docker:5000/staff_app
   docker tag staff_web docker:5000/staff_web
-  docker tag staff_import docker:5000/staff_import
 
   docker push docker:5000/staff_db
   docker push docker:5000/staff_api
   docker push docker:5000/staff_app
   docker push docker:5000/staff_web
-  docker push docker:5000/staff_import
+```
+
+```bash
+  docker pull docker:5000/staff_db
+  docker pull docker:5000/staff_api
+  docker pull docker:5000/staff_app
+  docker pull docker:5000/staff_web
 ```
 
 Export images to tar files
@@ -73,4 +80,14 @@ Export images to tar files
 mongo shell
 ```bash
 docker-compose run --rm --no-deps db mongo -u staff -p staff --authenticationDatabase admin db/staff
+```
+
+mongo dump
+```bash
+docker-compose run --rm --no-deps db mongodump -u staff -p staff --authenticationDatabase admin -h db -d staff --out /backup
+```
+
+mongo restore
+```bash
+docker-compose run --rm --no-deps db mongodump -u staff -p staff --authenticationDatabase admin -h db -d staff /backup
 ```
