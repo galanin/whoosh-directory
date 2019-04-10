@@ -52,6 +52,9 @@ services:
     build: docker/db
     volumes:
       - 'db_data:/data/db'
+      - type: bind
+        source: /var/staff/backup
+        target: /backup
 volumes:
   db_data:
   photos:
