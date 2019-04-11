@@ -48,6 +48,7 @@ class Employment < ApplicationRecord
       'id'          => short_id,
       'person_id'   => person_short_id,
       'unit_id'     => unit_short_id,
+      'dept_id'     => department_short_id,
     )
     if telephones.present?
       result.merge!('format_phones' => telephones.format_phones_with_type)

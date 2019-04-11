@@ -44,6 +44,9 @@ mapStateToProps = (state, ownProps) ->
   employment_id: employment_id
   employment: employment
   person: state.people[employment?.person_id]
+  dept_id: employment?.dept_id
+  dept: state.units[employment?.dept_id]
+  unit_id: employment?.unit_id
   unit: state.units[employment?.unit_id]
   parent_ids: employment? && reverse(getParentIds(state, employment))
 
@@ -91,7 +94,12 @@ class EmployeeInfo extends React.Component
 
   onUnitClick: (e) ->
     e.preventDefault()
-    @props.onUnitClick(@props.employment.unit_id)
+    @props.onUnitClick(@props.unit_id)
+
+
+  onDeptClick: (e) ->
+    e.preventDefault()
+    @props.onUnitClick(@props.dept_id)
 
 
   render: ->
@@ -109,6 +117,10 @@ class EmployeeInfo extends React.Component
                 @props.person.last_name + ' ' + @props.person.first_name + ' ' + @props.person.middle_name
             div { className: 'employee-info__post_title' },
               @props.employment.post_title
+
+            if @props.dept_id? and @props.dept_id != @props.unit_id and @props.dept?
+              a { className: 'employee-info__unit_title', onClick: @onDeptClick.bind(this), href: '/' },
+                @props.dept.list_title
 
             if @props.unit?
               a { className: 'employee-info__unit_title', onClick: @onUnitClick.bind(this), href: '/' },
