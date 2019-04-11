@@ -63,7 +63,6 @@ module Utilities
         add_term(person.first_name, PRIORITY_FIRST_NAME, person, partial: :begin)
         add_term(person.middle_name, PRIORITY_MIDDLE_NAME, person, partial: :begin)
         add_normal_term(person.birthday, PRIORITY_LOWEST, person) if person.birthday
-        set_sub_order(person.last_name + ' ' + person.first_name + ' ' + person.middle_name, person)
       end
 
 
@@ -71,7 +70,7 @@ module Utilities
         # puts unit.long_title
         add_term(unit.long_title, PRIORITY_UNIT_TITLE, unit, partial: :begin)
         add_term(unit.short_title, PRIORITY_UNIT_TITLE, unit, partial: :begin)
-        set_sub_order(unit.list_title, unit)
+        set_sub_order(unit.alpha_sort, unit)
       end
 
 
@@ -83,6 +82,7 @@ module Utilities
         end
         add_term(employment.office, PRIORITY_LOWEST, person)
         add_term(employment.building, PRIORITY_LOWEST, person)
+        set_sub_order(employment.alpha_sort, person)
         if employment.telephones.present?
           employment.telephones.phone_w_type.each do |phone_type, phone_array|
             phone_array.each do |phone|
@@ -99,17 +99,9 @@ module Utilities
         add_term(external_contact.first_name, PRIORITY_FIRST_NAME, external_contact, partial: :begin)
         add_term(external_contact.middle_name, PRIORITY_MIDDLE_NAME, external_contact, partial: :begin)
         add_normal_term(external_contact.birthday, PRIORITY_LOWEST, external_contact) if external_contact.birthday
-        unless external_contact.last_name.nil? && external_contact.first_name.nil? && external_contact.middle_name.nil?
-          set_sub_order(external_contact.last_name + ' ' + external_contact.first_name + ' ' + external_contact.middle_name, external_contact)
-        end
+        set_sub_order(external_contact.alpha_sort, external_contact)
         add_term(external_contact.function_title, PRIORITY_EXTERNAL_CONTACT, external_contact, partial: :begin)
-        unless external_contact.function_title.nil?
-          set_sub_order(external_contact.function_title, external_contact)
-        end
         add_term(external_contact.location_title, PRIORITY_EXTERNAL_CONTACT, external_contact, partial: :begin)
-        unless external_contact.location_title.nil?
-          set_sub_order(external_contact.location_title, external_contact)
-        end
         add_term(external_contact.post_title, PRIORITY_LOWEST, external_contact, partial: :begin)
         add_term(external_contact.office, PRIORITY_LOWEST, external_contact)
         add_term(external_contact.building, PRIORITY_LOWEST, external_contact)
