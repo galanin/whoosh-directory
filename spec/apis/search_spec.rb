@@ -70,6 +70,26 @@ describe Staff::API do
     end
 
 
+    it 'count limit check' do
+      query = "e"
+      max = SearchEntry.all.count
+
+      get "/api/search?q=#{query}&max=#{max}&skip=0"
+
+      results = last_response_body.results
+      results_count = results.count
+      expect(last_response).to has_status_200
+      expect(results).not_to be_empty
+      expect(results_count).to eq last_response_body.results_number
+
+      max = 1
+      (0..(results_count-1)).each do |skip|
+        get "/api/search?q=#{query}&max=#{max}&skip=#{skip}"
+        expect(last_response_body.results.first).to eq results[skip]
+      end
+    end
+
+
     it 'find unit by title' do
       unit = Unit.all.sample
       query = create_query(unit.long_title)

@@ -4,6 +4,7 @@ module Staff
     params {
       requires :q, type: String
       optional :max, type: Integer, default: 20
+      optional :skip, type: Integer, default: 0
     }
     get :search do
       search_query = SearchQuery.new(params[:q])
@@ -19,8 +20,11 @@ module Staff
         present :birthday_interval, birthday_interval
         present :birthdays, results
       elsif search_query.common?
-        search_result = search_query.execute(params[:max])
+        search_result = search_query.get_results(params[:max], params[:skip])
+        results_number = search_query.results_count
+
         present :results, search_result
+        present :results_number, results_number
 
         employments = fetch_search_result_employments(search_result)
         external_contacts = fetch_search_result_external_contacts(search_result)

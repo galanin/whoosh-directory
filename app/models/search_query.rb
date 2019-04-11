@@ -68,17 +68,23 @@ class SearchQuery < ApplicationRecord
   end
 
 
-  def execute(limit = 10)
-    pipeline = aggregation_pipeline(query_words, limit)
+  def get_results(limit, skip)
+    pipeline = sort_limit_skip_pipeline(limit, skip)
     view = SearchEntry.collection.aggregate(pipeline)
     view_to_entries(view)
+  end
+
+  def results_count
+    pipeline = count_pipeline
+    view = SearchEntry.collection.aggregate(pipeline)
+    view.to_a.empty? ? 0 : view.to_a.first['count']
   end
 
 
   private
 
 
-  def aggregation_pipeline(query_arr, limit)
+  def search_pipeline(query_arr)
     weights_keys = query_arr.map { |query_term| "$weights.#{query_term}" }
 
     [
@@ -101,16 +107,41 @@ class SearchQuery < ApplicationRecord
           'sub_order' => 1,
         }
       },
+    ]
+  end
+
+
+  def count_pipeline
+    base_pipeline = search_pipeline(query_words)
+    lookup_pipeline = {
+       '$group' => {
+         '_id'     => '$null',
+         'count'   => { '$sum' => 1 },
+       }
+     }
+    base_pipeline << lookup_pipeline
+  end
+
+
+  def sort_limit_skip_pipeline(limit = 10, skip = 0 )
+    base_pipeline = search_pipeline(query_words)
+    lookup_pipeline = [
       {
         '$sort' => {
           'weight' => -1,
           'sub_order' => 1,
+          '_id' => 1,
         }
       },
       {
-        '$limit' => limit,
+        '$limit' => limit + skip,
+      },
+      {
+        '$skip' => skip,
       },
     ]
+
+    base_pipeline + lookup_pipeline
   end
 
 
