@@ -13,8 +13,9 @@ module.exports = {
   // **WARNING**: Be careful not to expose any secrets here!
   clientEnv: [
     'NODE_ENV',
-    'APPLICATION_BASE_URL',
-    'API_BASE_URL',
+    'SSR',
+    'CLIENT_SIDE_API_BASE_URL',
+    'SERVER_SIDE_API_BASE_URL',
     'PHOTO_BASE_URL',
     'KEYBOARD_LAYOUT_FIX'
   ],

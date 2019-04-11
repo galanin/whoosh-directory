@@ -1,9 +1,10 @@
+import yn from 'yn'
 import superagent from 'superagent'
 import superagentJsonapify from 'superagent-jsonapify'
 
 superagentJsonapify(superagent)
 
-baseURL = process.env.API_BASE_URL
+baseURL = if yn(process.env.SSR) then process.env.SERVER_SIDE_API_BASE_URL else process.env.CLIENT_SIDE_API_BASE_URL
 throw 'API URL is not defined' unless baseURL?
 
 export encode = encodeURIComponent

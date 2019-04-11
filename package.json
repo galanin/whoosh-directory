@@ -44,7 +44,7 @@
     "dev:start:server": "better-npm-run dev:start:server",
     "dev:start:client": "better-npm-run dev:start:client",
     "prod:build": "better-npm-run prod:build",
-    "prod:build:client": "better-npm-run prod:build:client",
+    "prod:build:client": "better-npm-run --path=docker/app/.env.client prod:build:client",
     "prod:build:ssr": "better-npm-run prod:build:ssr",
     "prod:build:server": "better-npm-run prod:build:server",
     "test": "better-npm-run test",
@@ -65,13 +65,15 @@
     "dev:start:server": {
       "command": "$(npm bin)/nodemon --exec npm run babel-node -- server",
       "env": {
-        "NODE_ENV": "development"
+        "NODE_ENV": "development",
+        "SSR": true
       }
     },
     "dev:start:client": {
       "command": "npx babel-node webpack/development.client.babel",
       "env": {
-        "NODE_ENV": "development"
+        "NODE_ENV": "development",
+        "CLIENT": true
       }
     },
     "prod:build": {
@@ -84,7 +86,7 @@
       "command": "$(npm bin)/webpack --config webpack/production.client.babel.js --progress",
       "env": {
         "NODE_ENV": "production",
-        "PUBLIC_ASSET_PATH": "/"
+        "CLIENT": true
       }
     },
     "prod:build:ssr": {
@@ -97,7 +99,8 @@
     "prod:build:server": {
       "command": "npx babel ./server -d ./dist --ignore '**/*.test.js,renderer/handler.js'",
       "env": {
-        "NODE_ENV": "production"
+        "NODE_ENV": "production",
+        "SSR": true
       }
     },
     "test": {

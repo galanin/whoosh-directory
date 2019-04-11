@@ -45,3 +45,10 @@ npm-debug.log*
 !/test/test_template.rb
 # ignore test folder
 /test
+
+/docker/web/public/
+/docker/api/api/
+/docker/import/api/
+/docker/import/data/
+/docker/app/app/
+/docker/app/.env.client
