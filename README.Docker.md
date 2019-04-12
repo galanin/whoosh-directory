@@ -89,5 +89,5 @@ docker-compose run --rm --no-deps db mongodump -u staff -p staff --authenticatio
 
 mongo restore
 ```bash
-docker-compose run --rm --no-deps db mongodump -u staff -p staff --authenticationDatabase admin -h db -d staff /backup
+docker-compose run --rm --no-deps db mongorestore -u staff -p staff --authenticationDatabase admin -h db -d staff --drop /backup
 ```
