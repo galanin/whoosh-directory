@@ -5,10 +5,6 @@ mkdir dist
 
 yarn install
 
-for i in $(cat docker/app/.env); do
-  export $i
-done
-
 yarn run prod:build:client && \
 yarn run prod:build:ssr && \
 yarn run prod:build:server
