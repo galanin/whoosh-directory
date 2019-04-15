@@ -10,6 +10,7 @@ module Utilities
                       :employment_ids,
                       :contact_ids,
                       :alpha_sort,
+                      :type,
                       :path, :level
 
 
@@ -75,6 +76,7 @@ module Utilities
             list_title:     list_title,
             level:          level,
             alpha_sort:     alpha_sort,
+            type:           type,
           }
         end
 

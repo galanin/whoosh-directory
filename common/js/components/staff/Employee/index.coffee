@@ -26,7 +26,10 @@ mapStateToProps = (state, ownProps) ->
 
   employment: employment
   person: employment && state.people[employment.person_id]
+  unit_id: employment?.unit_id
   unit: employment && state.units[employment.unit_id]
+  dept_id: employment?.dept_id
+  dept: state.units[employment?.dept_id]
   current_employment_id: state.current.employment_id
   is_to_call  : state.to_call.unchecked_employment_index[ownProps.employment_id]?
   is_favorite : state.favorites.employment_index[ownProps.employment_id]?
@@ -109,9 +112,13 @@ class Employee extends React.Component
             @props.employment.post_title
 
         unless @props.hide?.unit
-          if @props.unit?
-            div { className: 'employee__organization_unit_title' },
-              @props.unit.list_title
+          div { className: 'employee__organization_unit_title' },
+            if @props.dept_id?
+              if @props.dept?
+                @props.dept.list_title
+            else
+              if @props.unit?
+                @props.unit.list_title
 
       if isArray(@props.employment.format_phones) and @props.employment.format_phones.length > 0
         div { className: 'employee__phones' },

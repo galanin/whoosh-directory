@@ -18,7 +18,10 @@ module Utilities
         results = @ldap.search(:filter => filter, :attributes => result_attrs)
 
         results.empty? || results[0][:mail].empty? ? (nil) : (results[0][:mail][0])
+      rescue StandardError
+        nil
       end
+
     end
   end
 end

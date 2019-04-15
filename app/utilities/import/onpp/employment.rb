@@ -5,7 +5,7 @@ module Utilities
 
         attr_accessor :external_id,
                       :person_external_id,
-                      :unit_external_id,
+                      :unit_external_id, :department_unit_id,
                       :post_title,
                       :post_code, :is_manager, :is_head,
                       :office, :building,
@@ -37,6 +37,7 @@ module Utilities
           @external_id        = source_data['ID_M']
           @person_external_id = source_data['ID_FL']
           @unit_external_id   = source_data['ID_PODR']
+          @department_unit_id = source_data['ID_STRUCT_PODR']
           @post_title         = source_data['POST']
           @post_code          = POST_CATEGORY_CODE[source_data['KAT']] || POST_CATEGORY_CODE['*']
           @is_manager         = @post_code == 'manager'

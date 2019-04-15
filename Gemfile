@@ -48,10 +48,15 @@ gem 'carrierwave-mongoid', require: 'carrierwave/mongoid'
 gem 'i18n'
 gem 'net-ldap'
 gem 'whenever', require: false
+gem 'write_xlsx'
+
+gem 'faker'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
+  gem 'rack-test'
+  gem 'minitest'
 end
 
 group :development do
@@ -68,8 +73,13 @@ group :development do
   gem 'capistrano3-puma', require: false
   gem 'capistrano-rails-console', require: false
   gem 'airbrussh', require: false
+end
 
-  gem 'faker'
+group :test do
+  gem 'rspec'
+  gem 'factory_bot'
+  gem 'mongoid_cleaner'
+  gem 'mongoid-rspec'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem

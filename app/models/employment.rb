@@ -9,6 +9,7 @@ class Employment < ApplicationRecord
   field :person_short_id,    type: String
   field :node_short_id,      type: String
   field :parent_node_short_id, type: String
+  field :department_short_id,type: String
   field :post_title,         type: String
   field :post_code,          type: String
   field :is_manager,         type: Boolean
@@ -30,6 +31,7 @@ class Employment < ApplicationRecord
   belongs_to :person
   belongs_to :node, optional: true
   belongs_to :parent_node, class_name: 'Node', optional: true
+  belongs_to :department, class_name: 'Node', optional: true
 
   embeds_one :telephones, as: :phonable,  class_name: 'Phones'
 
@@ -53,6 +55,7 @@ class Employment < ApplicationRecord
     )
     result.merge!('node_id' => node_short_id) if node_short_id.present?
     result.merge!('parent_node_id' => parent_node_short_id) if parent_node_short_id.present?
+    result.merge!('dept_id' => department_short_id) if department_short_id.present?
 
     if telephones.present?
       result.merge!('format_phones' => telephones.format_phones_with_type)

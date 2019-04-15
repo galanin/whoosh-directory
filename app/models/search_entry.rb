@@ -15,62 +15,9 @@ class SearchEntry < ApplicationRecord
   index(keywords: 1)
 
 
-  def self.query(query_str, limit = 10)
-    query_arr = query_str.downcase.scan(/[\p{Word}]+/)
-    pipeline = aggregation_pipeline(query_arr, limit)
-    view = SearchEntry.collection.aggregate(pipeline)
-    view_to_entries(view)
-  end
-
-
   def as_json(options = nil)
     super.slice('unit_id', 'person_id', 'employ_ids', 'contact_id').compact
   end
 
-
-  private
-
-
-  def self.aggregation_pipeline(query_arr, limit)
-    weights_keys = query_arr.map { |query_term| "$weights.#{query_term}" }
-
-    [
-      {
-        '$match' => {
-          'keywords' => {
-            '$all' => query_arr
-          }
-        },
-      },
-      {
-        '$project' => {
-          'unit_id'   => 1,
-          'person_id' => 1,
-          'employ_ids' => 1,
-          'contact_id' => 1,
-          'weight' => {
-            '$sum' => weights_keys
-          },
-          'sub_order' => 1,
-        }
-      },
-      {
-        '$sort' => {
-          'weight' => -1,
-          'sub_order' => 1,
-        }
-      },
-      {
-        '$limit' => limit,
-      },
-    ]
-  end
-
-
-  def self.view_to_entries(view)
-    view.map do |entry_doc|
-      SearchEntry.new(entry_doc.except(:weight))
-    end
-  end
 
 end

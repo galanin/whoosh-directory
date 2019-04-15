@@ -42,15 +42,16 @@ import VacationIcon from '@icons/vacation.svg'
 mapStateToProps = (state, ownProps) ->
   employment_id = state.current.employment_id
   employment = state.employments[employment_id]
-  node = state.nodes.data[employment?.node_id]
-  parent_node = state.nodes.data[employment?.parent_node_id]
 
   employment_id: employment_id
   employment: employment
   person: state.people[employment?.person_id]
-  node: node
-  parent_node: parent_node
-  unit: state.units[parent_node?.unit_id]
+  dept_id: employment?.dept_id
+  dept: state.units[employment?.dept_id]
+  node_id: employment?.node_id
+  node: state.nodes.data[employment?.node_id]
+  parent_node_id: employment?.parent_node_id
+  parent_node: state.nodes.data[employment?.parent_node_id]
   parents: employment? && reverse(getNodeParents(state, employment))
 
 
@@ -127,6 +128,10 @@ class EmployeeInfo extends React.Component
             else
               div { className: 'employee-info__post-title' },
                 @props.employment.post_title
+
+            if @props.dept_id? and @props.dept_id != @props.unit_id and @props.dept?
+              a { className: 'employee-info__unit_title', onClick: @onDeptClick.bind(this), href: '/' },
+                @props.dept.list_title
 
             if @props.unit?
               if @props.unit.short_title?

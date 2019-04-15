@@ -45,7 +45,7 @@ module Utilities
             end
 
             unless phones.empty?
-               phone_w_type[type] = phones
+               phone_w_type[type] = phones.uniq
             end
           end
 

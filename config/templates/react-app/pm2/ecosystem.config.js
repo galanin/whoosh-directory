@@ -9,8 +9,8 @@ module.exports = {
     env_production : {
       NODE_ENV: 'production',
       APPLICATION_PORT: 8001,
-      API_BASE_URL: 'http://staff:8002/api',
-      APPLICATION_BASE_URL: 'http://staff',
+      CLIENT_SIDE_API_BASE_URL: '/api',
+      SERVER_SIDE_API_BASE_URL: 'http://localhost:8002/api',
       PUBLIC_ASSET_PATH: '/'
     }
   }],

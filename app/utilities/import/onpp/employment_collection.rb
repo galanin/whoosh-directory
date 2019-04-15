@@ -71,6 +71,28 @@ module Utilities
           end
         end
 
+
+        def link_objects_to_department(unit_collection)
+          @entities.each do |id, employment_entity|
+            if employment_entity.new_data.present?
+              unit_entity = unit_collection[ employment_entity.new_data.department_unit_id ]
+              if unit_entity.present? && unit_entity.new_data.type == 'dep'
+                employment_entity.old_object.department = unit_entity.old_object
+                employment_entity.old_object.department_short_id = unit_entity.old_object.short_id
+              end
+            end
+          end
+        end
+
+
+        def get_department_unit_array()
+          department_unit_array = []
+          @entities.each_value do |employment_entity|
+            department_unit_array << employment_entity.new_data.department_unit_id
+          end
+          department_unit_array.uniq.compact
+        end
+
       end
     end
   end

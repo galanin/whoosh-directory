@@ -11,6 +11,7 @@ class Unit < ApplicationRecord
   field :node_short_id,type: String
   field :head_short_id,type: String
   field :alpha_sort,   type: String
+  field :type,         type: String # one of [org, div, dep, sec, nil]
   field :destroyed_at, type: Time
 
   belongs_to :node
@@ -22,7 +23,7 @@ class Unit < ApplicationRecord
 
   def as_json(options = nil)
     super.slice(
-      'long_title', 'short_title', 'alpha_sort',
+      'long_title', 'short_title', 'alpha_sort', 'type',
     ).compact.merge(
       'id' => short_id,
       'node_id' => node_short_id,

@@ -3,8 +3,8 @@ import { template } from 'lodash';
 import { Helmet } from 'react-helmet';
 
 const { NODE_ENV } = process.env;
-const compile = template(require('@templates/layouts/application.html'));
 const env = NODE_ENV || 'development';
+const compile = template(require('@templates/layouts/application.html'));
 
 export default function render(html, initialState = {}, bundles = []) {
   if (env === 'development') {

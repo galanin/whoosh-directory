@@ -76,7 +76,7 @@ module Utilities
           # puts photo_path
           if File.exists?(photo_path)
             photo_modified_time = File.mtime(photo_path)
-            if person.photo_updated_at.nil? || photo_modified_time > person.photo_updated_at
+            if person.photo_updated_at.nil? || photo_modified_time > person.photo_updated_at || ENV['STAFF_IMPORT_FORCE_PHOTO_UPDATE']
               # puts ' do import'
               File.open(photo_path) do |f|
                 person.photo = f

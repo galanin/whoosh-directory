@@ -33,6 +33,7 @@ module Utilities
           { post: /\bглавный механик\z/, priority: 50 },
           { post: /\bглавный метролог\z/, priority: 50 },
           { post: /\bначальник\b/, priority: 60 },
+          { post: /\bзаведующий центральным складом\b/, priority: 60 },
           { post: /\bруководитель\b/, priority: 60 },
           { post: /\bпервый заместитель\b/, priority: 70 },
           { post: /\bзаместитель\b/, priority: 80 },
@@ -64,6 +65,14 @@ module Utilities
         def import_black_list(doc)
           doc.xpath('.//organization').map do |org|
             add_black_list(org['ID'])
+          end
+        end
+
+
+        def get_structure_unit(employment_collection)
+          department_unit_array = employment_collection.get_department_unit_array
+          department_unit_array.each do |unit_id|
+            @entities[unit_id].new_data.type = "dep"
           end
         end
 
