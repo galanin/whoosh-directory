@@ -156,10 +156,10 @@ GEM
       mongoid (>= 3.1)
       mongoid-compatibility (>= 0.5.1)
       rspec (~> 3.3)
-    mongoid_cleaner (1.2.0)
-      mongoid (>= 4.0)
     mongoid-tree (2.1.1)
       mongoid (>= 4.0, < 8)
+    mongoid_cleaner (1.2.0)
+      mongoid (>= 4.0)
     multi_json (1.13.1)
     mustermann (1.0.3)
     mustermann-grape (1.0.0)
@@ -296,8 +296,8 @@ DEPENDENCIES
   mongoid
   mongoid-autoinc
   mongoid-rspec
-  mongoid_cleaner
   mongoid-tree
+  mongoid_cleaner
   mongoid_paranoia!
   net-ldap
   nokogiri

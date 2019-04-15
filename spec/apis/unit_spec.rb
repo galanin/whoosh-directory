@@ -24,8 +24,8 @@ describe Staff::API do
       get "api/units/#{unit.short_id}"
 
       expect(last_response).to has_status_200
-      expect(last_response_body.unit_titles.first['long_title']).to eq unit.long_title
-      expect(last_response_body.unit_titles.first['id']).to eq unit.short_id
+      expect(last_response_body.units.first['long_title']).to eq unit.long_title
+      expect(last_response_body.units.first['id']).to eq unit.short_id
 
       employment_response_ids = get_ids(last_response_body.employments, 'id')
       expect(employment_response_ids).to match_array(unit.employ_ids)

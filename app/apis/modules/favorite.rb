@@ -11,7 +11,7 @@ module Staff
           units = Unit.only(:short_id, :short_title, :long_title, :alpha_sort).where(destroyed_at: nil).in(short_id: unit_ids)
 
           present :favorite_units, @user_information.favorite_unit
-          present :unit_titles, units
+          present :units, units
         end
 
 

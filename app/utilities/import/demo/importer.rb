@@ -2,7 +2,6 @@ require 'yaml'
 require 'utilities/import/demo/unit_collection'
 require 'utilities/import/demo/employment_collection'
 require 'faker'
-require 'faker/name'
 
 module Utilities
   module Import
