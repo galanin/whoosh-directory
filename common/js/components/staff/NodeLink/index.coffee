@@ -48,13 +48,15 @@ class NodeLink extends React.Component
 
     div { className: classNames(class_names), onClick: @onUnitClick.bind(this) },
       if @props.unit?
-        if @props.unit?.short_title?
-          div { className: 'node-link__unit-short-title' },
-            @props.unit.short_title
+        [
+          if @props.unit.short_title?
+            div { className: 'node-link__unit-short-title', key: 'short' },
+              @props.unit.short_title
 
-        if @props.unit?.long_title?
-          div { className: 'node-link__unit-long-title' },
-            @props.unit.long_title
+          if @props.unit.long_title?
+            div { className: 'node-link__unit-long-title', key: 'long' },
+              @props.unit.long_title
+        ]
 
       else if @props.employment?
 
