@@ -8,9 +8,10 @@ class ExternalContact < ApplicationRecord
   include Searchable
   include FormattableBirthday
   include Importable
+  include ImportableContact
 
-  field :unit_external_id,  type: String
-  field :unit_short_id,     type: String
+
+  field :parent_node_short_id, type: String
   field :first_name,        type: String
   field :middle_name,       type: String
   field :last_name,         type: String
@@ -30,7 +31,7 @@ class ExternalContact < ApplicationRecord
   validates :external_id, presence: true
   validates :short_id, uniqueness: true
 
-  belongs_to :unit
+  belongs_to :parent_node,  class_name: 'Node'
   embeds_one :telephones, as: :phonable,  class_name: 'Phones'
 
   mount_uploader :photo, PersonPhotoUploader

@@ -33,13 +33,11 @@ module Utilities
             @duplicated_objects << @old_object
           end
           @old_object = object
-          @new_data.object = @old_object if @new_data.present?
         end
 
 
         def build_new_object
           @old_object = @object_class.build_new_object(new_data)
-          @new_data.object = @old_object
         end
 
 

@@ -1,10 +1,10 @@
 module Utilities
   module Import
     module ONPP
-      class ExternalContact
+      class ExternalContactData
 
         attr_accessor :external_id,
-                      :unit_external_id,
+                      :parent_node_external_id,
                       :first_name,
                       :middle_name,
                       :last_name,
@@ -20,9 +20,9 @@ module Utilities
                       :email
 
 
-        def initialize(source_data, unit_id)
+        def initialize(source_data, node_id)
           @external_id      = source_data['id'].to_s
-          @unit_external_id = unit_id
+          @parent_node_external_id = node_id
           @first_name       = source_data['first_name']
           @middle_name      = source_data['middle_name']
           @last_name        = source_data['last_name']
@@ -44,7 +44,6 @@ module Utilities
         def attributes
           {
             external_id:      external_id,
-            unit_external_id: unit_external_id,
             first_name:       first_name,
             middle_name:      middle_name,
             last_name:        last_name,

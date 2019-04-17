@@ -1,4 +1,5 @@
 require 'utilities/import/collection'
+require 'utilities/import/onpp/external_contact_entity'
 
 module Utilities
   module Import
@@ -8,11 +9,15 @@ module Utilities
         include Utilities::Import::Collection
 
 
+        self.entity_class = Utilities::Import::ONPP::ExternalContactEntity
+        self.object_class = ::ExternalContact
+
+
         def import(source_data)
-          source_data.each do |unit|
-            unit_id = unit["id"]
-            unit["contacts"].each do |contact|
-              new_data = Utilities::Import::ONPP::ExternalContact.new(contact, unit_id)
+          source_data.each do |node|
+            node_id = node["id"].to_s
+            node["contacts"].each do |contact|
+              new_data = Utilities::Import::ONPP::ExternalContactData.new(contact, node_id)
               add_new_data(new_data)
             end
           end
@@ -47,11 +52,10 @@ module Utilities
         end
 
 
-        def link_data_to_units(unit_collection)
+        def link_data_to_nodes(node_collection)
           @entities.each do |id, external_contact_entity|
-            unit_entity = unit_collection[ external_contact_entity.new_data.unit_external_id.to_s ]
-            unit_entity.new_data.contact_ids = [] if unit_entity.new_data.contact_ids.nil?
-            unit_entity.new_data.contact_ids << id
+            node_entity = node_collection[ external_contact_entity.new_data.parent_node_external_id.to_s ]
+            node_entity.new_data.add_child_contact_data(external_contact_entity.new_data)
           end
         end
 
@@ -59,10 +63,17 @@ module Utilities
         def link_objects_to_units(unit_collection)
           @entities.each do |id, external_contact_entity|
             if external_contact_entity.new_data.present?
-              unit_entity = unit_collection[ external_contact_entity.new_data.unit_external_id.to_s ]
+              unit_entity = unit_collection[ external_contact_entity.new_data.parent_node_external_id.to_s ]
               external_contact_entity.old_object.unit = unit_entity.old_object
               external_contact_entity.old_object.unit_short_id = unit_entity.old_object.short_id
             end
+          end
+        end
+
+
+        def link_node_objects(node_collection)
+          @entities.each do |id, entity|
+            entity.link_node_objects(node_collection)
           end
         end
 

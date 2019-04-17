@@ -9,6 +9,12 @@ module ImportableEmployment
     end
 
 
+    def link_department_node(node)
+      self.department          = node
+      self.department_short_id = node&.short_id
+    end
+
+
     def link_parent_node(parent_node)
       self.parent_node          = parent_node
       self.parent_node_short_id = parent_node&.short_id

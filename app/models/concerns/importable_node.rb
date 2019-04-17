@@ -21,6 +21,12 @@ module ImportableNode
     end
 
 
+    def link_child_contacts(contacts)
+      self.child_contacts = contacts
+      self.contact_ids    = contacts.map(&:short_id)
+    end
+
+
     def link_employment(employment)
       self.employment          = employment
       self.employment_short_id = employment&.short_id

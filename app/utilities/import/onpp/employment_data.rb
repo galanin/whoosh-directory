@@ -1,11 +1,10 @@
 module Utilities
   module Import
     module ONPP
-      class Employment
+      class EmploymentData
 
+        # attributes
         attr_accessor :external_id,
-                      :person_external_id,
-                      :unit_external_id, :department_unit_id,
                       :post_title,
                       :post_code, :is_manager, :is_head,
                       :office, :building,
@@ -16,6 +15,9 @@ module Utilities
                       :for_person_rank,
                       :alpha_sort,
                       :in_unit_rank
+        # relations
+        attr_accessor :person_external_id,
+                      :node_external_id, :department_node_external_id, :parent_node_external_id
 
 
         WORKING_TYPE_RANK = {
@@ -36,11 +38,12 @@ module Utilities
         def initialize(source_data)
           @external_id        = source_data['ID_M']
           @person_external_id = source_data['ID_FL']
-          @unit_external_id   = source_data['ID_PODR']
-          @department_unit_id = source_data['ID_STRUCT_PODR']
+          @parent_node_external_id   = source_data['ID_PODR']
+          @department_node_external_id = source_data['ID_STRUCT_PODR']
           @post_title         = source_data['POST']
           @post_code          = POST_CATEGORY_CODE[source_data['KAT']] || POST_CATEGORY_CODE['*']
           @is_manager         = @post_code == 'manager'
+          @is_head            = is_head_post(source_data['POST'])
           @office             = normalize_office(source_data['ROOM'])
           @building           = normalize_building(source_data['KORP'])
           @telephones         = Phones.from_xml(source_data)
@@ -62,8 +65,6 @@ module Utilities
         def attributes
           {
             external_id:        external_id,
-            person_external_id: person_external_id,
-            unit_external_id:   unit_external_id,
             post_title:         post_title,
             post_code:          post_code,
             is_manager:         is_manager,
@@ -154,6 +155,51 @@ module Utilities
 
         def normalize_time(time_str)
           time_str.to_s.sub(/:\d\d$/, '').presence
+        end
+
+
+
+        POST_PRIORITY = [
+          { post: /\bгенеральный директор\z/, priority: 0 },
+          { post: /\bзаместитель генерального директора\b/, priority: 10 },
+          { post: /\bдиректор\b/, priority: 20},
+          { post: /\bглавный инженер\z/, priority: 20},
+          { post: /\bпервый заместитель директора\b/, priority: 30 },
+          { post: /\bзаместитель директора\b/, priority: 40 },
+          { post: /\bглавный энергетик\z/, priority: 50 },
+          { post: /\bглавный механик\z/, priority: 50 },
+          { post: /\bглавный метролог\z/, priority: 50 },
+          { post: /\bначальник\b/, priority: 60 },
+          { post: /\bруководитель\b/, priority: 60 },
+          { post: /\bзаведующий центральным складом\b/, priority: 60 },
+          { post: /\bпервый заместитель\b/, priority: 70 },
+          { post: /\bзаместитель\b/, priority: 80 },
+          { post: /\bстарший мастер\b/, priority: 90 },
+          { post: /\bмастер\b/, priority: 100 },
+          { post: /\bсекретарь\b/, priority: 110 },
+
+          { post: //, priority: 120 } # This record must be last item
+        ]
+
+
+        def employment_priority
+          employment_post = post_title.downcase
+
+          post_priority = POST_PRIORITY.find do |post|
+            employment_post =~ post[:post]
+          end
+
+          post_priority && post_priority[:priority]
+        end
+
+
+
+        HEAD_POSTS = [
+          /^начальник\b/,
+        ]
+
+        def is_head_post(post_title)
+          HEAD_POSTS.any? { |re| post_title =~ re }
         end
 
       end

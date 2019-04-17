@@ -9,35 +9,27 @@ module Utilities
         include Utilities::Import::Collection
 
 
+        self.entity_class = Utilities::Import::ONPP::PersonEntity
+        self.object_class = ::Person
+
+
         def import(doc, unit_collection)
           doc.xpath('.//person').each do |person|
             unless unit_collection.present_in_black_list?(person['ID_PODR'])
-              new_data = Utilities::Import::ONPP::Person.new(person)
+              new_data = Utilities::Import::ONPP::PersonData.new(person)
               add_new_data(new_data)
             end
           end
         end
 
         def delete_without_employment(employment_collection)
-          @entities.keys.each do |id|
-            remove_by_id(id) unless employment_collection.person_has_employment?(id)
-          end
+          @entities.keep_if { |id, person| employment_collection.person_has_employment?(id) }
         end
 
 
         def cleanup_excess_employments(employment_collection)
           @entities.each do |id, person_entity|
-            if person_entity.new_data.employment_ids.count > 1
-              person_entity.new_data.employment_ids.sort_by! { |employment_id| employment_collection[employment_id].new_data.for_person_rank }
-              person_entity.new_data.employment_ids[1..-1].each { |employment_id| employment_collection.remove_by_id(employment_id) }
-            end
-          end
-        end
-
-
-        def reset_employments_link
-          @entities.each do |id, person_entity|
-            person_entity.new_data.employment_ids = []
+            person_entity.new_data.cleanup_excess_employments(employment_collection)
           end
         end
 
@@ -59,10 +51,10 @@ module Utilities
         end
 
 
-        def link_objects_to_employment_short_ids(employment_collection)
-          @entities.each do |id, unit_entity|
-            if unit_entity.new_data
-              unit_entity.old_object.employ_ids = employment_collection.short_ids_by_external_ids(unit_entity.new_data.employment_ids).presence
+        def link_employments(employment_collection)
+          @entities.each do |id, person_entity|
+            if person_entity.new_data
+              person_entity.old_object.employ_ids = employment_collection.short_ids_by_external_ids(person_entity.new_data.employment_external_ids).presence
             end
           end
         end

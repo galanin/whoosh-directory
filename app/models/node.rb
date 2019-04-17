@@ -16,11 +16,13 @@ class Node < ApplicationRecord
   field :employment_short_id, type: String
   field :unit_short_id,   type: String
   field :employ_ids,      type: Array
+  field :contact_ids,     type: Array
   field :default_expanded,type: Boolean
 
   belongs_to :employment, optional: true
   belongs_to :unit, optional: true
   has_many :child_employments, class_name: 'Employment'
+  has_many :child_contacts, class_name: 'ExternalContact'
 
 
   scope :tree_fields, -> { only(:short_id, :title, :variant, :child_short_ids) }

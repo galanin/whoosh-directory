@@ -22,12 +22,13 @@ module Utilities
       end
 
 
+      # TODO Refactor using a separate ReplaceRule class
       def replace(collection)
         @list.each do |employment_id, data|
           collection_entity = collection[employment_id]
-          if collection_entity.new_data.post_title == data[:from_post_title] && collection_entity.new_data.unit_external_id == data[:from_unit]
+          if collection_entity.new_data.post_title == data[:from_post_title] && collection_entity.new_data.parent_node_external_id == data[:from_unit]
             collection_entity.new_data.post_title = data[:to_post_title] if data[:to_post_title].present?
-            collection_entity.new_data.unit_external_id = data[:to_unit] if data[:from_unit].present?
+            collection_entity.new_data.parent_node_external_id = data[:to_unit] if data[:to_unit].present?
           end
         end
       end
