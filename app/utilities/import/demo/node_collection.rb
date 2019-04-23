@@ -1,4 +1,5 @@
 require 'utilities/import/collection'
+require 'utilities/import/demo/node_entity'
 
 module Utilities
   module Import

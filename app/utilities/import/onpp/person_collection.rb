@@ -1,4 +1,5 @@
 require 'utilities/import/collection'
+require 'utilities/import/onpp/person_entity'
 require 'utilities/import/ldap_connection'
 
 module Utilities
