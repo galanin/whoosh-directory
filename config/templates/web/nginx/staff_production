@@ -1,4 +1,4 @@
-upstream staff_production_web {
+upstream staff_production_app {
   server 127.0.0.1:8001 fail_timeout=0;
 }
 
@@ -16,7 +16,7 @@ server {
   listen              80;
   server_name         staff;
   root                /home/deployer/staff_production/current/dist/public;
-  try_files           $uri @staff_production_web;
+  try_files           $uri @staff_production_app;
 
   # remove slash in end url
   rewrite ^/(.*)/$ /$1 permanent;
@@ -28,8 +28,10 @@ server {
     rewrite ^(.*)$ http://$host_without_www$1 permanent;
   }
 
-  location ~ ^/(favicon)/ {
-    root                     /home/deployer/staff_production/current/public;
+  client_max_body_size 100m;
+
+  location /favicon/ {
+    alias                    /home/deployer/staff_production/current/public/favicon/;
     gzip_static              on;
     open_file_cache          max=1000 inactive=500s;
     open_file_cache_valid    600s;
@@ -37,7 +39,11 @@ server {
     break;
   }
 
-  location @staff_production_web {
+  location /api/ {
+    gzip on;
+    gzip_proxied any;
+    gzip_types application/json;
+
     proxy_set_header  X-Forwarded-For $proxy_add_x_forwarded_for;
     proxy_set_header  X-Forwarded-Proto $scheme;
     proxy_set_header  Host $http_host;
@@ -47,33 +53,66 @@ server {
     add_header P3P 'CP="ALL DSP COR PSAa PSDa OUR NOR ONL UNI COM NAV"'; # ie cookies fix
 
     proxy_redirect    off;
-    proxy_pass        http://staff_production_web;
-    limit_req         zone=one burst=5;
-
-    access_log        /home/deployer/staff_production/shared/log/web.access.log;
-    error_log         /home/deployer/staff_production/shared/log/web.error.log;
+    proxy_pass        http://staff_production_api;
+    break;
   }
 
-  location ~ ^/(asssets)/ {
-    alias             /home/deployer/staff_production/current/dist/public;
+  location @staff_production_app {
+    proxy_set_header  X-Forwarded-For $proxy_add_x_forwarded_for;
+    proxy_set_header  X-Forwarded-Proto $scheme;
+    proxy_set_header  Host $http_host;
+
+    proxy_set_header Accept $accept_header; # problem with text/javascript,image/webp
+
+    add_header P3P 'CP="ALL DSP COR PSAa PSDa OUR NOR ONL UNI COM NAV"'; # ie cookies fix
+
+    proxy_redirect    off;
+    proxy_pass        http://staff_production_app;
+
+    access_log        /home/deployer/staff_production/shared/log/app.access.log;
+    error_log         /home/deployer/staff_production/shared/log/app.error.log;
+  }
+
+  location /assets/ {
+    alias             /home/deployer/staff_production/current/dist/public/;
     gzip_static       on;
     expires           max;
     add_header        Cache-Control public;
 
-    open_file_cache          max=1000 inactive=500s;
+    open_file_cache          max=10 inactive=500s;
     open_file_cache_valid    600s;
     open_file_cache_errors   on;
+    break;
+  }
+
+  location /photos/ {
+    alias             /home/deployer/shared/public/photos/;
+    gzip_static       off;
+    expires           4h;
+    add_header        Cache-Control public;
+
+    open_file_cache          max=100 inactive=500s;
+    open_file_cache_valid    600s;
+    open_file_cache_errors   on;
+
+    break;
+  }
+
+  location ~ ^/(robots\.txt|@sitemap\.xml|yandex_.*\.html){
+    root              /public;
+    gzip_static       on;
+    add_header        Cache-Control public;
     break;
   }
 
   error_page          500 502 504  /500.html;
 
   location = /50x.html {
-      root            /home/deployer/tech_staging/current/public;
+      root            /home/deployer/staff_production/current/public;
   }
 
   location = /404.html {
-      root            /home/deployer/tech_staging/current/public;
+      root            /home/deployer/staff_production/current/public;
   }
 
   if ($request_method !~ ^(GET|HEAD|PUT|POST|DELETE|OPTIONS)$ ){
