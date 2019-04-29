@@ -34,6 +34,8 @@ module Utilities
           @units.build_new_objects
           @nodes.build_new_objects
 
+          @employments.assign_phone_numbers
+          
           # @employments.import_photos
 
           @employments.assign_head_id(@nodes)
