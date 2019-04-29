@@ -42,7 +42,6 @@ module Utilities
           offices = Offices.new(number_pool)
           @entities.each do |id, employment_entity|
             employment_entity.old_objects.each do |employment|
-              employment.telephones.phone_w_type.delete('local')
               offices << employment
             end
           end
