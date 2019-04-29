@@ -16,7 +16,7 @@ module Staff
     get 'units/:unit_id' do
       if params.key? :unit_id
         unit = Unit.find_by!(short_id: params[:unit_id])
-        present :units, [unit.as_json.slice('id', 'long_title', 'short_title', 'alpha_sort')]
+        present :units, [unit]
 
         unless unit.employ_ids.nil?
           employments = Employment.in(short_id: unit.employ_ids)

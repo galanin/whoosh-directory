@@ -8,7 +8,7 @@ module Staff
         desc 'Returns all FavoriteUnits records from UserInformation'
         get do
           unit_ids = @user_information.favorite_unit.pluck(:unit_short_id)
-          units = Unit.only(:short_id, :short_title, :long_title, :alpha_sort).where(destroyed_at: nil).in(short_id: unit_ids)
+          units = Unit.api_fields.where(destroyed_at: nil).in(short_id: unit_ids)
 
           present :favorite_units, @user_information.favorite_unit
           present :units, units
