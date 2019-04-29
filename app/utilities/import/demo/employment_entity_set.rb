@@ -47,6 +47,7 @@ module Utilities
 
         def update_employment_fields(employment)
           update_office(employment, new_data.office)
+          update_alpha_sort(employment)
         end
 
 
@@ -59,6 +60,11 @@ module Utilities
           else
             employment.office = new_office
           end
+        end
+
+
+        def update_alpha_sort(employment)
+          employment.alpha_sort = employment.person.sorting_title
         end
 
 

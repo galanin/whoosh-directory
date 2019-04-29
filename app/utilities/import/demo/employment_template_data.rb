@@ -6,6 +6,7 @@ module Utilities
 
         attr_reader   :post_title,
                       :post_type,
+                      :is_manager,
                       :is_head,
                       :building, :office,
                       :count
@@ -21,6 +22,7 @@ module Utilities
           @external_id = hash['id'].to_s
           @post_title  = hash['post_title'].presence || '-'
           @post_type   = hash['post_type']
+          @is_manager  = @post_type == 'manager'
           @is_head     = hash['is_head']
           @building    = hash['building']
           @office      = hash['office']
@@ -33,9 +35,9 @@ module Utilities
             external_id: external_id,
             post_title:  post_title,
             post_code:   post_type,
+            is_manager:  is_manager,
             is_head:     is_head,
             building:    building,
-            alpha_sort:  post_title,
           }
         end
 
