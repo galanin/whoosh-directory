@@ -1,5 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import { isMobile } from 'react-device-detect'
 import SvgIcon from '@components/common/SvgIcon'
 
 import { RESULTS_SOURCE_QUERY } from '@constants/search'
@@ -76,7 +77,7 @@ class SearchPanel extends React.Component
 
 
   onQueryBlur: (event) ->
-    if window.getSelection
+    if window.getSelection and not isMobile
       inputElement = event.currentTarget
       @timer = setInterval =>
         @focusInputIfNoSelection(inputElement)
@@ -100,7 +101,7 @@ class SearchPanel extends React.Component
             'Поиск'
           div { className: 'search-panel__input-field soft-shadow' },
 
-            input { autoFocus: true, className: 'search-panel__input', ref: @text_input, value: @props.query, onChange: @onQueryChange.bind(this), onBlur: @onQueryBlur.bind(this), onClick: @onQueryExec.bind(this), onKeyUp: @onKeyDown.bind(this) }
+            input { autoFocus: not isMobile, className: 'search-panel__input', ref: @text_input, value: @props.query, onChange: @onQueryChange.bind(this), onBlur: @onQueryBlur.bind(this), onClick: @onQueryExec.bind(this), onKeyUp: @onKeyDown.bind(this) }
             div { className: 'search-panel__reset', onClick: @onQueryReset.bind(this) },
               svg { className: 'search-panel__reset-icon', svg: Backspace },
 
