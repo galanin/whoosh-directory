@@ -1,3 +1,4 @@
+require 'stringex_lite'
 require 'utilities/import/demo/entity_set'
 
 module Utilities
@@ -13,6 +14,7 @@ module Utilities
             new_person.link_employment(employment)
 
             update_employment_fields(employment)
+            update_person_fields(employment.person)
             # puts "EMPLOY IDS #{ employment.person.employ_ids }"
           end
         end
@@ -21,6 +23,7 @@ module Utilities
         def update_existing
           update_existing_objects do |employment|
             update_employment_fields(employment)
+            update_person_fields(employment.person)
           end
         end
 
@@ -99,6 +102,11 @@ module Utilities
             employment.vacation_end = today + rand(366)
             employment.vacation_begin = employment.vacation_end - 28
           end
+        end
+
+
+        def update_person_fields(person)
+          person.email ||= "#{ person.first_name.to_url }.#{ person.last_name.to_url }@alpha-centauri.science"
         end
 
 

@@ -49,6 +49,7 @@ gem 'i18n'
 gem 'net-ldap'
 gem 'whenever', require: false
 gem 'write_xlsx'
+gem 'stringex'
 
 gem 'faker'
 
