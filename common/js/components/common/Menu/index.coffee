@@ -3,6 +3,11 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import classNames from 'classnames'
 
+import { RESULTS_SOURCE_BIRTHDAY } from '@constants/search'
+
+import { setBirthdayPeriodByShortcut } from '@actions/birthday_period'
+import { setResultsSource } from '@actions/search'
+
 import { closeMenu } from '@actions/menu'
 import {
   popSearchResults
@@ -40,6 +45,11 @@ mapDispatchToProps = (dispatch, ownProps) ->
   goToCall: ->
     dispatch(popToCall())
 
+  goBirthdays: (shortcut) ->
+    dispatch(setBirthdayPeriodByShortcut(shortcut))
+    dispatch(setResultsSource(RESULTS_SOURCE_BIRTHDAY))
+    dispatch(popSearchResults())
+
 
 class Menu extends React.Component
 
@@ -71,6 +81,12 @@ class Menu extends React.Component
     @props.closeMenu()
 
 
+  onBirthdaysTodayChosen: (event) ->
+    event.preventDefault()
+    @props.goBirthdays(event.currentTarget.getAttribute('shortcut'))
+    @props.closeMenu()
+
+
   render: ->
     class_names =
       'menu'         : true
@@ -95,6 +111,18 @@ class Menu extends React.Component
 
         a { className: 'menu-item menu-item__structure', onClick: @onToCallChosen.bind(this), href: '#' },
           'Планировщик'
+
+        div { className: 'menu-subtitle' },
+          'Дни рождения'
+
+        a { className: 'menu-item menu-item__structure', onClick: @onBirthdaysTodayChosen.bind(this), href: '#', shortcut: 'today' },
+          'Сегодня'
+
+        a { className: 'menu-item menu-item__structure', onClick: @onBirthdaysTodayChosen.bind(this), href: '#', shortcut: 'tomorrow' },
+          'Будущие'
+
+        a { className: 'menu-item menu-item__structure', onClick: @onBirthdaysTodayChosen.bind(this), href: '#', shortcut: 'recent' },
+          'Прошедшие'
 
 
 export default connect(mapStateToProps, mapDispatchToProps)(Menu)
