@@ -5,6 +5,8 @@
   height: 100%
   overflow-y: auto
   overflow-x: hidden
+  -webkit-overflow-scrolling: touch
+  z-index: 0
 
 .employee-info
 
@@ -99,13 +101,21 @@
 
 .employee-info__two-columns
   margin-top: 2rem
-  display: flex
   padding: 0 1rem
 
 .employee-info__photo
   flex: 0 0 240px
   width: 240px
   margin-right: 2em
+
+@media (max-width: 599px)
+  .employee-info__photo
+    margin-bottom: 2rem
+
+@media (min-width: 600px)
+  .employee-info__two-columns
+    display: flex
+
 
 .employee-info__photo-large
   width: 240px

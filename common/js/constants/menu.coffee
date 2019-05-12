@@ -1,0 +1,2 @@
+export OPEN_MENU = 'OPEN_MENU'
+export CLOSE_MENU = 'CLOSE_MENU'

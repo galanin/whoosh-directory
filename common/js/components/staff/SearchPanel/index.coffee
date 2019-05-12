@@ -14,6 +14,9 @@ img = React.createFactory('img')
 svg = React.createFactory(SvgIcon)
 input = React.createFactory('input')
 
+import MenuButton from '@components/common/Menu/Button'
+menu_button = React.createFactory(MenuButton)
+
 import Backspace from './icons/backspace.svg'
 import SearchButton from '@icons/search.svg'
 
@@ -96,6 +99,8 @@ class SearchPanel extends React.Component
   render: ->
     div { className: 'search-panel-container plug' },
       div { className: 'search-panel' },
+        menu_button {}
+
         div { className: 'search-panel__input-container' },
           div { className: 'search-panel__input-title' },
             'Поиск'

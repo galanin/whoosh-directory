@@ -4,6 +4,9 @@ import { loadSession } from '@actions/session'
 
 div = React.createFactory('div')
 
+import Menu from '@components/common/Menu'
+menu = React.createFactory(Menu)
+
 import Header from '@components/common/Header'
 header = React.createFactory(Header)
 
@@ -19,6 +22,8 @@ class TopLayout extends React.Component
 
   render: ->
     div { className: 'top-layout' },
+      menu {}
+
       div { className: 'top-layout__header socket' },
         header {}
       div { className: 'top-layout__working-area socket' },
