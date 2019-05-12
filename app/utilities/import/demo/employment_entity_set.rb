@@ -48,6 +48,7 @@ module Utilities
         def update_employment_fields(employment)
           update_office(employment, new_data.office)
           update_alpha_sort(employment)
+          update_lunch(employment, new_data.lunch)
         end
 
 
@@ -82,6 +83,12 @@ module Utilities
 
         def make_object_by_attributes(attributes)
           @object_class.new(attributes)
+        end
+
+
+        def update_lunch(employment, lunch)
+          employment.lunch_begin = lunch.first
+          employment.lunch_end   = lunch.last
         end
 
 

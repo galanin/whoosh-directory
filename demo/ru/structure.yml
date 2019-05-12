@@ -22,6 +22,7 @@ employees:
     - long_title: Околоземное отделение
       id: 111
       node_type: div
+      lunch: '12:00'
       employees:
       - post_title: Директор околоземного отделения
         id: 1111
@@ -533,6 +534,7 @@ employees:
     - long_title: Отделение Солнечной системы
       node_type: div
       id: 112
+      lunch: '12:15'
       employees:
       - post_title: Директор отделения Солнечной системы
         id: 1121
@@ -1057,6 +1059,7 @@ employees:
     - long_title: Внутригалактическое отделение
       node_type: div
       id: 113
+      lunch: '12:30'
       employees:
       - post_title: Директор внутригалактического отделения
         id: 1131
@@ -1786,6 +1789,7 @@ employees:
     - long_title: Межгалактическое отделение
       node_type: div
       id: 114
+      lunch: '12:45'
       employees:
       - post_title: Директор межгалактического отделения
         id: 1141
@@ -2525,6 +2529,7 @@ employees:
       short_title: ОНТИ
       node_type: dep
       id: 115
+      lunch: '13:00'
       employees:
       - post_title: Начальник отдела
         id: 1151
@@ -2590,6 +2595,7 @@ employees:
     - long_title: Патентный отдел
       node_type: dep
       id: 116
+      lunch: '13:00'
       employees:
       - post_title: Начальник отдела
         id: 1161
@@ -2618,6 +2624,7 @@ employees:
     - long_title: Метрологический отдел
       node_type: dep
       id: 117
+      lunch: '13:00'
       employees:
       - post_title: Начальник отдела
         id: 1171
@@ -2675,6 +2682,7 @@ employees:
     - long_title: Отделение опытного производства
       node_type: div
       id: 121
+      lunch: '12:00'
       employees:
       units:
       - long_title: Цех высокоточных средств измерения и наблюдения
@@ -2824,6 +2832,7 @@ employees:
     - long_title: Отделение главного технолога
       node_type: div
       id: 122
+      lunch: '12:15'
       employees:
       - post_title: Начальник отдела
         id: 1221
@@ -2840,6 +2849,7 @@ employees:
     - long_title: Отделение главного инженера
       node_type: div
       id: 123
+      lunch: '12:30'
       employees:
       units:
 

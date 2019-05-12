@@ -7,6 +7,7 @@ module Utilities
         COLLAPSED_NODE_TYPES = %w(section dep)
 
         attr_reader :title, :node_type
+        attr_reader :lunch
         attr_accessor :unit_external_id, :employment_external_id
         attr_accessor :parent_node_external_id, :head_external_id
         attr_reader :child_node_external_ids
@@ -16,6 +17,12 @@ module Utilities
         def initialize(encapsulated_data, hash)
           @external_id = encapsulated_data.external_id
           @node_type   = hash['node_type']
+
+          if (lunch_time = hash['lunch']).present?
+            hours, minutes = *lunch_time.split(':')
+            lunch_end = (hours.to_i + 1).to_s + ':' + minutes
+            @lunch = lunch_time .. lunch_end
+          end
 
           case encapsulated_data
           when Utilities::Import::Demo::UnitData
@@ -77,6 +84,27 @@ module Utilities
             unit_entity = unit_collection[@unit_external_id]
             if unit_entity.present?
               unit_entity.new_data.head_external_id = @head_external_id
+            end
+          end
+        end
+
+
+        def assign_lunch_time_recursively(node_collection, default_lunch_time = '13:00' .. '14:00')
+          @lunch ||= default_lunch_time
+          @child_node_external_ids.each do |child_id|
+            child_node_data = node_collection[child_id].new_data
+            child_node_data.assign_lunch_time_recursively(node_collection, @lunch)
+          end
+        end
+
+
+        def assign_lunch_to_employments(employment_collection)
+          if (employment = employment_collection[@employment_external_id]&.new_data).present?
+            employment.lunch = @lunch
+          end
+          @child_employment_external_ids.each do |employment_id|
+            if (employment = employment_collection[employment_id]&.new_data).present?
+              employment.lunch = @lunch
             end
           end
         end

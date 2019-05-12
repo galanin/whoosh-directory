@@ -13,6 +13,13 @@ module Utilities
         self.object_class = ::Node
 
 
+        def assign_lunch_to_employments(employment_collection)
+          fresh_entities.each do |node_entity|
+            node_entity.assign_lunch_to_employments(employment_collection)
+          end
+        end
+
+
         def assign_head_id(unit_collection)
           fresh_entities.each do |node_entity|
             node_entity.assign_head_id(unit_collection)

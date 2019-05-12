@@ -21,6 +21,8 @@ module Utilities
 
           demo_yaml = YAML.load_file ENV['STAFF_DEMO_FILE_PATH']
           @root_node = parse_yaml_unit nil, demo_yaml
+          @root_node.assign_lunch_time_recursively(@nodes)
+          @nodes.assign_lunch_to_employments(@employments)
 
           @employments.fetch_from_db
           @units.fetch_from_db
@@ -35,7 +37,7 @@ module Utilities
           @nodes.build_new_objects
 
           @employments.assign_phone_numbers
-          
+
           # @employments.import_photos
 
           @employments.assign_head_id(@nodes)

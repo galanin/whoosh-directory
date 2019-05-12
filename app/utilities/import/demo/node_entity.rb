@@ -6,6 +6,11 @@ module Utilities
         include Utilities::Import::Entity
 
 
+        def assign_lunch_to_employments(employment_collection)
+          new_data.assign_lunch_to_employments(employment_collection)
+        end
+
+
         def assign_head_id(unit_collection)
           new_data.assign_head_id(unit_collection)
         end

@@ -10,6 +10,7 @@ module Utilities
                       :is_head,
                       :building, :office,
                       :count
+        attr_accessor :lunch
         attr_accessor :node_external_id
         attr_accessor :parent_node_external_id
 
