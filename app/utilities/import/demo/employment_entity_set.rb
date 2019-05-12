@@ -49,6 +49,7 @@ module Utilities
           update_office(employment, new_data.office)
           update_alpha_sort(employment)
           update_lunch(employment, new_data.lunch)
+          update_vacation(employment)
         end
 
 
@@ -89,6 +90,15 @@ module Utilities
         def update_lunch(employment, lunch)
           employment.lunch_begin = lunch.first
           employment.lunch_end   = lunch.last
+        end
+
+
+        def update_vacation(employment)
+          today = Date.today
+          if employment.vacation_end.nil? || employment.vacation_end < today
+            employment.vacation_end = today + rand(366)
+            employment.vacation_begin = employment.vacation_end - 28
+          end
         end
 
 
