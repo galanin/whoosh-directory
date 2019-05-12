@@ -70,17 +70,17 @@ class SearchPanel extends React.Component
 
 
   focusInputIfNoSelection: (input) ->
-    if window.getSelection
-      if window.getSelection()?.isCollapsed
-        clearInterval(@timer)
-        input.focus()
+    if window.getSelection()?.isCollapsed
+      clearInterval(@timer)
+      input.focus()
 
 
   onQueryBlur: (event) ->
-    inputElement = event.currentTarget
-    @timer = setInterval =>
-      @focusInputIfNoSelection(inputElement)
-    , 1000
+    if window.getSelection
+      inputElement = event.currentTarget
+      @timer = setInterval =>
+        @focusInputIfNoSelection(inputElement)
+      , 1000
 
 
   onQueryExec: (event) ->
