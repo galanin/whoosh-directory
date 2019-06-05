@@ -34,11 +34,10 @@ module Utilities
           @employments.import(doc, @nodes)
           @people.import(doc, @nodes)
 
-          yaml_str = YAML.load_file ENV['STAFF_IMPORT_EXTERNAL_CONTACTS_FILE_PATH']
+          yaml_doc = YAML.load_file ENV['STAFF_IMPORT_EXTERNAL_CONTACTS_FILE_PATH']
 
-          @nodes.import_from_yaml(yaml_str)
-
-          @contacts.import(yaml_str)
+          @nodes.import_from_yaml(yaml_doc)
+          @contacts.import(yaml_doc)
 
           host = ENV['STAFF_IMPORT_LDAP_HOST']
           base = ENV['STAFF_IMPORT_LDAP_USERS_PATH']

@@ -13,8 +13,8 @@ module Utilities
         self.object_class = ::ExternalContact
 
 
-        def import(source_data)
-          source_data.each do |node|
+        def import(yaml_doc)
+          yaml_doc.each do |node|
             node_id = node["id"].to_s
             node["contacts"].each do |contact|
               new_data = Utilities::Import::ONPP::ExternalContactData.new(contact, node_id)

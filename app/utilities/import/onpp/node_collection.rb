@@ -72,8 +72,8 @@ module Utilities
         end
 
 
-        def import_from_yaml(doc)
-          doc.each do |org|
+        def import_from_yaml(yaml_doc)
+          yaml_doc.each do |org|
             new_data = Utilities::Import::ONPP::NodeData.new_from_yml(org)
             puts 'IMPORT CONTACT NODE'
             p new_data
