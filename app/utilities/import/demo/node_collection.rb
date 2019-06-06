@@ -14,7 +14,7 @@ module Utilities
 
 
         def assign_lunch_to_employments(employment_collection)
-          fresh_entities.each do |node_entity|
+          each_fresh_entity do |node_entity|
             node_entity.assign_lunch_to_employments(employment_collection)
           end
         end
