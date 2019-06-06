@@ -116,7 +116,7 @@ class Employee extends React.Component
             if @props.dept? and @props.dept_id != @props.node_id
               @props.dept.t
             else
-              @props.node.t
+              @props.node?.t
 
       if isArray(@props.employment.format_phones) and @props.employment.format_phones.length > 0
         div { className: 'employee__phones' },
