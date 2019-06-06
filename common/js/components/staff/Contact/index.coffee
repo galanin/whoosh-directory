@@ -90,9 +90,9 @@ class Contact extends React.Component
             @props.contact.post_title
 
         unless @props.hide?.unit
-          if @props.unit?
+          if @props.node?
             div { className: 'employee__organization_unit_title' },
-              @props.unit.list_title
+              @props.node.t
 
       if isArray(@props.contact.format_phones) and @props.contact.format_phones.length > 0
         div { className: 'employee__phones' },

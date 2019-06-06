@@ -35,7 +35,8 @@ mapStateToProps = (state, ownProps) ->
 
   contact_id: contact_id
   contact: contact
-  unit: state.units[contact?.unit_id]
+  node_id: contact?.node_id
+  node: state.nodes.tree[contact?.node_id]
 
 mapDispatchToProps = (dispatch) ->
   unsetCurrentContact: ->
@@ -54,9 +55,9 @@ class EmployeeInfo extends React.Component
     @props.unsetCurrentContact()
 
 
-  onUnitClick: (e) ->
+  onNodeClick: (e) ->
     e.preventDefault()
-    @props.goToNode(@props.contact.parent_node_id)
+    @props.goToNode(@props.node_id)
 
 
   render: ->
@@ -82,9 +83,10 @@ class EmployeeInfo extends React.Component
             div { className: 'employee-info__post-title' },
               @props.contact.post_title
 
-            if @props.unit?
-              a { className: 'employee-info__unit_title', onClick: @onUnitClick.bind(this), href: '/' },
-                @props.unit.list_title
+            if @props.node?
+              a { className: 'employee-info__unit_title', onClick: @onNodeClick.bind(this), href: '/' },
+                span { className: 'employee-info__unit-long-title' },
+                  @props.node.t
 
             div { className: 'employee-info__two-columns' },
 
