@@ -35,10 +35,9 @@ module Utilities
         end
 
 
-        def import_emails(host, base, user_name, user_password, id_ldap_attribute)
-          ldap = Utilities::Import::LdapConnection.new(host, base, user_name, user_password, id_ldap_attribute)
+        def import_emails(emails)
           @entities.each do |id, person_entity|
-            person_entity.new_data.email = ldap.get_email(id)
+            person_entity.new_data.email = emails[id]
           end
         end
 

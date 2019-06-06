@@ -44,7 +44,15 @@ module Utilities
           user_name = ENV['STAFF_IMPORT_LDAP_USER']
           user_password = ENV['STAFF_IMPORT_LDAP_PASSWORD']
           id_ldap_attribute = ENV['STAFF_IMPORT_LDAP_USER_ID_ATTRIBUTE']
-          @people.import_emails(host, base, user_name, user_password, id_ldap_attribute)
+          email_ldap_attribute = ENV['STAFF_IMPORT_LDAP_EMAIL_ATTRIBUTE']
+          begin
+            ldap = Utilities::Import::LdapConnection.new(host, base, user_name, user_password)
+            emails = ldap.get_emails_as_hash(id_ldap_attribute, email_ldap_attribute)
+          rescue Net::LDAP::Error => e
+            pp e
+            emails = {}
+          end
+          @people.import_emails(emails)
 
           @people.delete_without_employment(@employments)
 
