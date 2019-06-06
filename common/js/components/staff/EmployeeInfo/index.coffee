@@ -47,11 +47,11 @@ mapStateToProps = (state, ownProps) ->
   employment: employment
   person: state.people[employment?.person_id]
   dept_id: employment?.dept_id
-  dept: state.units[employment?.dept_id]
+  dept: state.nodes.tree[employment?.dept_id]
   node_id: employment?.node_id
-  node: state.nodes.data[employment?.node_id]
+  node: state.nodes.tree[employment?.node_id]
   parent_node_id: employment?.parent_node_id
-  parent_node: state.nodes.data[employment?.parent_node_id]
+  parent_node: state.nodes.tree[employment?.parent_node_id]
   parents: employment? && reverse(getNodeParents(state, employment))
 
 
@@ -97,6 +97,11 @@ class EmployeeInfo extends React.Component
     @props.unsetCurrentEmployee()
 
 
+  onDeptClick: (e) ->
+    e.preventDefault()
+    @props.goToNode(@props.employment.dept_id)
+
+
   onUnitClick: (e) ->
     e.preventDefault()
     @props.goToNode(@props.employment.parent_node_id)
@@ -129,19 +134,15 @@ class EmployeeInfo extends React.Component
               div { className: 'employee-info__post-title' },
                 @props.employment.post_title
 
-            if @props.dept_id? and @props.dept_id != @props.unit_id and @props.dept?
-              a { className: 'employee-info__unit_title', onClick: @onDeptClick.bind(this), href: '/' },
-                @props.dept.list_title
+            if @props.dept_id? and @props.dept_id != @props.parent_node_id and @props.dept?
+              a { className: 'employee-info__unit-title-link', onClick: @onDeptClick.bind(this), href: '/' },
+                span { className: 'employee-info__unit-long-title' },
+                  @props.dept.t
 
-            if @props.unit?
-              if @props.unit.short_title?
-                a { className: 'employee-info__unit-title-link', onClick: @onUnitClick.bind(this), href: '/' },
-                  span { className: 'employee-info__unit-short-title' },
-                    @props.unit.short_title
-              if @props.unit.long_title?
-                a { className: 'employee-info__unit-title-link', onClick: @onUnitClick.bind(this), href: '/' },
-                  span { className: 'employee-info__unit-long-title' },
-                    @props.unit.long_title
+            if @props.parent_node?
+              a { className: 'employee-info__unit-title-link', onClick: @onUnitClick.bind(this), href: '/' },
+                span { className: 'employee-info__unit-long-title' },
+                  @props.parent_node.t
 
             div { className: 'employee-info__two-columns' },
               div { className: 'employee-info__photo' },
