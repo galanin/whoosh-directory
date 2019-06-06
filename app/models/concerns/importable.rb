@@ -28,7 +28,11 @@ module Importable
 
 
     def drop
-      set(destroyed_at: Time.now)
+      if self.class.ancestors.include? Mongoid::Paranoia
+        destroy
+      else
+        set(destroyed_at: Time.now)
+      end
     end
 
 
