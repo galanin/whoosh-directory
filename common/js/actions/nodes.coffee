@@ -17,6 +17,7 @@ import {
 import { addUnits } from '@actions/units'
 import { addEmployments } from '@actions/employments'
 import { addPeople } from '@actions/people'
+import { addContacts } from '@actions/contacts'
 
 
 export loadNodeTree = ->
@@ -50,6 +51,7 @@ export loadMissingNodeData = (node_ids) ->
         dispatch(addUnits(result.body.units))
         dispatch(addEmployments(result.body.employments))
         dispatch(addPeople(result.body.people))
+        dispatch(addContacts(result.body.contacts))
       , (error) ->
 
 

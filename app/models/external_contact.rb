@@ -50,7 +50,7 @@ class ExternalContact < ApplicationRecord
       'gender', 'function_title', 'location_title',
     ).compact.merge(
       'id'          => short_id,
-      'unit_id'     => unit_short_id,
+      'node_id'     => parent_node_short_id,
     )
     if telephones.present?
       json.merge!('format_phones' => telephones.format_phones_with_type)

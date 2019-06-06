@@ -26,7 +26,7 @@ class Node < ApplicationRecord
 
 
   scope :tree_fields, -> { only(:short_id, :title, :variant, :child_short_ids) }
-  scope :info_fields, -> { only(:short_id, :employment_short_id, :unit_short_id, :employ_ids) }
+  scope :info_fields, -> { only(:short_id, :employment_short_id, :unit_short_id, :employ_ids, :contact_ids) }
   scope :root_fields, -> { only(:child_short_ids) }
   scope :with_children, ->(node_ids) { all.or({:short_id.in => node_ids}, {:parent_short_id.in => node_ids}) }
 
@@ -45,6 +45,7 @@ class Node < ApplicationRecord
     json['employment_id'] = employment_short_id if has_attribute?(:employment_short_id)
     json['unit_id'] = unit_short_id if has_attribute?(:unit_short_id)
     json['employ_ids'] = employ_ids if has_attribute?(:employ_ids) and employ_ids.present?
+    json['contact_ids'] = contact_ids if has_attribute?(:contact_ids) and contact_ids.present?
 
     json
   end
@@ -57,6 +58,11 @@ class Node < ApplicationRecord
 
   def self.child_employments
     Employment.where(destroyed_at: nil).in(short_id: all.map(&:employ_ids).compact.flatten)
+  end
+
+
+  def self.child_contacts
+    ExternalContact.where(destroyed_at: nil).in(short_id: all.map(&:contact_ids).compact.flatten)
   end
 
 

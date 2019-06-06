@@ -23,7 +23,7 @@ avatar = React.createFactory(CommonAvatar)
 mapStateToProps = (state, ownProps) ->
   contact = state.contacts[ownProps.contact_id]
   contact: contact
-  unit: contact && state.units[contact.unit_id]
+  node: state.nodes.tree[contact?.node_id]
   current_contact_id: state.current.contact_id
   is_to_call  : state.to_call.unchecked_contact_index[ownProps.contact_id]?
   is_favorite : state.favorites.contact_index[ownProps.contact_id]?
