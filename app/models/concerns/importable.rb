@@ -37,7 +37,7 @@ module Importable
 
       assign_attributes(attributes.compact)
       update_embedded_attributes(new_data.embedded_attributes) if new_data.respond_to?(:embedded_attributes)
-      save!
+      save! if changed?
 
       unset_nil_attributes(attributes)
     end
@@ -75,8 +75,11 @@ module Importable
 
 
     def unset_nil_attributes(attributes)
-      nil_attribute_names = attributes.select { |name, value| value.nil? }.map(&:first)
-      nil_attribute_names.each { |name| unset(name) }
+      attributes.each do |name, value|
+        if value.nil? && has_attribute?(name)
+          unset(name)
+        end
+      end
     end
 
   end
