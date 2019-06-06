@@ -35,6 +35,7 @@ class ExternalContact < ApplicationRecord
   embeds_one :telephones, as: :phonable,  class_name: 'Phones'
 
   mount_uploader :photo, PersonPhotoUploader
+  field :photo_short_id,   type: String
   field :photo_updated_at, type: Time
 
   index({ destroyed_at: 1, birthday: 1 }, {})
@@ -85,6 +86,18 @@ class ExternalContact < ApplicationRecord
     elsif location?
       location_title
     end
+  end
+
+
+  def is_photo_stale?(file_mtime)
+    photo_updated_at.nil? || file_mtime > photo_updated_at
+  end
+
+
+  def photo_file=(file)
+    self.photo_short_id = create_uniq_id('photo_short_id')
+    self.photo = file
+    self.photo_updated_at = Time.now
   end
 
 end

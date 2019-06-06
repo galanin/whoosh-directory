@@ -37,12 +37,10 @@ module Utilities
           photo_path = File.join(ENV['STAFF_IMPORT_PHOTO_PATH'], "#{external_id}.jpg")
           # puts photo_path
           if File.exists?(photo_path)
-            photo_modified_time = File.mtime(photo_path)
-            if contact.photo_updated_at.nil? || photo_modified_time > contact.photo_updated_at
+            if contact.is_photo_stale?(File.mtime(photo_path))
               # puts ' do import'
               File.open(photo_path) do |f|
-                contact.photo = f
-                contact.photo_updated_at = Time.now
+                contact.photo_file = f
                 # puts '  success'
               end
             else
