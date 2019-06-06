@@ -21,8 +21,8 @@ class Node < ApplicationRecord
 
   belongs_to :employment, optional: true
   belongs_to :unit, optional: true
-  has_many :child_employments, class_name: 'Employment'
-  has_many :child_contacts, class_name: 'ExternalContact'
+  has_many :child_employments, class_name: 'Employment', inverse_of: :parent_node
+  has_many :child_contacts, class_name: 'ExternalContact', inverse_of: :parent_node
 
 
   scope :tree_fields, -> { only(:short_id, :title, :variant, :child_short_ids) }
