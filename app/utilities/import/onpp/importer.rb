@@ -20,6 +20,8 @@ module Utilities
 
 
         def import(language:)
+          # Mongoid.logger = Logger.new($stdout)
+          # Mongo::Logger.logger = Logger.new($stdout)
 
           blacklist_xml_str = IO.read ENV['STAFF_IMPORT_BLACKLIST_FILE_PATH']
           blacklist_doc = ::Nokogiri::XML(blacklist_xml_str, nil, 'UTF-8')
