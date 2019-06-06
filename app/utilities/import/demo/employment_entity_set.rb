@@ -35,6 +35,17 @@ module Utilities
         end
 
 
+        def flush_to_db
+          generate_missing
+          drop_excessive
+          update_existing
+          proper_objects.each do |employment|
+            employment.flush_to_db(new_data)
+            employment.person.save if employment.person.changed?
+          end
+        end
+
+
         def assign_head_id(node_collection)
           new_data.assign_head_id(node_collection)
         end

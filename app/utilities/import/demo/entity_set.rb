@@ -65,16 +65,6 @@ module Utilities
           end
 
 
-          def flush_to_db
-            generate_missing
-            drop_excessive
-            update_existing
-            proper_objects.each do |object|
-              object.flush_to_db(new_data)
-            end
-          end
-
-
           def drop_stale_object
             drop_excessive
           end
