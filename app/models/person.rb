@@ -24,6 +24,7 @@ class Person < ApplicationRecord
   has_many :employments
 
   mount_uploader :photo, PersonPhotoUploader
+  field :photo_short_id,   type: String
   field :photo_updated_at, type: Time
 
 
@@ -52,6 +53,18 @@ class Person < ApplicationRecord
 
   def sorting_title
     "#{last_name} #{first_name} #{middle_name}".squish
+  end
+
+
+  def is_photo_stale?(file_mtime)
+    photo_updated_at.nil? || file_mtime > photo_updated_at
+  end
+
+
+  def photo_file=(file)
+    self.photo_short_id = create_uniq_id('photo_short_id')
+    self.photo = file
+    self.photo_updated_at = Time.now
   end
 
 end
