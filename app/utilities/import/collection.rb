@@ -85,28 +85,28 @@ module Utilities
 
 
         def build_new_objects
-          new_entities.each do |entity|
+          each_new_entity do |entity|
             entity.build_new_object
           end
         end
 
 
         def create_new_objects
-          new_entities.each do |entity|
+          each_new_entity do |entity|
             entity.old_object.save
           end
         end
 
 
         def drop_stale_objects
-          stale_entities.each do |entity|
+          each_stale_entity do |entity|
             entity.drop_stale_object
           end
         end
 
 
         def flush_to_db
-          fresh_entities.each do |entity|
+          each_fresh_entity do |entity|
             entity.flush_to_db
           end
         end
@@ -117,18 +117,30 @@ module Utilities
         end
 
 
-        def new_entities
-          @entities.values.select { |entity| entity.new? }
+        def each_new_entity
+          @entities.each do |id, entity|
+            if entity.new?
+              yield entity
+            end
+          end
         end
 
 
-        def fresh_entities
-          @entities.values.reject { |entity| entity.stale? }
+        def each_fresh_entity
+          @entities.each do |id, entity|
+            unless entity.stale?
+              yield entity
+            end
+          end
         end
 
 
-        def stale_entities
-          @entities.values.select { |entity| entity.stale? }
+        def each_stale_entity
+          @entities.each do |id, entity|
+            if entity.stale?
+              yield entity
+            end
+          end
         end
 
 

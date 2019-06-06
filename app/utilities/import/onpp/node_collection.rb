@@ -14,35 +14,35 @@ module Utilities
 
 
         def assign_head_id(unit_collection)
-          fresh_entities.each do |node_entity|
+          each_fresh_entity do |node_entity|
             node_entity.assign_head_id(unit_collection)
           end
         end
 
 
         def link_node_objects
-          fresh_entities.each do |node_entity|
+          each_fresh_entity do |node_entity|
             node_entity.link_node_objects(self)
           end
         end
 
 
         def link_employment_objects(employment_collection)
-          fresh_entities.each do |node_entity|
+          each_fresh_entity do |node_entity|
             node_entity.link_employment_objects(employment_collection)
           end
         end
 
 
         def link_contact_objects(contact_collection)
-          fresh_entities.each do |node_entity|
+          each_fresh_entity do |node_entity|
             node_entity.link_contact_objects(contact_collection)
           end
         end
 
 
         def link_unit_objects(unit_collection)
-          fresh_entities.each do |node_entity|
+          each_fresh_entity do |node_entity|
             node_entity.link_unit_objects(unit_collection)
           end
         end

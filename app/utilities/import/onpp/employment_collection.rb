@@ -39,7 +39,7 @@ module Utilities
 
 
         def assign_head_id(node_collection)
-          fresh_entities.each do |entity|
+          each_fresh_entity do |entity|
             entity.assign_head_id(node_collection)
           end
         end

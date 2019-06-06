@@ -21,14 +21,14 @@ module Utilities
 
 
         def link_node_objects(node_collection)
-          fresh_entities.each do |entity|
+          each_fresh_entity do |entity|
             entity.link_node_objects(node_collection)
           end
         end
 
 
         def link_employment_objects(employment_collection)
-          fresh_entities.each do |entity|
+          each_fresh_entity do |entity|
             entity.link_employment_objects(employment_collection)
           end
         end

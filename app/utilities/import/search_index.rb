@@ -125,10 +125,11 @@ module Utilities
 
 
       def drop_stale_entries
-        stale_entities = @entities.select { |_, entity| entity.stale? }.to_h
-        stale_entities.each do |id, entity|
-          entity.drop_stale_entry
-          @entities.delete(id)
+        @entities.each do |id, entity|
+          if entity.stale?
+            entity.drop_stale_entry
+            @entities.delete(id)
+          end
         end
       end
 
