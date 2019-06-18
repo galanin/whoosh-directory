@@ -75,11 +75,7 @@ module Utilities
         def import_from_yaml(yaml_doc)
           yaml_doc.each do |org|
             new_data = Utilities::Import::ONPP::NodeData.new_from_yml(org)
-            puts 'IMPORT CONTACT NODE'
-            p new_data
             add_new_data(new_data)
-            p @entities[new_data.external_id]
-            puts
           end
         end
 
