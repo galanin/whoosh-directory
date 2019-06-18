@@ -46,14 +46,14 @@ module Utilities
 
 
         def link_node_objects(node_collection)
-          @entities.each do |id, entity|
+          each_fresh_entity do |entity|
             entity.link_node_objects(node_collection)
           end
         end
 
 
         def link_data_to_people(person_collection)
-          @entities.each do |id, employment_entity|
+          each_fresh_entity do |employment_entity|
             person_entity = person_collection[ employment_entity.new_data.person_external_id ]
             person_entity.new_data.add_employment_data(employment_entity.new_data)
           end
@@ -61,7 +61,7 @@ module Utilities
 
 
         def link_data_to_nodes(node_collection)
-          @entities.each do |id, employment_entity|
+          each_fresh_entity do |employment_entity|
             node_entity = node_collection[ employment_entity.new_data.parent_node_external_id ]
             node_entity.new_data.add_child_employment_data(employment_entity.new_data)
           end
@@ -69,7 +69,7 @@ module Utilities
 
 
         def link_objects_to_people(person_collection)
-          @entities.each do |id, employment_entity|
+          each_fresh_entity do |employment_entity|
             if employment_entity.new_data.present?
               person_entity = person_collection[ employment_entity.new_data.person_external_id ]
               employment_entity.old_object.person = person_entity.old_object
@@ -80,7 +80,7 @@ module Utilities
 
 
         def link_objects_to_department(node_collection)
-          @entities.each do |id, employment_entity|
+          each_fresh_entity do |employment_entity|
             if employment_entity.new_data.present?
               unit_entity = node_collection[ employment_entity.new_data.department_unit_id ]
               if unit_entity.present? && unit_entity.new_data.type == 'dep'
