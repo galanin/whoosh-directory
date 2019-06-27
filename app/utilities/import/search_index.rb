@@ -21,7 +21,7 @@ module Utilities
         Person.where(destroyed_at: nil).each do |person|
           search_index.add_object(person)
         end
-        Employment.where(destroyed_at: nil).each do |employment|
+        Employment.includes(:person).where(destroyed_at: nil).each do |employment|
           search_index.add_object(employment)
         end
         ExternalContact.where(destroyed_at: nil).each do |external_contact|
