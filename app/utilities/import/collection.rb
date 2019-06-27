@@ -44,8 +44,8 @@ module Utilities
 
 
         def add_new_data(new_data)
-          puts "DUPLICATE ID #{ new_data.class.name } #{ new_data.external_id }" if already_present?(new_data.external_id)
-          puts "EMPTY ID #{ new_data }" if new_data.external_id.empty?
+          # puts "DUPLICATE ID #{ new_data.class.name } #{ new_data.external_id }" if already_present?(new_data.external_id)
+          # puts "EMPTY ID #{ new_data }" if new_data.external_id.empty?
           entity = sure_entity_exists(new_data.external_id)
           entity.add_new_data(new_data)
         end
