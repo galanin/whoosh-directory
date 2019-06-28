@@ -10,6 +10,7 @@ import { setHighlightedUnitId } from '@actions/current'
 import { popNodeInfo, popStructure } from '@actions/layout'
 
 div = React.createFactory('div')
+img = React.createFactory('img')
 avatar = React.createFactory(CommonAvatar)
 
 
