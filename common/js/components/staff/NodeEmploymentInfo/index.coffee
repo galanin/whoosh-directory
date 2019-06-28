@@ -72,20 +72,22 @@ class NodeEmploymentInfo extends React.Component
         employee employment_id: @props.employment_id, hide: { unit: true, post: true }, className: 'list-item shadow'
 
       if @props.node?
-        if isArray(@props.employ_ids)
-          for employment_id in @props.employ_ids
-            div { className: 'hierarchy-child' },
-              someone key: employment_id, employment_id: employment_id, hide: { unit: true }, className: 'list-item shadow'
+        [
+          if isArray(@props.employ_ids)
+            for employment_id in @props.employ_ids
+              div { className: 'hierarchy-child' },
+                someone key: employment_id, employment_id: employment_id, className: 'list-item shadow'
 
-        if isArray(@props.node?.contact_ids)
-          for contact_id in @props.node.contact_ids
-            div { className: 'hierarchy-child' },
-              someone key: contact_id, contact_id: contact_id, hide: { unit: true }, className: 'list-item shadow'
+          if isArray(@props.node?.contact_ids)
+            for contact_id in @props.node.contact_ids
+              div { className: 'hierarchy-child' },
+                someone key: contact_id, contact_id: contact_id, hide: { unit: true }, className: 'list-item shadow'
 
-        if isArray(@props.child_ids)
-          for child_node_id in @props.child_ids
-            div { className: 'hierarchy-child' },
-              node_link key: 'child-node-' + child_node_id, node_id: child_node_id, className: 'list-item shadow'
+          if isArray(@props.child_ids)
+            for child_node_id in @props.child_ids
+              div { className: 'hierarchy-child' },
+                node_link key: 'child-node-' + child_node_id, node_id: child_node_id, className: 'list-item shadow'
+        ]
 
 
 export default connect(mapStateToProps, mapDispatchToProps)(NodeEmploymentInfo)
