@@ -69,6 +69,7 @@ module Utilities
           move_nodes
 
           replace_employments
+          assign_root_sort
           # end modifications
 
           @nodes.build_structure

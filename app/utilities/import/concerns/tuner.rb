@@ -15,6 +15,8 @@ module Utilities
 
         @employee_to_node = @tunes['employee_to_node'] || []
         @move_nodes = @tunes['move_nodes'] || []
+
+        @root_node_order = @tunes['root_node_order'] || []
       end
 
 
@@ -91,6 +93,16 @@ module Utilities
           if node_entity
             node_entity.new_data.parent_node_external_id = data['to_parent']
             node_entity.new_data.tree_sort = data['number']
+          end
+        end
+      end
+
+
+      def assign_root_sort
+        @root_node_order.each_with_index do |id, i|
+          node = @nodes[id]
+          if node
+            node.new_data.root_sort = '%04d' % i
           end
         end
       end

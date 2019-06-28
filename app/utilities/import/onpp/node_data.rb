@@ -9,7 +9,7 @@ module Utilities
         attr_reader :short_title, :long_title, :alpha_sort
 
         attr_accessor :title
-        attr_accessor :tree_sort
+        attr_accessor :tree_sort, :root_sort
         attr_accessor :node_type
         attr_accessor :unit_external_id, :employment_external_id
         attr_accessor :parent_node_external_id
@@ -88,7 +88,8 @@ module Utilities
             external_id:      external_id,
             title:            title,
             node_type:        node_type,
-            default_expanded: !node_type.in?(COLLAPSED_NODE_TYPES)
+            default_expanded: !node_type.in?(COLLAPSED_NODE_TYPES),
+            root_sort:        root_sort,
           }
         end
 

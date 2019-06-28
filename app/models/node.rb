@@ -18,6 +18,7 @@ class Node < ApplicationRecord
   field :employ_ids,      type: Array
   field :contact_ids,     type: Array
   field :default_expanded,type: Boolean
+  field :root_sort,       type: String
 
   belongs_to :employment, optional: true
   belongs_to :unit, optional: true

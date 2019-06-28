@@ -4,7 +4,7 @@ module Staff
     namespace 'nodes' do
 
       get do
-        present :root_ids, Node.roots.pluck(:short_id)
+        present :root_ids, Node.roots.order(root_sort: :asc).pluck(:short_id)
         present :nodes, Node.all.tree_fields
       end
 
