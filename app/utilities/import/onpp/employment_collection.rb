@@ -63,7 +63,7 @@ module Utilities
         def link_data_to_nodes(node_collection)
           each_fresh_entity do |employment_entity|
             node_entity = node_collection[ employment_entity.new_data.parent_node_external_id ]
-            node_entity.new_data.add_child_employment_data(employment_entity.new_data)
+            node_entity.new_data.add_child_employment_data(employment_entity.new_data) if node_entity
           end
         end
 
