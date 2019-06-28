@@ -18,7 +18,7 @@ module Utilities
 
 
         def link_employment_objects(employment_collection)
-          old_object.link_employment(employment_collection.object_by_external_id(new_data.employment_external_id)&.first)
+          old_object.link_employment(employment_collection.object_by_external_id(new_data.employment_external_id))
           old_object.link_child_employments(employment_collection.objects_by_external_ids(new_data.child_employment_external_ids))
         end
 
