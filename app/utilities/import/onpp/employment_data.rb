@@ -43,7 +43,6 @@ module Utilities
           @post_title         = source_data['POST']
           @post_code          = POST_CATEGORY_CODE[source_data['KAT']] || POST_CATEGORY_CODE['*']
           @is_manager         = @post_code == 'manager'
-          @is_head            = is_head_post(source_data['POST'])
           @office             = normalize_office(source_data['ROOM'])
           @building           = normalize_building(source_data['KORP'])
           @telephones         = Phones.from_xml(source_data)
@@ -190,16 +189,6 @@ module Utilities
           end
 
           post_priority && post_priority[:priority]
-        end
-
-
-
-        HEAD_POSTS = [
-          /^начальник\b/,
-        ]
-
-        def is_head_post(post_title)
-          HEAD_POSTS.any? { |re| post_title =~ re }
         end
 
       end

@@ -8,8 +8,8 @@ module Utilities
 
         attr_reader :short_title, :long_title, :alpha_sort
 
-        attr_reader :title
-        attr_reader :tree_sort
+        attr_accessor :title
+        attr_accessor :tree_sort
         attr_accessor :node_type
         attr_accessor :unit_external_id, :employment_external_id
         attr_accessor :parent_node_external_id
@@ -32,6 +32,24 @@ module Utilities
           @child_node_external_ids = []
           @child_employment_external_ids = []
           @child_contact_external_ids = []
+        end
+
+
+        def self.new_from_employee(employee_data, overrides)
+          new_node_data = new(
+            id:         employee_data.external_id,
+            long_title: employee_data.post_title,
+            parent_id:  overrides['node'],
+            tree_sort:  overrides['number'],
+          )
+
+          employee_data.node_external_id = employee_data.external_id
+          employee_data.department_node_external_id = nil
+          employee_data.parent_node_external_id = nil
+
+          new_node_data.employment_external_id = new_node_data.unit_external_id
+          new_node_data.unit_external_id = nil
+          new_node_data
         end
 
 

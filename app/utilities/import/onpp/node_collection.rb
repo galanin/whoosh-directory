@@ -48,18 +48,6 @@ module Utilities
         end
 
 
-        COMPANY_MANAGEMENT_PREFIX = 'Руководство предприятия'
-        RIGHT_NODE_FOR_POST       = [
-          {
-            post_title: 'Генеральный директор',
-            node_title: 'Обнинское научно-производственное предприятие'
-          },
-          {
-            post_title: 'Первый заместитель генерального директора',
-            node_title: 'Блок первого заместителя генерального директора'
-          }
-        ]
-
         MANAGEMENT_PREFIX = [/^Руководство/, /^Рук\./]
 
         def import_from_xml(doc)
@@ -159,57 +147,20 @@ module Utilities
         end
 
 
-        def select_company_management
-          @entities.values.find do |node_entity|
-            node_entity.new_data.title_includes?(COMPANY_MANAGEMENT_PREFIX)
-          end
-        end
-
-
-        def change_company_management(employment_collection)
-          company_management_node_entity = select_company_management
-          company_management_employments = employment_collection.entities_by_ids(company_management_node_entity.new_data.child_employment_external_ids)
-
-          RIGHT_NODE_FOR_POST.each do |node_post_rule|
-            employment_to_correct = company_management_employments.find do |employment|
-              employment.new_data.post_title.include?(node_post_rule[:post_title])
-            end
-            has_changed = change_employment_node(employment_to_correct, node_post_rule[:node_title])
-            company_management_employments.delete(employment_to_correct) if has_changed
-          end
-
-          company_management_employments.each do |employment_entity|
-            node_title_substring = employment_entity.new_data.post_title.split(' ', 2)[1]
-            change_employment_node(employment_entity, node_title_substring)
-          end
-        end
-
-
-        def change_employment_node(employment_entity, node_title_substring)
-          node_entity = find_node_by_partial_title(node_title_substring)
-          if node_entity.present?
-            employment_entity.new_data.parent_node_external_id = node_entity.new_data.external_id
-          end
-        end
-
-
-        def find_node_by_partial_title(node_title_substring)
-          @entities.values.find { |node_entity| node_entity.new_data.title_includes?(node_title_substring) }
-        end
-
-
         def management_nodes
-          @entities.values.select do |node_entity|
-            MANAGEMENT_PREFIX.any? { |regex| node_entity.new_data.title_matches?(regex)}
-          end
+          @entities.select do |id, node_entity|
+            MANAGEMENT_PREFIX.any? { |regex| node_entity.new_data.title_matches?(regex) }
+          end.to_h
         end
 
 
         def change_management_node(employment_collection)
-          management_nodes.each do |node_entity|
-            employments = employment_collection.entities_by_ids(node_entity.new_data.child_employment_external_ids)
-            employments.each do |employment|
-              employment.new_data.parent_node_external_id = node_entity.new_data.parent_node_external_id
+          m_nodes = management_nodes
+          employment_collection.each do |id, employment_entity|
+            node_entity = m_nodes[employment_entity.new_data.parent_node_external_id]
+            if node_entity
+              employment_entity.new_data.parent_node_external_id = node_entity.new_data.parent_node_external_id
+              employment_entity.new_data.department_node_external_id = node_entity.new_data.parent_node_external_id
             end
           end
         end

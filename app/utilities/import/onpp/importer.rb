@@ -9,6 +9,7 @@ module Utilities
   module Import
     module ONPP
       class Importer
+        include Tuner
 
         def initialize
           @people      = Utilities::Import::ONPP::PersonCollection.new
@@ -28,6 +29,8 @@ module Utilities
 
           @nodes.import_black_list(blacklist_doc)
           @employments.import_black_list(blacklist_doc)
+
+          load_tunes(ENV['STAFF_IMPORT_FINE_TUNING'])
 
           xml_str = IO.read ENV['STAFF_IMPORT_FILE_PATH']
           doc = ::Nokogiri::XML(xml_str, nil, 'CP1251')
@@ -58,30 +61,30 @@ module Utilities
 
           @people.delete_without_employment(@employments)
 
+          set_head_flags
+
+          # a time to modify the structure
+          replace_pseudo_units
+          convert_employee_to_node
+          move_nodes
+
+          replace_employments
+          # end modifications
+
           @nodes.build_structure
           @nodes.get_structure_unit(@employments)
 
-          yaml_replace_list = YAML.load_file ENV['STAFF_IMPORT_REPLACEMENT_RULES']
-          replace_list = Utilities::Import::ReplaceList.new
-          replace_list.import(yaml_replace_list)
-          replace_list.replace(@employments)
-
-          # TODO a time to modify the structure
+          # assign links between objects
           @employments.link_data_to_people(@people)
           @people.cleanup_excess_employments(@employments)
           @employments.link_data_to_nodes(@nodes)
           @contacts.link_data_to_nodes(@nodes)
-
-          @nodes.change_company_management(@employments)
-          @nodes.reset_employments_link
-          @employments.link_data_to_nodes(@nodes)
 
           @nodes.change_management_node(@employments)
           @nodes.reset_employments_link
           @employments.link_data_to_nodes(@nodes)
 
           @nodes.delete_empty_nodes
-          # structure modified
 
           @nodes.reset_structure
           @nodes.build_structure
@@ -92,6 +95,7 @@ module Utilities
           @units.import_from_nodes(@nodes)
 
           @nodes.set_heads(@employments, @units)
+          set_exception_head_ids
 
           # then, let's read-write db
           @people.fetch_from_db
