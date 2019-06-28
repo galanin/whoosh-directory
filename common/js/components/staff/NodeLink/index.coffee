@@ -65,8 +65,8 @@ class NodeLink extends React.Component
 
         div { className: 'node-link__employee-link' },
           div { className: 'node-link__employee-photo' },
-            if photo?.thumb30?.url?
-              img { src: process.env.PHOTO_BASE_URL + photo.thumb30.url, className: 'node-link__employee-thumb30' }
+            if photo?.thumb39?.url?
+              img { src: process.env.PHOTO_BASE_URL + photo.thumb39.url, className: 'node-link__employee-thumb39' }
             else
               avatar { className: 'node-link__avatar', gender: @props.person?.gender, post_code: @props.employment.post_code }
 
