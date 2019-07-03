@@ -3,6 +3,7 @@ require 'utilities/import/onpp/person_collection'
 require 'utilities/import/onpp/node_collection'
 require 'utilities/import/onpp/unit_collection'
 require 'utilities/import/onpp/employment_collection'
+require 'utilities/import/concerns/tuner'
 require 'yaml'
 
 module Utilities
