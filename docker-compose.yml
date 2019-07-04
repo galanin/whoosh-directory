@@ -21,6 +21,7 @@ services:
   web:
     restart: always
     build: docker/web
+    image: "staff_web:${TAG}"
     ports:
       - '4000:80'
     volumes:
@@ -31,6 +32,7 @@ services:
   app:
     restart: always
     build: docker/app
+    image: "staff_app:${TAG}"
     environment: *common-variables
     ports:
       - '4003:4003'
@@ -39,6 +41,7 @@ services:
   api:
     restart: always
     build: docker/api
+    image: "staff_api:${TAG}"
     environment: *common-variables
     ports:
       - '4002:4002'
@@ -50,6 +53,7 @@ services:
   db:
     restart: always
     build: docker/db
+    image: "staff_db:${TAG}"
     volumes:
       - 'db_data:/data/db'
       - type: bind
