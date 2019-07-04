@@ -17,6 +17,8 @@ class UserSession < ApplicationRecord
     session.token = SecureRandom.urlsafe_base64(TOKEN_LENGTH)
   end
 
+  index({ token: 1 }, {})
+
 
   def self.find!(token)
     UserSession.find_by!(token: token)
