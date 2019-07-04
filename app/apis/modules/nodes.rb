@@ -16,8 +16,8 @@ module Staff
 
         present :nodes, nodes
         present :units, nodes.units
-        present :employments, nodes.employments + direct_nodes.child_employments
-        present :people, nodes.employments.people + direct_nodes.child_employments.people
+        present :employments, nodes.employments + direct_nodes.child_employments + nodes.units.head_employments
+        present :people, nodes.employments.people + direct_nodes.child_employments.people + nodes.units.head_employments.people
         present :contacts, direct_nodes.child_contacts
       end
 
