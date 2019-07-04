@@ -31,4 +31,9 @@ class Unit < ApplicationRecord
     )
   end
 
+
+  def self.head_employments
+    Employment.where(destroyed_at: nil).in(short_id: all.map(&:head_short_id).compact.flatten)
+  end
+
 end
