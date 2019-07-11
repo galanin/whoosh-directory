@@ -4,6 +4,7 @@ require 'utilities/import/onpp/node_collection'
 require 'utilities/import/onpp/unit_collection'
 require 'utilities/import/onpp/employment_collection'
 require 'utilities/import/concerns/tuner'
+require 'utilities/import/ldap_connection'
 require 'yaml'
 
 module Utilities
@@ -40,10 +41,13 @@ module Utilities
           @employments.import(doc, @nodes)
           @people.import(doc, @nodes)
 
-          yaml_doc = YAML.load_file ENV['STAFF_IMPORT_EXTERNAL_CONTACTS_FILE_PATH']
-
-          @nodes.import_from_yaml(yaml_doc)
-          @contacts.import(yaml_doc)
+          begin
+            yaml_doc = YAML.load_file ENV['STAFF_IMPORT_EXTERNAL_CONTACTS_FILE_PATH']
+            @nodes.import_from_yaml(yaml_doc)
+            @contacts.import(yaml_doc)
+          rescue Errno::ENOENT
+            p "Missing external contacts file. File path: #{ENV['STAFF_IMPORT_EXTERNAL_CONTACTS_FILE_PATH']}"
+          end
 
           host = ENV['STAFF_IMPORT_LDAP_HOST']
           base = ENV['STAFF_IMPORT_LDAP_USERS_PATH']

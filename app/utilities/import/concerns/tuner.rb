@@ -3,7 +3,12 @@ module Utilities
     module Tuner
 
       def load_tunes(tuning_file_path)
-        @tunes = YAML.load_file tuning_file_path rescue {}
+        begin
+          @tunes = YAML.load_file tuning_file_path
+        rescue Errno::ENOENT
+          p "Missing tuning file. File path: #{tuning_file_path}"
+          @tunes = {}
+        end
 
         @head_posts = @tunes['heads']['auto']['posts'] rescue []
         @no_auto_heads_units = Set.new(@tunes['heads']['auto']['except_units'].map(&:presence).compact) rescue Set.new
