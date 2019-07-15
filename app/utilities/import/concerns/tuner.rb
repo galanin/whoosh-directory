@@ -22,6 +22,12 @@ module Utilities
         @move_nodes = @tunes['move_nodes'] || []
 
         @root_node_order = @tunes['root_node_order'] || []
+
+        @organization_id = @tunes['node_type']['organization']
+        @director_id = @tunes['node_type']['director']
+        @vice_ids = @tunes['node_type']['vice']
+        @manager_rules = @tunes['node_type']['manager']['rules']
+
       end
 
 
@@ -113,12 +119,89 @@ module Utilities
       end
 
 
+      def set_nodes_type
+        set_organization_type_to_node
+        set_director_type_to_node
+        set_vice_type_to_nodes
+        find_and_set_manager_type_to_nodes
+      end
+
+
       private
 
 
       def head?(post_title)
         @head_posts.any? { |re| re.is_a?(Regexp) ? re =~ post_title : post_title === re }
       end
+
+
+      def set_organization_type_to_node
+        node = @nodes[@organization_id]
+        node.new_data.node_type = 'org' unless node.nil?
+      end
+
+      def set_director_type_to_node
+        node = @nodes[@director_id]
+        node.new_data.node_type = 'dir' unless node.nil?
+      end
+
+
+      def set_vice_type_to_nodes
+        @nodes.each do |id, entity|
+          entity_new_data = entity.new_data
+          if entity_new_data.employment_external_id.present? && @vice_ids.include?(entity_new_data.employment_external_id)
+            entity_new_data.node_type = 'vice'
+          end
+        end
+      end
+
+
+      def find_and_set_manager_type_to_nodes
+        whitelist_managers_ids = find_whitelist_manager_nodes
+        result_managers_ids = remove_blacklist_manager_nodes(whitelist_managers_ids)
+        set_manager_type_to_nodes(result_managers_ids)
+      end
+
+
+      def find_whitelist_manager_nodes
+        white_list_nodes_ids = []
+        @nodes.each do |id, entity|
+          entity_new_data = entity.new_data
+          @manager_rules['whitelist'].each do |rule|
+            if entity_new_data.title.downcase.include?(rule) && entity_new_data.employment_external_id.present?
+              white_list_nodes_ids << id
+              break
+            end
+          end
+        end
+        white_list_nodes_ids
+      end
+
+
+      def remove_blacklist_manager_nodes(manager_ids)
+        blacklist_ids = []
+
+        manager_ids.each do |id|
+          title = @nodes[id].new_data.title.downcase
+
+          @manager_rules['blacklist'].each do |rule|
+            if title.include?(rule)
+              blacklist_ids << id
+            end
+          end
+        end
+
+        manager_ids - blacklist_ids
+      end
+
+
+      def set_manager_type_to_nodes(manager_node_ids)
+        manager_node_ids.each do |id|
+          node = @nodes[id]
+          node.new_data.node_type = 'mang' unless node.nil?
+        end
+      end
+
 
     end
   end

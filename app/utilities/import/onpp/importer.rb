@@ -79,6 +79,7 @@ module Utilities
 
           @nodes.build_structure
           @nodes.get_structure_unit(@employments)
+          set_nodes_type
 
           # assign links between objects
           @employments.link_data_to_people(@people)

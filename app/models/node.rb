@@ -10,7 +10,7 @@ class Node < ApplicationRecord
   include ImportableNode
 
   field :title,           type: String
-  field :node_type,       type: String
+  field :node_type,       type: String # one of [org, dir, div, vice, man, dep, sec,  nil]
   field :parent_short_id, type: String
   field :child_short_ids, type: Array
   field :employment_short_id, type: String

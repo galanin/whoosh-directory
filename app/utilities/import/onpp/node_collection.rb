@@ -175,7 +175,21 @@ module Utilities
 
         def get_structure_unit(employment_collection)
           employment_collection.get_department_node_ids.each do |node_id|
-            @entities[node_id].new_data.node_type = 'dep'
+            department =  @entities[node_id].new_data
+            department.node_type = 'dep'
+            set_section_type_to_nodes(department.child_node_external_ids) unless department.child_node_external_ids.empty?
+          end
+        end
+
+
+        def set_section_type_to_nodes(section_ids)
+          section_ids.each do |section_id|
+            section = @entities[section_id].new_data
+            section.node_type = 'sec'
+
+            unless section.child_node_external_ids.empty?
+              set_section_type_to_nodes(section.child_node_external_ids)
+            end
           end
         end
 
