@@ -1,6 +1,10 @@
 module Staff
   class NodesAPI < Grape::API
 
+    before do
+      set_cache_header(1800)
+    end
+
     namespace 'nodes' do
 
       get do

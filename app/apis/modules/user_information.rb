@@ -5,6 +5,10 @@ require_relative 'history.rb'
 module Staff
   class UserInformationAPI < Grape::API
 
+    before do
+      set_cache_header
+    end
+
     namespace 'user_information' do
 
       before do

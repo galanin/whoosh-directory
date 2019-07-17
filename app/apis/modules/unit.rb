@@ -1,6 +1,11 @@
 module Staff
   class UnitAPI < Grape::API
 
+    before do
+      set_cache_header(1800)
+    end
+
+
     get :units do
       present :units,
               Unit.

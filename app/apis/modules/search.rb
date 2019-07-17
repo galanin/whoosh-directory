@@ -1,6 +1,10 @@
 module Staff
   class SearchAPI < Grape::API
 
+    before do
+      set_cache_header(1800)
+    end
+
     params {
       requires :q, type: String
       optional :max, type: Integer, default: 20

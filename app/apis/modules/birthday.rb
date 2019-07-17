@@ -1,6 +1,10 @@
 module Staff
   class BirthdayAPI < Grape::API
 
+    before do
+      set_cache_header(1800)
+    end
+
     params {
       requires :when, type: String, regexp: /^\d\d-\d\d(,\d\d-\d\d)*$/
     }
