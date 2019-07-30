@@ -8,6 +8,11 @@ module Importable
       new_object = create(new_data.attributes)
       new_object.build_new_embedded_objects(new_data.embedded_attributes) if new_data.respond_to?(:embedded_attributes)
       new_object
+    rescue StandardError => e
+      puts "OBJECT NOT CREATED #{ self.class.name }: #{ external_id }"
+      puts "EXCEPTION: #{ e.message }\n#{ e.backtrace.join("\n") }"
+      pp self
+      puts
     end
 
   end
@@ -44,6 +49,11 @@ module Importable
       save! if changed?
 
       unset_nil_attributes(attributes)
+    rescue StandardError => e
+      puts "OBJECT NOT SAVED #{ self.class.name }: #{ external_id }"
+      puts "EXCEPTION: #{ e.message }\n#{ e.backtrace.join("\n") }\n"
+      pp self
+      puts
     end
 
 
