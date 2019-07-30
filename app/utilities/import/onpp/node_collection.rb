@@ -173,7 +173,7 @@ module Utilities
         end
 
 
-        def get_structure_unit(employment_collection)
+        def mark_nodes_as_departments(employment_collection)
           employment_collection.get_department_node_ids.each do |node_id|
             department =  @entities[node_id].new_data
             department.node_type = 'dep'

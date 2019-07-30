@@ -78,7 +78,7 @@ module Utilities
           # end modifications
 
           @nodes.build_structure
-          @nodes.get_structure_unit(@employments)
+          @nodes.mark_nodes_as_departments(@employments)
           set_nodes_type
 
           # assign links between objects
