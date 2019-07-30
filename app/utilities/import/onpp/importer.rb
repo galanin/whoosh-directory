@@ -26,45 +26,15 @@ module Utilities
           # Mongoid.logger = Logger.new($stdout)
           # Mongo::Logger.logger = Logger.new($stdout)
 
-          blacklist_xml_str = IO.read ENV['STAFF_IMPORT_BLACKLIST_FILE_PATH']
-          blacklist_doc = ::Nokogiri::XML(blacklist_xml_str, nil, 'UTF-8')
+          load_black_lists
 
-          @nodes.import_black_list(blacklist_doc)
-          @employments.import_black_list(blacklist_doc)
+          load_import_data
 
-          load_tunes(ENV['STAFF_IMPORT_FINE_TUNING'])
-
-          xml_str = IO.read ENV['STAFF_IMPORT_FILE_PATH']
-          doc = ::Nokogiri::XML(xml_str, nil, 'CP1251')
-
-          @nodes.import_from_xml(doc)
-          @employments.import(doc, @nodes)
-          @people.import(doc, @nodes)
-
-          begin
-            yaml_doc = YAML.load_file ENV['STAFF_IMPORT_EXTERNAL_CONTACTS_FILE_PATH']
-            @nodes.import_from_yaml(yaml_doc)
-            @contacts.import(yaml_doc)
-          rescue Errno::ENOENT
-            p "Missing external contacts file. File path: #{ENV['STAFF_IMPORT_EXTERNAL_CONTACTS_FILE_PATH']}"
-          end
-
-          host = ENV['STAFF_IMPORT_LDAP_HOST']
-          base = ENV['STAFF_IMPORT_LDAP_USERS_PATH']
-          user_name = ENV['STAFF_IMPORT_LDAP_USER']
-          user_password = ENV['STAFF_IMPORT_LDAP_PASSWORD']
-          id_ldap_attribute = ENV['STAFF_IMPORT_LDAP_USER_ID_ATTRIBUTE']
-          email_ldap_attribute = ENV['STAFF_IMPORT_LDAP_EMAIL_ATTRIBUTE']
-          begin
-            ldap = Utilities::Import::LdapConnection.new(host, base, user_name, user_password)
-            emails = ldap.get_emails_as_hash(id_ldap_attribute, email_ldap_attribute)
-          rescue Net::LDAP::Error => e
-            pp e
-            emails = {}
-          end
-          @people.import_emails(emails)
+          import_emails
 
           @people.delete_without_employment(@employments)
+
+          load_tunes(ENV['STAFF_IMPORT_FINE_TUNING'])
 
           set_head_flags
 
@@ -87,7 +57,7 @@ module Utilities
           @employments.link_data_to_nodes(@nodes)
           @contacts.link_data_to_nodes(@nodes)
 
-          @nodes.change_management_node(@employments)
+          @nodes.change_management_node(@employments) # specific
           @nodes.reset_employments_link
           @employments.link_data_to_nodes(@nodes)
 
@@ -105,28 +75,63 @@ module Utilities
           set_exception_head_ids
 
           # then, let's read-write db
+          fetch_from_db
+
+          drop_stale_objects
+
+          build_new_objects
+
+          import_photos
+
+          link_objects
+
+          flush_to_db
+        end
+
+
+        def fetch_from_db
           @people.fetch_from_db
           @nodes.fetch_from_db
           @units.fetch_from_db
           @employments.fetch_from_db
           @contacts.fetch_from_db
+        end
 
+
+        def drop_stale_objects
           @people.drop_stale_objects
           @nodes.drop_stale_objects
           @units.drop_stale_objects
           @employments.drop_stale_objects
           @contacts.drop_stale_objects
+        end
 
+
+        def build_new_objects
           @people.build_new_objects
           @nodes.build_new_objects
           @units.build_new_objects
           @employments.build_new_objects
           @contacts.build_new_objects
+        end
 
+
+        def flush_to_db
+          @people.flush_to_db
+          @nodes.flush_to_db
+          @units.flush_to_db
+          @employments.flush_to_db
+          @contacts.flush_to_db
+        end
+
+
+        def import_photos
           @people.import_photos
           @contacts.import_photos
+        end
 
-          # link the objects using external ids
+
+        def link_objects
           @employments.link_node_objects(@nodes)
           @contacts.link_node_objects(@nodes)
           @units.link_node_objects(@nodes)
@@ -139,12 +144,59 @@ module Utilities
 
           @people.link_employments(@employments)
           @employments.link_objects_to_people(@people)
+        end
 
-          @people.flush_to_db
-          @nodes.flush_to_db
-          @units.flush_to_db
-          @employments.flush_to_db
-          @contacts.flush_to_db
+
+        def load_black_lists
+          blacklist_xml_str = IO.read ENV['STAFF_IMPORT_BLACKLIST_FILE_PATH']
+          blacklist_doc = ::Nokogiri::XML(blacklist_xml_str, nil, 'UTF-8')
+
+          @nodes.import_black_list(blacklist_doc)
+          @employments.import_black_list(blacklist_doc)
+        end
+
+
+        def load_import_data
+          xml_str = IO.read ENV['STAFF_IMPORT_FILE_PATH']
+          doc = ::Nokogiri::XML(xml_str, nil, 'CP1251')
+
+          @nodes.import_from_xml(doc)
+          @employments.import(doc, @nodes)
+          @people.import(doc, @nodes)
+
+          begin
+            yaml_doc = YAML.load_file ENV['STAFF_IMPORT_EXTERNAL_CONTACTS_FILE_PATH']
+
+            @nodes.import_from_yaml(yaml_doc)
+            @contacts.import(yaml_doc)
+          rescue Errno::ENOENT
+            p "Missing external contacts file. File path: #{ENV['STAFF_IMPORT_EXTERNAL_CONTACTS_FILE_PATH']}"
+          end
+        end
+
+
+        def import_emails
+          emails = load_emails_from_ldap
+          @people.import_emails(emails)
+        end
+
+
+        def load_emails_from_ldap
+          host = ENV['STAFF_IMPORT_LDAP_HOST']
+          base = ENV['STAFF_IMPORT_LDAP_USERS_PATH']
+          user_name = ENV['STAFF_IMPORT_LDAP_USER']
+          user_password = ENV['STAFF_IMPORT_LDAP_PASSWORD']
+          id_ldap_attribute = ENV['STAFF_IMPORT_LDAP_USER_ID_ATTRIBUTE']
+          email_ldap_attribute = ENV['STAFF_IMPORT_LDAP_EMAIL_ATTRIBUTE']
+          begin
+            ldap = Utilities::Import::LdapConnection.new(host, base, user_name, user_password)
+            emails = ldap.get_emails_as_hash(id_ldap_attribute, email_ldap_attribute)
+          rescue Net::LDAP::Error => e
+            pp e
+            emails = {}
+          end
+
+          emails
         end
 
       end
