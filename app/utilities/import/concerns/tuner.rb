@@ -23,11 +23,15 @@ module Utilities
 
         @root_node_order = @tunes['root_node_order'] || []
 
-        @organization_id = @tunes['node_type']['organization']
-        @director_id = @tunes['node_type']['director']
-        @vice_ids = @tunes['node_type']['vice']
-        @manager_rules = @tunes['node_type']['manager']['rules']
-
+        node_type = @tunes['node_type']
+        if node_type
+          @organization_id = node_type['organization']
+          @director_id = node_type['director']
+          @vice_ids = node_type['vice']
+          @manager_rules = node_type['manager'] && node_type['manager']['rules']
+        end
+        @vice_ids ||= []
+        @manager_rules ||= { 'whitelist' => {}, 'blacklist' => {} }
       end
 
 
