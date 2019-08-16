@@ -2,6 +2,7 @@ import { loadNodeTree } from '@actions/nodes'
 import { loadExpandedNodes } from '@actions/nodes'
 import { loadToCall } from '@actions/to_call'
 import { loadFavoritePeople, loadFavoriteUnits } from '@actions/favorites'
+import { loadSettings } from '@actions/settings'
 
 initial_info_requested = null
 
@@ -17,7 +18,9 @@ export default (store) ->
 
       setTimeout (-> store.dispatch(loadToCall())),
         30
-      setTimeout (-> store.dispatch(loadFavoritePeople())),
+      setTimeout (-> store.dispatch(loadSettings())),
         31
+      setTimeout (-> store.dispatch(loadFavoritePeople())),
+        33
       setTimeout (-> store.dispatch(loadFavoriteUnits())),
         42

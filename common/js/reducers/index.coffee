@@ -16,6 +16,7 @@ import birthdays from '@reducers/birthdays'
 import birthday_period from '@reducers/birthday_period'
 import to_call from '@reducers/to_call'
 import favorites from '@reducers/favorites'
+import settings from '@reducers/settings'
 import menu from '@reducers/menu'
 
 
@@ -37,4 +38,5 @@ export default (history) ->
     to_call:            to_call
     favorites:          favorites
     menu:               menu
+    settings:           settings
     router:             connectRouter(history)

@@ -1,6 +1,7 @@
 require_relative 'to_call.rb'
 require_relative 'favorite.rb'
 require_relative 'history.rb'
+require_relative 'settings.rb'
 
 module Staff
   class UserInformationAPI < Grape::API
@@ -85,6 +86,7 @@ module Staff
       mount Staff::ToCallAPI
       mount Staff::FavoriteAPI
       mount Staff::HistoryAPI
+      mount Staff::SettingsAPI
 
     end
 

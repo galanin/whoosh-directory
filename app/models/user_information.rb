@@ -4,6 +4,7 @@ class UserInformation < ApplicationRecord
 
   field :expanded_units, type: Array
   field :expanded_node_ids, type: Array, default: -> { UserInformation.default_expanded_node_ids }
+  field :settings, type: Hash
 
   has_many :user_session
   has_many :to_call, autosave: true

@@ -27,6 +27,7 @@ mapStateToProps = (state, ownProps) ->
   current_contact_id: state.current.contact_id
   is_to_call  : state.to_call.unchecked_contact_index[ownProps.contact_id]?
   is_favorite : state.favorites.contact_index[ownProps.contact_id]?
+  show_location: state.settings.search_results__show_location
 
 
 mapDispatchToProps = (dispatch, ownProps) ->
@@ -93,6 +94,24 @@ class Contact extends React.Component
           if @props.node?
             div { className: 'employee__organization_unit_title' },
               @props.node.t
+
+        if @props.show_location
+          div { className: 'employee__location' },
+            if @props.contact.building
+              span { className: 'employee__location-building' },
+                span { className: 'employee__location-building-label' },
+                  'Корпус '
+                span { className: 'employee__location-building-number' },
+                  @props.contact.building
+            if @props.contact.office
+              span { className: 'employee__location-office' },
+                span { className: 'employee__location-office-label' },
+                  if @props.contact.building
+                    ', кабинет '
+                  else
+                    'Кабинет '
+                span { className: 'employee__location-office-number' },
+                  @props.contact.office
 
       if isArray(@props.contact.format_phones) and @props.contact.format_phones.length > 0
         div { className: 'employee__phones' },

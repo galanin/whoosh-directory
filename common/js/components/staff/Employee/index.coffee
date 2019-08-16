@@ -33,6 +33,7 @@ mapStateToProps = (state, ownProps) ->
   current_employment_id: state.current.employment_id
   is_to_call  : state.to_call.unchecked_employment_index[ownProps.employment_id]?
   is_favorite : state.favorites.employment_index[ownProps.employment_id]?
+  show_location: state.settings.search_results__show_location
 
 
 mapDispatchToProps = (dispatch, ownProps) ->
@@ -117,6 +118,24 @@ class Employee extends React.Component
               @props.dept.t
             else
               @props.node?.t
+
+        if @props.show_location
+          div { className: 'employee__location' },
+            if @props.employment.building
+              span { className: 'employee__location-building' },
+                span { className: 'employee__location-building-label' },
+                  'Корпус '
+                span { className: 'employee__location-building-number' },
+                  @props.employment.building
+            if @props.employment.office
+              span { className: 'employee__location-office' },
+                span { className: 'employee__location-office-label' },
+                  if @props.employment.building
+                    ', кабинет '
+                  else
+                    'Кабинет '
+                span { className: 'employee__location-office-number' },
+                  @props.employment.office
 
       if isArray(@props.employment.format_phones) and @props.employment.format_phones.length > 0
         div { className: 'employee__phones' },

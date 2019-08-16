@@ -11,6 +11,9 @@ search_panel = React.createFactory(SearchPanel)
 import BirthdayShortcutPanel from '@components/staff/BirthdayShortcutPanel'
 birthday_panel = React.createFactory(BirthdayShortcutPanel)
 
+import SettingsPanel from '@components/staff/SettingsPanel'
+settings_panel = React.createFactory(SettingsPanel)
+
 import ToCallPanel from '@components/staff/ToCallPanel'
 to_call_panel = React.createFactory(ToCallPanel)
 
@@ -70,6 +73,7 @@ class WorkingArea extends React.Component
         div { className: 'working-area__toolbar-panel-left' },
           birthday_panel { className: 'working-area__toolbar' }
         div { className: 'working-area__toolbar-panel-right' },
+          settings_panel { className: 'working-area__toolbar' }
           favorites_panel { className: 'working-area__toolbar' }
           to_call_panel { className: 'working-area__toolbar' }
 
