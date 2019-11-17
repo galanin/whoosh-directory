@@ -153,6 +153,8 @@ module Utilities
 
           @nodes.import_black_list(blacklist_doc)
           @employments.import_black_list(blacklist_doc)
+        rescue Errno::ENOENT
+          puts 'Black list file not found - skip it.'
         end
 
 
@@ -170,7 +172,9 @@ module Utilities
             @nodes.import_from_yaml(yaml_doc)
             @contacts.import(yaml_doc)
           rescue Errno::ENOENT
-            p "Missing external contacts file. File path: #{ENV['STAFF_IMPORT_EXTERNAL_CONTACTS_FILE_PATH']}"
+            puts "Missing external contacts file: #{ENV['STAFF_IMPORT_EXTERNAL_CONTACTS_FILE_PATH']}"
+          rescue TypeError
+            puts "No external contacts file name provided - skip it."
           end
         end
 

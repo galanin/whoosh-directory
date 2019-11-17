@@ -6,7 +6,10 @@ module Utilities
         begin
           @tunes = YAML.load_file tuning_file_path
         rescue Errno::ENOENT
-          p "Missing tuning file. File path: #{tuning_file_path}"
+          puts "Missing tuning file: #{tuning_file_path} - skip it."
+          @tunes = {}
+        rescue TypeError
+          puts "No tuning file provided - skip it."
           @tunes = {}
         end
 
