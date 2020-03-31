@@ -9,8 +9,8 @@
     "url": "https://github.com/galanin/staff-frontend.git"
   },
   "engines": {
-    "node": "10.x.x",
-    "npm": "6.x.x"
+    "node": ">=10.0.0",
+    "npm": ">=6.0.0"
   },
   "_moduleAliases": {
     "@automation": "common/js/automation",
