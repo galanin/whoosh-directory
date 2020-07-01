@@ -25,6 +25,10 @@ class ExternalContact < ApplicationRecord
   field :building,          type: String
   field :email,             type: String
   field :alpha_sort,        type: String
+  field :lunch_begin,       type: String
+  field :lunch_end,         type: String
+  field :vacation_begin,    type: Date
+  field :vacation_end,      type: Date
   field :destroyed_at,      type: Time
 
 
@@ -48,6 +52,7 @@ class ExternalContact < ApplicationRecord
       'birthday', 'post_title', 'post_code', 'office',
       'building', 'photo', 'email',
       'gender', 'function_title', 'location_title',
+      'lunch_begin', 'lunch_end', 'vacation_begin', 'vacation_end',
     ).compact.merge(
       'id'          => short_id,
       'node_id'     => parent_node_short_id,
@@ -58,6 +63,7 @@ class ExternalContact < ApplicationRecord
     if birthday.present?
       json.merge!('birthday_formatted' => birthday_formatted(birthday))
     end
+    json.merge!('on_vacation' => true) if on_vacation
 
     json
   end
@@ -98,6 +104,12 @@ class ExternalContact < ApplicationRecord
     self.photo_short_id = create_uniq_id('photo_short_id')
     self.photo = file
     self.photo_updated_at = Time.now
+  end
+
+
+  def on_vacation
+    today = Date.today
+    vacation_begin && vacation_end && today >= vacation_begin && today <= vacation_end
   end
 
 end

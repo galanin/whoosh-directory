@@ -17,6 +17,8 @@ module Utilities
                       :building,
                       :telephones,
                       :alpha_sort,
+                      :lunch_begin, :lunch_end,
+                      :vacation_begin, :vacation_end,
                       :email
 
 
@@ -38,6 +40,10 @@ module Utilities
           @email            = source_data['email']
           @alpha_sort       = source_data['function_title'] || source_data['location_title'] ||
                               (source_data['last_name'] + source_data['middle_name'] + source_data['first_name'])
+          @lunch_begin      = normalize_time(source_data['lunch_begin'])
+          @lunch_end        = normalize_time(source_data['lunch_end'])
+          @vacation_begin   = source_data['vacation_begin'].presence
+          @vacation_end     = source_data['vacation_end'].presence
         end
 
 
@@ -57,6 +63,10 @@ module Utilities
             building:         building,
             email:            email,
             alpha_sort:       alpha_sort,
+            lunch_begin:      lunch_begin,
+            lunch_end:        lunch_end,
+            vacation_begin:   vacation_begin,
+            vacation_end:     vacation_end,
           }
         end
 
@@ -66,6 +76,10 @@ module Utilities
                 attributes: telephones.attributes,
               },
           }
+        end
+
+        def normalize_time(time_str)
+          time_str.to_s.presence
         end
 
       end

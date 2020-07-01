@@ -8,10 +8,12 @@ import Email from '@components/contact_info/Email'
 import OfficeLocation from '@components/contact_info/OfficeLocation'
 import LunchBreak from '@components/contact_info/LunchBreak'
 import Birthday from '@components/contact_info/Birthday'
+import IconedData from '@components/contact_info/IconedData'
 
 import { setCurrentContactId } from '@actions/current'
 import { sinkEmployeeInfo, popNodeInfo, popStructure } from '@actions/layout'
 import { goToNodeInStructure } from '@actions/nodes'
+import { currentTime, todayDate } from '@lib/datetime'
 
 div = React.createFactory('div')
 span = React.createFactory('span')
@@ -25,8 +27,10 @@ email = React.createFactory(Email)
 location = React.createFactory(OfficeLocation)
 lunch_break = React.createFactory(LunchBreak)
 birthday = React.createFactory(Birthday)
+iconed_data = React.createFactory(IconedData)
 
 import CloseButton from '@icons/close_button.svg'
+import VacationIcon from '@icons/vacation.svg'
 
 
 mapStateToProps = (state, ownProps) ->
@@ -50,6 +54,31 @@ mapDispatchToProps = (dispatch) ->
 
 
 class EmployeeInfo extends React.Component
+
+  isOnLunchNow: ->
+    if @props.contact?.lunch_begin? and @props.contact?.lunch_end? and @state?.current_time?
+      @props.contact.lunch_begin <= @state.current_time < @props.contact.lunch_end
+
+
+  isBirthday: ->
+    if @props.person?.birthday? and @state?.current_date
+      @props.person.birthday == @state.current_date
+
+
+  componentDidMount: ->
+    @setCurrentTime()
+    @interval = setInterval((() => @setCurrentTime()), 10000)
+
+
+  componentWillUnmount: ->
+    clearInterval(@interval)
+
+
+  setCurrentTime: ->
+    @setState
+      current_time: currentTime()
+      current_date: todayDate()
+
 
   onCloseButtonClick: ->
     @props.unsetCurrentContact()
@@ -109,9 +138,13 @@ class EmployeeInfo extends React.Component
 
                 location { building: @props.contact.building, office: @props.contact.office, className: 'employee-info__iconed-data employee-info__location' }
 
-                lunch_break { lunch_begin: @props.contact.lunch_begin, lunch_end: @props.contact.lunch_end, className: 'employee-info__iconed-data employee-info__lunch-break' }
+                lunch_break { lunch_begin: @props.contact.lunch_begin, lunch_end: @props.contact.lunch_end, highlighted: ! @props.contact.on_vacation and @isOnLunchNow(), className: 'employee-info__iconed-data employee-info__lunch-break' }
 
                 birthday { birthday_formatted: @props.contact.birthday_formatted, className: 'employee-info__iconed-data employee-info__birthday' }
+
+                if @props.contact.on_vacation
+                  iconed_data { className: 'employee-info__iconed-data employee-info__vacation', icon: VacationIcon, align_icon: 'middle' },
+                    'В отпуске'
 
 
 export default connect(mapStateToProps, mapDispatchToProps)(EmployeeInfo)

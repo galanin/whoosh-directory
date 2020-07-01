@@ -6,6 +6,7 @@ import classNames from 'classnames'
 import { loadUnitInfo } from '@actions/units'
 import { setCurrentContactId } from '@actions/current'
 import { popEmployeeInfo } from '@actions/layout'
+import { currentTime, todayDate } from '@lib/datetime'
 
 import SvgIcon from '@components/common/SvgIcon'
 import ToCallIcon from '@icons/call.svg'
@@ -37,6 +38,31 @@ mapDispatchToProps = (dispatch, ownProps) ->
 
 
 class Contact extends React.Component
+
+  isOnLunchNow: ->
+    if @props.contact?.lunch_begin? and @props.contact?.lunch_end? and @state?.current_time?
+      @props.contact.lunch_begin <= @state.current_time < @props.contact.lunch_end
+
+
+  isBirthday: ->
+    if @props.person?.birthday? and @state?.current_date
+      @props.person.birthday == @state.current_date
+
+
+  setCurrentTime: ->
+    @setState
+      current_time: currentTime()
+      current_date: todayDate()
+
+
+  componentDidMount: ->
+    @setCurrentTime()
+    @interval = setInterval((() => @setCurrentTime()), 30000)
+
+
+  componentWillUnmount: ->
+    clearInterval(@interval)
+
 
   onContactClick: ->
     @props.setCurrentContact()
@@ -118,6 +144,18 @@ class Contact extends React.Component
           for phone in @props.contact.format_phones[0..2]
             div { className: 'employee__phone', key: phone[1] },
               phone[1]
+
+      div { className: 'employee__status-container' },
+        if @props.contact.on_vacation
+          div { className: 'employee__status employee__on-vacation' },
+            'В отпуске'
+        else
+          if @isOnLunchNow()
+            div { className: 'employee__status employee__on-lunch' },
+              'Обеденный перерыв'
+        if @isBirthday()
+          div { className: 'employee__status employee__birthday' },
+            'День рождения'
 
 
 ConnectedContact = connect(mapStateToProps, mapDispatchToProps)(Contact)

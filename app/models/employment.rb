@@ -48,7 +48,7 @@ class Employment < ApplicationRecord
     result = super.slice(
       'post_title', 'alpha_sort', 'post_code', 'is_head',
       'office', 'building',
-      'lunch_begin', 'lunch_end',
+      'lunch_begin', 'lunch_end', 'vacation_begin', 'vacation_end',
     ).compact.merge(
       'id'          => short_id,
       'person_id'   => person_short_id,
