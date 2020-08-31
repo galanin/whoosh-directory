@@ -3,36 +3,37 @@ class Unit < ApplicationRecord
   include Mongoid::Timestamps
   include ShortId
   include Searchable
+  include Importable
+  include ImportableUnit
 
-  field :external_id,  type: String
   field :long_title,   type: String
   field :short_title,  type: String
-  field :list_title,   type: String
-  field :child_ids,    type: Array
-  field :employ_ids,   type: Array
-  field :contact_ids,  type: Array
-  field :level,        type: Integer
+  field :node_short_id,type: String
+  field :head_short_id,type: String
   field :alpha_sort,   type: String
   field :type,         type: String # one of [org, div, dep, sec, nil]
   field :destroyed_at, type: Time
 
-  validates :short_id, uniqueness: true
+  belongs_to :node
+  belongs_to :head, class_name: 'Employment', optional: true
 
-  belongs_to :parent, class_name: 'Unit', optional: true
-
-  has_many :employments
-  has_many :external_contacts
-
-  index({ destroyed_at: 1 }, {})
+  scope :api_fields, -> { only(:short_id, :long_title, :short_title, :alpha_sort, :node_short_id, :head_short_id) }
+  index({ destroyed_at: 1, short_id: 1 }, {})
 
 
   def as_json(options = nil)
     super.slice(
-      'long_title', 'short_title', 'alpha_sort', 'list_title',
-      'child_ids', 'employ_ids', 'contact_ids', 'level', "type"
+      'long_title', 'short_title', 'alpha_sort', 'type',
     ).compact.merge(
       'id' => short_id,
+      'node_id' => node_short_id,
+      'head_id' => head_short_id,
     )
+  end
+
+
+  def self.head_employments
+    Employment.where(destroyed_at: nil).in(short_id: all.map(&:head_short_id).compact.flatten)
   end
 
 end

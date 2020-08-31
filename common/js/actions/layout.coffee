@@ -2,7 +2,7 @@ import {
   POP_LAYOUT_BLOCK
   SINK_LAYOUT_BLOCK
   LAYOUT_BLOCK_STRUCTURE
-  LAYOUT_BLOCK_UNIT_INFO
+  LAYOUT_BLOCK_NODE_INFO
   LAYOUT_BLOCK_EMPLOYEE_INFO
   LAYOUT_BLOCK_SEARCH_RESULTS
   LAYOUT_BLOCK_FAVORITES
@@ -10,9 +10,9 @@ import {
   LAYOUT_BLOCK_TO_CALL
 } from '@constants/layout'
 
-export popUnitInfo = ->
+export popNodeInfo = ->
   type: POP_LAYOUT_BLOCK
-  layout_block: LAYOUT_BLOCK_UNIT_INFO
+  layout_block: LAYOUT_BLOCK_NODE_INFO
 
 export popEmployeeInfo = ->
   type: POP_LAYOUT_BLOCK

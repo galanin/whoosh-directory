@@ -1,0 +1,28 @@
+.hierarchy-root
+
+
+.hierarchy-child
+  margin-left: 24px
+  position: relative
+
+  &:before
+    display: block
+    position: absolute
+    right: 100%
+    top: -16px
+    width: 16px
+    height: 32px
+    border-bottom: 1px dotted #bbb
+    border-left: 1px dotted #bbb
+    content: ''
+
+  &:not(:last-child)
+    &:after
+      display: block
+      position: absolute
+      right: 100%
+      width: 16px
+      top: 16px
+      bottom: -1px
+      border-left: 1px dotted #bbb
+      content: ''

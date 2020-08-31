@@ -2,7 +2,10 @@ import React from 'react'
 import { connect } from 'react-redux'
 import classNames from 'classnames'
 
+import { RESULTS_SOURCE_QUERY } from '@constants/search'
+
 import { setQuery } from '@actions/search'
+import { setResultsSource } from '@actions/search'
 import { popSearchResults } from '@actions/layout'
 
 import SvgIcon from '@components/common/SvgIcon'
@@ -24,6 +27,7 @@ mapDispatchToProps = (dispatch, ownProps) ->
   onClick: ->
     location_str = "#{ownProps.building} #{ownProps.office}"
     dispatch(setQuery(location_str))
+    dispatch(setResultsSource(RESULTS_SOURCE_QUERY))
     dispatch(popSearchResults())
 
 

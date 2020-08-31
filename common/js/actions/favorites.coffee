@@ -2,7 +2,7 @@ import { UserRequest } from '@lib/request'
 
 import { addPeople } from '@actions/people'
 import { addEmployments } from '@actions/employments'
-import { addUnitTitles } from '@actions/unit_titles'
+import { addUnits } from '@actions/units'
 import { addContacts } from '@actions/contacts'
 
 import {
@@ -21,7 +21,7 @@ import {
 
 export loadFavoritePeople = ->
   (dispatch, getState) ->
-    UserRequest.get(getState().session?.token, '/favorites/people').then (response) ->
+    UserRequest.get(getState, 'favorites/people').then (response) ->
       dispatch(addPeople(response.body.people))
       dispatch(addEmployments(response.body.employments))
       dispatch(addContacts(response.body.external_contacts))
@@ -32,8 +32,8 @@ export loadFavoritePeople = ->
 
 export loadFavoriteUnits = ->
   (dispatch, getState) ->
-    UserRequest.get(getState().session?.token, '/favorites/units').then (response) ->
-      dispatch(addUnitTitles(response.body.unit_titles))
+    UserRequest.get(getState, 'favorites/units').then (response) ->
+      dispatch(addUnits(response.body.units))
       dispatch(loadedFavoriteUnits(response.body.favorite_units))
 
     , (error) ->
@@ -53,7 +53,7 @@ export addFavoriteEmployment = (employment_id) ->
   (dispatch, getState) ->
     state = getState()
     dispatch(addingFavoriteEmployment(state.employments[employment_id]))
-    UserRequest.post(getState().session?.token, "/favorites/people/employments/#{employment_id}").then (response) ->
+    UserRequest.post(getState, "favorites/people/employments/#{employment_id}").then (response) ->
       dispatch(loadedFavoritePeople(response.body.favorite_people))
 
     , (error) ->
@@ -63,7 +63,7 @@ export addFavoriteContact = (contact_id) ->
   (dispatch, getState) ->
     state = getState()
     dispatch(addingFavoriteContact(state.contacts[contact_id]))
-    UserRequest.post(getState().session?.token, "/favorites/people/contacts/#{contact_id}").then (response) ->
+    UserRequest.post(getState, "favorites/people/contacts/#{contact_id}").then (response) ->
       dispatch(loadedFavoritePeople(response.body.favorite_people))
 
     , (error) ->
@@ -82,8 +82,8 @@ export addingFavoriteContact = (contact) ->
 export addFavoriteUnit = (unit_id) ->
   (dispatch, getState) ->
     state = getState()
-    dispatch(addingFavoriteUnit(state.unit_titles[unit_id]))
-    UserRequest.post(getState().session?.token, "/favorites/units/#{unit_id}").then (response) ->
+    dispatch(addingFavoriteUnit(state.units[unit_id]))
+    UserRequest.post(getState, "favorites/units/#{unit_id}").then (response) ->
       dispatch(loadedFavoriteUnits(response.body.favorite_units))
 
     , (error) ->
@@ -97,7 +97,7 @@ export addingFavoriteUnit = (unit) ->
 export removeFavoriteEmployment = (employment_id) ->
   (dispatch, getState) ->
     dispatch(removingFavoriteEmployment(employment_id))
-    UserRequest.delete(getState().session?.token, "/favorites/people/employments/#{employment_id}").then (response) ->
+    UserRequest.delete(getState, "favorites/people/employments/#{employment_id}").then (response) ->
       dispatch(loadedFavoritePeople(response.body.favorite_people))
 
     , (error) ->
@@ -106,7 +106,7 @@ export removeFavoriteEmployment = (employment_id) ->
 export removeFavoriteContact = (contact_id) ->
   (dispatch, getState) ->
     dispatch(removingFavoriteContact(contact_id))
-    UserRequest.delete(getState().session?.token, "/favorites/people/contacts/#{contact_id}").then (response) ->
+    UserRequest.delete(getState, "favorites/people/contacts/#{contact_id}").then (response) ->
       dispatch(loadedFavoritePeople(response.body.favorite_people))
 
     , (error) ->
@@ -125,7 +125,7 @@ export removingFavoriteContact = (contact_id) ->
 export removeFavoriteUnit = (unit_id) ->
   (dispatch, getState) ->
     dispatch(removingFavoriteUnit(unit_id))
-    UserRequest.delete(getState().session?.token, "/favorites/units/#{unit_id}").then (response) ->
+    UserRequest.delete(getState, "favorites/units/#{unit_id}").then (response) ->
       dispatch(loadedFavoriteUnits(response.body.favorite_units))
 
     , (error) ->

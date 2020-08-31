@@ -26,13 +26,14 @@ mapStateToProps = (state, ownProps) ->
 
   employment: employment
   person: employment && state.people[employment.person_id]
-  unit_id: employment?.unit_id
-  unit: employment && state.units[employment.unit_id]
+  node_id: employment?.parent_node_id
+  node: state.nodes.tree[employment?.parent_node_id]
   dept_id: employment?.dept_id
-  dept: state.units[employment?.dept_id]
+  dept: state.nodes.tree[employment?.dept_id]
   current_employment_id: state.current.employment_id
   is_to_call  : state.to_call.unchecked_employment_index[ownProps.employment_id]?
   is_favorite : state.favorites.employment_index[ownProps.employment_id]?
+  show_location: state.settings.search_results__show_location
 
 
 mapDispatchToProps = (dispatch, ownProps) ->
@@ -73,7 +74,7 @@ class Employee extends React.Component
 
 
   render: ->
-    return '' unless @props.employment
+    return '' unless @props.employment? and @props.person?
 
     photo = @props.person.photo
 
@@ -102,22 +103,39 @@ class Employee extends React.Component
             @props.person.middle_name
 
           if @props.is_to_call
-            svg { className: 'employee__to-call', svg: ToCallIcon }
+            svg { className: 'small-icon employee__to-call', svg: ToCallIcon }
 
           if @props.is_favorite
-            svg { className: 'employee__favorite', svg: StarIcon }
+            svg { className: 'small-icon employee__favorite', svg: StarIcon }
 
-        div { className: 'employee__post_title' },
-          @props.employment.post_title
+        unless @props.hide?.post
+          div { className: 'employee__post_title' },
+            @props.employment.post_title
 
         unless @props.hide?.unit
           div { className: 'employee__organization_unit_title' },
-            if @props.dept_id?
-              if @props.dept?
-                @props.dept.list_title
+            if @props.dept? and @props.dept_id != @props.node_id
+              @props.dept.t
             else
-              if @props.unit?
-                @props.unit.list_title
+              @props.node?.t
+
+        if @props.show_location
+          div { className: 'employee__location' },
+            if @props.employment.building
+              span { className: 'employee__location-building' },
+                span { className: 'employee__location-building-label' },
+                  'Корпус '
+                span { className: 'employee__location-building-number' },
+                  @props.employment.building
+            if @props.employment.office
+              span { className: 'employee__location-office' },
+                span { className: 'employee__location-office-label' },
+                  if @props.employment.building
+                    ', кабинет '
+                  else
+                    'Кабинет '
+                span { className: 'employee__location-office-number' },
+                  @props.employment.office
 
       if isArray(@props.employment.format_phones) and @props.employment.format_phones.length > 0
         div { className: 'employee__phones' },

@@ -5,7 +5,6 @@ class PersonPhotoUploader < CarrierWave::Uploader::Base
   # Include RMagick or MiniMagick support:
   # include CarrierWave::RMagick
   include CarrierWave::MiniMagick
-  include UniqId
 
   # Choose what kind of storage to use for this uploader:
   storage :file
@@ -37,6 +36,10 @@ class PersonPhotoUploader < CarrierWave::Uploader::Base
   # end
 
   # Create different versions of your uploaded files:
+  version :thumb39 do
+    process resize_to_fit: [39, 52]
+  end
+
   version :thumb45 do
     process resize_to_fit: [45, 60]
   end
@@ -58,11 +61,7 @@ class PersonPhotoUploader < CarrierWave::Uploader::Base
   # Override the filename of the uploaded files:
   # Avoid using model.id or version_name here, see uploader/store.rb for details.
   def filename
-    "#{secure_token}.#{file.extension}" if original_filename.present?
+    "#{ model.photo_short_id }.jpg" if original_filename.present?
   end
 
-  protected
-  def secure_token()
-    create_uniq_id('person_photo')
-  end
 end

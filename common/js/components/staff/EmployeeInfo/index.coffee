@@ -9,13 +9,14 @@ import OfficeLocation from '@components/contact_info/OfficeLocation'
 import LunchBreak from '@components/contact_info/LunchBreak'
 import Birthday from '@components/contact_info/Birthday'
 import IconedData from '@components/contact_info/IconedData'
-import ComboUnitEmployee from '@components/staff/ComboUnitEmployee'
-import { reverse } from 'lodash'
+import SearchResultUnit from '@components/staff/SearchResultUnit'
+import SomeoneWithButtons from '@components/staff/SomeoneWithButtons'
+import { reverse, isEmpty } from 'lodash'
 
 import { setCurrentEmploymentId } from '@actions/current'
-import { sinkEmployeeInfo, popUnitInfo, popStructure } from '@actions/layout'
-import { goToUnitInStructure } from '@actions/units'
-import { getParentIds } from '@actions/employments'
+import { sinkEmployeeInfo, popNodeInfo, popStructure } from '@actions/layout'
+import { goToNodeInStructure } from '@actions/nodes'
+import { getNodeParents } from '@actions/employments'
 import { currentTime, todayDate } from '@lib/datetime'
 
 div = React.createFactory('div')
@@ -31,7 +32,8 @@ location = React.createFactory(OfficeLocation)
 lunch_break = React.createFactory(LunchBreak)
 birthday = React.createFactory(Birthday)
 iconed_data = React.createFactory(IconedData)
-combo_unit_employee = React.createFactory(ComboUnitEmployee)
+unit = React.createFactory(SearchResultUnit)
+employee = React.createFactory(SomeoneWithButtons)
 
 import CloseButton from '@icons/close_button.svg'
 import VacationIcon from '@icons/vacation.svg'
@@ -45,19 +47,22 @@ mapStateToProps = (state, ownProps) ->
   employment: employment
   person: state.people[employment?.person_id]
   dept_id: employment?.dept_id
-  dept: state.units[employment?.dept_id]
-  unit_id: employment?.unit_id
-  unit: state.units[employment?.unit_id]
-  parent_ids: employment? && reverse(getParentIds(state, employment))
+  dept: state.nodes.tree[employment?.dept_id]
+  node_id: employment?.node_id
+  node: state.nodes.tree[employment?.node_id]
+  parent_node_id: employment?.parent_node_id
+  parent_node: state.nodes.tree[employment?.parent_node_id]
+  parents: employment? && reverse(getNodeParents(state, employment))
 
 
 mapDispatchToProps = (dispatch) ->
   unsetCurrentEmployee: ->
     dispatch(sinkEmployeeInfo())
     dispatch(setCurrentEmploymentId(null))
-  onUnitClick: (unit_id) ->
-    dispatch(goToUnitInStructure(unit_id))
-    dispatch(popUnitInfo())
+
+  goToNode: (node_id) ->
+    dispatch(goToNodeInStructure(node_id))
+    dispatch(popNodeInfo())
     dispatch(popStructure())
 
 
@@ -92,14 +97,19 @@ class EmployeeInfo extends React.Component
     @props.unsetCurrentEmployee()
 
 
-  onUnitClick: (e) ->
-    e.preventDefault()
-    @props.onUnitClick(@props.unit_id)
-
-
   onDeptClick: (e) ->
     e.preventDefault()
-    @props.onUnitClick(@props.dept_id)
+    @props.goToNode(@props.employment.dept_id)
+
+
+  onUnitClick: (e) ->
+    e.preventDefault()
+    @props.goToNode(@props.employment.parent_node_id)
+
+
+  onEmploymentClick: (e) ->
+    e.preventDefault()
+    @props.goToNode(@props.employment.node_id)
 
 
   render: ->
@@ -109,22 +119,30 @@ class EmployeeInfo extends React.Component
 
       div { className: 'employee-info-scroller' },
 
-        if @props.employment?
+        if @props.employment? and @props.person?
 
           div { className: 'employee-info' },
             div { className: 'employee-info__head' },
               div { className: 'employee-info__name' },
                 @props.person.last_name + ' ' + @props.person.first_name + ' ' + @props.person.middle_name
-            div { className: 'employee-info__post_title' },
-              @props.employment.post_title
 
-            if @props.dept_id? and @props.dept_id != @props.unit_id and @props.dept?
-              a { className: 'employee-info__unit_title', onClick: @onDeptClick.bind(this), href: '/' },
-                @props.dept.list_title
+            if @props.node?
+              a { className: 'employee-info__post-title-link', onClick: @onEmploymentClick.bind(this), href: '/' },
+                span { className: 'employee-info__post-title' },
+                  @props.employment.post_title
+            else
+              div { className: 'employee-info__post-title' },
+                @props.employment.post_title
 
-            if @props.unit?
-              a { className: 'employee-info__unit_title', onClick: @onUnitClick.bind(this), href: '/' },
-                @props.unit.list_title
+            if @props.dept_id? and @props.dept_id != @props.parent_node_id and @props.dept?
+              a { className: 'employee-info__unit-title-link', onClick: @onDeptClick.bind(this), href: '/' },
+                span { className: 'employee-info__unit-long-title' },
+                  @props.dept.t
+
+            if @props.parent_node?
+              a { className: 'employee-info__unit-title-link', onClick: @onUnitClick.bind(this), href: '/' },
+                span { className: 'employee-info__unit-long-title' },
+                  @props.parent_node.t
 
             div { className: 'employee-info__two-columns' },
               div { className: 'employee-info__photo' },
@@ -150,13 +168,22 @@ class EmployeeInfo extends React.Component
                   iconed_data { className: 'employee-info__iconed-data employee-info__vacation', icon: VacationIcon, align_icon: 'middle' },
                     'В отпуске'
 
-            if @props.parent_ids?.length > 0
+            unless isEmpty(@props.parents)
               div { className: 'employee-info__structure' },
                 div { className: 'employee-info__structure-title' },
                   'Оргструктура'
+
                 div { className: 'employee-info__structure-units' },
-                  for parent in @props.parent_ids
-                    combo_unit_employee(key: parent.unit_id, unit_id: parent.unit_id, employment_id: parent.employment_id, className: 'list-item hair-border')
+                  for parent in @props.parents
+                    if parent.unit?
+                      div { key: parent.unit.id, className: 'list-item hair-border' },
+                        unit unit_id: parent.unit.id, className: 'employee-info__structure-unit'
+                        if parent.head?
+                          employee key: parent.head.id, employment_id: parent.head.id, hide: { unit: true }, className: 'employee-info__structure-employment'
+
+                    else if parent.employment?
+                      div { key: parent.employment.id, className: 'list-item hair-border' },
+                        employee key: parent.employment.id, employment_id: parent.employment.id, hide: { unit: true }, className: 'employee-info__structure-employment'
 
 
 export default connect(mapStateToProps, mapDispatchToProps)(EmployeeInfo)

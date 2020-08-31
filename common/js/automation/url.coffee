@@ -6,7 +6,7 @@ import { isEqualBirthdayPeriod, isPresentBirthdayPeriod, prevBirthdayPeriod, pac
 
 
 import {
-  URL_PARAM_UNIT
+  URL_PARAM_NODE
   URL_PARAM_EMPLOYMENT
   URL_PARAM_CONTACT
   URL_PARAM_LAYOUT
@@ -16,7 +16,7 @@ import {
 } from '@constants/url-parsing'
 
 
-prev_unit_id = prev_employment_id = prev_contact_id = prev_birthday_period = prev_results_source = prev_pushed_at = undefined
+prev_node_id = prev_employment_id = prev_contact_id = prev_birthday_period = prev_results_source = prev_pushed_at = undefined
 prev_query = ''
 prev_layout = []
 
@@ -26,8 +26,8 @@ export default (store) ->
 
     changed_params = []
 
-    unit_id = state.current?.unit_id
-    changed_params.push 'unit_id' if unit_id != prev_unit_id
+    node_id = state.nodes.current_id
+    changed_params.push 'node_id' if node_id != prev_node_id
 
     employment_id = state.current?.employment_id
     changed_params.push 'employment_id' if employment_id != prev_employment_id
@@ -51,8 +51,8 @@ export default (store) ->
 
       path_components = []
 
-      prev_unit_id = unit_id
-      path_components.push "#{URL_PARAM_UNIT}-#{unit_id}" if unit_id?
+      prev_node_id = node_id
+      path_components.push "#{URL_PARAM_NODE}-#{node_id}" if node_id?
 
       prev_employment_id = employment_id
       path_components.push "#{URL_PARAM_EMPLOYMENT}-#{employment_id}" if employment_id?

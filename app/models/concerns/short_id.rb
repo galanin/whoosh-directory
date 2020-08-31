@@ -14,6 +14,5 @@ module ShortId
       self.short_id ||= create_uniq_id('short_id')
     end
 
-
   end
 end

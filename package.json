@@ -9,8 +9,8 @@
     "url": "https://github.com/galanin/staff-frontend.git"
   },
   "engines": {
-    "node": "10.x.x",
-    "npm": "6.x.x"
+    "node": ">=10.0.0",
+    "npm": ">=6.0.0"
   },
   "_moduleAliases": {
     "@automation": "common/js/automation",
@@ -227,6 +227,7 @@
     "module-alias": "^2.0.6",
     "prop-types": "^15.6.2",
     "react": "^16.3.1",
+    "react-device-detect": "^1.6.2",
     "react-dom": "^16.3.1",
     "react-helmet": "^5.2.0",
     "react-loadable": "^5.3.1",

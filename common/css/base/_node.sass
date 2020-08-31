@@ -1,0 +1,113 @@
+.node
+  position: relative
+  display: flex
+
+  & + .node
+    margin-top: 0
+
+  &.node_expanded
+    & > .node__button
+      & > .node__button-open
+        display: none
+
+  &.node_collapsed
+    & > .node__button
+      & > .node__button-close
+        display: none
+
+    .node__children
+      display: none
+
+
+  &:before
+    position: absolute
+    left: 18px
+    width: 20px
+    top: 16px
+    border-top: 1px dotted #bbb
+    z-index: 0
+    content: ''
+
+  &.node_has_children.node_expanded
+    &:after
+      position: absolute
+      left: 48px
+      width: 0
+      top: 10px
+      bottom: 0
+      border-left: 1px dotted #bbb
+      z-index: 0
+      content: ''
+
+  &:last-child
+    & > .node__content
+      position: relative
+
+      &:before
+        position: absolute
+        left: -17px
+        width: 2px
+        top: 17px
+        bottom: 0
+        background-color: #fff
+        content: ''
+
+.node__button,
+.node__button-stub
+  flex: 0 0 32px
+  height: 32px
+  z-index: 2
+
+.node__button
+  cursor: pointer
+  position: relative
+
+  &:hover
+
+    .node__button-border
+      fill: #6e0d59
+
+    .node__button-sign
+      fill: #6e0d59
+
+.node__button-bg
+  fill: #fff
+
+.node__button-border
+  fill: #ccc
+
+.node__button-sign
+  fill: #bbb
+
+.node__content
+  position: relative
+  flex: 0 1 100%
+  z-index: 1
+
+.node__title
+  margin: 0 0 4px 8px
+  padding: 5px 0 0 2px
+  color: #444
+  background-color: #fff
+  cursor: pointer
+  z-index: 1
+
+  &[data-level='0'],
+  &[data-level='1']
+    color: #150a10
+    font-weight: 600
+
+.node__title_highlighted
+  margin: 0
+  padding: 5px 4px 4px 10px
+  color: #150a10
+  background-color: #ddd
+
+.node__title_current
+  margin: 0
+  padding: 5px 4px 4px 10px
+  font-weight: bold
+  background-color: #777
+  color: #fff
+  &[data-level]
+    color: #fff

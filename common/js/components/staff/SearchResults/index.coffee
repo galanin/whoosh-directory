@@ -23,8 +23,10 @@ class SearchResults extends React.Component
   render: ->
     div { className: 'search-results__scroller plug' },
       div { className: 'search-results' },
-        div { className: 'search-results__title' },
-          'Результаты поиска'
+        div { className: 'search-results__head' },
+          div { className: 'search-results__title' },
+            'Результаты поиска'
+
 
         if isArray(@props.results) and @props.results.length > 0
           div { className: 'search-results__results' },
@@ -34,7 +36,8 @@ class SearchResults extends React.Component
               else if result.contact_id?
                 someone key: result.contact_id, contact_id: result.contact_id, className: 'list-item shadow'
               else if result.person_id?
-                someone key: result.person_id, employment_id: result.employ_ids[0], className: 'list-item shadow'
+                if result.employ_ids?
+                  someone key: result.person_id, employment_id: result.employ_ids[0], className: 'list-item shadow'
 
         else
           div { className: 'search-results__no-results' },

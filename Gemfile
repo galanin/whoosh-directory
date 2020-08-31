@@ -21,6 +21,8 @@ gem 'activesupport', '~> 5.1.5'
 # Use sqlite3 as the database for Active Record
 gem 'mongoid'
 gem 'mongoid-autoinc'
+gem 'mongoid-tree'
+gem 'mongoid_paranoia', github: 'ktanaka777/mongoid_paranoia'
 gem 'hashids'
 
 # Use Puma as the app server
@@ -47,6 +49,7 @@ gem 'i18n'
 gem 'net-ldap'
 gem 'whenever', require: false
 gem 'write_xlsx'
+gem 'stringex'
 
 gem 'faker'
 
@@ -61,9 +64,6 @@ group :development do
   # Access an IRB console on exception pages or by using <%= console %> anywhere in the code.
   gem 'web-console', '>= 3.3.0'
   gem 'listen', '>= 3.0.5', '< 3.2'
-  # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
-  gem 'spring'
-  gem 'spring-watcher-listen', '~> 2.0.0'
 
   gem 'rails_real_favicon'
 

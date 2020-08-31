@@ -10,7 +10,7 @@ import {
 } from '@constants/search'
 
 
-import { addUnitTitles } from '@actions/unit_titles'
+import { addUnits } from '@actions/units'
 import { addPeople } from '@actions/people'
 import { addEmployments } from '@actions/employments'
 import { addContacts } from '@actions/contacts'
@@ -99,8 +99,8 @@ export sendQuery = (machine_query_string) ->
         dispatch(addEmployments(response.body.employments))
       if response.body.external_contacts?
         dispatch(addContacts(response.body.external_contacts))
-      if response.body.unit_titles?
-        dispatch(addUnitTitles(response.body.unit_titles))
+      if response.body.units?
+        dispatch(addUnits(response.body.units))
 
       if isCurrentMachineQuery(getState, response.body.query)
         if response.body.results?

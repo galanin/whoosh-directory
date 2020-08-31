@@ -27,9 +27,10 @@
 
 .working-area__toolbar
   display: inline-block
+  vertical-align: top
 
   & + .working-area__toolbar
-    margin-left: 40px
+    margin-left: 32px
 
 .working-area__toolbar-item
   flex: 0 0 auto
@@ -55,19 +56,45 @@
   z-index: 5
 .block-index-6
   z-index: 6
+.block-index-7
+  z-index: 7
 
 
 @media (max-width: $one-column-max)
-  .working-area__results-panel
-    overflow-y: auto
+  .top-layout__header,
+  .search-panel__input-title,
+  .working-area__toolbar-panel
+    display: none
 
-  .working-area__unit-info,
-  .working-area__results
-    padding: 15px 0
+  .working-area__structure,
+  .working-area__employee-info,
+  .working-area__node-info,
+  .working-area__results,
+  .working-area__birthdays,
+  .working-area__favorites,
+  .working-area__recent,
+  .working-area__to-call
+    position: absolute
+    left: 0
+    right: 0
+    top: 0
+    bottom: 0
 
-  .working-area__structure
-    padding: 15px 10px
+  .working-area__structure,
+  .working-area__employee-info
+    padding: 16px
 
+  .working-area__results,
+  .working-area__node-info,
+  .working-area__birthdays,
+  .working-area__favorites,
+  .working-area__recent,
+  .working-area__to-call
+    padding: 16px 0
+
+@media (min-width: $two-column-min)
+  .menu-button-container
+    display: none !important
 
 @media (min-width: $two-column-min) and (max-width: $two-column-max)
   .working-area__structure,
@@ -78,7 +105,7 @@
     top: 0
     bottom: 0
 
-  .working-area__unit-info,
+  .working-area__node-info,
   .working-area__results,
   .working-area__birthdays,
   .working-area__favorites,
@@ -90,12 +117,12 @@
     top: 0
     bottom: 0
 
-  .working-area__unit-info,
   .working-area__results,
   .working-area__birthdays,
   .working-area__to-call
     padding: 15px 0
 
+  .working-area__node-info,
   .working-area__structure,
   .working-area__employee-info
     padding: 15px 10px
@@ -111,8 +138,9 @@
     padding: 20px 0
 
   .working-area__results,
-  .working-area__unit-info,
+  .working-area__node-info,
   .working-area__birthdays,
+  .working-area__favorites,
   .working-area__to-call
     position: absolute
     left: 33.3%
@@ -127,7 +155,7 @@
     top: 0
     bottom: 0
 
-  .working-area__unit-info,
+  .working-area__node-info,
   .working-area__results,
   .working-area__birthdays,
   .working-area__to-call
@@ -147,7 +175,7 @@
     bottom: 0
 
   .working-area__results,
-  .working-area__unit-info,
+  .working-area__node-info,
   .working-area__birthdays
     position: absolute
     left: 25%
@@ -171,7 +199,7 @@
     top: 0
     bottom: 0
 
-  .working-area__unit-info,
+  .working-area__node-info,
   .working-area__results,
   .working-area__to-call
     padding: 20px 0

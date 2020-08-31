@@ -1,6 +1,11 @@
 module Staff
   class UnitAPI < Grape::API
 
+    before do
+      set_cache_header(1800)
+    end
+
+
     get :units do
       present :units,
               Unit.
@@ -16,7 +21,7 @@ module Staff
     get 'units/:unit_id' do
       if params.key? :unit_id
         unit = Unit.find_by!(short_id: params[:unit_id])
-        present :unit_titles, [unit.as_json.slice('id', 'long_title', 'short_title', 'alpha_sort')]
+        present :units, [unit]
 
         unless unit.employ_ids.nil?
           employments = Employment.in(short_id: unit.employ_ids)
@@ -41,7 +46,7 @@ module Staff
     get 'units/titles/:where' do
       unit_ids = params[:where].split(',')
       units = Unit.only(:short_id, :short_title, :long_title, :alpha_sort).in(short_id: unit_ids)
-      present :unit_titles, units
+      present :units, units
     end
 
 

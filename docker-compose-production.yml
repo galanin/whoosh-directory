@@ -20,8 +20,7 @@ x-common-variables: &common-variables
 services:
   web:
     restart: always
-    image: staff_web
-    build: docker/web
+    image: "staff_web:${TAG}"
     ports:
       - '4000:80'
     volumes:
@@ -31,8 +30,7 @@ services:
       - api
   app:
     restart: always
-    image: staff_app
-    build: docker/app
+    image: "staff_app:${TAG}"
     environment: *common-variables
     ports:
       - '4003:4003'
@@ -40,8 +38,7 @@ services:
       - api
   api:
     restart: always
-    image: staff_api
-    build: docker/api
+    image: "staff_api:${TAG}"
     environment: *common-variables
     ports:
       - '4002:4002'
@@ -51,8 +48,7 @@ services:
       - db
     command: puma -C /api/config/puma.rb
   import:
-    build: docker/api
-    image: staff_api
+    image: "staff_api:${TAG}"
     environment: *common-variables
     env_file:
       - docker/import/.env
@@ -67,8 +63,7 @@ services:
       - db
   db:
     restart: always
-    image: staff_db
-    build: docker/db
+    image: "staff_db:${TAG}"
     volumes:
       - 'db_data:/data/db'
 volumes:

@@ -1,6 +1,10 @@
 module Staff
   class SearchAPI < Grape::API
 
+    before do
+      set_cache_header(1800)
+    end
+
     params {
       requires :q, type: String
       optional :max, type: Integer, default: 20
@@ -30,7 +34,7 @@ module Staff
         external_contacts = fetch_search_result_external_contacts(search_result)
         people = fetch_search_result_people(search_result)
 
-        present :unit_titles, fetch_search_result_unit_extras(search_result, employments)
+        present :units, fetch_search_result_unit_extras(search_result, employments)
       end
 
       present :type,              search_query.type

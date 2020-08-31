@@ -21,7 +21,7 @@ module Utilities
         Person.where(destroyed_at: nil).each do |person|
           search_index.add_object(person)
         end
-        Employment.where(destroyed_at: nil).each do |employment|
+        Employment.includes(:person).where(destroyed_at: nil).each do |employment|
           search_index.add_object(employment)
         end
         ExternalContact.where(destroyed_at: nil).each do |external_contact|
@@ -125,10 +125,11 @@ module Utilities
 
 
       def drop_stale_entries
-        stale_entities = @entities.select { |_, entity| entity.stale? }.to_h
-        stale_entities.each do |id, entity|
-          entity.drop_stale_entry
-          @entities.delete(id)
+        @entities.each do |id, entity|
+          if entity.stale?
+            entity.drop_stale_entry
+            @entities.delete(id)
+          end
         end
       end
 

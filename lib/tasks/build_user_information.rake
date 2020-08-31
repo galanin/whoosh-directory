@@ -7,3 +7,11 @@ task build_user_information: :environment do
     end
   end
 end
+
+
+task migrate_expanded: :environment do
+  UserSession.all.each do |session|
+    session.user_information.expanded_node_ids = session.user_information.expanded_units
+    session.save
+  end
+end

@@ -78,7 +78,7 @@ class SomeoneButtons extends React.Component
 
     div { className: classNames(class_names) },
       div { className: 'employee-buttons__button employee-buttons__to-call', onClick: @onAddToCall.bind(this) },
-        svg { className: 'employee-buttons__icon', svg: ToCallIcon }
+        svg { className: 'medium-icon employee-buttons__icon', svg: ToCallIcon }
         span { className: 'employee-buttons__label' },
           if @props.is_to_call
             'Запланирован звонок'
@@ -86,7 +86,7 @@ class SomeoneButtons extends React.Component
             'Запланировать звонок'
 
       div { className: 'employee-buttons__button employee-buttons__favorite', onClick: @onFavorite.bind(this) },
-        svg { className: 'employee-buttons__icon', svg: StarIcon }
+        svg { className: 'medium-icon employee-buttons__icon', svg: StarIcon }
         span { className: 'employee-buttons__label' },
           if @props.is_favorite
             'В избранном'

@@ -1,9 +1,14 @@
 require_relative 'to_call.rb'
 require_relative 'favorite.rb'
 require_relative 'history.rb'
+require_relative 'settings.rb'
 
 module Staff
   class UserInformationAPI < Grape::API
+
+    before do
+      set_cache_header
+    end
 
     namespace 'user_information' do
 
@@ -15,6 +20,34 @@ module Staff
       after do
         @user_information.save if @user_information.changed?
       end
+
+
+      namespace 'expanded_nodes' do
+
+        desc 'Get all expanded node ids'
+        get do
+          present :expanded_nodes, @user_information.expanded_node_ids
+        end
+
+
+        desc 'Add the new node ids to the list of expanded nodes'
+        post ':node_ids' do
+          node_ids = params[:node_ids].to_s.split(',').presence.compact
+          if node_ids.present?
+            @user_information.expand_nodes(node_ids)
+          end
+        end
+
+
+        desc 'Remove the single node id from the list of expanded nodes'
+        delete ':node_id' do
+          if params[:node_id].present?
+            @user_information.collapse_node(params[:node_id])
+          end
+        end
+
+      end
+
 
       namespace 'expanded_units' do
 
@@ -53,6 +86,7 @@ module Staff
       mount Staff::ToCallAPI
       mount Staff::FavoriteAPI
       mount Staff::HistoryAPI
+      mount Staff::SettingsAPI
 
     end
 

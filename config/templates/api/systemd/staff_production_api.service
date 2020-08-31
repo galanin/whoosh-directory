@@ -21,14 +21,14 @@ WorkingDirectory=/home/deployer/staff_production/current
 Environment=PUMA_DEBUG=1
 Environment=RACK_ENV=production
 
-ExecStart=/home/deployer/.rvm/bin/rvm default do bundle exec puma -C /home/deployer/staff_production/shared/puma.rb
+ExecStart=/home/deployer/.rvm/bin/rvm default do bundle exec --keep-file-descriptors puma -C /home/deployer/staff_production/shared/puma.rb
 ExecStop=/home/deployer/.rvm/bin/rvm default do bundle exec pumactl -F /home/deployer/staff_production/shared/puma.rb stop
-ExecReload=/home/deployer/.rvm/bin/rvm default do bundle exec pumactl -F /home/deployer/staff_production/shared/puma.rb phased-restart
+ExecReload=/home/deployer/.rvm/bin/rvm default do bundle exec --keep-file-descriptors pumactl -F /home/deployer/staff_production/shared/puma.rb phased-restart
 
 KillMode=process
 Restart=always
 
-PidFile=/home/deployer/staff_production/shared/tmp/pids/puma.pid
+PIDFile=/home/deployer/staff_production/shared/tmp/pids/puma.pid
 
 [Install]
 WantedBy=multi-user.target

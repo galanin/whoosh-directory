@@ -1,6 +1,10 @@
 module Staff
   class EmploymentAPI < Grape::API
 
+    before do
+      set_cache_header(1800)
+    end
+
     params {
       requires :who, type: String
     }

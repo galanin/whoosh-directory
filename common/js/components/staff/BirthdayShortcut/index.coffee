@@ -2,6 +2,8 @@ import React from 'react'
 import classNames from 'classnames'
 import { connect } from 'react-redux'
 
+import { RESULTS_SOURCE_BIRTHDAY } from '@constants/search'
+
 import { setBirthdayPeriodByShortcut } from '@actions/birthday_period'
 import { setResultsSource } from '@actions/search'
 import { popSearchResults } from '@actions/layout'
@@ -15,7 +17,7 @@ mapStateToProps = (state, ownProps) ->
 mapDispatchToProps = (dispatch, ownProps) ->
   setBirthdayPeriodByShortcut: ->
     dispatch(setBirthdayPeriodByShortcut(ownProps.shortcut))
-    dispatch(setResultsSource('birthday'))
+    dispatch(setResultsSource(RESULTS_SOURCE_BIRTHDAY))
     dispatch(popSearchResults())
 
 

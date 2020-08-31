@@ -1,5 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import { isMobile } from 'react-device-detect'
 import SvgIcon from '@components/common/SvgIcon'
 
 import { RESULTS_SOURCE_QUERY } from '@constants/search'
@@ -12,6 +13,9 @@ div = React.createFactory('div')
 img = React.createFactory('img')
 svg = React.createFactory(SvgIcon)
 input = React.createFactory('input')
+
+import MenuButton from '@components/common/Menu/Button'
+menu_button = React.createFactory(MenuButton)
 
 import Backspace from './icons/backspace.svg'
 import SearchButton from '@icons/search.svg'
@@ -70,17 +74,17 @@ class SearchPanel extends React.Component
 
 
   focusInputIfNoSelection: (input) ->
-    if window.getSelection
-      if window.getSelection()?.isCollapsed
-        clearInterval(@timer)
-        input.focus()
+    if window.getSelection()?.isCollapsed
+      clearInterval(@timer)
+      input.focus()
 
 
   onQueryBlur: (event) ->
-    inputElement = event.currentTarget
-    @timer = setInterval =>
-      @focusInputIfNoSelection(inputElement)
-    , 1000
+    if window.getSelection and not isMobile
+      inputElement = event.currentTarget
+      @timer = setInterval =>
+        @focusInputIfNoSelection(inputElement)
+      , 1000
 
 
   onQueryExec: (event) ->
@@ -95,12 +99,14 @@ class SearchPanel extends React.Component
   render: ->
     div { className: 'search-panel-container plug' },
       div { className: 'search-panel' },
+        menu_button {}
+
         div { className: 'search-panel__input-container' },
           div { className: 'search-panel__input-title' },
             'Поиск'
           div { className: 'search-panel__input-field soft-shadow' },
 
-            input { autoFocus: true, className: 'search-panel__input', ref: @text_input, value: @props.query, onChange: @onQueryChange.bind(this), onBlur: @onQueryBlur.bind(this), onClick: @onQueryExec.bind(this), onKeyUp: @onKeyDown.bind(this) }
+            input { autoFocus: not isMobile, className: 'search-panel__input', ref: @text_input, value: @props.query, onChange: @onQueryChange.bind(this), onBlur: @onQueryBlur.bind(this), onClick: @onQueryExec.bind(this), onKeyUp: @onKeyDown.bind(this) }
             div { className: 'search-panel__reset', onClick: @onQueryReset.bind(this) },
               svg { className: 'search-panel__reset-icon', svg: Backspace },
 

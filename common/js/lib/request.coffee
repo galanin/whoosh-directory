@@ -24,17 +24,18 @@ export Request =
 
 
 export UserRequest =
-  del: (session_token, url, params = {}) ->
-    superagent.del("#{baseURL}/user_information#{url}").query(session_token: session_token).query(params)
+  get: (getState, url, params = {}) ->
+    session_token = getState().session?.token
+    superagent.get("#{baseURL}/user_information/#{url}").query(session_token: session_token).query(params)
 
-  get: (session_token, url, params = {}) ->
-    superagent.get("#{baseURL}/user_information#{url}").query(session_token: session_token).query(params)
+  put: (getState, url, params = {}) ->
+    session_token = getState().session?.token
+    superagent.put("#{baseURL}/user_information/#{url}").send(session_token: session_token).send(params)
 
-  put: (session_token, url, params = {}) ->
-    superagent.put("#{baseURL}/user_information#{url}").send(session_token: session_token).send(params)
+  post: (getState, url, params = {}) ->
+    session_token = getState().session?.token
+    superagent.post("#{baseURL}/user_information/#{url}").query(session_token: session_token).send(params)
 
-  post: (session_token, url, params = {}) ->
-    superagent.post("#{baseURL}/user_information#{url}").query(session_token: session_token).send(params)
-
-  delete: (session_token, url, params = {}) ->
-      superagent.delete("#{baseURL}/user_information#{url}").query(session_token: session_token).send(params)
+  delete: (getState, url, params = {}) ->
+    session_token = getState().session?.token
+    superagent.delete("#{baseURL}/user_information/#{url}").query(session_token: session_token).send(params)

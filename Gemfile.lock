@@ -1,3 +1,10 @@
+GIT
+  remote: https://github.com/ktanaka777/mongoid_paranoia.git
+  revision: fba0e52460fbc06ac38233a0ea79d8e487cca2f5
+  specs:
+    mongoid_paranoia (0.3.0)
+      mongoid (>= 7.0.0)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -149,6 +156,8 @@ GEM
       mongoid (>= 3.1)
       mongoid-compatibility (>= 0.5.1)
       rspec (~> 3.3)
+    mongoid-tree (2.1.1)
+      mongoid (>= 4.0, < 8)
     mongoid_cleaner (1.2.0)
       mongoid (>= 4.0)
     multi_json (1.13.1)
@@ -220,11 +229,6 @@ GEM
     rspec-support (3.8.0)
     ruby_dep (1.5.0)
     rubyzip (1.2.2)
-    spring (2.0.2)
-      activesupport (>= 4.2)
-    spring-watcher-listen (2.0.1)
-      listen (>= 2.7, < 4.0)
-      spring (>= 1.2, < 3.0)
     sprockets (3.7.2)
       concurrent-ruby (~> 1.0)
       rack (> 1, < 3)
@@ -237,6 +241,7 @@ GEM
       net-ssh (>= 2.8.0)
     sshkit-interactive (0.3.0)
       sshkit (~> 1.12)
+    stringex (2.8.5)
     thor (0.20.3)
     thread_safe (0.3.6)
     tzinfo (1.2.5)
@@ -292,7 +297,9 @@ DEPENDENCIES
   mongoid
   mongoid-autoinc
   mongoid-rspec
+  mongoid-tree
   mongoid_cleaner
+  mongoid_paranoia!
   net-ldap
   nokogiri
   puma (~> 3.7)
@@ -302,8 +309,7 @@ DEPENDENCIES
   rails_real_favicon
   rake
   rspec
-  spring
-  spring-watcher-listen (~> 2.0.0)
+  stringex
   tzinfo-data
   web-console (>= 3.3.0)
   whenever

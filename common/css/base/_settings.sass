@@ -1,0 +1,31 @@
+.settings-panel
+
+.settings-panel__button
+  & + .settings-panel__button
+    margin-left: 16px
+
+.settings-boolean-button
+  width: 24px
+  height: 24px
+  padding: 5px
+  display: block
+  cursor: pointer
+
+  &:hover
+    svg
+      path
+        fill: #444
+
+  svg
+    display: block
+    width: 24px
+    height: 24px
+
+    path
+      fill: #888
+
+.settings-boolean-button-checked
+  background-color: #ddd
+  svg
+    path
+      fill: #666
