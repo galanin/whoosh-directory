@@ -26,7 +26,7 @@ gem 'mongoid_paranoia', github: 'ktanaka777/mongoid_paranoia'
 gem 'hashids'
 
 # Use Puma as the app server
-gem 'puma', '~> 3.7'
+gem 'puma', '~> 3.12'
 gem 'puma_worker_killer'
 
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
