@@ -1,2 +1,0 @@
-export SET_SETTINGS = 'SET_SETTINGS';
-export SET_SETTING = 'SET_SETTING';

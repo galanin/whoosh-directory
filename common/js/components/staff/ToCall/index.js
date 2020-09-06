@@ -1,0 +1,159 @@
+/*
+ * decaffeinate suggestions:
+ * DS102: Remove unnecessary code created because of implicit returns
+ * DS103: Rewrite code to no longer use __guard__, or convert again using --optional-chaining
+ * DS205: Consider reworking code to avoid use of IIFEs
+ * DS207: Consider shorter variations of null checks
+ * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
+ */
+import React from 'react';
+import { connect } from 'react-redux';
+import classNames from 'classnames';
+
+import SvgIcon from '@components/common/SvgIcon';
+import {
+  addEmploymentToCall,
+  addContactToCall,
+  checkEmploymentToCall,
+  checkContactToCall,
+  destroyEmploymentToCall,
+  destroyContactToCall
+} from '@actions/to_call';
+
+const div = React.createFactory('div');
+const svg = React.createFactory(SvgIcon);
+
+import Employee from '@components/staff/Employee';
+const employee = React.createFactory(Employee);
+
+import Contact from '@components/staff/Contact';
+const contact = React.createFactory(Contact);
+
+import CheckIcon from '@icons/checked.svg';
+import DestroyIcon from '@icons/recycle-bin.svg';
+
+const mapStateToProps = function(state, ownProps) {
+  const to_call = __guard__(
+    state.to_call != null ? state.to_call.data : undefined,
+    x => x[ownProps.to_call_id]
+  );
+
+  const is_unchecked = (() => {
+    if (to_call.employment_id != null) {
+      return state.to_call.unchecked_employment_index[to_call.employment_id];
+    } else if (to_call.contact_id != null) {
+      return state.to_call.unchecked_contact_index[to_call.contact_id];
+    }
+  })();
+
+  return {
+    to_call,
+    is_unchecked
+  };
+};
+
+const mapDispatchToProps = (dispatch, ownProps) => ({
+  addToCall(to_call) {
+    if (to_call.employment_id != null) {
+      return dispatch(addEmploymentToCall(to_call.employment_id));
+    } else if (to_call.contact_id != null) {
+      return dispatch(addContactToCall(to_call.contact_id));
+    }
+  },
+
+  checkToCall(to_call) {
+    if (to_call.employment_id != null) {
+      return dispatch(checkEmploymentToCall(to_call.employment_id));
+    } else if (to_call.contact_id != null) {
+      return dispatch(checkContactToCall(to_call.contact_id));
+    }
+  },
+
+  destroyToCall(to_call) {
+    if (to_call.employment_id != null) {
+      return dispatch(destroyEmploymentToCall(to_call.employment_id));
+    } else if (to_call.contact_id != null) {
+      return dispatch(destroyContactToCall(to_call.contact_id));
+    }
+  }
+});
+
+class ToCall extends React.Component {
+  onCheck() {
+    if (this.props.is_unchecked) {
+      return this.props.checkToCall(this.props.to_call);
+    } else {
+      return this.props.addToCall(this.props.to_call);
+    }
+  }
+
+  onDestroyToCall() {
+    return this.props.destroyToCall(this.props.to_call);
+  }
+
+  render() {
+    if (this.props.to_call == null) {
+      return '';
+    }
+
+    const class_names = {
+      'to-call': true,
+      'employee-buttons-container': true,
+      'to-call_is-checked': !this.props.is_unchecked
+    };
+    class_names[this.props.className] = true;
+
+    return div(
+      { className: classNames(class_names) },
+
+      this.props.to_call.employment_id != null
+        ? employee({
+          employment_id: this.props.to_call.employment_id,
+          className: 'to-call__employee'
+        })
+        : undefined,
+
+      this.props.to_call.contact_id != null
+        ? contact({
+          contact_id: this.props.to_call.contact_id,
+          className: 'to-call__contact'
+        })
+        : undefined,
+
+      div(
+        { className: 'to-call__buttons employee-buttons-container__buttons' },
+        div(
+          {
+            className:
+              'to-call__button to-call__check-to-call employee-buttons-container__button',
+            onClick: this.onCheck.bind(this)
+          },
+          svg({
+            className: 'medium-icon to-call__icon to-call__check',
+            svg: CheckIcon
+          })
+        ),
+
+        div(
+          {
+            className:
+              'to-call__button to-call__destroy-to-call employee-buttons-container__button',
+            onClick: this.onDestroyToCall.bind(this)
+          },
+          svg({
+            className: 'medium-icon to-call__icon to-call__destroy',
+            svg: DestroyIcon
+          })
+        )
+      )
+    );
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(ToCall);
+
+function __guard__(value, transform) {
+  return typeof value !== 'undefined' && value !== null
+    ? transform(value)
+    : undefined;
+}

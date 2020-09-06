@@ -1,0 +1,1 @@
+export var SET_SESSION_TOKEN = 'SET_SESSION_TOKEN';

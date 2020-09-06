@@ -1,0 +1,2 @@
+export var SET_SETTINGS = 'SET_SETTINGS';
+export var SET_SETTING = 'SET_SETTING';
