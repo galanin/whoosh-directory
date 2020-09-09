@@ -1,8 +1,3 @@
-/*
- * decaffeinate suggestions:
- * DS102: Remove unnecessary code created because of implicit returns
- * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
- */
 import {
   POP_LAYOUT_BLOCK,
   SINK_LAYOUT_BLOCK,
@@ -15,42 +10,42 @@ import {
   LAYOUT_BLOCK_TO_CALL
 } from '@constants/layout';
 
-export var popNodeInfo = () => ({
+export const popNodeInfo = () => ({
   type: POP_LAYOUT_BLOCK,
   layout_block: LAYOUT_BLOCK_NODE_INFO
 });
 
-export var popEmployeeInfo = () => ({
+export const popEmployeeInfo = () => ({
   type: POP_LAYOUT_BLOCK,
   layout_block: LAYOUT_BLOCK_EMPLOYEE_INFO
 });
 
-export var sinkEmployeeInfo = () => ({
+export const sinkEmployeeInfo = () => ({
   type: SINK_LAYOUT_BLOCK,
   layout_block: LAYOUT_BLOCK_EMPLOYEE_INFO
 });
 
-export var popSearchResults = () => ({
+export const popSearchResults = () => ({
   type: POP_LAYOUT_BLOCK,
   layout_block: LAYOUT_BLOCK_SEARCH_RESULTS
 });
 
-export var popStructure = () => ({
+export const popStructure = () => ({
   type: POP_LAYOUT_BLOCK,
   layout_block: LAYOUT_BLOCK_STRUCTURE
 });
 
-export var popFavorites = () => ({
+export const popFavorites = () => ({
   type: POP_LAYOUT_BLOCK,
   layout_block: LAYOUT_BLOCK_FAVORITES
 });
 
-export var popRecent = () => ({
+export const popRecent = () => ({
   type: POP_LAYOUT_BLOCK,
   layout_block: LAYOUT_BLOCK_RECENT
 });
 
-export var popToCall = () => ({
+export const popToCall = () => ({
   type: POP_LAYOUT_BLOCK,
   layout_block: LAYOUT_BLOCK_TO_CALL
 });

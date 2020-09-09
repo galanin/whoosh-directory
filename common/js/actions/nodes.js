@@ -1,9 +1,3 @@
-/*
- * decaffeinate suggestions:
- * DS102: Remove unnecessary code created because of implicit returns
- * DS207: Consider shorter variations of null checks
- * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
- */
 import { isArray, isEmpty, reject } from 'lodash';
 
 import { Request, UserRequest } from '@lib/request';
@@ -25,122 +19,126 @@ import { addEmployments } from '@actions/employments';
 import { addPeople } from '@actions/people';
 import { addContacts } from '@actions/contacts';
 
+export const loadNodeTree = () => dispatch =>
+  Request.get('/nodes').then(
+    result => dispatch(addNodeTree(result.body.nodes, result.body.root_ids)),
+    error => {}
+  );
 
-export var loadNodeTree = () => dispatch => Request.get('/nodes').then(result => dispatch(addNodeTree(result.body.nodes, result.body.root_ids))
-  , function(error) {});
-
-
-export var addNodeTree = (nodes, root_ids) => ({
+export const addNodeTree = (nodes, root_ids) => ({
   type: ADD_NODE_TREE,
   nodes,
   root_ids
 });
 
+const filterLoadedNodeIds = (state, node_ids) =>
+  reject(node_ids, node_id => state.nodes.loaded[node_id]);
 
-const filterLoadedNodeIds = (state, node_ids) => reject(node_ids, node_id => state.nodes.loaded[node_id]);
-
-
-export var loadMissingNodeData = node_ids => (function(dispatch, getState) {
+export const loadMissingNodeData = node_ids => (dispatch, getState) => {
   const state = getState();
-  if (!isArray(node_ids)) { node_ids = [node_ids]; }
+  if (!isArray(node_ids)) {
+    node_ids = [node_ids];
+  }
 
   const missing_node_ids = filterLoadedNodeIds(state, node_ids);
 
   if (missing_node_ids.length > 0) {
-    return Request.get('/nodes/' + missing_node_ids.join(',')).then(function(result) {
-      dispatch(addNodes(result.body.nodes));
-      dispatch(addUnits(result.body.units));
-      dispatch(addEmployments(result.body.employments));
-      dispatch(addPeople(result.body.people));
-      return dispatch(addContacts(result.body.contacts));
-    }
-      , function(error) {});
+    return Request.get('/nodes/' + missing_node_ids.join(',')).then(
+      result => {
+        dispatch(addNodes(result.body.nodes));
+        dispatch(addUnits(result.body.units));
+        dispatch(addEmployments(result.body.employments));
+        dispatch(addPeople(result.body.people));
+        return dispatch(addContacts(result.body.contacts));
+      },
+      error => {}
+    );
   }
-});
+};
 
-
-export var addNodes = nodes => ({
+export const addNodes = nodes => ({
   type: ADD_NODE_DATA,
   nodes
 });
 
-
-export var loadedNodeIds = nodes => ({
+export const loadedNodeIds = nodes => ({
   type: LOADED_NODE_IDS,
   node_ids
 });
 
+export const loadExpandedNodes = () => (dispatch, getState) =>
+  UserRequest.get(getState, 'expanded_nodes').then(
+    result => dispatch(setExpandedNodes(result.body.expanded_nodes)),
 
-export var loadExpandedNodes = () => (dispatch, getState) => UserRequest.get(getState, 'expanded_nodes').then(result => dispatch(setExpandedNodes(result.body.expanded_nodes))
+    error => {}
+  );
 
-  , function(error) {});
-
-
-export var setExpandedNodes = node_ids => ({
+export const setExpandedNodes = node_ids => ({
   type: SET_EXPANDED_NODES,
   node_ids
 });
 
-
-export var collapseNode = node_id => ({
+export const collapseNode = node_id => ({
   type: COLLAPSE_NODE,
   node_id
 });
 
-
-export var saveCollapsedNode = node_id => (function(dispatch, getState) {
+export const saveCollapsedNode = node_id => (dispatch, getState) => {
   let node_ids;
-  if (!isArray(node_id)) { node_ids = [node_id]; }
-  return UserRequest.delete(getState, 'expanded_nodes/' + node_ids.join(',')).then();
-});
+  if (!isArray(node_id)) {
+    node_ids = [node_id];
+  }
+  return UserRequest.delete(
+    getState,
+    'expanded_nodes/' + node_ids.join(',')
+  ).then();
+};
 
-
-export var expandNodes = node_id => ({
+export const expandNodes = node_id => ({
   type: EXPAND_NODE,
   node_id
 });
 
-export var expandNode = expandNodes;
+export const expandNode = expandNodes;
 
+export const saveExpandedNodes = node_ids => (dispatch, getState) => {
+  if (!isArray(node_ids)) {
+    node_ids = [node_ids];
+  }
+  return UserRequest.post(
+    getState,
+    'expanded_nodes/' + node_ids.join(',')
+  ).then();
+};
 
-export var saveExpandedNodes = node_ids => (function(dispatch, getState) {
-  if (!isArray(node_ids)) { node_ids = [node_ids]; }
-  return UserRequest.post(getState, 'expanded_nodes/' + node_ids.join(',')).then();
-});
+export const saveExpandedNode = saveExpandedNodes;
 
-export var saveExpandedNode = saveExpandedNodes;
-
-
-export var setCurrentNodeId = node_id => ({
+export const setCurrentNodeId = node_id => ({
   type: SET_CURRENT_NODE,
   node_id
 });
 
-
-export var scrollToNode = node_id => ({
+export const scrollToNode = node_id => ({
   type: SCROLL_TO_NODE,
   node_id
 });
 
-
-export var scrolledToNode = node_id => ({
+export const scrolledToNode = node_id => ({
   type: SCROLLED_TO_NODE,
   node_id
 });
 
-
-export var openFullNodePath = node_id => (function(dispatch, getState) {
+export const openFullNodePath = node_id => (dispatch, getState) => {
   const node = getState().nodes.tree[node_id];
 
   if (!isEmpty(node != null ? node.path : undefined)) {
     dispatch(expandNodes(node.path));
     return dispatch(saveExpandedNodes(node.path));
   }
-});
+};
 
-
-export var goToNodeInStructure = node_id => (function(dispatch) {
+export const goToNodeInStructure = node_id => dispatch => {
   dispatch(openFullNodePath(node_id));
   dispatch(setCurrentNodeId(node_id));
   return dispatch(scrollToNode(node_id));
-});
+};

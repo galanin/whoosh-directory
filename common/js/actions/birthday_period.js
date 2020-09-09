@@ -1,9 +1,3 @@
-/*
- * decaffeinate suggestions:
- * DS101: Remove unnecessary use of Array.from
- * DS102: Remove unnecessary code created because of implicit returns
- * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
- */
 import {
   SET_BIRTHDAY_PERIOD,
   SET_BIRTHDAY_PERIOD_BY_DATE,
@@ -14,14 +8,18 @@ import {
 
 import { getOffsetsByShortcut } from '@lib/birthdays';
 
+export const setBirthdayPeriodByShortcut = shortcut => (dispatch, getState) => {
+  const [day_offset_left, day_offset_right] = getOffsetsByShortcut(shortcut);
+  return dispatch(
+    setBirthdayPeriod('today', day_offset_left, day_offset_right)
+  );
+};
 
-export var setBirthdayPeriodByShortcut = shortcut => (function(dispatch, getState) {
-  const [day_offset_left, day_offset_right] = Array.from(getOffsetsByShortcut(shortcut));
-  return dispatch(setBirthdayPeriod('today', day_offset_left, day_offset_right));
-});
-
-
-export var setBirthdayPeriod = (key_date, day_offset_left, day_offset_right) => ({
+export const setBirthdayPeriod = (
+  key_date,
+  day_offset_left,
+  day_offset_right
+) => ({
   type: SET_BIRTHDAY_PERIOD,
   key_date,
   day_offset_left,
@@ -30,25 +28,22 @@ export var setBirthdayPeriod = (key_date, day_offset_left, day_offset_right) => 
   day_scroll_to: day_offset_left
 });
 
-export var extendBirthdayPeriodLeft = days => ({
+export const extendBirthdayPeriodLeft = days => ({
   type: EXTEND_BIRTHDAY_PERIOD_LEFT,
   days
 });
 
-
-export var extendBirthdayPeriodRight = days => ({
+export const extendBirthdayPeriodRight = days => ({
   type: EXTEND_BIRTHDAY_PERIOD_RIGHT,
   days
 });
 
-
-export var setBirthdayPeriodByInterval = (date1, date2) => ({
+export const setBirthdayPeriodByInterval = (date1, date2) => ({
   type: SET_BIRTHDAY_PERIOD_BY_DATE,
   date1,
   date2
 });
 
-
-export var scrolledToDate = () => ({
+export const scrolledToDate = () => ({
   type: SCROLLED_TO_DATE
 });

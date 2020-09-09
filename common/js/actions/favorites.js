@@ -1,8 +1,3 @@
-/*
- * decaffeinate suggestions:
- * DS102: Remove unnecessary code created because of implicit returns
- * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
- */
 import { UserRequest } from '@lib/request';
 
 import { addPeople } from '@actions/people';
@@ -23,147 +18,144 @@ import {
   SHOW_FAVORITE_UNITS
 } from '@constants/favorites';
 
-export var loadFavoritePeople = () => (dispatch, getState) =>
+export const loadFavoritePeople = () => (dispatch, getState) =>
   UserRequest.get(getState, 'favorites/people').then(
-    function(response) {
+    response => {
       dispatch(addPeople(response.body.people));
       dispatch(addEmployments(response.body.employments));
       dispatch(addContacts(response.body.external_contacts));
       return dispatch(loadedFavoritePeople(response.body.favorite_people));
     },
 
-    function(error) {}
+    error => {}
   );
 
-export var loadFavoriteUnits = () => (dispatch, getState) =>
+export const loadFavoriteUnits = () => (dispatch, getState) =>
   UserRequest.get(getState, 'favorites/units').then(
-    function(response) {
+    response => {
       dispatch(addUnits(response.body.units));
       return dispatch(loadedFavoriteUnits(response.body.favorite_units));
     },
 
-    function(error) {}
+    error => {}
   );
 
-export var loadedFavoritePeople = favorite_people => ({
+export const loadedFavoritePeople = favorite_people => ({
   type: LOADED_FAVORITE_PEOPLE,
   favorite_people
 });
 
-export var loadedFavoriteUnits = favorite_units => ({
+export const loadedFavoriteUnits = favorite_units => ({
   type: LOADED_FAVORITE_UNITS,
   favorite_units
 });
 
-export var addFavoriteEmployment = employment_id =>
-  function(dispatch, getState) {
-    const state = getState();
-    dispatch(addingFavoriteEmployment(state.employments[employment_id]));
-    return UserRequest.post(
-      getState,
-      `favorites/people/employments/${employment_id}`
-    ).then(
-      response => dispatch(loadedFavoritePeople(response.body.favorite_people)),
+export const addFavoriteEmployment = employment_id => (dispatch, getState) => {
+  const state = getState();
+  dispatch(addingFavoriteEmployment(state.employments[employment_id]));
+  return UserRequest.post(
+    getState,
+    `favorites/people/employments/${employment_id}`
+  ).then(
+    response => dispatch(loadedFavoritePeople(response.body.favorite_people)),
 
-      function(error) {}
-    );
-  };
+    error => {}
+  );
+};
 
-export var addFavoriteContact = contact_id =>
-  function(dispatch, getState) {
-    const state = getState();
-    dispatch(addingFavoriteContact(state.contacts[contact_id]));
-    return UserRequest.post(
-      getState,
-      `favorites/people/contacts/${contact_id}`
-    ).then(
-      response => dispatch(loadedFavoritePeople(response.body.favorite_people)),
+export const addFavoriteContact = contact_id => (dispatch, getState) => {
+  const state = getState();
+  dispatch(addingFavoriteContact(state.contacts[contact_id]));
+  return UserRequest.post(
+    getState,
+    `favorites/people/contacts/${contact_id}`
+  ).then(
+    response => dispatch(loadedFavoritePeople(response.body.favorite_people)),
 
-      function(error) {}
-    );
-  };
+    error => {}
+  );
+};
 
-export var addingFavoriteEmployment = employment => ({
+export const addingFavoriteEmployment = employment => ({
   type: ADDING_FAVORITE_EMPLOYMENT,
   employment
 });
 
-export var addingFavoriteContact = contact => ({
+export const addingFavoriteContact = contact => ({
   type: ADDING_FAVORITE_CONTACT,
   contact
 });
 
-export var addFavoriteUnit = unit_id =>
-  function(dispatch, getState) {
-    const state = getState();
-    dispatch(addingFavoriteUnit(state.units[unit_id]));
-    return UserRequest.post(getState, `favorites/units/${unit_id}`).then(
-      response => dispatch(loadedFavoriteUnits(response.body.favorite_units)),
+export const addFavoriteUnit = unit_id => (dispatch, getState) => {
+  const state = getState();
+  dispatch(addingFavoriteUnit(state.units[unit_id]));
+  return UserRequest.post(getState, `favorites/units/${unit_id}`).then(
+    response => dispatch(loadedFavoriteUnits(response.body.favorite_units)),
 
-      function(error) {}
-    );
-  };
+    function(error) {}
+  );
+};
 
-export var addingFavoriteUnit = unit => ({
+export const addingFavoriteUnit = unit => ({
   type: ADDING_FAVORITE_UNIT,
   unit
 });
 
-export var removeFavoriteEmployment = employment_id =>
-  function(dispatch, getState) {
-    dispatch(removingFavoriteEmployment(employment_id));
-    return UserRequest.delete(
-      getState,
-      `favorites/people/employments/${employment_id}`
-    ).then(
-      response => dispatch(loadedFavoritePeople(response.body.favorite_people)),
+export const removeFavoriteEmployment = employment_id => (
+  dispatch,
+  getState
+) => {
+  dispatch(removingFavoriteEmployment(employment_id));
+  return UserRequest.delete(
+    getState,
+    `favorites/people/employments/${employment_id}`
+  ).then(
+    response => dispatch(loadedFavoritePeople(response.body.favorite_people)),
 
-      function(error) {}
-    );
-  };
+    error => {}
+  );
+};
 
-export var removeFavoriteContact = contact_id =>
-  function(dispatch, getState) {
-    dispatch(removingFavoriteContact(contact_id));
-    return UserRequest.delete(
-      getState,
-      `favorites/people/contacts/${contact_id}`
-    ).then(
-      response => dispatch(loadedFavoritePeople(response.body.favorite_people)),
+export const removeFavoriteContact = contact_id => (dispatch, getState) => {
+  dispatch(removingFavoriteContact(contact_id));
+  return UserRequest.delete(
+    getState,
+    `favorites/people/contacts/${contact_id}`
+  ).then(
+    response => dispatch(loadedFavoritePeople(response.body.favorite_people)),
 
-      function(error) {}
-    );
-  };
+    error => {}
+  );
+};
 
-export var removingFavoriteEmployment = employment_id => ({
+export const removingFavoriteEmployment = employment_id => ({
   type: REMOVING_FAVORITE_EMPLOYMENT,
   employment_id
 });
 
-export var removingFavoriteContact = contact_id => ({
+export const removingFavoriteContact = contact_id => ({
   type: REMOVING_FAVORITE_CONTACT,
   contact_id
 });
 
-export var removeFavoriteUnit = unit_id =>
-  function(dispatch, getState) {
-    dispatch(removingFavoriteUnit(unit_id));
-    return UserRequest.delete(getState, `favorites/units/${unit_id}`).then(
-      response => dispatch(loadedFavoriteUnits(response.body.favorite_units)),
+export const removeFavoriteUnit = unit_id => (dispatch, getState) => {
+  dispatch(removingFavoriteUnit(unit_id));
+  return UserRequest.delete(getState, `favorites/units/${unit_id}`).then(
+    response => dispatch(loadedFavoriteUnits(response.body.favorite_units)),
 
-      function(error) {}
-    );
-  };
+    error => {}
+  );
+};
 
-export var removingFavoriteUnit = unit_id => ({
+export const removingFavoriteUnit = unit_id => ({
   type: REMOVING_FAVORITE_UNIT,
   unit_id
 });
 
-export var showFavoriteEmployments = () => ({
+export const showFavoriteEmployments = () => ({
   type: SHOW_FAVORITE_PEOPLE
 });
 
-export var showFavoriteUnits = () => ({
+export const showFavoriteUnits = () => ({
   type: SHOW_FAVORITE_UNITS
 });
