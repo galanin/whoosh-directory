@@ -1,1 +1,1 @@
-export var ADD_UNITS = 'ADD_UNITS';
+export const ADD_UNITS = 'ADD_UNITS';

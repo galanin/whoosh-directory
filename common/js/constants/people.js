@@ -1,1 +1,1 @@
-export var ADD_PEOPLE = 'ADD_PEOPLE';
+export const ADD_PEOPLE = 'ADD_PEOPLE';

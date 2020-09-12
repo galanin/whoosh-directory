@@ -1,1 +1,1 @@
-export var ADD_CONTACTS = 'ADD_CONTACTS';
+export const ADD_CONTACTS = 'ADD_CONTACTS';

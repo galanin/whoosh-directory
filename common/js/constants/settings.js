@@ -1,2 +1,2 @@
-export var SET_SETTINGS = 'SET_SETTINGS';
-export var SET_SETTING = 'SET_SETTING';
+export const SET_SETTINGS = 'SET_SETTINGS';
+export const SET_SETTING = 'SET_SETTING';
