@@ -1,14 +1,11 @@
-/*
- * decaffeinate suggestions:
- * DS102: Remove unnecessary code created because of implicit returns
- * DS207: Consider shorter variations of null checks
- * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
- */
 import { isEqual } from 'lodash';
 
 import { LOCATION_CHANGE } from 'connected-react-router';
 import { getNewUrlParam } from '@lib/url-parsing';
-import { URL_PARAM_RESULTS_SOURCE, URL_PARAM_QUERY } from '@constants/url-parsing';
+import {
+  URL_PARAM_RESULTS_SOURCE,
+  URL_PARAM_QUERY
+} from '@constants/url-parsing';
 
 import { unpackResultsSource, unpackQuery } from '@lib/search';
 
@@ -21,11 +18,11 @@ import {
   DEFAULT_RESULTS_SOURCE
 } from '@constants/search';
 
-
-export default (function(state, action) {
-  if (state == null) { state = { query: '', current_machine_query: '' }; }
+export default (state, action) => {
+  if (state == null) {
+    state = { query: '', current_machine_query: '' };
+  }
   switch (action.type) {
-
     case SET_HUMAN_QUERY:
       var new_state = Object.assign({}, state);
       new_state.query = action.query;
@@ -53,7 +50,10 @@ export default (function(state, action) {
 
     case LOCATION_CHANGE:
       if (action.payload.action === 'POP') {
-        const results_source_packed = getNewUrlParam(action.payload, URL_PARAM_RESULTS_SOURCE);
+        const results_source_packed = getNewUrlParam(
+          action.payload,
+          URL_PARAM_RESULTS_SOURCE
+        );
         const query = getNewUrlParam(action.payload, URL_PARAM_QUERY);
 
         new_state = Object.assign({}, state);
@@ -70,13 +70,14 @@ export default (function(state, action) {
         }
 
         if (query != null) {
-          new_state.current_machine_query = (new_state.query = unpackQuery(query));
+          new_state.current_machine_query = new_state.query = unpackQuery(
+            query
+          );
         } else {
-          new_state.current_machine_query = (new_state.query = '');
+          new_state.current_machine_query = new_state.query = '';
         }
 
         return new_state;
-
       } else {
         return state;
       }
@@ -84,4 +85,4 @@ export default (function(state, action) {
     default:
       return state;
   }
-});
+};

@@ -1,8 +1,3 @@
-/*
- * decaffeinate suggestions:
- * DS102: Remove unnecessary code created because of implicit returns
- * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
- */
 import { combineReducers } from 'redux';
 import { connectRouter } from 'connected-react-router';
 
@@ -24,24 +19,24 @@ import favorites from '@reducers/favorites';
 import settings from '@reducers/settings';
 import menu from '@reducers/menu';
 
-
-export default history => combineReducers({
-  session,
-  nodes,
-  units,
-  current,
-  people,
-  employments,
-  contacts,
-  initial_state,
-  layout,
-  search,
-  search_cache,
-  birthdays,
-  birthday_period,
-  to_call,
-  favorites,
-  menu,
-  settings,
-  router:             connectRouter(history)
-});
+export default history =>
+  combineReducers({
+    session,
+    nodes,
+    units,
+    current,
+    people,
+    employments,
+    contacts,
+    initial_state,
+    layout,
+    search,
+    search_cache,
+    birthdays,
+    birthday_period,
+    to_call,
+    favorites,
+    menu,
+    settings,
+    router: connectRouter(history)
+  });

@@ -1,10 +1,3 @@
-/*
- * decaffeinate suggestions:
- * DS101: Remove unnecessary use of Array.from
- * DS102: Remove unnecessary code created because of implicit returns
- * DS207: Consider shorter variations of null checks
- * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
- */
 import { clone, without, isArray } from 'lodash';
 import { LOCATION_CHANGE } from 'connected-react-router';
 import { getNewUrlParam } from '@lib/url-parsing';
@@ -21,19 +14,15 @@ import {
   SCROLLED_TO_NODE
 } from '@constants/nodes';
 
-import {
-  URL_PARAM_NODE
-} from '@constants/url-parsing';
+import { URL_PARAM_NODE } from '@constants/url-parsing';
 
-const setChildrenParent = function(nodes, node) {
+const setChildrenParent = (nodes, node) => {
   if (isArray(node.c)) {
-    return Array.from(node.c).map((child_id) =>
-      (nodes[child_id].parent_id = node.id));
+    return node.c.map(child_id => (nodes[child_id].parent_id = node.id));
   }
 };
 
-
-const getParentPath = function(nodes, node) {
+const getParentPath = (nodes, node) => {
   if (node.parent_id) {
     const parent_node = nodes[node.parent_id];
     setPath(nodes, parent_node);
@@ -43,12 +32,12 @@ const getParentPath = function(nodes, node) {
   }
 };
 
-
-var setPath = function(nodes, node) {
-  if (!node.path) { node.path = getParentPath(nodes, node); }
-  return node.full_path || (node.full_path = [...Array.from(node.path), node.id]);
+const setPath = (nodes, node) => {
+  if (!node.path) {
+    node.path = getParentPath(nodes, node);
+  }
+  return node.full_path || (node.full_path = [...node.path, node.id]);
 };
-
 
 const default_state = {
   root_ids: [],
@@ -60,17 +49,27 @@ const default_state = {
   scroll_to_id: null
 };
 
-export default (function(state, action) {
+export default (state, action) => {
   let id, node, node_id;
-  if (state == null) { state = default_state; }
+  if (state == null) {
+    state = default_state;
+  }
   switch (action.type) {
     case ADD_NODE_TREE:
       var new_tree = clone(state.tree);
 
-      for (node of Array.from(action.nodes)) { new_tree[node.id] = node; }
+      for (node of action.nodes) {
+        new_tree[node.id] = node;
+      }
 
-      for (id in new_tree) { node = new_tree[id]; setChildrenParent(new_tree, node); }
-      for (id in new_tree) { node = new_tree[id]; setPath(new_tree, node); }
+      for (id in new_tree) {
+        node = new_tree[id];
+        setChildrenParent(new_tree, node);
+      }
+      for (id in new_tree) {
+        node = new_tree[id];
+        setPath(new_tree, node);
+      }
 
       var new_state = clone(state);
       new_state.root_ids = action.root_ids;
@@ -80,7 +79,9 @@ export default (function(state, action) {
 
     case ADD_NODE_DATA:
       var new_data = clone(state.data);
-      for (node of Array.from(action.nodes)) { new_data[node.id] = node; }
+      for (node of action.nodes) {
+        new_data[node.id] = node;
+      }
 
       new_state = clone(state);
       new_state.data = new_data;
@@ -89,7 +90,9 @@ export default (function(state, action) {
 
     case LOADED_NODE_IDS:
       var new_loaded = clone(state.loaded);
-      for (node_id of Array.from(action.node_ids)) { new_loaded[node_id] = true; }
+      for (node_id of action.node_ids) {
+        new_loaded[node_id] = true;
+      }
 
       new_state = clone(state);
       new_state.loaded = new_loaded;
@@ -98,7 +101,9 @@ export default (function(state, action) {
 
     case SET_EXPANDED_NODES:
       var new_expanded = {};
-      for (node_id of Array.from(action.node_ids)) { new_expanded[node_id] = true; }
+      for (node_id of action.node_ids) {
+        new_expanded[node_id] = true;
+      }
 
       new_state = clone(state);
       new_state.expanded = new_expanded;
@@ -117,8 +122,12 @@ export default (function(state, action) {
     case EXPAND_NODE:
       new_expanded = clone(state.expanded);
 
-      var node_ids = isArray(action.node_id) ? action.node_id : [action.node_id];
-      for (node_id of Array.from(node_ids)) { new_expanded[node_id] = true; }
+      var node_ids = isArray(action.node_id)
+        ? action.node_id
+        : [action.node_id];
+      for (node_id of node_ids) {
+        new_expanded[node_id] = true;
+      }
 
       new_state = clone(state);
       new_state.expanded = new_expanded;
@@ -154,11 +163,9 @@ export default (function(state, action) {
           new_state.current_id = new_node_id;
 
           return new_state;
-
         } else {
           return state;
         }
-
       } else {
         return state;
       }
@@ -166,4 +173,4 @@ export default (function(state, action) {
     default:
       return state;
   }
-});
+};

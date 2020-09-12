@@ -1,19 +1,13 @@
-/*
- * decaffeinate suggestions:
- * DS102: Remove unnecessary code created because of implicit returns
- * DS207: Consider shorter variations of null checks
- * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
- */
 import {
   SET_SEARCH_RUNNING,
   SET_SEARCH_FINISHED
 } from '@constants/search_cache';
 
-
-export default (function(state, action) {
-  if (state == null) { state = {}; }
+export default (state, action) => {
+  if (state == null) {
+    state = {};
+  }
   switch (action.type) {
-
     case SET_SEARCH_RUNNING:
       var new_state = Object.assign({}, state);
       new_state[action.query] = null;
@@ -33,4 +27,4 @@ export default (function(state, action) {
     default:
       return state;
   }
-});
+};

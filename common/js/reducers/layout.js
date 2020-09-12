@@ -1,9 +1,3 @@
-/*
- * decaffeinate suggestions:
- * DS102: Remove unnecessary code created because of implicit returns
- * DS207: Consider shorter variations of null checks
- * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
- */
 import { isEqual } from 'lodash';
 
 import { LOCATION_CHANGE } from 'connected-react-router';
@@ -25,11 +19,12 @@ import {
   SINK_LAYOUT_BLOCK
 } from '@constants/layout';
 
-export default (function(state, action) {
+export default (state, action) => {
   let new_state, new_z_order;
-  if (state == null) { state = { pile: DEFAULT_LAYOUT }; }
+  if (state == null) {
+    state = { pile: DEFAULT_LAYOUT };
+  }
   switch (action.type) {
-
     case POP_LAYOUT_BLOCK:
       var new_top_block = action.layout_block;
       if (state.pile[state.pile.length - 1] !== new_top_block) {
@@ -60,7 +55,7 @@ export default (function(state, action) {
 
         new_state = Object.assign({}, state);
 
-        if (layout_packed != null) {
+        if (layout_packed) {
           const new_layout = unpackLayout(layout_packed);
           if (isEqual(new_layout, state.pile)) {
             state;
@@ -72,7 +67,6 @@ export default (function(state, action) {
         }
 
         return new_state;
-
       } else {
         return state;
       }
@@ -80,5 +74,4 @@ export default (function(state, action) {
     default:
       return state;
   }
-});
-
+};

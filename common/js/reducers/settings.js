@@ -1,19 +1,10 @@
-/*
- * decaffeinate suggestions:
- * DS102: Remove unnecessary code created because of implicit returns
- * DS207: Consider shorter variations of null checks
- * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
- */
-import {
-  SET_SETTINGS,
-  SET_SETTING
-} from '@constants/settings';
+import { SET_SETTINGS, SET_SETTING } from '@constants/settings';
 
-
-export default (function(state, action) {
-  if (state == null) { state = {}; }
+export default (state, action) => {
+  if (state == null) {
+    state = {};
+  }
   switch (action.type) {
-
     case SET_SETTINGS:
       return action.settings;
 
@@ -25,4 +16,4 @@ export default (function(state, action) {
     default:
       return state;
   }
-});
+};
