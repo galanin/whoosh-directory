@@ -1,21 +1,15 @@
-/*
- * decaffeinate suggestions:
- * DS102: Remove unnecessary code created because of implicit returns
- * DS207: Consider shorter variations of null checks
- * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
- */
-import { each, filter, split, startsWith } from 'lodash';
+import { each, filter, split, startsWith } from "lodash";
 
 const url_parsing_cache = {};
 
-const surePathParsed = function(pathname) {
+const surePathParsed = pathname => {
   if (url_parsing_cache[pathname] == null) {
-    const location_arr = split(pathname, '/');
+    const location_arr = split(pathname, "/");
     const params_hash = {};
-    each(location_arr, function(part) {
+    each(location_arr, part => {
       let matches;
-      if (matches = part.match(/^([^\-]+)-(.+)$/)) {
-        return params_hash[matches[1]] = matches[2];
+      if ((matches = part.match(/^([^\-]+)-(.+)$/))) {
+        return (params_hash[matches[1]] = matches[2]);
       }
     });
 
@@ -25,8 +19,7 @@ const surePathParsed = function(pathname) {
   return url_parsing_cache[pathname];
 };
 
-
-export var getNewUrlParam = function(payload, param_name) {
+export const getNewUrlParam = (payload, param_name) => {
   const path_params = surePathParsed(payload.location.pathname);
   return path_params[param_name];
 };

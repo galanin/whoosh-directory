@@ -1,10 +1,4 @@
-/*
- * decaffeinate suggestions:
- * DS102: Remove unnecessary code created because of implicit returns
- * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
- */
-import { invert, map, isEqual } from 'lodash';
-
+import { invert, map, isEqual } from "lodash";
 
 import {
   LAYOUT_BLOCK_STRUCTURE,
@@ -21,8 +15,7 @@ import {
   THREE_COLUMN_MIN,
   THREE_COLUMN_MAX,
   FOUR_COLUMN_MIN
-} from '@constants/layout';
-
+} from "@constants/layout";
 
 const BLOCK_IDS = {
   s: LAYOUT_BLOCK_STRUCTURE,
@@ -36,24 +29,21 @@ const BLOCK_IDS = {
 
 const BLOCK_CODES = invert(BLOCK_IDS);
 
+export const isDefaultLayout = layout => isEqual(layout, DEFAULT_LAYOUT);
 
-export var isDefaultLayout = layout => isEqual(layout, DEFAULT_LAYOUT);
+export const packLayout = layout_ids =>
+  map(layout_ids, layout_id => BLOCK_CODES[layout_id]).join("");
 
+export const unpackLayout = layout_codes =>
+  map(layout_codes, layout_code => BLOCK_IDS[layout_code]);
 
-export var packLayout = layout_ids => map(layout_ids, layout_id => BLOCK_CODES[layout_id]).join('');
+export const isOneColumn = () => window.innerWidth <= ONE_COLUMN_MAX;
 
+export const isTwoColumn = () =>
+  TWO_COLUMN_MIN <= window.innerWidth && window.innerWidth <= TWO_COLUMN_MAX;
 
-export var unpackLayout = layout_codes => map(layout_codes, layout_code => BLOCK_IDS[layout_code]);
+export const isThreeColumn = () =>
+  THREE_COLUMN_MIN <= window.innerWidth &&
+  window.innerWidth <= THREE_COLUMN_MAX;
 
-
-export var isOneColumn = () => window.innerWidth <= ONE_COLUMN_MAX;
-
-
-export var isTwoColumn = () => TWO_COLUMN_MIN <= window.innerWidth && window.innerWidth <= TWO_COLUMN_MAX;
-
-
-export var isThreeColumn = () => THREE_COLUMN_MIN <= window.innerWidth && window.innerWidth <= THREE_COLUMN_MAX;
-
-
-export var isFourColumn = () => FOUR_COLUMN_MIN <= window.innerWidth;
-
+export const isFourColumn = () => FOUR_COLUMN_MIN <= window.innerWidth;
