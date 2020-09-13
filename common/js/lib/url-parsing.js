@@ -1,10 +1,10 @@
-import { each, filter, split, startsWith } from "lodash";
+import { each, filter, split, startsWith } from 'lodash';
 
 const url_parsing_cache = {};
 
 const surePathParsed = pathname => {
   if (url_parsing_cache[pathname] == null) {
-    const location_arr = split(pathname, "/");
+    const location_arr = split(pathname, '/');
     const params_hash = {};
     each(location_arr, part => {
       let matches;

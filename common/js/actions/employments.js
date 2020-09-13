@@ -62,7 +62,7 @@ const getMissingUnitIds = (state, unit_ids) =>
   unit_ids.filter(unit_id => state.units[unit_id] == null);
 
 export const getParentUnits = (state, employment) =>
-   getParentUnitIds(state, employment).map(u_id => state.units[u_id]);
+  getParentUnitIds(state, employment).map(u_id => state.units[u_id]);
 
 export const getParentEmployIds = (state, employment) => {
   const raw_employ_ids = getParentUnits(state, employment).map(unit =>

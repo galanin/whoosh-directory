@@ -1,10 +1,10 @@
-import { invert, map, isEqual } from "lodash";
+import { invert, map, isEqual } from 'lodash';
 
 import {
   RESULTS_SOURCE_BIRTHDAY,
   RESULTS_SOURCE_QUERY,
   DEFAULT_RESULTS_SOURCE
-} from "@constants/search";
+} from '@constants/search';
 
 const SOURCE_IDS = {
   b: RESULTS_SOURCE_BIRTHDAY,

@@ -1,9 +1,9 @@
-import { padStart } from "lodash";
+import { padStart } from 'lodash';
 
 export const padNumber = (number, length) => {
   if (length == null) {
     length = 2;
   }
   const number_str = number.toString();
-  return padStart(number_str, length, "0");
+  return padStart(number_str, length, '0');
 };

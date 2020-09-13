@@ -1,4 +1,4 @@
-import { invert, map, isEqual } from "lodash";
+import { invert, map, isEqual } from 'lodash';
 
 import {
   LAYOUT_BLOCK_STRUCTURE,
@@ -15,7 +15,7 @@ import {
   THREE_COLUMN_MIN,
   THREE_COLUMN_MAX,
   FOUR_COLUMN_MIN
-} from "@constants/layout";
+} from '@constants/layout';
 
 const BLOCK_IDS = {
   s: LAYOUT_BLOCK_STRUCTURE,
@@ -32,7 +32,7 @@ const BLOCK_CODES = invert(BLOCK_IDS);
 export const isDefaultLayout = layout => isEqual(layout, DEFAULT_LAYOUT);
 
 export const packLayout = layout_ids =>
-  map(layout_ids, layout_id => BLOCK_CODES[layout_id]).join("");
+  map(layout_ids, layout_id => BLOCK_CODES[layout_id]).join('');
 
 export const unpackLayout = layout_codes =>
   map(layout_codes, layout_code => BLOCK_IDS[layout_code]);

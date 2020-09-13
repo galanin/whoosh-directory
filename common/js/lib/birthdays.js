@@ -1,4 +1,4 @@
-import { todayDay, dayNumberByDate, dateByDayNumber } from "@lib/datetime";
+import { todayDay, dayNumberByDate, dateByDayNumber } from '@lib/datetime';
 
 export const limitExtension = (offsets, days) => {
   const max_extension =
@@ -8,13 +8,13 @@ export const limitExtension = (offsets, days) => {
 
 export const getOffsetsByShortcut = period_shortcut => {
   switch (period_shortcut) {
-    case "today":
+    case 'today':
       return [0, 0];
 
-    case "tomorrow":
+    case 'tomorrow':
       return [1, 6];
 
-    case "recent":
+    case 'recent':
       return [-3, -1];
   }
 };
@@ -29,7 +29,7 @@ export const getOffsetsByInterval = (date1, date2) => {
 };
 
 export const getDayNumberByOffset = (key_date, offset) => {
-  const key_day = key_date === "today" ? todayDay() : key_date;
+  const key_day = key_date === 'today' ? todayDay() : key_date;
   return key_day + offset;
 };
 
@@ -140,17 +140,17 @@ export const isPresentBirthdayPeriod = period =>
 export const prevBirthdayPeriod = period => Object.assign({}, period);
 
 export const packBirthdayPeriod = period => {
-  const start = period.day_offset_start.toString().replace("-", "_");
-  const left = period.day_offset_left.toString().replace("-", "_");
-  const right = period.day_offset_right.toString().replace("-", "_");
+  const start = period.day_offset_start.toString().replace('-', '_');
+  const left = period.day_offset_left.toString().replace('-', '_');
+  const right = period.day_offset_right.toString().replace('-', '_');
   return `${period.key_date}-${start}-${left}-${right}`;
 };
 
 export const unpackBirthdayPeriod = str => {
-  const period_arr = str.split("-");
-  const start = +period_arr[1].replace("_", "-");
-  const left = +period_arr[2].replace("_", "-");
-  const right = +period_arr[3].replace("_", "-");
+  const period_arr = str.split('-');
+  const start = +period_arr[1].replace('_', '-');
+  const left = +period_arr[2].replace('_', '-');
+  const right = +period_arr[3].replace('_', '-');
   if (
     period_arr[0] != null &&
     start != null &&

@@ -1,6 +1,6 @@
-import yn from "yn";
-import superagent from "superagent";
-import superagentJsonapify from "superagent-jsonapify";
+import yn from 'yn';
+import superagent from 'superagent';
+import superagentJsonapify from 'superagent-jsonapify';
 
 superagentJsonapify(superagent);
 
@@ -8,7 +8,7 @@ const baseURL = yn(process.env.SSR)
   ? process.env.SERVER_SIDE_API_BASE_URL
   : process.env.CLIENT_SIDE_API_BASE_URL;
 if (baseURL == null) {
-  throw "API URL is not defined";
+  throw 'API URL is not defined';
 }
 
 export const encode = encodeURIComponent;
@@ -90,7 +90,7 @@ export const UserRequest = {
 };
 
 const __guard__ = (value, transform) => {
-  return typeof value !== "undefined" && value !== null
+  return typeof value !== 'undefined' && value !== null
     ? transform(value)
     : undefined;
 };

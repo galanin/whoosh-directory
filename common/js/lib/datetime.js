@@ -1,10 +1,10 @@
-import { padNumber } from "@lib/number";
+import { padNumber } from '@lib/number';
 
 export const formatDayTime = (hours, minutes) =>
-  padNumber(hours) + ":" + padNumber(minutes);
+  padNumber(hours) + ':' + padNumber(minutes);
 
 export const formatDate = (month, day) =>
-  padNumber(month + 1) + "-" + padNumber(day + 1);
+  padNumber(month + 1) + '-' + padNumber(day + 1);
 
 const MONTH_DAYS = [31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
 
