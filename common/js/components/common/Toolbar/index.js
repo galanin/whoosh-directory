@@ -1,9 +1,3 @@
-/*
- * decaffeinate suggestions:
- * DS102: Remove unnecessary code created because of implicit returns
- * DS205: Consider reworking code to avoid use of IIFEs
- * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
- */
 import React from 'react';
 import PropTypes from 'prop-types';
 
@@ -15,30 +9,28 @@ const toolbar_button = React.createFactory(ToolbarButton);
 import Logo from './icons/logo-white.svg';
 import Phonebook from './icons/phonebook.svg';
 
-
 const buttons = {
   portal: {
-    key:  'logo',
+    key: 'logo',
     href: 'http://portal',
-    svg:  Logo,
+    svg: Logo,
     label: 'Портал'
   },
   staff: {
-    key:  'staff',
+    key: 'staff',
     href: 'http://staff',
-    svg:  Phonebook,
+    svg: Phonebook,
     label: 'Справочник сотрудников',
     current: true
   }
 };
 
-
 class Toolbar extends React.Component {
-
   render() {
     const current = this.props.current_tool;
 
-    return div({ className: 'toolbar plug' },
+    return div(
+      { className: 'toolbar plug' },
       (() => {
         const result = [];
         for (let key in buttons) {
@@ -50,6 +42,5 @@ class Toolbar extends React.Component {
     );
   }
 }
-
 
 export default Toolbar;
