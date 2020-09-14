@@ -1,11 +1,3 @@
-/*
- * decaffeinate suggestions:
- * DS101: Remove unnecessary use of Array.from
- * DS102: Remove unnecessary code created because of implicit returns
- * DS205: Consider reworking code to avoid use of IIFEs
- * DS207: Consider shorter variations of null checks
- * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
- */
 import React from 'react';
 import { connect } from 'react-redux';
 import { isArray, isEmpty } from 'lodash';
@@ -56,9 +48,9 @@ class ToCallList extends React.Component {
             { className: 'to-call-list__unchecked' },
             (() => {
               const result = [];
-              for (to_call_id of Array.from(this.props.unchecked)) {
+              for (to_call_id of this.props.unchecked) {
                 to_call = this.props.data[to_call_id];
-                if (to_call != null) {
+                if (to_call) {
                   result.push(
                     employee({
                       key: to_call.id,
@@ -99,9 +91,9 @@ class ToCallList extends React.Component {
             { className: 'to-call-list__checked' },
             (() => {
               const result1 = [];
-              for (to_call_id of Array.from(this.props.checked_today)) {
+              for (to_call_id of this.props.checked_today) {
                 to_call = this.props.data[to_call_id];
-                if (to_call != null) {
+                if (to_call) {
                   result1.push(
                     employee({
                       key: to_call.id,

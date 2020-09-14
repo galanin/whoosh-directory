@@ -1,9 +1,3 @@
-/*
- * decaffeinate suggestions:
- * DS102: Remove unnecessary code created because of implicit returns
- * DS207: Consider shorter variations of null checks
- * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
- */
 import React from 'react';
 import classNames from 'classnames';
 
@@ -14,22 +8,24 @@ const div = React.createFactory('div');
 const unit = React.createFactory(SearchResultUnit);
 const employee = React.createFactory(SomeoneWithButtons);
 
-
 class ComboUnitEmployee extends React.Component {
-
   render() {
-
-    const class_names =
-      {'combo-unit-employee' : true};
+    const class_names = { 'combo-unit-employee': true };
     class_names[this.props.className] = true;
 
-    return div({ className: classNames(class_names) },
-      (this.props.unit_id != null) ?
-        unit({ unit_id: this.props.unit_id }) : undefined,
-      (this.props.employment_id != null) ?
-        employee({ employment_id: this.props.employment_id, hide: { unit: true } }) : undefined);
+    return div(
+      { className: classNames(class_names) },
+      this.props.unit_id != null
+        ? unit({ unit_id: this.props.unit_id })
+        : undefined,
+      this.props.employment_id != null
+        ? employee({
+          employment_id: this.props.employment_id,
+          hide: { unit: true }
+        })
+        : undefined
+    );
   }
 }
-
 
 export default ComboUnitEmployee;

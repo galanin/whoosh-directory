@@ -1,12 +1,3 @@
-/*
- * decaffeinate suggestions:
- * DS101: Remove unnecessary use of Array.from
- * DS102: Remove unnecessary code created because of implicit returns
- * DS205: Consider reworking code to avoid use of IIFEs
- * DS206: Consider reworking classes to avoid initClass
- * DS207: Consider shorter variations of null checks
- * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
- */
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
@@ -26,19 +17,23 @@ const svg = React.createFactory(SvgIcon);
 const someone = React.createFactory(SomeoneWithButtons);
 const node_link = React.createFactory(NodeLink);
 
-
-const mapStateToProps = function(state, ownProps) {
+const mapStateToProps = (state, ownProps) => {
   let node_id;
   const unit = state.units[ownProps.unit_id];
   const node = state.nodes.data[unit != null ? unit.node_id : undefined];
   const tree_node = state.nodes.tree[unit != null ? unit.node_id : undefined];
-  const employments = compact((Array.from((node != null ? node.employ_ids : undefined) || [])).map((e_id) => state.employments[e_id]));
-  const child_nodes = compact((() => {
-    const result = [];
-    for (node_id of Array.from(((tree_node != null ? tree_node.c : undefined) || []))) {       result.push(state.nodes.data[node_id]);
-    }
-    return result;
-  })());
+  const employments = compact(
+    (node != null ? node.employ_ids : undefined) || []
+  ).map(e_id => state.employments[e_id]);
+  const child_nodes = compact(
+    (() => {
+      const result = [];
+      for (node_id of (tree_node != null ? tree_node.c : undefined) || []) {
+        result.push(state.nodes.data[node_id]);
+      }
+      return result;
+    })()
+  );
 
   return {
     unit,
@@ -50,7 +45,6 @@ const mapStateToProps = function(state, ownProps) {
   };
 };
 
-
 const mapDispatchToProps = dispatch => ({
   favorite(unit_id) {
     return dispatch(addFavoriteUnit(unit_id));
@@ -61,13 +55,10 @@ const mapDispatchToProps = dispatch => ({
   }
 });
 
-
 class NodeUnitInfo extends React.Component {
   static initClass() {
-    this.propTypes =
-      {unit_id: PropTypes.integer};
+    this.propTypes = { unit_id: PropTypes.integer };
   }
-
 
   onClickFavorite() {
     if (this.props.is_favorite) {
@@ -77,47 +68,77 @@ class NodeUnitInfo extends React.Component {
     }
   }
 
-
   render() {
-    if (this.props.unit == null) { return ''; }
+    if (this.props.unit == null) {
+      return '';
+    }
 
     const class_names = {
-      'unit' : true,
-      'unit__scroller' : true,
-      'unit_is-favorite' : this.props.is_favorite
+      unit: true,
+      unit__scroller: true,
+      'unit_is-favorite': this.props.is_favorite
     };
     class_names[this.props.className] = true;
 
     let child_class_name = 'list-item shadow';
-    if (this.props.unit.head_id != null) {
+    if (this.props.unit.head_id) {
       child_class_name += ' hierarchy-child';
     }
 
-    return div({ className: classNames(class_names) },
+    return div(
+      { className: classNames(class_names) },
 
-      (this.props.unit.short_title != null) ?
-        div({ className: 'unit__short-title' },
+      this.props.unit.short_title != null
+        ? div(
+          { className: 'unit__short-title' },
           this.props.unit.short_title,
 
-          svg({ className: 'medium-icon unit__favorite', svg: StarIcon, onClick: this.onClickFavorite.bind(this) })) : undefined,
+          svg({
+            className: 'medium-icon unit__favorite',
+            svg: StarIcon,
+            onClick: this.onClickFavorite.bind(this)
+          })
+        )
+        : undefined,
 
-      (this.props.unit.long_title != null) ?
-        div({ className: 'unit__long-title' },
+      this.props.unit.long_title != null
+        ? div(
+          { className: 'unit__long-title' },
           this.props.unit.long_title,
 
-          (this.props.unit.short_title == null) ?
-            svg({ className: 'medium-icon unit__favorite', svg: StarIcon, onClick: this.onClickFavorite.bind(this) }) : undefined) : undefined,
+          this.props.unit.short_title == null
+            ? svg({
+              className: 'medium-icon unit__favorite',
+              svg: StarIcon,
+              onClick: this.onClickFavorite.bind(this)
+            })
+            : undefined
+        )
+        : undefined,
 
-      (this.props.unit.head_id != null) ?
-        someone({key: this.props.unit.head_id, employment_id: this.props.unit.head_id, hide: { unit: true }, className: 'list-item shadow hierarchy-root'}) : undefined,
+      this.props.unit.head_id != null
+        ? someone({
+          key: this.props.unit.head_id,
+          employment_id: this.props.unit.head_id,
+          hide: { unit: true },
+          className: 'list-item shadow hierarchy-root'
+        })
+        : undefined,
 
-      (this.props.node != null) && (this.props.tree_node != null) ?
-        [
+      this.props.node != null && this.props.tree_node != null
+        ? [
           (() => {
             const result = [];
-            for (let employment of Array.from(this.props.employments)) {
+            for (let employment of this.props.employments) {
               if (employment.id !== this.props.unit.head_id) {
-                result.push(someone({key: employment.id, employment_id: employment.id, hide: { unit: true }, className: child_class_name}));
+                result.push(
+                  someone({
+                    key: employment.id,
+                    employment_id: employment.id,
+                    hide: { unit: true },
+                    className: child_class_name
+                  })
+                );
               } else {
                 result.push(undefined);
               }
@@ -125,16 +146,31 @@ class NodeUnitInfo extends React.Component {
             return result;
           })(),
 
-          isArray(this.props.node != null ? this.props.node.contact_ids : undefined) ?
-            Array.from(this.props.node.contact_ids).map((contact_id) =>
-              someone({key: contact_id, contact_id, hide: { unit: true }, className: child_class_name})) : undefined,
+          isArray(
+            this.props.node != null ? this.props.node.contact_ids : undefined
+          )
+            ? this.props.node.contact_ids.map(contact_id =>
+              someone({
+                key: contact_id,
+                contact_id,
+                hide: { unit: true },
+                className: child_class_name
+              })
+            )
+            : undefined,
 
-          Array.from(this.props.child_nodes).map((child_node) =>
-            node_link({key: child_node.id, node_id: child_node.id, className: child_class_name}))
-        ] : undefined);
+          this.props.child_nodes.map(child_node =>
+            node_link({
+              key: child_node.id,
+              node_id: child_node.id,
+              className: child_class_name
+            })
+          )
+        ]
+        : undefined
+    );
   }
 }
 NodeUnitInfo.initClass();
-
 
 export default connect(mapStateToProps, mapDispatchToProps)(NodeUnitInfo);

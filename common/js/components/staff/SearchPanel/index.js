@@ -1,10 +1,3 @@
-/*
- * decaffeinate suggestions:
- * DS102: Remove unnecessary code created because of implicit returns
- * DS103: Rewrite code to no longer use __guard__, or convert again using --optional-chaining
- * DS207: Consider shorter variations of null checks
- * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
- */
 import React from 'react';
 import { connect } from 'react-redux';
 import { isMobile } from 'react-device-detect';
@@ -157,8 +150,8 @@ class SearchPanel extends React.Component {
 
 export default connect(mapStateToProps, mapDispatchToProps)(SearchPanel);
 
-function __guard__(value, transform) {
+const __guard__ = (value, transform) => {
   return typeof value !== 'undefined' && value !== null
     ? transform(value)
     : undefined;
-}
+};

@@ -1,8 +1,3 @@
-/*
- * decaffeinate suggestions:
- * DS102: Remove unnecessary code created because of implicit returns
- * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
- */
 import React from 'react';
 import classNames from 'classnames';
 import { connect } from 'react-redux';
@@ -15,7 +10,6 @@ import { popSearchResults } from '@actions/layout';
 
 const span = React.createFactory('span');
 
-
 const mapStateToProps = (state, ownProps) => ({});
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
@@ -26,23 +20,20 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
   }
 });
 
-
 class BirthdayShortcut extends React.Component {
-
   onClick() {
     return this.props.setBirthdayPeriodByShortcut();
   }
 
-
   render() {
-    const classes =
-      {'birthday-shortcut' : true};
+    const classes = { 'birthday-shortcut': true };
     classes[this.props.className] = true;
 
-    return span({ className: classNames(classes), onClick: this.onClick.bind(this) },
-      this.props.children);
+    return span(
+      { className: classNames(classes), onClick: this.onClick.bind(this) },
+      this.props.children
+    );
   }
 }
-
 
 export default connect(mapStateToProps, mapDispatchToProps)(BirthdayShortcut);

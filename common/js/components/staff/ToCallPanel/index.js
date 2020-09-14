@@ -1,10 +1,3 @@
-/*
- * decaffeinate suggestions:
- * DS102: Remove unnecessary code created because of implicit returns
- * DS103: Rewrite code to no longer use __guard__, or convert again using --optional-chaining
- * DS207: Consider shorter variations of null checks
- * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
- */
 import React from 'react';
 import { connect } from 'react-redux';
 import classNames from 'classnames';
@@ -45,21 +38,26 @@ class ToCallPanel extends React.Component {
     };
     class_names[this.props.className] = true;
 
-    return div(
-      { className: classNames(class_names), onClick: this.onClick.bind(this) },
-      svg({ className: 'medium-icon to-call-panel__icon', svg: ToCallIcon }),
-      span({ className: 'to-call-panel__title' }, 'Планировщик'),
-      this.props.counter > 0
-        ? span({ className: 'to-call-panel__counter' }, this.props.counter)
-        : svg({ className: 'to-call-panel__empty', svg: CheckedIcon })
+    return (
+      <div
+        className={classNames(class_names)}
+        onClick={this.onClick.bind(this)}
+      >
+        <SvgIcon className="medium-icon to-call-panel__icon" svg={ToCallIcon} />
+        {this.props.counter > 0 ? (
+          <span className="to-call-panel__counter">{this.props.counter}</span>
+        ) : (
+          <SvgIcon className="to-call-panel__empty" svg={CheckedIcon} />
+        )}
+      </div>
     );
   }
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(ToCallPanel);
 
-function __guard__(value, transform) {
+const __guard__ = (value, transform) => {
   return typeof value !== 'undefined' && value !== null
     ? transform(value)
     : undefined;
-}
+};

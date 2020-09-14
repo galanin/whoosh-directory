@@ -1,11 +1,3 @@
-/*
- * decaffeinate suggestions:
- * DS102: Remove unnecessary code created because of implicit returns
- * DS103: Rewrite code to no longer use __guard__, or convert again using --optional-chaining
- * DS205: Consider reworking code to avoid use of IIFEs
- * DS207: Consider shorter variations of null checks
- * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
- */
 import React from 'react';
 import { connect } from 'react-redux';
 import classNames from 'classnames';
@@ -32,16 +24,16 @@ const contact = React.createFactory(Contact);
 import CheckIcon from '@icons/checked.svg';
 import DestroyIcon from '@icons/recycle-bin.svg';
 
-const mapStateToProps = function(state, ownProps) {
+const mapStateToProps = (state, ownProps) => {
   const to_call = __guard__(
     state.to_call != null ? state.to_call.data : undefined,
     x => x[ownProps.to_call_id]
   );
 
   const is_unchecked = (() => {
-    if (to_call.employment_id != null) {
+    if (to_call.employment_id) {
       return state.to_call.unchecked_employment_index[to_call.employment_id];
-    } else if (to_call.contact_id != null) {
+    } else if (to_call.contact_id) {
       return state.to_call.unchecked_contact_index[to_call.contact_id];
     }
   })();
@@ -54,25 +46,25 @@ const mapStateToProps = function(state, ownProps) {
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
   addToCall(to_call) {
-    if (to_call.employment_id != null) {
+    if (to_call.employment_id) {
       return dispatch(addEmploymentToCall(to_call.employment_id));
-    } else if (to_call.contact_id != null) {
+    } else if (to_call.contact_id) {
       return dispatch(addContactToCall(to_call.contact_id));
     }
   },
 
   checkToCall(to_call) {
-    if (to_call.employment_id != null) {
+    if (to_call.employment_id) {
       return dispatch(checkEmploymentToCall(to_call.employment_id));
-    } else if (to_call.contact_id != null) {
+    } else if (to_call.contact_id) {
       return dispatch(checkContactToCall(to_call.contact_id));
     }
   },
 
   destroyToCall(to_call) {
-    if (to_call.employment_id != null) {
+    if (to_call.employment_id) {
       return dispatch(destroyEmploymentToCall(to_call.employment_id));
-    } else if (to_call.contact_id != null) {
+    } else if (to_call.contact_id) {
       return dispatch(destroyContactToCall(to_call.contact_id));
     }
   }
@@ -152,8 +144,8 @@ class ToCall extends React.Component {
 
 export default connect(mapStateToProps, mapDispatchToProps)(ToCall);
 
-function __guard__(value, transform) {
+const __guard__ = (value, transform) => {
   return typeof value !== 'undefined' && value !== null
     ? transform(value)
     : undefined;
-}
+};

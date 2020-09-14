@@ -1,11 +1,3 @@
-/*
- * decaffeinate suggestions:
- * DS102: Remove unnecessary code created because of implicit returns
- * DS103: Rewrite code to no longer use __guard__, or convert again using --optional-chaining
- * DS205: Consider reworking code to avoid use of IIFEs
- * DS207: Consider shorter variations of null checks
- * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
- */
 import React from 'react';
 import { connect } from 'react-redux';
 import classNames from 'classnames';
@@ -39,7 +31,7 @@ import ToCallIcon from '@icons/call.svg';
 import StarIcon from '@icons/star.svg';
 
 const mapStateToProps = function(state, ownProps) {
-  if (ownProps.employment_id != null) {
+  if (ownProps.employment_id) {
     return {
       is_to_call: __guard__(
         state.to_call != null
@@ -49,7 +41,7 @@ const mapStateToProps = function(state, ownProps) {
       ),
       is_favorite: state.favorites.employment_index[ownProps.employment_id]
     };
-  } else if (ownProps.contact_id != null) {
+  } else if (ownProps.contact_id) {
     return {
       is_to_call: __guard__(
         state.to_call != null
@@ -66,33 +58,33 @@ const mapStateToProps = function(state, ownProps) {
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
   addToCall() {
-    if (ownProps.employment_id != null) {
+    if (ownProps.employment_id) {
       return dispatch(addEmploymentToCall(ownProps.employment_id));
-    } else if (ownProps.contact_id != null) {
+    } else if (ownProps.contact_id) {
       return dispatch(addContactToCall(ownProps.contact_id));
     }
   },
 
   checkToCall() {
-    if (ownProps.employment_id != null) {
+    if (ownProps.employment_id) {
       return dispatch(checkEmploymentToCall(ownProps.employment_id));
-    } else if (ownProps.contact_id != null) {
+    } else if (ownProps.contact_id) {
       return dispatch(checkContactToCall(ownProps.contact_id));
     }
   },
 
   favorite() {
-    if (ownProps.employment_id != null) {
+    if (ownProps.employment_id) {
       return dispatch(addFavoriteEmployment(ownProps.employment_id));
-    } else if (ownProps.contact_id != null) {
+    } else if (ownProps.contact_id) {
       return dispatch(addFavoriteContact(ownProps.contact_id));
     }
   },
 
   unfavorite() {
-    if (ownProps.employment_id != null) {
+    if (ownProps.employment_id) {
       return dispatch(removeFavoriteEmployment(ownProps.employment_id));
-    } else if (ownProps.contact_id != null) {
+    } else if (ownProps.contact_id) {
       return dispatch(removeFavoriteContact(ownProps.contact_id));
     }
   }
@@ -135,10 +127,10 @@ class SomeoneWithButtons extends React.Component {
       { className: classNames(class_names) },
 
       (() => {
-        if (this.props.employment_id != null) {
+        if (this.props.employment_id) {
           child_props.className = 'employee-with-buttons__employee';
           return employee(child_props);
-        } else if (this.props.contact_id != null) {
+        } else if (this.props.contact_id) {
           child_props.className = 'employee-with-buttons__contact';
           return contact(child_props);
         }
@@ -179,8 +171,8 @@ class SomeoneWithButtons extends React.Component {
 
 export default connect(mapStateToProps, mapDispatchToProps)(SomeoneWithButtons);
 
-function __guard__(value, transform) {
+const __guard__ = (value, transform) => {
   return typeof value !== 'undefined' && value !== null
     ? transform(value)
     : undefined;
-}
+};

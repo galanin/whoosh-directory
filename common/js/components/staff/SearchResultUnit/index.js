@@ -1,10 +1,3 @@
-/*
- * decaffeinate suggestions:
- * DS102: Remove unnecessary code created because of implicit returns
- * DS206: Consider reworking classes to avoid initClass
- * DS207: Consider shorter variations of null checks
- * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
- */
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
@@ -28,10 +21,6 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
 });
 
 class SearchResultUnit extends React.Component {
-  static initClass() {
-    this.propTypes = { unit_id: PropTypes.integer };
-  }
-
   onUnitClick() {
     return this.props.goToNode(this.props.unit.node_id);
   }
@@ -65,6 +54,6 @@ class SearchResultUnit extends React.Component {
     );
   }
 }
-SearchResultUnit.initClass();
+SearchResultUnit.propTypes = { unit_id: PropTypes.integer };
 
 export default connect(mapStateToProps, mapDispatchToProps)(SearchResultUnit);
