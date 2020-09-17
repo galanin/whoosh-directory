@@ -23,8 +23,10 @@ const mapStateToProps = (state, ownProps) => {
   const node = state.nodes.data[unit != null ? unit.node_id : undefined];
   const tree_node = state.nodes.tree[unit != null ? unit.node_id : undefined];
   const employments = compact(
-    (node != null ? node.employ_ids : undefined) || []
-  ).map(e_id => state.employments[e_id]);
+    ((node != null ? node.employ_ids : undefined) || []).map(
+      e_id => state.employments[e_id]
+    )
+  );
   const child_nodes = compact(
     (() => {
       const result = [];
