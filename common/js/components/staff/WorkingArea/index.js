@@ -38,7 +38,7 @@ class WorkingArea extends React.Component {
         <div className="working-area__search-panel socket">
           <SearchPanel />
         </div>
-        <div>
+        <div className="working-area__toolbar-panel">
           <div className="working-area__toolbar-panel-left">
             <BirthdayShortcutPanel className="working-area__toolbar" />
           </div>
@@ -48,11 +48,6 @@ class WorkingArea extends React.Component {
             <ToCallPanel className="working-area__toolbar" />
           </div>
 
-          <div
-            className={`working-area__block working-area__node-info socket block-index-${pile_hash['node-info']}`}
-          >
-            <NodeInfo className="plug" />
-          </div>
         </div>
 
         <div className="working-area__results-panel">
