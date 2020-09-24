@@ -61,7 +61,7 @@ export const addNodes = nodes => ({
   nodes
 });
 
-export const loadedNodeIds = nodes => ({
+export const loadedNodeIds = node_ids => ({
   type: LOADED_NODE_IDS,
   node_ids
 });
