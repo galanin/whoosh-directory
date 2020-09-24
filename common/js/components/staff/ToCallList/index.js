@@ -46,24 +46,18 @@ class ToCallList extends React.Component {
         isArray(this.props.unchecked) && !isEmpty(this.props.unchecked)
           ? div(
             { className: 'to-call-list__unchecked' },
-            (() => {
-              const result = [];
-              for (to_call_id of this.props.unchecked) {
+            this.props.unchecked.map(to_call_id => {
                 to_call = this.props.data[to_call_id];
                 if (to_call) {
-                  result.push(
-                    employee({
+                return employee({
                       key: to_call.id,
                       to_call_id: to_call.id,
                       className: 'list-item shadow'
-                    })
-                  );
+                });
                 } else {
-                  result.push(undefined);
+                return undefined;
                 }
-              }
-              return result;
-            })()
+            })
           )
           : undefined,
 
@@ -89,24 +83,18 @@ class ToCallList extends React.Component {
         isArray(this.props.checked_today) && !isEmpty(this.props.checked_today)
           ? div(
             { className: 'to-call-list__checked' },
-            (() => {
-              const result1 = [];
-              for (to_call_id of this.props.checked_today) {
+            this.props.checked_today.map(to_call_id => {
                 to_call = this.props.data[to_call_id];
                 if (to_call) {
-                  result1.push(
-                    employee({
+                return employee({
                       key: to_call.id,
                       to_call_id: to_call.id,
                       className: 'list-item shadow'
-                    })
-                  );
+                });
                 } else {
-                  result1.push(undefined);
-                }
+                return undefined;
               }
-              return result1;
-            })()
+            })
           )
           : undefined
       )

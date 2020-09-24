@@ -129,24 +129,18 @@ class NodeUnitInfo extends React.Component {
 
       this.props.node != null && this.props.tree_node != null
         ? [
-          (() => {
-            const result = [];
-            for (let employment of this.props.employments) {
+          this.props.employments.map((employment) => {
               if (employment.id !== this.props.unit.head_id) {
-                result.push(
-                  someone({
+              return someone({
                     key: employment.id,
                     employment_id: employment.id,
                     hide: { unit: true },
                     className: child_class_name
-                  })
-                );
+              });
               } else {
-                result.push(undefined);
-              }
+              return undefined;
             }
-            return result;
-          })(),
+          }),
 
           isArray(
             this.props.node != null ? this.props.node.contact_ids : undefined

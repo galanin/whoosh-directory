@@ -17,24 +17,19 @@ export const getNodeParents = (state, employment) => {
 
   const node_ids = getNodeParentIds(state, employment);
 
-  return (() => {
-    const result = [];
-    for (let node_id of node_ids) {
-      const node = state.nodes.data[node_id];
-      const unit = state.units[node != null ? node.unit_id : undefined];
-      const head = state.employments[unit != null ? unit.head_id : undefined];
-      employment =
-        state.employments[node != null ? node.employment_id : undefined];
+  return node_ids.map(node_id => {
+    const node = state.nodes.data[node_id];
+    const unit = state.units[node ? node.unit_id : undefined];
+    const head = state.employments[unit ? unit.head_id : undefined];
+    employment = state.employments[node ? node.employment_id : undefined];
 
-      result.push({
-        node,
-        unit,
-        head,
-        employment
-      });
-    }
-    return result;
-  })();
+    return {
+      node,
+      unit,
+      head,
+      employment
+    };
+  });
 };
 
 export const getNodeParentIds = (state, employment) => {
@@ -62,11 +57,11 @@ const getMissingUnitIds = (state, unit_ids) =>
   unit_ids.filter(unit_id => state.units[unit_id] == null);
 
 export const getParentUnits = (state, employment) =>
-  getParentUnitIds(state, employment).map(u_id => state.units[u_id]);
+  getNodeParentIds(state, employment).map(u_id => state.units[u_id]);
 
 export const getParentEmployIds = (state, employment) => {
   const raw_employ_ids = getParentUnits(state, employment).map(unit =>
-    unit.employ_ids != null ? unit.employ_ids[0] : undefined
+    unit.employ_ids ? unit.employ_ids[0] : undefined
   );
   return filter(raw_employ_ids);
 };
@@ -88,8 +83,8 @@ export const loadEmployments = employment_ids => (dispatch, getState) =>
 export const loadUnitHierarchy = employment_id => (dispatch, getState) => {
   const state = getState();
   const employment = state.employments[employment_id];
-  const parent_unit_ids = getParentUnitIds(state, employment);
-  const missing_unit_title_ids = getMissingUnitTitleIds(state, parent_unit_ids);
+  const parent_unit_ids = getNodeParentIds(state, employment);
+  const missing_unit_title_ids = getMissingUnitIds(state, parent_unit_ids);
   if (missing_unit_title_ids.length > 0) {
     return Request.get(
       '/units/titles/' + join(missing_unit_title_ids, ',')

@@ -95,14 +95,9 @@ class Birthdays extends React.Component {
         { className: 'birthdays' },
         div({ className: 'birthdays__title' }, 'Дни рождения'),
 
-        (() => {
-          const result1 = [];
-          for (let date of dates) {
-            var day_obj = this.props.birthdays[date];
-
-            if (day_obj) {
-              result1.push(
-                div(
+        dates.map(date => {
+          if (this.props.birthdays[date]) {
+            return div(
                   { className: 'birthdays__date', key: date },
                   div(
                     { className: 'birthdays__date-head' },
@@ -127,43 +122,32 @@ class Birthdays extends React.Component {
                   isArray(day_obj.results) && day_obj.results.length > 0
                     ? div(
                       { className: 'birthdays__results' },
-                      (() => {
-                        const result2 = [];
-                        for (let result of day_obj.results) {
+
+                  day_obj.results.map(result => {
                           if (result.contact_id) {
-                            result2.push(
-                              someone({
+                      return someone({
                                 key: result.contact_id,
                                 contact_id: result.contact_id,
                                 className: 'list-item shadow'
-                              })
-                            );
+                      });
                           } else if (result.person_id) {
-                            result2.push(
-                              someone({
+                      return someone({
                                 key: result.person_id,
                                 employment_id: result.employ_ids[0],
                                 hide: { birthday: true },
                                 className: 'list-item shadow'
-                              })
-                            );
+                      });
                           } else {
-                            result2.push(undefined);
-                          }
+                      return undefined;
                         }
-                        return result2;
-                      })()
+                  })
                     )
                     : undefined
-                )
               );
             } else {
-              result1.push(undefined);
-            }
+            return undefined;
           }
-          return result1;
-        })(),
-
+        }),
         div(
           {
             className: 'birthdays__button-forward',
