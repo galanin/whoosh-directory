@@ -96,56 +96,54 @@ class Birthdays extends React.Component {
         div({ className: 'birthdays__title' }, 'Дни рождения'),
 
         dates.map(date => {
-          if (this.props.birthdays[date]) {
-            return div(
-                  { className: 'birthdays__date', key: date },
-                  div(
-                    { className: 'birthdays__date-head' },
-                    scroll_element(
-                      {
-                        className: 'birthdays__date-title',
-                        name: `date-${date}`
-                      },
-                      day_obj.date_formatted
-                    ),
-                    date === dates[0] || date === prev_date_offset_left
-                      ? div(
-                        {
-                          className: 'birthdays__button-backward',
-                          onClick: this.stepBackward.bind(this)
-                        },
-                        'Предыдущая неделя'
-                      )
-                      : undefined
-                  ),
+          const day_obj = this.props.birthdays[date];
 
-                  isArray(day_obj.results) && day_obj.results.length > 0
-                    ? div(
-                      { className: 'birthdays__results' },
+          if (day_obj) {
+            return div(
+              { className: 'birthdays__date', key: date },
+              div(
+                { className: 'birthdays__date-head' },
+                scroll_element(
+                  {
+                    className: 'birthdays__date-title',
+                    name: `date-${date}`
+                  },
+                  day_obj.date_formatted
+                ),
+                date === dates[0] || date === prev_date_offset_left
+                  ? div(
+                    {
+                      className: 'birthdays__button-backward',
+                      onClick: this.stepBackward.bind(this)
+                    },
+                    'Предыдущая неделя'
+                  )
+                  : undefined
+              ),
+
+              isArray(day_obj.results) && day_obj.results.length > 0
+                ? div(
+                  { className: 'birthdays__results' },
 
                   day_obj.results.map(result => {
-                          if (result.contact_id) {
+                    if (result.contact_id) {
                       return someone({
-                                key: result.contact_id,
-                                contact_id: result.contact_id,
-                                className: 'list-item shadow'
+                        key: result.contact_id,
+                        contact_id: result.contact_id,
+                        className: 'list-item shadow'
                       });
-                          } else if (result.person_id) {
+                    } else if (result.person_id) {
                       return someone({
-                                key: result.person_id,
-                                employment_id: result.employ_ids[0],
-                                hide: { birthday: true },
-                                className: 'list-item shadow'
+                        key: result.person_id,
+                        employment_id: result.employ_ids[0],
+                        hide: { birthday: true },
+                        className: 'list-item shadow'
                       });
-                          } else {
-                      return undefined;
-                        }
+                    }
                   })
-                    )
-                    : undefined
-              );
-            } else {
-            return undefined;
+                )
+                : undefined
+            );
           }
         }),
         div(
