@@ -6,7 +6,8 @@ import { isArray } from 'lodash';
 
 import {
   addFavoriteEmployment,
-  removeFavoriteEmployment
+  removeFavoriteEmployment,
+  addFavoriteUnit
 } from '@actions/favorites';
 
 import SvgIcon from '@components/common/SvgIcon';
