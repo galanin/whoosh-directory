@@ -1,5 +1,6 @@
 const FIX_TABLE = {
   cyrillic: {
+    // eslint-disable-next-line no-useless-escape
     match: /(([qwertyuiop\[\]asdfghjkl;'zxcvbnm,`QWERTYUIOP\{\}ASDFGHJKL:"ZXCVBNM<>~])|(\D)(\.)|^(\.))/,
     func(replace, match, whole, p11, p21, p22, p31) {
       if (p11 != null) {

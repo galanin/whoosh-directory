@@ -8,6 +8,7 @@ const surePathParsed = pathname => {
     const params_hash = {};
     each(location_arr, part => {
       let matches;
+      // eslint-disable-next-line no-useless-escape
       if ((matches = part.match(/^([^\-]+)-(.+)$/))) {
         return (params_hash[matches[1]] = matches[2]);
       }
