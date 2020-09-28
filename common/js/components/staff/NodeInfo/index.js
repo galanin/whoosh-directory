@@ -25,7 +25,18 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => ({});
 
 class NodeInfo extends React.Component {
-  render() {
+  employeeOrUnit() {
+    if (this.props.node.employment_id) {
+      return employee({
+        employment_id: this.props.node.employment_id,
+        className: 'plug'
+      });
+    } else if (this.props.node.unit_id) {
+      return unit({ unit_id: this.props.node.unit_id, className: 'plug' });
+    }
+  }
+
+  render () {
     if (this.props.node == null) {
       return '';
     }
@@ -38,17 +49,7 @@ class NodeInfo extends React.Component {
 
     return div(
       { className: classNames(class_names) },
-
-      (() => {
-        if (this.props.node.employment_id) {
-          return employee({
-            employment_id: this.props.node.employment_id,
-            className: 'plug'
-          });
-        } else if (this.props.node.unit_id) {
-          return unit({ unit_id: this.props.node.unit_id, className: 'plug' });
-        }
-      })()
+      this.employeeOrUnit()
     );
   }
 }
