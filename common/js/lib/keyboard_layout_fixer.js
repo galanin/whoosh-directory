@@ -88,10 +88,7 @@ export const fixText = string => {
   const fix_mode = process.env.KEYBOARD_LAYOUT_FIX;
   const fix_table = FIX_TABLE[fix_mode];
   if (fix_table) {
-    return string.replace(
-      fix_table.match,
-      ...args => fix_table.func(fix_table.replace, ...args)
-    );
+    return string.replace(fix_table.match, (...args) => fix_table.func(fix_table.replace, ...args));
   } else {
     return string;
   }
