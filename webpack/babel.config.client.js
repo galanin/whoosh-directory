@@ -2,24 +2,26 @@ export default {
   babelrc: false,
   presets: [
     [
-      'env',
+      '@babel/preset-env',
       {
         targets: {
           ie: '11'
         },
         useBuiltIns: 'entry',
+        corejs: { version: '3.6' },
         debug: true
       }
     ],
-    'react'
+    ['@babel/preset-react']
   ],
   plugins: [
-    'react-loadable/babel',
-    'transform-es2015-modules-commonjs',
-    'transform-class-properties',
-    'transform-export-extensions',
-    'transform-object-rest-spread',
-    'syntax-dynamic-import',
+    '@babel/plugin-transform-modules-commonjs',
+    '@babel/plugin-proposal-class-properties',
+    '@babel/plugin-proposal-export-default-from',
+    '@babel/plugin-proposal-export-namespace-from',
+    '@babel/plugin-proposal-object-rest-spread',
+    '@babel/plugin-syntax-dynamic-import',
+    '@babel/plugin-proposal-optional-chaining',
     [
       'lodash',
       {
