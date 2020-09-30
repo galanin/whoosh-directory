@@ -24,7 +24,7 @@ export const setSearchFinished = (
 });
 
 export const hasQuerySent = (getState, machine_query_string) =>
-  getState().search_cache.hasOwnProperty(machine_query_string);
+  Object.prototype.hasOwnProperty.call(getState().search_cache, machine_query_string);
 
 export const hasQueryFinished = (getState, machine_query_string) =>
   getState().search_cache[machine_query_string] != null;
