@@ -23,18 +23,10 @@ const mapStateToProps = (state, ownProps) => {
   const node = state.nodes.data[unit != null ? unit.node_id : undefined];
   const tree_node = state.nodes.tree[unit != null ? unit.node_id : undefined];
   const employments = compact(
-    ((node != null ? node.employ_ids : undefined) || []).map(
-      e_id => state.employments[e_id]
-    )
+    (node?.employ_ids || []).map(e_id => state.employments[e_id] )
   );
   const child_nodes = compact(
-    (() => {
-      const result = [];
-      for (node_id of (tree_node != null ? tree_node.c : undefined) || []) {
-        result.push(state.nodes.data[node_id]);
-      }
-      return result;
-    })()
+    (tree_node?.c) || [].map(node_id => state.nodes.data[node_id])
   );
 
   return {
@@ -83,7 +75,7 @@ class NodeUnitInfo extends React.Component {
     class_names[this.props.className] = true;
 
     let child_class_name = 'list-item shadow';
-    if (this.props.unit.head_id) {
+    if (this.props.unit.head_id != null) {
       child_class_name += ' hierarchy-child';
     }
 
@@ -129,16 +121,14 @@ class NodeUnitInfo extends React.Component {
 
       this.props.node != null && this.props.tree_node != null
         ? [
-          this.props.employments.map((employment) => {
-              if (employment.id !== this.props.unit.head_id) {
+          this.props.employments.map(employment => {
+            if (employment.id !== this.props.unit.head_id) {
               return someone({
-                    key: employment.id,
-                    employment_id: employment.id,
-                    hide: { unit: true },
-                    className: child_class_name
+                key: employment.id,
+                employment_id: employment.id,
+                hide: { unit: true },
+                className: child_class_name
               });
-              } else {
-              return undefined;
             }
           }),
 

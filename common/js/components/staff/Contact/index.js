@@ -87,6 +87,79 @@ class Contact extends React.Component {
     return this.props.setCurrentContact();
   }
 
+  photoOrAvatar() {
+    if (this.photo.thumb45.url || this.photo.thumb60.url) {
+      if (this.photo.thumb45.url) {
+        img({
+          src: process.env.PHOTO_BASE_URL + this.photo.thumb45.url,
+          className: 'employee__thumb45'
+        });
+      }
+      if (this.photo.thumb60.url) {
+        return img({
+          src: process.env.PHOTO_BASE_URL + this.photo.thumb60.url,
+          className: 'employee__thumb60'
+        });
+      }
+    } else {
+      return avatar({
+        className: 'employee__avatar',
+        gender: this.props.contact.gender,
+        post_code: this.props.contact.post_code
+      });
+    }
+  }
+
+  vacationOrLunch() {
+    if (this.props.contact.on_vacation) {
+      return div(
+        { className: 'employee__status employee__on-vacation' },
+        'В отпуске'
+      );
+    } else {
+      if (this.isOnLunchNow()) {
+        return div(
+          { className: 'employee__status employee__on-lunch' },
+          'Обеденный перерыв'
+        );
+      }
+    }
+  }
+
+  fullName() {
+    if (this.props.contact.last_name) {
+      return [
+        span(
+          { className: 'employee__last-name' },
+          this.props.contact.last_name
+        ),
+        span(
+          { className: 'employee__first-name' },
+          this.props.contact.first_name
+        ),
+        span(
+          { className: 'employee__middle-name' },
+          this.props.contact.middle_name
+        )
+      ];
+    } else if (this.props.contact.function_title) {
+      return this.props.contact.function_title;
+    } else if (this.props.contact.location_title) {
+      return this.props.contact.location_title;
+    }
+  }
+
+  organizationTitle() {
+    if (!this.props.hide?.unit) {
+      if (this.props.node) {
+        return div(
+          { className: 'employee__organization_unit_title' },
+          this.props.node.t
+        );
+      }
+    }
+  }
+
   render() {
     if (!this.props.contact) {
       return '';
@@ -109,58 +182,13 @@ class Contact extends React.Component {
         className: classNames(class_names),
         onClick: this.onContactClick.bind(this)
       },
-      div(
-        { className: 'employee__photo' },
-        (() => {
-          if (photo.thumb45.url != null || photo.thumb60.url != null) {
-            if (photo.thumb45.url != null) {
-              img({
-                src: process.env.PHOTO_BASE_URL + photo.thumb45.url,
-                className: 'employee__thumb45'
-              });
-            }
-            if (photo.thumb60.url != null) {
-              return img({
-                src: process.env.PHOTO_BASE_URL + photo.thumb60.url,
-                className: 'employee__thumb60'
-              });
-            }
-          } else {
-            return avatar({
-              className: 'employee__avatar',
-              gender: this.props.contact.gender,
-              post_code: this.props.contact.post_code
-            });
-          }
-        })()
-      ),
+      div({ className: 'employee__photo' }, this.photoOrAvatar()),
 
       div(
         { className: 'employee__info' },
         div(
           { className: 'employee__name' },
-          (() => {
-            if (this.props.contact.last_name) {
-              return [
-                span(
-                  { className: 'employee__last-name' },
-                  this.props.contact.last_name
-                ),
-                span(
-                  { className: 'employee__first-name' },
-                  this.props.contact.first_name
-                ),
-                span(
-                  { className: 'employee__middle-name' },
-                  this.props.contact.middle_name
-                )
-              ];
-            } else if (this.props.contact.function_title) {
-              return this.props.contact.function_title;
-            } else if (this.props.contact.location_title) {
-              return this.props.contact.location_title;
-            }
-          })(),
+          this.fullName(),
 
           this.props.is_to_call
             ? svg({
@@ -181,16 +209,7 @@ class Contact extends React.Component {
           )
           : undefined,
 
-        (() => {
-          if (!(this.props.hide != null ? this.props.hide.unit : undefined)) {
-            if (this.props.node != null) {
-              return div(
-                { className: 'employee__organization_unit_title' },
-                this.props.node.t
-              );
-            }
-          }
-        })(),
+        this.organizationTitle(),
 
         this.props.show_location
           ? div(
@@ -240,21 +259,7 @@ class Contact extends React.Component {
 
       div(
         { className: 'employee__status-container' },
-        (() => {
-          if (this.props.contact.on_vacation) {
-            return div(
-              { className: 'employee__status employee__on-vacation' },
-              'В отпуске'
-            );
-          } else {
-            if (this.isOnLunchNow()) {
-              return div(
-                { className: 'employee__status employee__on-lunch' },
-                'Обеденный перерыв'
-              );
-            }
-          }
-        })(),
+        this.vacationOrLunch(),
         this.isBirthday()
           ? div(
             { className: 'employee__status employee__birthday' },

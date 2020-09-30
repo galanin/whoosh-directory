@@ -40,6 +40,48 @@ class FavoritesList extends React.Component {
     return this.props.showUnits();
   }
 
+  favoritePeople() {
+    switch (this.props.show) {
+      case FAVORITE_PEOPLE:
+        if (isArray(this.props.people) && !isEmpty(this.props.people)) {
+          return div(
+            { className: 'favorite-list__employments' },
+            this.props.people.map(favorite_people => {
+              if (favorite_people.employment_id) {
+                return someone({
+                  key: favorite_people.employment_id,
+                  employment_id: favorite_people.employment_id,
+                  className: 'list-item shadow'
+                });
+              } else if (favorite_people.contact_id) {
+                return someone({
+                  key: favorite_people.contact_id,
+                  contact_id: favorite_people.contact_id,
+                  className: 'list-item shadow'
+                });
+              }
+            })
+          );
+        }
+        break;
+
+      case FAVORITE_UNITS:
+        if (isArray(this.props.units) && !isEmpty(this.props.units)) {
+          return div(
+            { className: 'favorite-list__units' },
+            this.props.units.map(favorite_unit =>
+              unit({
+                key: favorite_unit.unit_id,
+                unit_id: favorite_unit.unit_id,
+                className: 'list-item shadow'
+              })
+            )
+          );
+        }
+        break;
+    }
+  }
+
   render() {
     const class_names = {
       'favorites-list': true,
@@ -77,57 +119,7 @@ class FavoritesList extends React.Component {
           )
         ),
 
-        (() => {
-          switch (this.props.show) {
-            case FAVORITE_PEOPLE:
-              if (isArray(this.props.people) && !isEmpty(this.props.people)) {
-                return div(
-                  { className: 'favorite-list__employments' },
-                  (() => {
-                    const result = [];
-                    for (let favorite_people of this.props.people) {
-                      if (favorite_people.employment_id) {
-                        result.push(
-                          someone({
-                            key: favorite_people.employment_id,
-                            employment_id: favorite_people.employment_id,
-                            className: 'list-item shadow'
-                          })
-                        );
-                      } else if (favorite_people.contact_id) {
-                        result.push(
-                          someone({
-                            key: favorite_people.contact_id,
-                            contact_id: favorite_people.contact_id,
-                            className: 'list-item shadow'
-                          })
-                        );
-                      } else {
-                        result.push(undefined);
-                      }
-                    }
-                    return result;
-                  })()
-                );
-              }
-              break;
-
-            case FAVORITE_UNITS:
-              if (isArray(this.props.units) && !isEmpty(this.props.units)) {
-                return div(
-                  { className: 'favorite-list__units' },
-                  this.props.units.map(favorite_unit =>
-                    unit({
-                      key: favorite_unit.unit_id,
-                      unit_id: favorite_unit.unit_id,
-                      className: 'list-item shadow'
-                    })
-                  )
-                );
-              }
-              break;
-          }
-        })()
+        this.favoritePeople()
       )
     );
   }

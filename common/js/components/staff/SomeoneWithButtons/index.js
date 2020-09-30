@@ -107,13 +107,23 @@ class SomeoneWithButtons extends React.Component {
     }
   }
 
+  employeeOrContact() {
+    const child_props = clone(this.props);
+    delete child_props.key;
+
+    if (this.props.employment_id) {
+      child_props.className = 'employee-with-buttons__employee';
+      return employee(child_props);
+    } else if (this.props.contact_id) {
+      child_props.className = 'employee-with-buttons__contact';
+      return contact(child_props);
+    }
+  }
+
   render() {
     if (this.props.employment_id == null && this.props.contact_id == null) {
       return '';
     }
-
-    const child_props = clone(this.props);
-    delete child_props.key;
 
     const class_names = {
       'employee-with-buttons': true,
@@ -126,15 +136,7 @@ class SomeoneWithButtons extends React.Component {
     return div(
       { className: classNames(class_names) },
 
-      (() => {
-        if (this.props.employment_id) {
-          child_props.className = 'employee-with-buttons__employee';
-          return employee(child_props);
-        } else if (this.props.contact_id) {
-          child_props.className = 'employee-with-buttons__contact';
-          return contact(child_props);
-        }
-      })(),
+      this.employeeOrContact(),
 
       div(
         {

@@ -30,13 +30,13 @@ const mapStateToProps = (state, ownProps) => {
     x => x[ownProps.to_call_id]
   );
 
-  const is_unchecked = (() => {
+  const is_unchecked = () => {
     if (to_call.employment_id) {
       return state.to_call.unchecked_employment_index[to_call.employment_id];
     } else if (to_call.contact_id) {
       return state.to_call.unchecked_contact_index[to_call.contact_id];
     }
-  })();
+  };
 
   return {
     to_call,
@@ -72,7 +72,7 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
 
 class ToCall extends React.Component {
   onCheck() {
-    if (this.props.is_unchecked) {
+    if (this.props.is_unchecked()) {
       return this.props.checkToCall(this.props.to_call);
     } else {
       return this.props.addToCall(this.props.to_call);
@@ -91,7 +91,7 @@ class ToCall extends React.Component {
     const class_names = {
       'to-call': true,
       'employee-buttons-container': true,
-      'to-call_is-checked': !this.props.is_unchecked
+      'to-call_is-checked': !this.props.is_unchecked()
     };
     class_names[this.props.className] = true;
 

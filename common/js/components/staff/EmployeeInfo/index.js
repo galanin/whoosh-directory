@@ -293,53 +293,42 @@ class EmployeeInfo extends React.Component {
 
                 div(
                   { className: 'employee-info__structure-units' },
-                  (() => {
-                    const result = [];
-                    for (let parent of this.props.parents) {
-                      if (parent.unit) {
-                        result.push(
-                          div(
-                            {
-                              key: parent.unit.id,
-                              className: 'list-item hair-border'
-                            },
-                            unit({
-                              unit_id: parent.unit.id,
-                              className: 'employee-info__structure-unit'
-                            }),
-                            parent.head != null
-                              ? employee({
-                                key: parent.head.id,
-                                employment_id: parent.head.id,
-                                hide: { unit: true },
-                                className:
-                                        'employee-info__structure-employment'
-                              })
-                              : undefined
-                          )
-                        );
-                      } else if (parent.employment) {
-                        result.push(
-                          div(
-                            {
-                              key: parent.employment.id,
-                              className: 'list-item hair-border'
-                            },
-                            employee({
-                              key: parent.employment.id,
-                              employment_id: parent.employment.id,
-                              hide: { unit: true },
-                              className:
+                  this.props.parents.map(parent => {
+                    if (parent.unit) {
+                      return div(
+                        {
+                          key: parent.unit.id,
+                          className: 'list-item hair-border'
+                        },
+                        unit({
+                          unit_id: parent.unit.id,
+                          className: 'employee-info__structure-unit'
+                        }),
+                        parent.head
+                          ? employee({
+                            key: parent.head.id,
+                            employment_id: parent.head.id,
+                            hide: { unit: true },
+                            className:
                                     'employee-info__structure-employment'
-                            })
-                          )
-                        );
-                      } else {
-                        result.push(undefined);
-                      }
+                          })
+                          : undefined
+                      );
+                    } else if (parent.employment) {
+                      return div(
+                        {
+                          key: parent.employment.id,
+                          className: 'list-item hair-border'
+                        },
+                        employee({
+                          key: parent.employment.id,
+                          employment_id: parent.employment.id,
+                          hide: { unit: true },
+                          className: 'employee-info__structure-employment'
+                        })
+                      );
                     }
-                    return result;
-                  })()
+                  })
                 )
               )
               : undefined

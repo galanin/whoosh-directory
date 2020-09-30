@@ -63,6 +63,51 @@ class NodeEmploymentInfo extends React.Component {
     }
   }
 
+  employeeTree() {
+    if (this.props.node) {
+      if (isArray(this.props.employ_ids)) {
+        for (let employment_id of Array.from(this.props.employ_ids)) {
+          div(
+            { className: 'hierarchy-child' },
+            someone({
+              key: employment_id,
+              employment_id,
+              hide: { unit: true },
+              className: 'list-item shadow'
+            })
+          );
+        }
+      }
+
+      if (isArray(this.props.node?.contact_ids)) {
+        for (let contact_id of Array.from(this.props.node.contact_ids)) {
+          div(
+            { className: 'hierarchy-child' },
+            someone({
+              key: contact_id,
+              contact_id,
+              hide: { unit: true },
+              className: 'list-item shadow'
+            })
+          );
+        }
+      }
+
+      if (isArray(this.props.child_ids)) {
+        return Array.from(this.props.child_ids).map(child_node_id =>
+          div(
+            { className: 'hierarchy-child' },
+            node_link({
+              key: 'child-node-' + child_node_id,
+              node_id: child_node_id,
+              className: 'list-item shadow'
+            })
+          )
+        );
+      }
+    }
+  }
+
   render() {
     if (this.props.employment == null) {
       return '';
@@ -93,52 +138,7 @@ class NodeEmploymentInfo extends React.Component {
           className: 'list-item shadow'
         })
       ),
-
-      this.props.node != null
-        ? [
-          isArray(this.props.employ_ids)
-            ? this.props.employ_ids.map(employment_id =>
-              div(
-                { className: 'hierarchy-child' },
-                someone({
-                  key: employment_id,
-                  employment_id,
-                  className: 'list-item shadow'
-                })
-              )
-            )
-            : undefined,
-
-          isArray(
-            this.props.node != null ? this.props.node.contact_ids : undefined
-          )
-            ? this.props.node.contact_ids.map(contact_id =>
-              div(
-                { className: 'hierarchy-child' },
-                someone({
-                  key: contact_id,
-                  contact_id,
-                  hide: { unit: true },
-                  className: 'list-item shadow'
-                })
-              )
-            )
-            : undefined,
-
-          isArray(this.props.child_ids)
-            ? this.props.child_ids.map(child_node_id =>
-              div(
-                { className: 'hierarchy-child' },
-                node_link({
-                  key: 'child-node-' + child_node_id,
-                  node_id: child_node_id,
-                  className: 'list-item shadow'
-                })
-              )
-            )
-            : undefined
-        ]
-        : undefined
+      this.employeeTree()
     );
   }
 }

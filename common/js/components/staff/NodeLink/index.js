@@ -46,6 +46,50 @@ class NodeLink extends React.Component {
     return this.props.click();
   }
 
+  linkContent() {
+    if (this.props.unit) {
+      return [
+        this.props.unit.short_title
+          ? div(
+            { className: 'node-link__unit-short-title', key: 'short' },
+            this.props.unit.short_title
+          )
+          : undefined,
+
+        this.props.unit.long_title
+          ? div(
+            { className: 'node-link__unit-long-title', key: 'long' },
+            this.props.unit.long_title
+          )
+          : undefined
+      ];
+    } else if (this.props.employment) {
+      const photo = this.props.person?.photo;
+
+      return div(
+        { className: 'node-link__employee-link' },
+        div(
+          { className: 'node-link__employee-photo' },
+          __guard__(photo?.thumb39, x => x.url)
+            ? img({
+              src: process.env.PHOTO_BASE_URL + photo.thumb39.url,
+              className: 'node-link__employee-thumb39'
+            })
+            : avatar({
+              className: 'node-link__avatar',
+              gender: this.props.person?.gender,
+              post_code: this.props.employment.post_code
+            })
+        ),
+
+        div(
+          { className: 'node-link__employment-post-title' },
+          this.props.employment.post_title
+        )
+      );
+    }
+  }
+
   render() {
     const class_names = { 'node-link': true };
     class_names[this.props.className] = true;
@@ -55,56 +99,7 @@ class NodeLink extends React.Component {
         className: classNames(class_names),
         onClick: this.onUnitClick.bind(this)
       },
-      (() => {
-        if (this.props.unit != null) {
-          return [
-            this.props.unit.short_title != null
-              ? div(
-                { className: 'node-link__unit-short-title', key: 'short' },
-                this.props.unit.short_title
-              )
-              : undefined,
-
-            this.props.unit.long_title != null
-              ? div(
-                { className: 'node-link__unit-long-title', key: 'long' },
-                this.props.unit.long_title
-              )
-              : undefined
-          ];
-        } else if (this.props.employment != null) {
-          const photo =
-            this.props.person != null ? this.props.person.photo : undefined;
-
-          return div(
-            { className: 'node-link__employee-link' },
-            div(
-              { className: 'node-link__employee-photo' },
-              __guard__(
-                photo != null ? photo.thumb39 : undefined,
-                x => x.url
-              ) != null
-                ? img({
-                  src: process.env.PHOTO_BASE_URL + photo.thumb39.url,
-                  className: 'node-link__employee-thumb39'
-                })
-                : avatar({
-                  className: 'node-link__avatar',
-                  gender:
-                      this.props.person != null
-                        ? this.props.person.gender
-                        : undefined,
-                  post_code: this.props.employment.post_code
-                })
-            ),
-
-            div(
-              { className: 'node-link__employment-post-title' },
-              this.props.employment.post_title
-            )
-          );
-        }
-      })()
+      this.linkContent()
     );
   }
 }

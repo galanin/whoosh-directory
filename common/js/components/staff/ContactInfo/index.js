@@ -109,6 +109,50 @@ class EmployeeInfo extends React.Component {
     return this.props.goToNode(this.props.node_id);
   }
 
+  fullName() {
+    if (this.props.contact.last_name) {
+      return (
+        this.props.contact.last_name +
+        ' ' +
+        this.props.contact.first_name +
+        ' ' +
+        this.props.contact.middle_name
+      );
+    } else if (this.props.contact.function_title) {
+      return this.props.contact.function_title;
+    } else if (this.props.contact.location_title) {
+      return this.props.contact.location_title;
+    }
+  }
+
+  largePhotoOrSilhouette() {
+    if (this.props.contact.photo.large.url) {
+      return img({
+        src: process.env.PHOTO_BASE_URL + this.props.contact.photo.large.url,
+        className: 'employee-info__photo-large'
+      });
+    } else if (this.props.contact.gender) {
+      return silhouette({
+        className: 'employee-info__avatar',
+        gender: this.props.contact.gender
+      });
+    }
+  }
+
+  photoOrSilhouette() {
+    if (this.props.contact.photo.large.url || this.props.contact.gender) {
+      return div(
+        { className: 'employee-info__photo' },
+        this.largePhotoOrSilhouette()
+      );
+    } else if (this.props.contact.gender) {
+      return silhouette({
+        className: 'employee-info__avatar',
+        gender: this.props.contact.gender
+      });
+    }
+  }
+
   render() {
     return div(
       { className: 'employee-info-container soft-shadow plug' },
@@ -135,21 +179,7 @@ class EmployeeInfo extends React.Component {
 
               div(
                 { className: 'employee-info__name contact-info__name' },
-                (() => {
-                  if (this.props.contact.last_name) {
-                    return (
-                      this.props.contact.last_name +
-                        ' ' +
-                        this.props.contact.first_name +
-                        ' ' +
-                        this.props.contact.middle_name
-                    );
-                  } else if (this.props.contact.function_title) {
-                    return this.props.contact.function_title;
-                  } else if (this.props.contact.location_title) {
-                    return this.props.contact.location_title;
-                  }
-                })()
+                this.fullName()
               )
             ),
 
@@ -175,36 +205,7 @@ class EmployeeInfo extends React.Component {
             div(
               { className: 'employee-info__two-columns' },
 
-              (() => {
-                if (
-                  this.props.contact.photo.large.url != null ||
-                    this.props.contact.gender != null
-                ) {
-                  return div(
-                    { className: 'employee-info__photo' },
-                    (() => {
-                      if (this.props.contact.photo.large.url != null) {
-                        return img({
-                          src:
-                              process.env.PHOTO_BASE_URL +
-                              this.props.contact.photo.large.url,
-                          className: 'employee-info__photo-large'
-                        });
-                      } else if (this.props.contact.gender != null) {
-                        return silhouette({
-                          className: 'employee-info__avatar',
-                          gender: this.props.contact.gender
-                        });
-                      }
-                    })()
-                  );
-                } else if (this.props.contact.gender != null) {
-                  return silhouette({
-                    className: 'employee-info__avatar',
-                    gender: this.props.contact.gender
-                  });
-                }
-              })(),
+              this.photoOrSilhouette(),
 
               div(
                 { className: 'employee-info__data' },

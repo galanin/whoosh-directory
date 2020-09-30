@@ -97,12 +97,62 @@ class Employee extends React.Component {
     return this.props.setCurrentEmployee();
   }
 
+  birthday() {
+    if (!this.props.hide?.birthday) {
+      if (this.isBirthday()) {
+        return div(
+          { className: 'employee__status employee__birthday' },
+          'День рождения'
+        );
+      }
+    }
+  }
+
+  vacationOrLunch() {
+    if (this.props.employment.on_vacation) {
+      return div(
+        { className: 'employee__status employee__on-vacation' },
+        'В отпуске'
+      );
+    } else {
+      if (this.isOnLunchNow()) {
+        return div(
+          { className: 'employee__status employee__on-lunch' },
+          'Обеденный перерыв'
+        );
+      }
+    }
+  }
+
+  photoOrAvatar() {
+    const { photo } = this.props.person;
+
+    if (photo.thumb45.url || photo.thumb60.url) {
+      if (photo.thumb45.url) {
+        img({
+          src: process.env.PHOTO_BASE_URL + photo.thumb45.url,
+          className: 'employee__thumb45'
+        });
+      }
+      if (photo.thumb60.url) {
+        return img({
+          src: process.env.PHOTO_BASE_URL + photo.thumb60.url,
+          className: 'employee__thumb60'
+        });
+      }
+    } else {
+      return avatar({
+        className: 'employee__avatar',
+        gender: this.props.person.gender,
+        post_code: this.props.employment.post_code
+      });
+    }
+  }
+
   render() {
     if (this.props.employment == null || this.props.person == null) {
       return '';
     }
-
-    const { photo } = this.props.person;
 
     const class_names = {
       employee: true,
@@ -116,31 +166,7 @@ class Employee extends React.Component {
         className: classNames(class_names),
         onClick: this.onContactClick.bind(this)
       },
-      div(
-        { className: 'employee__photo' },
-        (() => {
-          if (photo.thumb45.url || photo.thumb60.url) {
-            if (photo.thumb45.url) {
-              img({
-                src: process.env.PHOTO_BASE_URL + photo.thumb45.url,
-                className: 'employee__thumb45'
-              });
-            }
-            if (photo.thumb60.url) {
-              return img({
-                src: process.env.PHOTO_BASE_URL + photo.thumb60.url,
-                className: 'employee__thumb60'
-              });
-            }
-          } else {
-            return avatar({
-              className: 'employee__avatar',
-              gender: this.props.person.gender,
-              post_code: this.props.employment.post_code
-            });
-          }
-        })()
-      ),
+      div({ className: 'employee__photo' }, this.photoOrAvatar()),
 
       div(
         { className: 'employee__info' },
@@ -237,33 +263,8 @@ class Employee extends React.Component {
 
       div(
         { className: 'employee__status-container' },
-        (() => {
-          if (this.props.employment.on_vacation) {
-            return div(
-              { className: 'employee__status employee__on-vacation' },
-              'В отпуске'
-            );
-          } else {
-            if (this.isOnLunchNow()) {
-              return div(
-                { className: 'employee__status employee__on-lunch' },
-                'Обеденный перерыв'
-              );
-            }
-          }
-        })(),
-        (() => {
-          if (
-            !(this.props.hide != null ? this.props.hide.birthday : undefined)
-          ) {
-            if (this.isBirthday()) {
-              return div(
-                { className: 'employee__status employee__birthday' },
-                'День рождения'
-              );
-            }
-          }
-        })()
+        this.vacationOrLunch(),
+        this.birthday()
       )
     );
   }
