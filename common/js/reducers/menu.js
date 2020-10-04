@@ -1,7 +1,7 @@
 import { OPEN_MENU, CLOSE_MENU } from '@constants/menu';
 
 export default (state, action) => {
-  if (state == null) {
+  if (!state) {
     state = { open: false };
   }
   switch (action.type) {

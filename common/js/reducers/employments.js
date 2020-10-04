@@ -1,7 +1,7 @@
 import { ADD_EMPLOYMENTS } from '@constants/employments';
 
 export default (state, action) => {
-  if (state == null) {
+  if (!state) {
     state = {};
   }
   switch (action.type) {

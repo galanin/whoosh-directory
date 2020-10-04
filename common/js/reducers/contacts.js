@@ -1,7 +1,7 @@
 import { ADD_CONTACTS } from '@constants/contacts';
 
 export default (function(state, action) {
-  if (state == null) {
+  if (!state) {
     state = {};
   }
   switch (action.type) {

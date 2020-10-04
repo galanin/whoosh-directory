@@ -25,17 +25,15 @@ const node_link = React.createFactory(NodeLink);
 
 const mapStateToProps = (state, ownProps) => {
   const employment = state.employments[ownProps.employment_id];
-  const tree_node =
-    state.nodes.tree[employment != null ? employment.node_id : undefined];
-  const node =
-    state.nodes.data[employment != null ? employment.node_id : undefined];
+  const tree_node = state.nodes.tree[employment?.node_id];
+  const node = state.nodes.data[employment?.node_id];
 
   return {
     employment,
     node,
     tree_node,
-    employ_ids: node != null ? node.employ_ids : undefined,
-    child_ids: tree_node != null ? tree_node.c : undefined,
+    employ_ids: node?.employ_ids,
+    child_ids: tree_node?.c,
     is_favorite: state.favorites.employment_index[ownProps.employment_id]
   };
 };
@@ -109,7 +107,7 @@ class NodeEmploymentInfo extends React.Component {
   }
 
   render() {
-    if (this.props.employment == null) {
+    if (!this.props.employment) {
       return '';
     }
 
@@ -123,7 +121,7 @@ class NodeEmploymentInfo extends React.Component {
     return div(
       { className: classNames(class_names) },
 
-      this.props.employment.post_title != null
+      this.props.employment.post_title
         ? div(
           { className: 'node-employment__post-title' },
           this.props.employment.post_title

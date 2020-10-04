@@ -122,20 +122,20 @@ export const getOffsetsUnion = (offsets1, offsets2) => {
 };
 
 export const isEqualBirthdayPeriod = (period1, period2) =>
-  (period1 == null && period2 == null) ||
-  (period1 != null &&
-    period2 != null &&
+  (!period1 && !period2) ||
+  (period1 &&
+    period2 &&
     period1.key_date === period2.key_date &&
     period1.day_offset_left === period2.day_offset_left &&
     period1.day_offset_right === period2.day_offset_right &&
     period1.day_offset_start === period2.day_offset_start);
 
 export const isPresentBirthdayPeriod = period =>
-  period != null &&
-  period.key_date != null &&
-  period.day_offset_left != null &&
-  period.day_offset_right != null &&
-  period.day_offset_start != null;
+  period &&
+  period.key_date &&
+  period.day_offset_left &&
+  period.day_offset_right &&
+  period.day_offset_start;
 
 export const prevBirthdayPeriod = period => Object.assign({}, period);
 
@@ -152,10 +152,10 @@ export const unpackBirthdayPeriod = str => {
   const left = +period_arr[2].replace('_', '-');
   const right = +period_arr[3].replace('_', '-');
   if (
-    period_arr[0] != null &&
-    start != null &&
-    left != null &&
-    right != null &&
+    period_arr[0] &&
+    start &&
+    left &&
+    right &&
     !isNaN(start) &&
     !isNaN(left) &&
     !isNaN(right)

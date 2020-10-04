@@ -3,7 +3,7 @@ import { each, filter, split, startsWith } from 'lodash';
 const url_parsing_cache = {};
 
 const surePathParsed = pathname => {
-  if (url_parsing_cache[pathname] == null) {
+  if (!url_parsing_cache[pathname]) {
     const location_arr = split(pathname, '/');
     const params_hash = {};
     each(location_arr, part => {

@@ -22,14 +22,14 @@ import ToCallIcon from '@icons/call.svg';
 import StarIcon from '@icons/star.svg';
 
 const mapStateToProps = (state, ownProps) => {
-  if (ownProps.employment_id != null) {
+  if (ownProps.employment_id) {
     return {
       employment: state.employments[ownProps.employment_id],
       is_to_call:
         state.to_call.unchecked_employment_index[ownProps.employment_id],
       is_favorite: state.favorites.employment_index[ownProps.employment_id]
     };
-  } else if (ownProps.contact_id != null) {
+  } else if (ownProps.contact_id) {
     return {
       contact: state.contacts[ownProps.contact_id],
       is_to_call: state.to_call.unchecked_contact_index[ownProps.contact_id],
@@ -40,33 +40,33 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
   addToCall() {
-    if (ownProps.employment_id != null) {
+    if (ownProps.employment_id) {
       return dispatch(addEmploymentToCall(ownProps.employment_id));
-    } else if (ownProps.contact_id != null) {
+    } else if (ownProps.contact_id) {
       return dispatch(addContactToCall(ownProps.contact_id));
     }
   },
 
   checkToCall() {
-    if (ownProps.employment_id != null) {
+    if (ownProps.employment_id) {
       return dispatch(checkEmploymentToCall(ownProps.employment_id));
-    } else if (ownProps.contact_id != null) {
+    } else if (ownProps.contact_id) {
       return dispatch(checkContactToCall(ownProps.contact_id));
     }
   },
 
   favorite() {
-    if (ownProps.employment_id != null) {
+    if (ownProps.employment_id) {
       return dispatch(addFavoriteEmployment(ownProps.employment_id));
-    } else if (ownProps.contact_id != null) {
+    } else if (ownProps.contact_id) {
       return dispatch(addFavoriteContact(ownProps.contact_id));
     }
   },
 
   unfavorite() {
-    if (ownProps.employment_id != null) {
+    if (ownProps.employment_id) {
       return dispatch(removeFavoriteEmployment(ownProps.employment_id));
-    } else if (ownProps.contact_id != null) {
+    } else if (ownProps.contact_id) {
       return dispatch(removeFavoriteContact(ownProps.contact_id));
     }
   }

@@ -19,7 +19,7 @@ import {
 } from '@constants/search';
 
 export default (state, action) => {
-  if (state == null) {
+  if (!state) {
     state = { query: '', current_machine_query: '' };
   }
   switch (action.type) {
@@ -58,7 +58,7 @@ export default (state, action) => {
 
         new_state = Object.assign({}, state);
 
-        if (results_source_packed != null) {
+        if (results_source_packed) {
           const new_results_source = unpackResultsSource(results_source_packed);
           if (isEqual(new_results_source, state.results_source)) {
             state;
@@ -69,7 +69,7 @@ export default (state, action) => {
           new_state.results_source = DEFAULT_RESULTS_SOURCE;
         }
 
-        if (query != null) {
+        if (query) {
           new_state.current_machine_query = new_state.query = unpackQuery(
             query
           );

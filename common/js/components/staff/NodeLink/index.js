@@ -15,15 +15,14 @@ const avatar = React.createFactory(CommonAvatar);
 
 const mapStateToProps = function(state, ownProps) {
   const node = state.nodes.data[ownProps.node_id];
-  const employment =
-    state.employments[node != null ? node.employment_id : undefined];
+  const employment = state.employments[node?.employment_id];
 
   return {
     node,
     tree_node: state.nodes.tree[ownProps.node_id],
     employment,
-    person: state.people[employment != null ? employment.person_id : undefined],
-    unit: state.units[node != null ? node.unit_id : undefined]
+    person: state.people[employment?.person_id],
+    unit: state.units[node?.unit_id]
   };
 };
 

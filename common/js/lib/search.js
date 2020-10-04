@@ -13,8 +13,7 @@ const SOURCE_IDS = {
 
 const SOURCE_CODES = invert(SOURCE_IDS);
 
-export const isDefaultResultsSource = source =>
-  source == null || source === DEFAULT_RESULTS_SOURCE;
+export const isDefaultResultsSource = source => !source || source === DEFAULT_RESULTS_SOURCE;
 
 export const packResultsSource = source => SOURCE_CODES[source];
 

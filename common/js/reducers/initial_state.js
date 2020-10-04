@@ -5,7 +5,7 @@ import {
 } from '@constants/initial_state';
 
 export default (state, action) => {
-  if (state == null) {
+  if (!state) {
     state = {};
   }
   switch (action.type) {

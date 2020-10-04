@@ -26,7 +26,7 @@ class SearchResultUnit extends React.Component {
   }
 
   render() {
-    if (this.props.unit == null) {
+    if (!this.props.unit) {
       return '';
     }
 
@@ -38,14 +38,13 @@ class SearchResultUnit extends React.Component {
         className: classNames(class_names),
         onClick: this.onUnitClick.bind(this)
       },
-      (this.props.unit != null ? this.props.unit.short_title : undefined) !=
-        null
+      this.props.unit?.short_title
         ? div(
           { className: 'search-result-unit__short-title' },
           this.props.unit.short_title
         )
         : undefined,
-      (this.props.unit != null ? this.props.unit.long_title : undefined) != null
+      this.props.unit?.long_title
         ? div(
           { className: 'search-result-unit__long-title' },
           this.props.unit.long_title

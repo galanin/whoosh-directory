@@ -1,7 +1,7 @@
 import { ADD_PEOPLE } from '@constants/people';
 
 export default (state, action) => {
-  if (state == null) {
+  if (!state) {
     state = {};
   }
   switch (action.type) {

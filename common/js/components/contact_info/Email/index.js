@@ -7,7 +7,7 @@ import EmailIcon from '@icons/at-sign.svg';
 
 class Email extends React.Component {
   render() {
-    if (this.props.email == null) {
+    if (!this.props.email) {
       return '';
     }
 

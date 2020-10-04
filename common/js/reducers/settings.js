@@ -1,7 +1,7 @@
 import { SET_SETTINGS, SET_SETTING } from '@constants/settings';
 
 export default (state, action) => {
-  if (state == null) {
+  if (!state) {
     state = {};
   }
   switch (action.type) {

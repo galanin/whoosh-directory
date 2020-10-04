@@ -25,7 +25,7 @@ const default_state = {
 };
 
 export default (state, action) => {
-  if (state == null) {
+  if (!state) {
     state = default_state;
   }
   switch (action.type) {

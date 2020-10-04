@@ -15,7 +15,7 @@ const svg = React.createFactory(SvgIcon);
 const mapStateToProps = (state, ownProps) => ({
   counter:
     __guard__(
-      state.to_call != null ? state.to_call.unchecked : undefined,
+      state.to_call?.unchecked,
       x => x.length
     ) || 0
 });

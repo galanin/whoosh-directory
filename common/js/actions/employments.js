@@ -19,9 +19,9 @@ export const getNodeParents = (state, employment) => {
 
   return node_ids.map(node_id => {
     const node = state.nodes.data[node_id];
-    const unit = state.units[node ? node.unit_id : undefined];
-    const head = state.employments[unit ? unit.head_id : undefined];
-    employment = state.employments[node ? node.employment_id : undefined];
+    const unit = state.units[node?.unit_id];
+    const head = state.employments[unit?.head_id];
+    employment = state.employments[node?.employment_id];
 
     return {
       node,
@@ -60,8 +60,8 @@ export const getParentUnits = (state, employment) =>
   getNodeParentIds(state, employment).map(u_id => state.units[u_id]);
 
 export const getParentEmployIds = (state, employment) => {
-  const raw_employ_ids = getParentUnits(state, employment).map(unit =>
-    unit.employ_ids ? unit.employ_ids[0] : undefined
+  const raw_employ_ids = getParentUnits(state, employment).map(
+    unit => unit.employ_ids?.[0]
   );
   return filter(raw_employ_ids);
 };

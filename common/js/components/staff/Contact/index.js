@@ -24,11 +24,10 @@ const mapStateToProps = (state, ownProps) => {
   const contact = state.contacts[ownProps.contact_id];
   return {
     contact,
-    node: state.nodes.tree[contact != null ? contact.node_id : undefined],
+    node: state.nodes.tree[contact?.node_id],
     current_contact_id: state.current.contact_id,
-    is_to_call:
-      state.to_call.unchecked_contact_index[ownProps.contact_id] != null,
-    is_favorite: state.favorites.contact_index[ownProps.contact_id] != null,
+    is_to_call: state.to_call.unchecked_contact_index[ownProps.contact_id],
+    is_favorite: state.favorites.contact_index[ownProps.contact_id],
     show_location: state.settings.search_results__show_location
   };
 };
@@ -43,12 +42,9 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
 class Contact extends React.Component {
   isOnLunchNow() {
     if (
-      (this.props.contact != null
-        ? this.props.contact.lunch_begin
-        : undefined) != null &&
-      (this.props.contact != null ? this.props.contact.lunch_end : undefined) !=
-        null &&
-      (this.state != null ? this.state.current_time : undefined) != null
+      this.props.contact?.lunch_begin &&
+      this.props.contact?.lunch_end &&
+      this.state?.current_time
     ) {
       return (
         this.props.contact.lunch_begin <= this.state.current_time &&
@@ -58,11 +54,7 @@ class Contact extends React.Component {
   }
 
   isBirthday() {
-    if (
-      (this.props.person != null ? this.props.person.birthday : undefined) !=
-        null &&
-      (this.state != null ? this.state.current_date : undefined)
-    ) {
+    if (this.props.person?.birthday && this.state?.current_date) {
       return this.props.person.birthday === this.state.current_date;
     }
   }

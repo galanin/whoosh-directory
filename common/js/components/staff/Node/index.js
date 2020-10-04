@@ -24,7 +24,7 @@ import PlusIcon from '@icons/plus-square.svg';
 
 const mapStateToProps = (state, ownProps) => ({
   node: state.nodes.tree[ownProps.node_id],
-  is_expanded: state.nodes.expanded[ownProps.node_id] != null,
+  is_expanded: state.nodes.expanded[ownProps.node_id],
   is_current: ownProps.node_id === state.nodes.current_id,
   do_scroll: ownProps.node_id === state.nodes.scroll_to_id
 });
@@ -55,7 +55,7 @@ const mapDispatchToProps = dispatch => {
 class Node extends React.Component {
   hasChildren() {
     return (
-      +(this.props.node.c != null ? this.props.node.c.length : undefined) > 0
+      +(this.props.node.c?.length) > 0
     );
   }
 
@@ -87,7 +87,7 @@ class Node extends React.Component {
   }
 
   render() {
-    if (this.props.node == null) {
+    if (!this.props.node) {
       return '';
     }
 

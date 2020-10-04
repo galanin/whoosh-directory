@@ -131,7 +131,7 @@ export const scrolledToNode = node_id => ({
 export const openFullNodePath = node_id => (dispatch, getState) => {
   const node = getState().nodes.tree[node_id];
 
-  if (!isEmpty(node != null ? node.path : undefined)) {
+  if (!isEmpty(node?.path)) {
     dispatch(expandNodes(node.path));
     return dispatch(saveExpandedNodes(node.path));
   }

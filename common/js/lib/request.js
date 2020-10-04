@@ -7,7 +7,7 @@ superagentJsonapify(superagent);
 const baseURL = yn(process.env.SSR)
   ? process.env.SERVER_SIDE_API_BASE_URL
   : process.env.CLIENT_SIDE_API_BASE_URL;
-if (baseURL == null) {
+if (!baseURL) {
   throw 'API URL is not defined';
 }
 
@@ -15,28 +15,28 @@ export const encode = encodeURIComponent;
 
 export const Request = {
   del(url, params) {
-    if (params == null) {
+    if (!params) {
       params = {};
     }
     return superagent.del(`${baseURL}${url}`).query(params);
   },
 
   get(url, params) {
-    if (params == null) {
+    if (!params) {
       params = {};
     }
     return superagent.get(`${baseURL}${url}`).query(params);
   },
 
   put(url, params) {
-    if (params == null) {
+    if (!params) {
       params = {};
     }
     return superagent.put(`${baseURL}${url}`).send(params);
   },
 
   post(url, params) {
-    if (params == null) {
+    if (!params) {
       params = {};
     }
     return superagent.post(`${baseURL}${url}`).send(params);
@@ -45,7 +45,7 @@ export const Request = {
 
 export const UserRequest = {
   get(getState, url, params) {
-    if (params == null) {
+    if (!params) {
       params = {};
     }
     const session_token = __guard__(getState().session, x => x.token);
@@ -56,7 +56,7 @@ export const UserRequest = {
   },
 
   put(getState, url, params) {
-    if (params == null) {
+    if (!params) {
       params = {};
     }
     const session_token = __guard__(getState().session, x => x.token);
@@ -67,7 +67,7 @@ export const UserRequest = {
   },
 
   post(getState, url, params) {
-    if (params == null) {
+    if (!params) {
       params = {};
     }
     const session_token = __guard__(getState().session, x => x.token);
@@ -78,7 +78,7 @@ export const UserRequest = {
   },
 
   delete(getState, url, params) {
-    if (params == null) {
+    if (!params) {
       params = {};
     }
     const session_token = __guard__(getState().session, x => x.token);

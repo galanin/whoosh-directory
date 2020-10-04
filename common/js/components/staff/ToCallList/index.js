@@ -13,9 +13,9 @@ const svg = React.createFactory(SvgIcon);
 const employee = React.createFactory(ToCall);
 
 const mapStateToProps = (state, ownProps) => ({
-  data: state.to_call != null ? state.to_call.data : undefined,
-  unchecked: state.to_call != null ? state.to_call.unchecked : undefined,
-  checked_today: state.to_call != null ? state.to_call.checked_today : undefined
+  data: state.to_call?.data,
+  unchecked: state.to_call?.unchecked,
+  checked_today: state.to_call?.checked_today
 });
 
 const mapDispatchToProps = dispatch => ({});
@@ -47,16 +47,14 @@ class ToCallList extends React.Component {
           ? div(
             { className: 'to-call-list__unchecked' },
             this.props.unchecked.map(to_call_id => {
-                to_call = this.props.data[to_call_id];
-                if (to_call) {
+              to_call = this.props.data[to_call_id];
+              if (to_call) {
                 return employee({
-                      key: to_call.id,
-                      to_call_id: to_call.id,
-                      className: 'list-item shadow'
+                  key: to_call.id,
+                  to_call_id: to_call.id,
+                  className: 'list-item shadow'
                 });
-                } else {
-                return undefined;
-                }
+              }
             })
           )
           : undefined,
@@ -84,15 +82,13 @@ class ToCallList extends React.Component {
           ? div(
             { className: 'to-call-list__checked' },
             this.props.checked_today.map(to_call_id => {
-                to_call = this.props.data[to_call_id];
-                if (to_call) {
+              to_call = this.props.data[to_call_id];
+              if (to_call) {
                 return employee({
-                      key: to_call.id,
-                      to_call_id: to_call.id,
-                      className: 'list-item shadow'
+                  key: to_call.id,
+                  to_call_id: to_call.id,
+                  className: 'list-item shadow'
                 });
-                } else {
-                return undefined;
               }
             })
           )

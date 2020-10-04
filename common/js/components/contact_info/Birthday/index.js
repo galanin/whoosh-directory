@@ -6,7 +6,7 @@ import BirthdayIcon from '@icons/birthday.svg';
 
 class Birthday extends React.Component {
   render() {
-    if (this.props.birthday_formatted == null) {
+    if (!this.props.birthday_formatted) {
       return '';
     }
 

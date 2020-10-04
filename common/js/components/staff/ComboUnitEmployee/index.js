@@ -15,10 +15,10 @@ class ComboUnitEmployee extends React.Component {
 
     return div(
       { className: classNames(class_names) },
-      this.props.unit_id != null
+      this.props.unit_id
         ? unit({ unit_id: this.props.unit_id })
         : undefined,
-      this.props.employment_id != null
+      this.props.employment_id
         ? employee({
           employment_id: this.props.employment_id,
           hide: { unit: true }

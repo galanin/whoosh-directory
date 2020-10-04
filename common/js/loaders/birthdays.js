@@ -7,14 +7,8 @@ export default store =>
   store.subscribe(() => {
     const state = store.getState();
 
-    const day_offset_left =
-      state.birthday_period != null
-        ? state.birthday_period.day_offset_left
-        : undefined;
-    const day_offset_right =
-      state.birthday_period != null
-        ? state.birthday_period.day_offset_right
-        : undefined;
+    const day_offset_left = state.birthday_period?.day_offset_left;
+    const day_offset_right = state.birthday_period?.day_offset_right;
 
     if (
       day_offset_left !== prev_day_offset_left ||

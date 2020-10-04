@@ -51,7 +51,7 @@ const default_state = {
 
 export default (state, action) => {
   let id, node, node_id;
-  if (state == null) {
+  if (!state) {
     state = default_state;
   }
   switch (action.type) {

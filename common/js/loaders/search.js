@@ -6,9 +6,7 @@ export default store =>
   store.subscribe(() => {
     const state = store.getState();
 
-    const query =
-      (state.search != null ? state.search.current_machine_query : undefined) ||
-      '';
+    const query = state.search?.current_machine_query || '';
 
     if (query !== prev_query) {
       prev_query = query;

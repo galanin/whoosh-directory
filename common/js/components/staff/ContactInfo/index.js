@@ -39,8 +39,8 @@ const mapStateToProps = function(state, ownProps) {
   return {
     contact_id,
     contact,
-    node_id: contact != null ? contact.node_id : undefined,
-    node: state.nodes.tree[contact != null ? contact.node_id : undefined]
+    node_id: contact?.node_id,
+    node: state.nodes.tree[contact?.node_id]
   };
 };
 
@@ -60,12 +60,9 @@ const mapDispatchToProps = dispatch => ({
 class EmployeeInfo extends React.Component {
   isOnLunchNow() {
     if (
-      (this.props.contact != null
-        ? this.props.contact.lunch_begin
-        : undefined) != null &&
-      (this.props.contact != null ? this.props.contact.lunch_end : undefined) !=
-        null &&
-      (this.state != null ? this.state.current_time : undefined) != null
+      this.props.contact?.lunch_begin &&
+      this.props.contact?.lunch_end &&
+      this.state?.current_time
     ) {
       return (
         this.props.contact.lunch_begin <= this.state.current_time &&
@@ -75,11 +72,7 @@ class EmployeeInfo extends React.Component {
   }
 
   isBirthday() {
-    if (
-      (this.props.person != null ? this.props.person.birthday : undefined) !=
-        null &&
-      (this.state != null ? this.state.current_date : undefined)
-    ) {
+    if (this.props.person?.birthday && this.state?.current_date) {
       return this.props.person.birthday === this.state.current_date;
     }
   }
@@ -188,7 +181,7 @@ class EmployeeInfo extends React.Component {
               this.props.contact.post_title
             ),
 
-            this.props.node != null
+            this.props.node
               ? a(
                 {
                   className: 'employee-info__unit_title',

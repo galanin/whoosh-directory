@@ -26,13 +26,13 @@ export const loadToCall = () => (dispatch, getState) =>
           response.body.checked_today
         )
       );
-      if (response.body.people != null) {
+      if (response.body.people) {
         dispatch(addPeople(response.body.people));
       }
-      if (response.body.employments != null) {
+      if (response.body.employments) {
         dispatch(addEmployments(response.body.employments));
       }
-      if (response.body.contacts != null) {
+      if (response.body.contacts) {
         return dispatch(addContacts(response.body.contacts));
       }
     },

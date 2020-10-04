@@ -19,7 +19,7 @@ import {
 } from '@lib/birthdays';
 
 export default (state, action) => {
-  if (state == null) {
+  if (!state) {
     state = {};
   }
   switch (action.type) {

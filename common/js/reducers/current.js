@@ -21,7 +21,7 @@ import {
 } from '@constants/url-parsing';
 
 export default (state, action) => {
-  if (state == null) {
+  if (!state) {
     state = {};
   }
   switch (action.type) {

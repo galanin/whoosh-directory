@@ -10,14 +10,13 @@ export default store =>
   store.subscribe(() => {
     const state = store.getState();
 
-    const employment_id =
-      state.current != null ? state.current.employment_id : undefined;
+    const employment_id = state.current?.employment_id;
     const employment = state.employments[employment_id];
 
     if (employment_id) {
       if (employment) {
         if (!isEmpty(state.nodes.tree)) {
-          if (requested_hierarchy_employment_ids[employment_id] == null) {
+          if (!requested_hierarchy_employment_ids[employment_id]) {
             requested_hierarchy_employment_ids[employment_id] = true;
 
             const parent_ids = getNodeParentIds(state, employment);
@@ -25,7 +24,7 @@ export default store =>
           }
         }
       } else {
-        if (requested_employment_ids[employment_id] == null) {
+        if (!requested_employment_ids[employment_id]) {
           requested_employment_ids[employment_id] = true;
           return store.dispatch(loadEmployments([employment_id]));
         }

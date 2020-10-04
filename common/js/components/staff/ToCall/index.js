@@ -26,7 +26,7 @@ import DestroyIcon from '@icons/recycle-bin.svg';
 
 const mapStateToProps = (state, ownProps) => {
   const to_call = __guard__(
-    state.to_call != null ? state.to_call.data : undefined,
+    state.to_call?.data,
     x => x[ownProps.to_call_id]
   );
 
@@ -84,7 +84,7 @@ class ToCall extends React.Component {
   }
 
   render() {
-    if (this.props.to_call == null) {
+    if (!this.props.to_call) {
       return '';
     }
 
@@ -98,14 +98,14 @@ class ToCall extends React.Component {
     return div(
       { className: classNames(class_names) },
 
-      this.props.to_call.employment_id != null
+      this.props.to_call.employment_id
         ? employee({
           employment_id: this.props.to_call.employment_id,
           className: 'to-call__employee'
         })
         : undefined,
 
-      this.props.to_call.contact_id != null
+      this.props.to_call.contact_id
         ? contact({
           contact_id: this.props.to_call.contact_id,
           className: 'to-call__contact'

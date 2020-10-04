@@ -20,9 +20,9 @@ const mapStateToProps = (state, ownProps) => {
   return {
     unit_data: state.units[ownProps.unit_id],
     unit_titles: state.unit_titles || {},
-    loading: extra != null ? extra.loading : undefined,
-    loaded: extra != null ? extra.loaded : undefined,
-    is_expanded: state.expanded_sub_units[ownProps.unit_id] != null
+    loading: extra?.loading,
+    loaded: extra?.loaded,
+    is_expanded: state.expanded_sub_units[ownProps.unit_id]
   };
 };
 
@@ -46,7 +46,7 @@ class OrganizationSubUnit extends React.Component {
   }
 
   render() {
-    if (this.props.unit_data == null) {
+    if (!this.props.unit_data) {
       return '';
     }
 
@@ -73,11 +73,7 @@ class OrganizationSubUnit extends React.Component {
         { className: 'sub-unit__content' },
 
         this.props.is_expanded &&
-          isArray(
-            this.props.unit_data != null
-              ? this.props.unit_data.employ_ids
-              : undefined
-          )
+          isArray(this.props.unit_data?.employ_ids)
           ? div(
             { className: 'sub-unit__employees' },
             this.props.unit_data.employ_ids.map(employment_id =>
@@ -92,11 +88,7 @@ class OrganizationSubUnit extends React.Component {
           : undefined,
 
         this.props.is_expanded &&
-          isArray(
-            this.props.unit_data != null
-              ? this.props.unit_data.child_ids
-              : undefined
-          )
+          isArray(this.props.unit_data?.child_ids)
           ? div(
             { className: 'sub-unit__sub-units' },
             this.props.unit_data.child_ids.map(sub_unit_id =>

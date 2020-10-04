@@ -26,7 +26,7 @@ export default (state, action) => {
     to_call,
     unchecked_to_call,
     unchecked_to_call_id;
-  if (state == null) {
+  if (!state) {
     state = default_state;
   }
   switch (action.type) {
@@ -66,10 +66,7 @@ export default (state, action) => {
 
       var to_call_id = find(
         state.checked_today,
-        to_call_id =>
-          (state.data[to_call_id] != null
-            ? state.data[to_call_id].employment_id
-            : undefined) === action.employment_id
+        to_call_id => state.data[to_call_id]?.employment_id === action.employment_id
       );
       if (to_call_id) {
         new_unchecked = [...state.unchecked, to_call_id];
@@ -93,10 +90,7 @@ export default (state, action) => {
 
       to_call_id = find(
         state.checked_today,
-        to_call_id =>
-          (state.data[to_call_id] != null
-            ? state.data[to_call_id].contact_id
-            : undefined) === action.contact_id
+        to_call_id => state.data[to_call_id]?.contact_id === action.contact_id
       );
       if (to_call_id) {
         new_unchecked = [...Array.from(state.unchecked), to_call_id];
@@ -119,10 +113,7 @@ export default (state, action) => {
       delete new_unchecked_employment_index[action.employment_id];
       to_call_id = find(
         state.checked_today,
-        to_call_id =>
-          (state.data[to_call_id] != null
-            ? state.data[to_call_id].employment_id
-            : undefined) === action.employment_id
+        to_call_id => state.data[to_call_id]?.employment_id === action.employment_id
       );
 
       if (to_call_id) {
@@ -146,10 +137,7 @@ export default (state, action) => {
       delete new_unchecked_contact_index[action.contact_id];
       to_call_id = find(
         state.checked_today,
-        to_call_id =>
-          (state.data[to_call_id] != null
-            ? state.data[to_call_id].contact_id
-            : undefined) === action.contact_id
+        to_call_id => state.data[to_call_id]?.contact_id === action.contact_id
       );
 
       if (to_call_id) {
@@ -197,7 +185,7 @@ export default (state, action) => {
         state.data,
         to_call => to_call.employment_id === action.employment_id
       );
-      if ((to_call != null ? to_call.id : undefined) != null) {
+      if (to_call?.id) {
         new_unchecked = without(state.unchecked, to_call.id);
         new_checked_today = without(state.checked_today, to_call.id);
       }
@@ -215,7 +203,7 @@ export default (state, action) => {
         state.data,
         to_call => to_call.contact_id === action.contact_id
       );
-      if ((to_call != null ? to_call.id : undefined) != null) {
+      if (to_call?.id) {
         new_unchecked = without(state.unchecked, to_call.id);
         new_checked_today = without(state.checked_today, to_call.id);
       }

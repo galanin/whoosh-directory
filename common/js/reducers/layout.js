@@ -21,7 +21,7 @@ import {
 
 export default (state, action) => {
   let new_state, new_z_order;
-  if (state == null) {
+  if (!state) {
     state = { pile: DEFAULT_LAYOUT };
   }
   switch (action.type) {

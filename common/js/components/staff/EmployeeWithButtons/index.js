@@ -22,9 +22,7 @@ import StarIcon from '@icons/star.svg';
 
 const mapStateToProps = (state, ownProps) => ({
   is_to_call: __guard__(
-    state.to_call != null
-      ? state.to_call.unchecked_employment_index
-      : undefined,
+    state.to_call?.unchecked_employment_index,
     x => x[ownProps.employment_id]
   ),
   is_favorite: state.favorites.employment_index[ownProps.employment_id]

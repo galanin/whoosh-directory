@@ -1,7 +1,7 @@
 import { padStart } from 'lodash';
 
 export const padNumber = (number, length) => {
-  if (length == null) {
+  if (!length) {
     length = 2;
   }
   const number_str = number.toString();

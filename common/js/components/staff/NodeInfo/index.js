@@ -13,8 +13,7 @@ const unit = React.createFactory(NodeUnitInfo);
 const mapStateToProps = state => {
   const node_id = state.nodes.current_id;
   const node = state.nodes.data[node_id];
-  const child_node_ids =
-    state.nodes.tree[node_id] != null ? state.nodes.tree[node_id].c : undefined;
+  const child_node_ids = state.nodes.tree[node_id]?.c;
 
   return {
     node,
@@ -37,7 +36,7 @@ class NodeInfo extends React.Component {
   }
 
   render () {
-    if (this.props.node == null) {
+    if (!this.props.node) {
       return '';
     }
 

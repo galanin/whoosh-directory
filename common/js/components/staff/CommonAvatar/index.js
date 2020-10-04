@@ -59,11 +59,7 @@ const AVATARS = {
 
 class CommonAvatar extends React.Component {
   render() {
-    const avatar =
-      AVATARS[this.props.gender] != null
-        ? AVATARS[this.props.gender][this.props.post_code]
-        : undefined;
-
+    const avatar = AVATARS[this.props.gender]?.[this.props.post_code];
     if (avatar) {
       return div(
         { className: 'common-avatar ' + this.props.className },

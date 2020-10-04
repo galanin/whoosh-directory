@@ -34,9 +34,7 @@ const mapStateToProps = function(state, ownProps) {
   if (ownProps.employment_id) {
     return {
       is_to_call: __guard__(
-        state.to_call != null
-          ? state.to_call.unchecked_employment_index
-          : undefined,
+        state.to_call?.unchecked_employment_index,
         x => x[ownProps.employment_id]
       ),
       is_favorite: state.favorites.employment_index[ownProps.employment_id]
@@ -44,9 +42,7 @@ const mapStateToProps = function(state, ownProps) {
   } else if (ownProps.contact_id) {
     return {
       is_to_call: __guard__(
-        state.to_call != null
-          ? state.to_call.unchecked_contact_index
-          : undefined,
+        state.to_call?.unchecked_contact_index,
         x1 => x1[ownProps.contact_id]
       ),
       is_favorite: state.favorites.contact_index[ownProps.contact_id]
@@ -121,7 +117,7 @@ class SomeoneWithButtons extends React.Component {
   }
 
   render() {
-    if (this.props.employment_id == null && this.props.contact_id == null) {
+    if (!this.props.employment_id && !this.props.contact_id) {
       return '';
     }
 

@@ -1,7 +1,7 @@
 import { SET_SESSION_TOKEN } from '@constants/session';
 
 export default (state, action) => {
-  if (state == null) {
+  if (!state) {
     state = {};
   }
   switch (action.type) {

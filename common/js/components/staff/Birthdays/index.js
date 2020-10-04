@@ -19,7 +19,7 @@ const someone = React.createFactory(SomeoneWithButtons);
 
 const mapStateToProps = (state, ownProps) => {
   let scroll_to_date;
-  let do_scroll = state.birthday_period.day_scroll_to != null;
+  let do_scroll = state.birthday_period.day_scroll_to;
   if (do_scroll) {
     const scroll_to_day_offset = state.birthday_period.day_scroll_to;
     const scroll_to_day_number = getDayNumberByOffset(
@@ -28,7 +28,7 @@ const mapStateToProps = (state, ownProps) => {
     );
     scroll_to_date = dateByDayNumber(scroll_to_day_number);
     if (do_scroll) {
-      do_scroll = state.birthdays[scroll_to_date] != null;
+      do_scroll = state.birthdays[scroll_to_date];
     }
   }
 
@@ -77,7 +77,7 @@ class Birthdays extends React.Component {
   }
 
   render() {
-    if (this.props.birthday_period.key_date == null) {
+    if (!this.props.birthday_period.key_date) {
       return '';
     }
 

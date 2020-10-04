@@ -1,7 +1,7 @@
 import { SET_BIRTHDAY_RESULTS } from '@constants/birthdays';
 
 export default (function(state, action) {
-  if (state == null) {
+  if (!state) {
     state = {};
   }
   switch (action.type) {

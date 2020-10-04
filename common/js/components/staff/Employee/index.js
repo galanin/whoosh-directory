@@ -26,18 +26,14 @@ const mapStateToProps = (state, ownProps) => {
   return {
     employment,
     person: employment && state.people[employment.person_id],
-    node_id: employment != null ? employment.parent_node_id : undefined,
-    node:
-      state.nodes.tree[
-        employment != null ? employment.parent_node_id : undefined
-      ],
-    dept_id: employment != null ? employment.dept_id : undefined,
-    dept: state.nodes.tree[employment != null ? employment.dept_id : undefined],
+    node_id: employment?.parent_node_id,
+    node: state.nodes.tree[employment?.parent_node_id],
+    dept_id: employment?.dept_id,
+    dept: state.nodes.tree[employment?.dept_id],
     current_employment_id: state.current.employment_id,
     is_to_call:
-      state.to_call.unchecked_employment_index[ownProps.employment_id] != null,
-    is_favorite:
-      state.favorites.employment_index[ownProps.employment_id] != null,
+      state.to_call.unchecked_employment_index[ownProps.employment_id],
+    is_favorite: state.favorites.employment_index[ownProps.employment_id],
     show_location: state.settings.search_results__show_location
   };
 };
@@ -59,13 +55,9 @@ class Employee extends React.Component {
 
   isOnLunchNow() {
     if (
-      (this.props.employment != null
-        ? this.props.employment.lunch_begin
-        : undefined) != null &&
-      (this.props.employment != null
-        ? this.props.employment.lunch_end
-        : undefined) != null &&
-      (this.state != null ? this.state.current_time : undefined) != null
+      this.props.employment?.lunch_begin &&
+      this.props.employment?.lunch_end &&
+      this.state?.current_time
     ) {
       return (
         this.props.employment.lunch_begin <= this.state.current_time &&
@@ -75,11 +67,7 @@ class Employee extends React.Component {
   }
 
   isBirthday() {
-    if (
-      (this.props.person != null ? this.props.person.birthday : undefined) !=
-        null &&
-      (this.state != null ? this.state.current_date : undefined)
-    ) {
+    if (this.props.person?.birthday && this.state?.current_date) {
       return this.props.person.birthday === this.state.current_date;
     }
   }
@@ -150,7 +138,7 @@ class Employee extends React.Component {
   }
 
   render() {
-    if (this.props.employment == null || this.props.person == null) {
+    if (!this.props.employment || !this.props.person) {
       return '';
     }
 
@@ -197,22 +185,19 @@ class Employee extends React.Component {
             : undefined
         ),
 
-        !(this.props.hide != null ? this.props.hide.post : undefined)
+        !this.props.hide?.post
           ? div(
             { className: 'employee__post_title' },
             this.props.employment.post_title
           )
           : undefined,
 
-        !(this.props.hide != null ? this.props.hide.unit : undefined)
+        !this.props.hide?.unit
           ? div(
             { className: 'employee__organization_unit_title' },
-            this.props.dept != null &&
-                this.props.dept_id !== this.props.node_id
+            this.props.dept && this.props.dept_id !== this.props.node_id
               ? this.props.dept.t
-              : this.props.node != null
-                ? this.props.node.t
-                : undefined
+              : this.props.node?.t
           )
           : undefined,
 

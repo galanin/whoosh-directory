@@ -30,7 +30,7 @@ class OfficeLocation extends React.Component {
   }
 
   render() {
-    if (this.props.building == null && this.props.office == null) {
+    if (!this.props.building && !this.props.office) {
       return '';
     }
 
@@ -45,7 +45,7 @@ class OfficeLocation extends React.Component {
         onClick={this.onClick.bind(this)}
       >
         {
-          (this.props.building != null ? (
+          (this.props.building ? (
             <div className="iconed-data__row iconed-data__inline">
               <span className="iconed-data__inline-title">Корпус</span>
               <span className="iconed-data__inline-data">
@@ -55,7 +55,7 @@ class OfficeLocation extends React.Component {
           ) : (
             undefined
           ),
-          this.props.office != null ? (
+          this.props.office ? (
             <div className="iconed-data__row iconed-data__inline">
               <span className="iconed-data__inline-title">Кабинет</span>
               <span className="iconed-data__inline-data">

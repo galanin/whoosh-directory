@@ -51,7 +51,7 @@ class SearchPanel extends React.Component {
   }
 
   componentDidUpdate() {
-    if (this.cursor_position != null) {
+    if (this.cursor_position) {
       return this.text_input.current.setSelectionRange(
         this.cursor_position,
         this.cursor_position

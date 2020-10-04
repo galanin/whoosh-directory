@@ -8,7 +8,7 @@ export default store =>
   store.subscribe(() => {
     const state = store.getState();
 
-    const query = state.search != null ? state.search.query : undefined;
+    const query = state.search?.query;
 
     if (query !== prev_query) {
       prev_query = query;

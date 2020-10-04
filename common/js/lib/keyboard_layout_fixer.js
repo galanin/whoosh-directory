@@ -3,11 +3,11 @@ const FIX_TABLE = {
     // eslint-disable-next-line no-useless-escape
     match: /(([qwertyuiop\[\]asdfghjkl;'zxcvbnm,`QWERTYUIOP\{\}ASDFGHJKL:"ZXCVBNM<>~])|(\D)(\.)|^(\.))/,
     func(replace, match, whole, p11, p21, p22, p31) {
-      if (p11 != null) {
+      if (p11) {
         return replace[p11];
-      } else if (p22 != null) {
+      } else if (p22) {
         return p21 + replace[p22];
-      } else if (p31 != null) {
+      } else if (p31) {
         return replace[p31];
       } else {
         return match;

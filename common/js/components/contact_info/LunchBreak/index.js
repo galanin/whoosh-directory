@@ -7,7 +7,7 @@ import LunchIcon from '@icons/lunch.svg';
 
 class LunchBreak extends React.Component {
   render() {
-    if (this.props.lunch_begin == null || this.props.lunch_end == null) {
+    if (!this.props.lunch_begin || !this.props.lunch_end) {
       return '';
     }
 

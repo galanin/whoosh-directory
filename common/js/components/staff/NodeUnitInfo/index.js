@@ -20,13 +20,13 @@ const node_link = React.createFactory(NodeLink);
 const mapStateToProps = (state, ownProps) => {
   let node_id;
   const unit = state.units[ownProps.unit_id];
-  const node = state.nodes.data[unit != null ? unit.node_id : undefined];
-  const tree_node = state.nodes.tree[unit != null ? unit.node_id : undefined];
+  const node = state.nodes.data[unit?.node_id];
+  const tree_node = state.nodes.tree[unit?.node_id];
   const employments = compact(
-    (node?.employ_ids || []).map(e_id => state.employments[e_id] )
+    (node?.employ_ids || []).map(e_id => state.employments[e_id])
   );
   const child_nodes = compact(
-    (tree_node?.c) || [].map(node_id => state.nodes.data[node_id])
+    tree_node?.c || [].map(node_id => state.nodes.data[node_id])
   );
 
   return {
@@ -63,7 +63,7 @@ class NodeUnitInfo extends React.Component {
   }
 
   render() {
-    if (this.props.unit == null) {
+    if (!this.props.unit) {
       return '';
     }
 
@@ -75,14 +75,14 @@ class NodeUnitInfo extends React.Component {
     class_names[this.props.className] = true;
 
     let child_class_name = 'list-item shadow';
-    if (this.props.unit.head_id != null) {
+    if (this.props.unit.head_id) {
       child_class_name += ' hierarchy-child';
     }
 
     return div(
       { className: classNames(class_names) },
 
-      this.props.unit.short_title != null
+      this.props.unit.short_title
         ? div(
           { className: 'unit__short-title' },
           this.props.unit.short_title,
@@ -95,12 +95,12 @@ class NodeUnitInfo extends React.Component {
         )
         : undefined,
 
-      this.props.unit.long_title != null
+      this.props.unit.long_title
         ? div(
           { className: 'unit__long-title' },
           this.props.unit.long_title,
 
-          this.props.unit.short_title == null
+          !this.props.unit.short_title
             ? svg({
               className: 'medium-icon unit__favorite',
               svg: StarIcon,
@@ -110,7 +110,7 @@ class NodeUnitInfo extends React.Component {
         )
         : undefined,
 
-      this.props.unit.head_id != null
+      this.props.unit.head_id
         ? someone({
           key: this.props.unit.head_id,
           employment_id: this.props.unit.head_id,
@@ -119,7 +119,7 @@ class NodeUnitInfo extends React.Component {
         })
         : undefined,
 
-      this.props.node != null && this.props.tree_node != null
+      this.props.node && this.props.tree_node
         ? [
           this.props.employments.map(employment => {
             if (employment.id !== this.props.unit.head_id) {
@@ -132,9 +132,7 @@ class NodeUnitInfo extends React.Component {
             }
           }),
 
-          isArray(
-            this.props.node != null ? this.props.node.contact_ids : undefined
-          )
+          isArray(this.props.node?.contact_ids)
             ? this.props.node.contact_ids.map(contact_id =>
               someone({
                 key: contact_id,

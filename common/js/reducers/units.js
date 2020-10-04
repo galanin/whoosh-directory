@@ -3,7 +3,7 @@ import { clone } from 'lodash';
 import { ADD_UNITS } from '@constants/units';
 
 export default (state, action) => {
-  if (state == null) {
+  if (!state) {
     state = {};
   }
   switch (action.type) {
