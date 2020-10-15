@@ -21,10 +21,7 @@ import ToCallIcon from '@icons/call.svg';
 import StarIcon from '@icons/star.svg';
 
 const mapStateToProps = (state, ownProps) => ({
-  is_to_call: __guard__(
-    state.to_call?.unchecked_employment_index,
-    x => x[ownProps.employment_id]
-  ),
+  is_to_call: state.to_call?.unchecked_employment_index?.[ownProps.employment_id],
   is_favorite: state.favorites.employment_index[ownProps.employment_id]
 });
 
@@ -116,8 +113,3 @@ export default connect(
   mapDispatchToProps
 )(EmployeeWithButtons);
 
-const __guard__ = (value, transform) => {
-  return typeof value !== 'undefined' && value !== null
-    ? transform(value)
-    : undefined;
-};

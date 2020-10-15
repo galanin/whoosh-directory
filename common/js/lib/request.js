@@ -48,7 +48,7 @@ export const UserRequest = {
     if (!params) {
       params = {};
     }
-    const session_token = __guard__(getState().session, x => x.token);
+    const session_token = getState().session?.token;
     return superagent
       .get(`${baseURL}/user_information/${url}`)
       .query({ session_token })
@@ -59,7 +59,7 @@ export const UserRequest = {
     if (!params) {
       params = {};
     }
-    const session_token = __guard__(getState().session, x => x.token);
+    const session_token = getState().session?.token;
     return superagent
       .put(`${baseURL}/user_information/${url}`)
       .send({ session_token })
@@ -70,7 +70,7 @@ export const UserRequest = {
     if (!params) {
       params = {};
     }
-    const session_token = __guard__(getState().session, x => x.token);
+    const session_token = getState().session?.token;
     return superagent
       .post(`${baseURL}/user_information/${url}`)
       .query({ session_token })
@@ -81,7 +81,7 @@ export const UserRequest = {
     if (!params) {
       params = {};
     }
-    const session_token = __guard__(getState().session, x => x.token);
+    const session_token = getState().session?.token;
     return superagent
       .delete(`${baseURL}/user_information/${url}`)
       .query({ session_token })
@@ -89,8 +89,3 @@ export const UserRequest = {
   }
 };
 
-const __guard__ = (value, transform) => {
-  return typeof value !== 'undefined' && value !== null
-    ? transform(value)
-    : undefined;
-};

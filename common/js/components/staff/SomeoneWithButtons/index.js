@@ -33,18 +33,13 @@ import StarIcon from '@icons/star.svg';
 const mapStateToProps = function(state, ownProps) {
   if (ownProps.employment_id) {
     return {
-      is_to_call: __guard__(
-        state.to_call?.unchecked_employment_index,
-        x => x[ownProps.employment_id]
-      ),
+      is_to_call:
+        state.to_call?.unchecked_employment_index?.[ownProps.employment_id],
       is_favorite: state.favorites.employment_index[ownProps.employment_id]
     };
   } else if (ownProps.contact_id) {
     return {
-      is_to_call: __guard__(
-        state.to_call?.unchecked_contact_index,
-        x1 => x1[ownProps.contact_id]
-      ),
+      is_to_call: state.to_call?.unchecked_contact_index?.[ownProps.contact_id],
       is_favorite: state.favorites.contact_index[ownProps.contact_id]
     };
   } else {
@@ -168,9 +163,3 @@ class SomeoneWithButtons extends React.Component {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(SomeoneWithButtons);
-
-const __guard__ = (value, transform) => {
-  return typeof value !== 'undefined' && value !== null
-    ? transform(value)
-    : undefined;
-};

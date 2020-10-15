@@ -69,7 +69,7 @@ class NodeLink extends React.Component {
         { className: 'node-link__employee-link' },
         div(
           { className: 'node-link__employee-photo' },
-          __guard__(photo?.thumb39, x => x.url)
+          photo?.thumb39?.url
             ? img({
               src: process.env.PHOTO_BASE_URL + photo.thumb39.url,
               className: 'node-link__employee-thumb39'
@@ -105,9 +105,3 @@ class NodeLink extends React.Component {
 NodeLink.initClass();
 
 export default connect(mapStateToProps, mapDispatchToProps)(NodeLink);
-
-function __guard__(value, transform) {
-  return typeof value !== 'undefined' && value !== null
-    ? transform(value)
-    : undefined;
-}

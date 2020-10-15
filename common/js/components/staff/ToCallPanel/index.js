@@ -13,11 +13,7 @@ const span = React.createFactory('span');
 const svg = React.createFactory(SvgIcon);
 
 const mapStateToProps = (state, ownProps) => ({
-  counter:
-    __guard__(
-      state.to_call?.unchecked,
-      x => x.length
-    ) || 0
+  counter: state.to_call?.unchecked?.length || 0
 });
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
@@ -56,8 +52,3 @@ class ToCallPanel extends React.Component {
 
 export default connect(mapStateToProps, mapDispatchToProps)(ToCallPanel);
 
-const __guard__ = (value, transform) => {
-  return typeof value !== 'undefined' && value !== null
-    ? transform(value)
-    : undefined;
-};

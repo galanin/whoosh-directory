@@ -78,7 +78,7 @@ class SearchPanel extends React.Component {
   }
 
   focusInputIfNoSelection(input) {
-    if (__guard__(window.getSelection(), x => x.isCollapsed)) {
+    if (window.getSelection()?.isCollapsed) {
       clearInterval(this.timer);
       return input.focus();
     }
@@ -150,8 +150,3 @@ class SearchPanel extends React.Component {
 
 export default connect(mapStateToProps, mapDispatchToProps)(SearchPanel);
 
-const __guard__ = (value, transform) => {
-  return typeof value !== 'undefined' && value !== null
-    ? transform(value)
-    : undefined;
-};

@@ -25,11 +25,7 @@ import CheckIcon from '@icons/checked.svg';
 import DestroyIcon from '@icons/recycle-bin.svg';
 
 const mapStateToProps = (state, ownProps) => {
-  const to_call = __guard__(
-    state.to_call?.data,
-    x => x[ownProps.to_call_id]
-  );
-
+  const to_call = state.to_call?.data?.[ownProps.to_call_id];
   const is_unchecked = () => {
     if (to_call.employment_id) {
       return state.to_call.unchecked_employment_index[to_call.employment_id];
@@ -143,9 +139,3 @@ class ToCall extends React.Component {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(ToCall);
-
-const __guard__ = (value, transform) => {
-  return typeof value !== 'undefined' && value !== null
-    ? transform(value)
-    : undefined;
-};
