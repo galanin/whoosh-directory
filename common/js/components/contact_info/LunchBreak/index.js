@@ -18,27 +18,24 @@ class LunchBreak extends React.Component {
     };
     classes[this.props.className] = true;
 
-    return (
-      <IconedData
-        className={classNames(classes)}
-        icon={LunchIcon}
-        align_icon="middle"
-      >
-        <div className="iconed-data__row iconed-data__row-title">
-          Обеденный перерыв
-        </div>
-        <div className="iconed-data__row iconed-data__row-data">
-          <div className="iconed-data__row-data-value">
-            <span className="employee-info__lunch-begin">
-              {this.props.lunch_begin}
-            </span>
-            <span className="employee-info__lunch-separator">—</span>
-            <span className="employee-info__lunch-end">
-              {this.props.lunch_end}
-            </span>
-          </div>
-        </div>
-      </IconedData>
+    return iconed_data(
+      { className: classNames(classes), icon: LunchIcon, align_icon: 'middle' },
+      div(
+        { className: 'iconed-data__row iconed-data__row-title' },
+        'Обеденный перерыв'
+      ),
+      div(
+        { className: 'iconed-data__row iconed-data__row-data' },
+        div(
+          { className: 'iconed-data__row-data-value' },
+          span(
+            { className: 'employee-info__lunch-begin' },
+            this.props.lunch_begin
+          ),
+          span({ className: 'employee-info__lunch-separator' }, '—'),
+          span({ className: 'employee-info__lunch-end' }, this.props.lunch_end)
+        )
+      )
     );
   }
 }

@@ -37,36 +37,27 @@ class OfficeLocation extends React.Component {
     const classes = { 'contact-data-office-location': true };
     classes[this.props.className] = true;
 
-    return (
-      <IconedData
-        className={classNames(classes)}
-        icon={LocationIcon}
-        align_icon="middle"
-        onClick={this.onClick.bind(this)}
-      >
-        {
-          (this.props.building ? (
-            <div className="iconed-data__row iconed-data__inline">
-              <span className="iconed-data__inline-title">Корпус</span>
-              <span className="iconed-data__inline-data">
-                {this.props.building}
-              </span>
-            </div>
-          ) : (
-            undefined
-          ),
-          this.props.office ? (
-            <div className="iconed-data__row iconed-data__inline">
-              <span className="iconed-data__inline-title">Кабинет</span>
-              <span className="iconed-data__inline-data">
-                {this.props.office}
-              </span>
-            </div>
-          ) : (
-            undefined
-          ))
-        }
-      </IconedData>
+    return iconed_data(
+      {
+        className: classNames(classes),
+        icon: LocationIcon,
+        align_icon: 'middle',
+        onClick: this.onClick.bind(this)
+      },
+      this.props.building
+        ? div(
+          { className: 'iconed-data__row iconed-data__inline' },
+          span({ className: 'iconed-data__inline-title' }, 'Корпус '),
+          span({ className: 'iconed-data__inline-data' }, this.props.building)
+        )
+        : undefined,
+      this.props.office
+        ? div(
+          { className: 'iconed-data__row iconed-data__inline' },
+          span({ className: 'iconed-data__inline-title' }, 'Кабинет '),
+          span({ className: 'iconed-data__inline-data' }, this.props.office)
+        )
+        : undefined
     );
   }
 }

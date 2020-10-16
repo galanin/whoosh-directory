@@ -17,21 +17,23 @@ class Birthday extends React.Component {
     };
     classes[this.props.className] = true;
 
-    return (
-      <IconedData
-        className={classNames(classes)}
-        icon={BirthdayIcon}
-        align_icon="middle"
-      >
-        <div className="iconed-data__row iconed-data__row-title">
-          День рождения
-        </div>
-        <div className="iconed-data__row iconed-data__row-data">
-          <div className="iconed-data__row-data-value">
-            {this.props.birthday_formatted}
-          </div>
-        </div>
-      </IconedData>
+    return iconed_data(
+      {
+        className: classNames(classes),
+        icon: BirthdayIcon,
+        align_icon: 'middle'
+      },
+      div(
+        { className: 'iconed-data__row iconed-data__row-title' },
+        'День рождения'
+      ),
+      div(
+        { className: 'iconed-data__row iconed-data__row-data' },
+        div(
+          { className: 'iconed-data__row-data-value' },
+          this.props.birthday_formatted
+        )
+      )
     );
   }
 }

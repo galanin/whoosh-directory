@@ -10,11 +10,10 @@ class ToolbarButton extends React.Component {
       'current-tool': this.props.current
     });
 
-    return (
-      <a className={class_name} href={this.props.href}>
-        <SvgIcon svg={this.props.svg} />
-        <div className="label">{this.props.label}</div>
-      </a>
+    return a(
+      { className: class_name, href: this.props.href },
+      svg({ svg: this.props.svg }),
+      div({ className: 'label' }, this.props.label)
     );
   }
 }

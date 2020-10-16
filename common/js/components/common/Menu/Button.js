@@ -19,18 +19,18 @@ class MenuButton extends React.Component {
   }
 
   render() {
-    return (
-      <a
-        className="menu-button-container"
-        onClick={this.onClick.bind(this)}
-        href="#"
-      >
-        <span className="menu-button">
-          <span className="menu-button-stripe menu-button-stripe-1"></span>
-          <span className="menu-button-stripe menu-button-stripe-2"></span>
-          <span className="menu-button-stripe menu-button-stripe-3"></span>
-        </span>
-      </a>
+    return a(
+      {
+        className: 'menu-button-container',
+        onClick: this.onClick.bind(this),
+        href: '#'
+      },
+      span(
+        { className: 'menu-button' },
+        span({ className: 'menu-button-stripe menu-button-stripe-1' }),
+        span({ className: 'menu-button-stripe menu-button-stripe-2' }),
+        span({ className: 'menu-button-stripe menu-button-stripe-3' })
+      )
     );
   }
 }

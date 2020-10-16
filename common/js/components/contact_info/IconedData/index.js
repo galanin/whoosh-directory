@@ -12,13 +12,13 @@ class IconedData extends React.Component {
     };
     classes[this.props.className] = true;
 
-    return (
-      <div className={classNames(classes)} onClick={this.props.onClick}>
-        <SvgIcon className="big-icon iconed-data__icon" svg={this.props.icon} />
-        <div className="iconed-data__container">
-          <div className="iconed-data__data">{this.props.children}</div>
-        </div>
-      </div>
+    return div(
+      { className: classNames(classes), onClick: this.props.onClick },
+      svg({ className: 'big-icon iconed-data__icon', svg: this.props.icon }),
+      div(
+        { className: 'iconed-data__container' },
+        div({ className: 'iconed-data__data' }, this.props.children)
+      )
     );
   }
 }

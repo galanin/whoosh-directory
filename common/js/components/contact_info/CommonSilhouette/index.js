@@ -19,7 +19,7 @@ class CommonSilhouette extends React.Component {
     const class_names = { 'common-silhouette': true };
     class_names[this.props.className] = true;
 
-    return <SvgIcon svg={silhouette} className={classNames(class_names)} />;
+    return svg({ svg: silhouette, className: classNames(class_names) });
   }
 }
 

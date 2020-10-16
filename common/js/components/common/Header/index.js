@@ -6,12 +6,16 @@ class Header extends React.Component {
   }
 
   render() {
-    return (
-      <div className="header plug">
-        <a className="header-title" href="/" onClick={this.onClick.bind(this)}>
-          Справочник сотрудников
-        </a>
-      </div>
+    return div(
+      { className: 'header plug' },
+      a(
+        {
+          className: 'header-title',
+          href: '/',
+          onClick: this.onClick.bind(this)
+        },
+        'Справочник сотрудников'
+      )
     );
   }
 }

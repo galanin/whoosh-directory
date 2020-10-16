@@ -93,79 +93,91 @@ class Menu extends React.Component {
       'menu_is-open': this.props.open
     };
 
-    return (
-      <div className={classNames(class_names)}>
-        <div className="menu-scroller">
-          <div className="menu-title">Справочник сотрудников</div>
-          <div
-            className="employee-info__close-button"
-            onClick={this.onCloseButtonClick.bind(this)}
-          >
-            <SvgIcon
-              className="employee-info__close-button-cross"
-              svg={CloseButton}
-            />
-          </div>
-          <a
-            className="menu-item menu-item__structure"
-            onClick={this.onSearchChosen.bind(this)}
-            href="#"
-          >
-            Поиск
-          </a>
+    return div(
+      { className: classNames(class_names) },
+      div(
+        { className: 'menu-scroller' },
+        div(
+          {
+            className: 'employee-info__close-button',
+            onClick: this.onCloseButtonClick.bind(this)
+          },
+          svg({
+            className: 'employee-info__close-button-cross',
+            svg: CloseButton
+          })
+        ),
 
-          <a
-            className="menu-item menu-item__structure"
-            onClick={this.onStructureChosen.bind(this)}
-            href="#"
-          >
-            Оргструктура
-          </a>
+        div({ className: 'menu-title' }, 'Справочник сотрудников'),
 
-          <a
-            className="menu-item menu-item__structure"
-            onClick={this.onFavoritesChosen.bind(this)}
-            href="#"
-          >
-            Избранное
-          </a>
+        a(
+          {
+            className: 'menu-item menu-item__search',
+            onClick: this.onSearchChosen.bind(this),
+            href: '#'
+          },
+          'Поиск'
+        ),
 
-          <a
-            className="menu-item menu-item__structure"
-            onClick={this.onToCallChosen.bind(this)}
-            href="#"
-          >
-            Планировщик
-          </a>
+        a(
+          {
+            className: 'menu-item menu-item__structure',
+            onClick: this.onStructureChosen.bind(this),
+            href: '#'
+          },
+          'Оргструктура'
+        ),
 
-          <div className="menu-subtitle">Дни рождения</div>
-          <a
-            className="menu-item menu-item__structure"
-            onClick={this.onBirthdaysTodayChosen.bind(this)}
-            href="#"
-            shortcut="today"
-          >
-            Сегодня
-          </a>
-          <a
-            className="menu-item menu-item__structure"
-            onClick={this.onBirthdaysTodayChosen.bind(this)}
-            href="#"
-            shortcut="tomorrow"
-          >
-            Будущие
-          </a>
+        a(
+          {
+            className: 'menu-item menu-item__structure',
+            onClick: this.onFavoritesChosen.bind(this),
+            href: '#'
+          },
+          'Избранное'
+        ),
 
-          <a
-            className="menu-item menu-item__structure"
-            onClick={this.onBirthdaysTodayChosen.bind(this)}
-            href="#"
-            shortcut="recent"
-          >
-            Прошедшие
-          </a>
-        </div>
-      </div>
+        a(
+          {
+            className: 'menu-item menu-item__structure',
+            onClick: this.onToCallChosen.bind(this),
+            href: '#'
+          },
+          'Планировщик'
+        ),
+
+        div({ className: 'menu-subtitle' }, 'Дни рождения'),
+
+        a(
+          {
+            className: 'menu-item menu-item__structure',
+            onClick: this.onBirthdaysTodayChosen.bind(this),
+            href: '#',
+            shortcut: 'today'
+          },
+          'Сегодня'
+        ),
+
+        a(
+          {
+            className: 'menu-item menu-item__structure',
+            onClick: this.onBirthdaysTodayChosen.bind(this),
+            href: '#',
+            shortcut: 'tomorrow'
+          },
+          'Будущие'
+        ),
+
+        a(
+          {
+            className: 'menu-item menu-item__structure',
+            onClick: this.onBirthdaysTodayChosen.bind(this),
+            href: '#',
+            shortcut: 'recent'
+          },
+          'Прошедшие'
+        )
+      )
     );
   }
 }

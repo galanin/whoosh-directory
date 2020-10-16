@@ -50,10 +50,6 @@ const mapDispatchToProps = dispatch => ({
 });
 
 class NodeUnitInfo extends React.Component {
-  static initClass() {
-    this.propTypes = { unit_id: PropTypes.integer };
-  }
-
   onClickFavorite() {
     if (this.props.is_favorite) {
       return this.props.unfavorite(this.props.unit_id);
@@ -155,6 +151,6 @@ class NodeUnitInfo extends React.Component {
     );
   }
 }
-NodeUnitInfo.initClass();
+NodeUnitInfo.propTypes = { unit_id: PropTypes.integer };
 
 export default connect(mapStateToProps, mapDispatchToProps)(NodeUnitInfo);

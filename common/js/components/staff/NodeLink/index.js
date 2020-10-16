@@ -37,9 +37,6 @@ const mapDispatchToProps = function(dispatch, ownProps) {
 };
 
 class NodeLink extends React.Component {
-  static initClass() {
-    this.propTypes = { node_id: PropTypes.integer };
-  }
 
   onUnitClick() {
     return this.props.click();
@@ -102,6 +99,6 @@ class NodeLink extends React.Component {
     );
   }
 }
-NodeLink.initClass();
+NodeLink.propTypes = { node_id: PropTypes.integer };
 
 export default connect(mapStateToProps, mapDispatchToProps)(NodeLink);

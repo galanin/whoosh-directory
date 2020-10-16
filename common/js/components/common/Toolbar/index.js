@@ -29,12 +29,11 @@ class Toolbar extends React.Component {
   render() {
     const current = this.props.current_tool;
 
-    return (
-      <div className='toolbar plug'>
-        {buttons.map(key => {
-          toolbar_button(key);
-        })}
-      </div>
+    return div(
+      { className: 'toolbar plug' },
+      buttons.map(key => {
+        toolbar_button(key);
+      })
     );
   }
 }

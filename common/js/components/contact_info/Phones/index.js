@@ -27,7 +27,7 @@ class Phones extends React.Component {
   render() {
     if (
       !isArray(this.props.format_phones) ||
-      !(this.props.format_phones.length > 0)
+      this.props.format_phones.length <= 0
     ) {
       return '';
     }
@@ -35,28 +35,30 @@ class Phones extends React.Component {
     const classes = { 'contact-data-phones': true };
     classes[this.props.className] = true;
 
-    return (
-      <div className={classNames(classes)}>
-        <div className="contact-data-phones__title">
-          {this.props.format_phones.length === 1 ? 'Телефон' : 'Телефоны'}
-        </div>
-        <div className="contact-data-phones__phones">
-          {this.props.format_phones.map(phone => (
-            <div
-              className="contact-data-phones__phone"
-              key={phone}
-              onClick={this.onClick.bind(this, phone)}
-            >
-              <span className="contact-data-phones__phone-label">
-                {phone[2] + ' '}
-              </span>
-              <span className="contact-data-phones__phone-number">
-                {phone[1]}
-              </span>
-            </div>
-          ))}
-        </div>
-      </div>
+    return div(
+      { className: classNames(classes) },
+      div(
+        { className: 'contact-data-phones__title' },
+        this.props.format_phones.length === 1 ? 'Телефон' : 'Телефоны'
+      ),
+
+      div(
+        { className: 'contact-data-phones__phones' },
+        this.props.format_phones.map(phone =>
+          div(
+            {
+              className: 'contact-data-phones__phone',
+              key: phone,
+              onClick: this.onClick.bind(this, phone)
+            },
+            span(
+              { className: 'contact-data-phones__phone-label' },
+              phone[2] + ' '
+            ),
+            span({ className: 'contact-data-phones__phone-number' }, phone[1])
+          )
+        )
+      )
     );
   }
 }

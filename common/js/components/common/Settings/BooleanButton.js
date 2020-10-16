@@ -34,13 +34,11 @@ class SettingsBooleanButton extends React.Component {
       'settings-boolean-button-checked': this.props.is_checked
     });
 
-    return (
-      <SvgIcon
-        className={class_name}
-        svg={this.props.svg}
-        onClick={this.onClick.bind(this)}
-      />
-    );
+    return svg({
+      className: class_name,
+      svg: this.props.svg,
+      onClick: this.onClick.bind(this)
+    });
   }
 }
 

@@ -14,22 +14,19 @@ class Email extends React.Component {
     const classes = { 'contact-data-email': true };
     classes[this.props.className] = true;
 
-    return (
-      <IconedData
-        className={classNames(classes)}
-        icon={EmailIcon}
-        align_icon="middle"
-      >
-        <div className="iconed-data__row iconed-data__row-title">E-mail</div>
-        <div className="iconed-data__row iconed-data__row-data">
-          <a
-            className="iconed-data__row-data-value iconed-data__email-link"
-            href={'mailto:' + this.props.email}
-          >
-            {this.props.email}
-          </a>
-        </div>
-      </IconedData>
+    return iconed_data(
+      { className: classNames(classes), icon: EmailIcon, align_icon: 'middle' },
+      div({ className: 'iconed-data__row iconed-data__row-title' }, 'E-mail'),
+      div(
+        { className: 'iconed-data__row iconed-data__row-data' },
+        a(
+          {
+            className: 'iconed-data__row-data-value iconed-data__email-link',
+            href: 'mailto:' + this.props.email
+          },
+          this.props.email
+        )
+      )
     );
   }
 }

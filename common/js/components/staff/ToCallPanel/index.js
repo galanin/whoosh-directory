@@ -34,21 +34,15 @@ class ToCallPanel extends React.Component {
     };
     class_names[this.props.className] = true;
 
-    return (
-      <div
-        className={classNames(class_names)}
-        onClick={this.onClick.bind(this)}
-      >
-        <SvgIcon className="medium-icon to-call-panel__icon" svg={ToCallIcon} />
-        {this.props.counter > 0 ? (
-          <span className="to-call-panel__counter">{this.props.counter}</span>
-        ) : (
-          <SvgIcon className="to-call-panel__empty" svg={CheckedIcon} />
-        )}
-      </div>
+    return div(
+      { className: classNames(class_names), onClick: this.onClick.bind(this) },
+      svg({ className: 'medium-icon to-call-panel__icon', svg: ToCallIcon }),
+      span({ className: 'to-call-panel__title' }, 'Планировщик'),
+      this.props.counter > 0
+        ? span({ className: 'to-call-panel__counter' }, this.props.counter)
+        : svg({ className: 'to-call-panel__empty', svg: CheckedIcon })
     );
   }
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(ToCallPanel);
-

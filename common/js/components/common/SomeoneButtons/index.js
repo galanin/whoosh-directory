@@ -97,36 +97,34 @@ class SomeoneButtons extends React.Component {
     };
     class_names[this.props.className] = true;
 
-    return (
-      <div className={classNames(class_names)}>
-        <div
-          className="employee-buttons__button employee-buttons__to-call"
-          onClick={this.onAddToCall.bind(this)}
-        >
-          <SvgIcon
-            className="medium-icon employee-buttons__icon"
-            svg={ToCallIcon}
-          />
-          <span className="employee-buttons__label">
-            {this.props.is_to_call
-              ? 'Запланирован звонок'
-              : 'Запланировать звонок'}
-          </span>
-        </div>
+    return div(
+      { className: classNames(class_names) },
+      div(
+        {
+          className: 'employee-buttons__button employee-buttons__to-call',
+          onClick: this.onAddToCall.bind(this)
+        },
+        svg({
+          className: 'medium-icon employee-buttons__icon',
+          svg: ToCallIcon
+        }),
+        span(
+          { className: 'employee-buttons__label' },
+          this.props.is_to_call ? 'Запланирован звонок' : 'Запланировать звонок'
+        )
+      ),
 
-        <div
-          className="employee-buttons__button employee-buttons__favorite"
-          onClick={this.onFavorite.bind(this)}
-        >
-          <SvgIcon
-            className="medium-icon employee-buttons__icon"
-            svg={StarIcon}
-          />
-          <span className="employee-buttons__label">
-            {this.props.is_favorite ? 'В избранном' : 'Добавить в избранное'}
-          </span>
-        </div>
-      </div>
+      div(
+        {
+          className: 'employee-buttons__button employee-buttons__favorite',
+          onClick: this.onFavorite.bind(this)
+        },
+        svg({ className: 'medium-icon employee-buttons__icon', svg: StarIcon }),
+        span(
+          { className: 'employee-buttons__label' },
+          this.props.is_favorite ? 'В избранном' : 'Добавить в избранное'
+        )
+      )
     );
   }
 }

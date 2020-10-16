@@ -294,7 +294,7 @@ class EmployeeInfo extends React.Component {
                           className: 'employee-info__structure-unit'
                         }),
                         parent.head
-                          ? employee({
+                          ? someoneWithButtons({
                             key: parent.head.id,
                             employment_id: parent.head.id,
                             hide: { unit: true },
@@ -309,7 +309,7 @@ class EmployeeInfo extends React.Component {
                           key: parent.employment.id,
                           className: 'list-item hair-border'
                         },
-                        employee({
+                        someoneWithButtons({
                           key: parent.employment.id,
                           employment_id: parent.employment.id,
                           hide: { unit: true },
