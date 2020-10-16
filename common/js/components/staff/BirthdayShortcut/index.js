@@ -2,13 +2,13 @@ import React from 'react';
 import classNames from 'classnames';
 import { connect } from 'react-redux';
 
+import { span } from '@components/factories';
+
 import { RESULTS_SOURCE_BIRTHDAY } from '@constants/search';
 
 import { setBirthdayPeriodByShortcut } from '@actions/birthday_period';
 import { setResultsSource } from '@actions/search';
 import { popSearchResults } from '@actions/layout';
-
-const span = React.createFactory('span');
 
 const mapStateToProps = (state, ownProps) => ({});
 

@@ -5,23 +5,19 @@ import classNames from 'classnames';
 import { isArray } from 'lodash';
 
 import {
+  div,
+  employeeWithButtons,
+  someoneWithButtons,
+  nodeLink
+} from '@components/factories';
+
+import {
   addFavoriteEmployment,
   removeFavoriteEmployment,
   addFavoriteUnit
 } from '@actions/favorites';
 
-import SvgIcon from '@components/common/SvgIcon';
-import EmployeeWithButtons from '@components/staff/EmployeeWithButtons';
-import SomeoneWithButtons from '@components/staff/SomeoneWithButtons';
-import NodeLink from '@components/staff/NodeLink';
 import StarIcon from '@icons/star.svg';
-
-const div = React.createFactory('div');
-const svg = React.createFactory(SvgIcon);
-
-const employee = React.createFactory(EmployeeWithButtons);
-const someone = React.createFactory(SomeoneWithButtons);
-const node_link = React.createFactory(NodeLink);
 
 const mapStateToProps = (state, ownProps) => {
   const employment = state.employments[ownProps.employment_id];
@@ -67,7 +63,7 @@ class NodeEmploymentInfo extends React.Component {
         for (let employment_id of Array.from(this.props.employ_ids)) {
           div(
             { className: 'hierarchy-child' },
-            someone({
+            someoneWithButtons({
               key: employment_id,
               employment_id,
               hide: { unit: true },
@@ -81,7 +77,7 @@ class NodeEmploymentInfo extends React.Component {
         for (let contact_id of Array.from(this.props.node.contact_ids)) {
           div(
             { className: 'hierarchy-child' },
-            someone({
+            someoneWithButtons({
               key: contact_id,
               contact_id,
               hide: { unit: true },
@@ -95,7 +91,7 @@ class NodeEmploymentInfo extends React.Component {
         return Array.from(this.props.child_ids).map(child_node_id =>
           div(
             { className: 'hierarchy-child' },
-            node_link({
+            nodeLink({
               key: 'child-node-' + child_node_id,
               node_id: child_node_id,
               className: 'list-item shadow'
@@ -130,7 +126,7 @@ class NodeEmploymentInfo extends React.Component {
 
       div(
         { className: 'hierarchy-root' },
-        employee({
+        employeeWithButtons({
           employment_id: this.props.employment_id,
           hide: { unit: true, post: true },
           className: 'list-item shadow'

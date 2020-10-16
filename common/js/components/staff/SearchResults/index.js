@@ -2,13 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { isArray } from 'lodash';
 
-const div = React.createFactory('div');
-
-import SearchResultUnit from '@components/staff/SearchResultUnit';
-const result_unit = React.createFactory(SearchResultUnit);
-
-import SomeoneWithButtons from '@components/staff/SomeoneWithButtons';
-const someone = React.createFactory(SomeoneWithButtons);
+import {div,searchResultUnit,someoneWithButtons} from '@components/factories';
 
 const mapStateToProps = (state, ownProps) => ({
   results: state.search.results,
@@ -33,20 +27,20 @@ class SearchResults extends React.Component {
             { className: 'search-results__results' },
             this.props.results.map(result => {
               if (result.unit_id) {
-                return result_unit({
+                return searchResultUnit({
                   key: result.unit_id,
                   unit_id: result.unit_id,
                   className: 'list-item shadow'
                 });
               } else if (result.contact_id) {
-                return someone({
+                return someoneWithButtons({
                   key: result.contact_id,
                   contact_id: result.contact_id,
                   className: 'list-item shadow'
                 });
               } else if (result.person_id) {
                 if (result.employ_ids) {
-                  return someone({
+                  return someoneWithButtons({
                     key: result.person_id,
                     employment_id: result.employ_ids[0],
                     className: 'list-item shadow'

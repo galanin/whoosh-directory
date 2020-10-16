@@ -1,6 +1,7 @@
 import React from 'react';
 import classNames from 'classnames';
-import IconedData from '@components/contact_info/IconedData';
+
+import { div, iconedData } from '@components/factories';
 
 import BirthdayIcon from '@icons/birthday.svg';
 
@@ -17,7 +18,7 @@ class Birthday extends React.Component {
     };
     classes[this.props.className] = true;
 
-    return iconed_data(
+    return iconedData(
       {
         className: classNames(classes),
         icon: BirthdayIcon,

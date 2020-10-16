@@ -1,7 +1,7 @@
 import React from 'react';
 import classNames from 'classnames';
-import SvgIcon from '@components/common/SvgIcon';
-import IconedData from '@components/contact_info/IconedData';
+
+import { a, div, iconedData } from '@components/factories';
 
 import EmailIcon from '@icons/at-sign.svg';
 
@@ -14,7 +14,7 @@ class Email extends React.Component {
     const classes = { 'contact-data-email': true };
     classes[this.props.className] = true;
 
-    return iconed_data(
+    return iconedData(
       { className: classNames(classes), icon: EmailIcon, align_icon: 'middle' },
       div({ className: 'iconed-data__row iconed-data__row-title' }, 'E-mail'),
       div(

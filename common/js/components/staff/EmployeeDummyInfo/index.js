@@ -1,13 +1,6 @@
 import React from 'react';
-import SvgIcon from '@components/common/SvgIcon';
-import Silhouette from '@components/contact_info/CommonSilhouette';
-import IconedData from '@components/contact_info/IconedData';
 
-const div = React.createFactory('div');
-const span = React.createFactory('span');
-const svg = React.createFactory(SvgIcon);
-const silhouette = React.createFactory(Silhouette);
-const iconed_data = React.createFactory(IconedData);
+import { div, silhouette, iconedData } from '@components/factories';
 
 import EmailIcon from '@icons/at-sign.svg';
 import LunchIcon from '@icons/lunch.svg';
@@ -49,21 +42,21 @@ class EmployeeDummyInfo extends React.Component {
             { className: 'employee-info__data' },
             div({ className: 'employee-dummy-info__phones' }),
 
-            iconed_data({
+            iconedData({
               className:
                 'employee-dummy-info__iconed-data employee-dummy-info__location',
               icon: LocationIcon,
               align_icon: 'middle'
             }),
 
-            iconed_data({
+            iconedData({
               className:
                 'employee-dummy-info__iconed-data employee-dummy-info__lunch-break',
               icon: LunchIcon,
               align_icon: 'middle'
             }),
 
-            iconed_data({
+            iconedData({
               className:
                 'employee-dummy-info__iconed-data employee-dummy-info__birthday',
               icon: BirthdayIcon,

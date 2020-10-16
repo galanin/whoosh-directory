@@ -1,7 +1,7 @@
 import React from 'react';
 import classNames from 'classnames';
-import SvgIcon from '@components/common/SvgIcon';
-import IconedData from '@components/contact_info/IconedData';
+
+import { div, span, iconedData } from '@components/factories';
 
 import LunchIcon from '@icons/lunch.svg';
 
@@ -18,7 +18,7 @@ class LunchBreak extends React.Component {
     };
     classes[this.props.className] = true;
 
-    return iconed_data(
+    return iconedData(
       { className: classNames(classes), icon: LunchIcon, align_icon: 'middle' },
       div(
         { className: 'iconed-data__row iconed-data__row-title' },

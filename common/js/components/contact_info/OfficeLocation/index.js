@@ -8,8 +8,7 @@ import { setQuery } from '@actions/search';
 import { setResultsSource } from '@actions/search';
 import { popSearchResults } from '@actions/layout';
 
-import SvgIcon from '@components/common/SvgIcon';
-import IconedData from '@components/contact_info/IconedData';
+import { div, span, iconedData } from '@components/factories';
 
 import LocationIcon from '@icons/location.svg';
 
@@ -37,7 +36,7 @@ class OfficeLocation extends React.Component {
     const classes = { 'contact-data-office-location': true };
     classes[this.props.className] = true;
 
-    return iconed_data(
+    return iconedData(
       {
         className: classNames(classes),
         icon: LocationIcon,

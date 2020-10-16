@@ -1,15 +1,9 @@
 import React from 'react';
 import classNames from 'classnames';
 
-import SettingsBooleanButtons from '@components/common/Settings/BooleanButton';
-const setting_boolean = React.createFactory(SettingsBooleanButtons);
+import { div, settingsBooleanButtons } from '@components/factories';
 
-import SvgIcon from '@components/common/SvgIcon';
 import Location from '@icons/location.svg';
-
-const div = React.createFactory('div');
-const span = React.createFactory('span');
-const svg = React.createFactory(SvgIcon);
 
 class SettingsPanel extends React.Component {
   render() {
@@ -18,7 +12,7 @@ class SettingsPanel extends React.Component {
 
     return div(
       { className: classNames(class_names) },
-      setting_boolean({
+      settingsBooleanButtons({
         setting: 'search_results__show_location',
         svg: Location,
         className: 'settings-panel__button'

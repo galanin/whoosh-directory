@@ -2,7 +2,8 @@ import React from 'react';
 import { connect } from 'react-redux';
 import classNames from 'classnames';
 
-import SvgIcon from '@components/common/SvgIcon';
+import { div, svgIcon, employee, contact } from '@components/factories';
+
 import {
   addEmploymentToCall,
   addContactToCall,
@@ -11,15 +12,6 @@ import {
   destroyEmploymentToCall,
   destroyContactToCall
 } from '@actions/to_call';
-
-const div = React.createFactory('div');
-const svg = React.createFactory(SvgIcon);
-
-import Employee from '@components/staff/Employee';
-const employee = React.createFactory(Employee);
-
-import Contact from '@components/staff/Contact';
-const contact = React.createFactory(Contact);
 
 import CheckIcon from '@icons/checked.svg';
 import DestroyIcon from '@icons/recycle-bin.svg';
@@ -116,7 +108,7 @@ class ToCall extends React.Component {
               'to-call__button to-call__check-to-call employee-buttons-container__button',
             onClick: this.onCheck.bind(this)
           },
-          svg({
+          svgIcon({
             className: 'medium-icon to-call__icon to-call__check',
             svg: CheckIcon
           })
@@ -128,7 +120,7 @@ class ToCall extends React.Component {
               'to-call__button to-call__destroy-to-call employee-buttons-container__button',
             onClick: this.onDestroyToCall.bind(this)
           },
-          svg({
+          svgIcon({
             className: 'medium-icon to-call__icon to-call__destroy',
             svg: DestroyIcon
           })

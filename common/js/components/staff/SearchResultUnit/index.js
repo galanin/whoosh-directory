@@ -3,10 +3,10 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import classNames from 'classnames';
 
+import { div } from '@components/factories';
+
 import { goToNodeInStructure } from '@actions/nodes';
 import { popNodeInfo, popStructure } from '@actions/layout';
-
-const div = React.createFactory('div');
 
 const mapStateToProps = (state, ownProps) => ({
   unit: state.units[ownProps.unit_id]

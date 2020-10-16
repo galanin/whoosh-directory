@@ -3,15 +3,11 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import classNames from 'classnames';
 
-import CommonAvatar from '@components/staff/CommonAvatar';
+import { div, img, commonAvatar } from '@components/factories';
 
 import { goToNodeInStructure } from '@actions/nodes';
 import { setHighlightedUnitId } from '@actions/current';
 import { popNodeInfo, popStructure } from '@actions/layout';
-
-const div = React.createFactory('div');
-const img = React.createFactory('img');
-const avatar = React.createFactory(CommonAvatar);
 
 const mapStateToProps = function(state, ownProps) {
   const node = state.nodes.data[ownProps.node_id];
@@ -37,7 +33,6 @@ const mapDispatchToProps = function(dispatch, ownProps) {
 };
 
 class NodeLink extends React.Component {
-
   onUnitClick() {
     return this.props.click();
   }
@@ -71,7 +66,7 @@ class NodeLink extends React.Component {
               src: process.env.PHOTO_BASE_URL + photo.thumb39.url,
               className: 'node-link__employee-thumb39'
             })
-            : avatar({
+            : commonAvatar({
               className: 'node-link__avatar',
               gender: this.props.person?.gender,
               post_code: this.props.employment.post_code

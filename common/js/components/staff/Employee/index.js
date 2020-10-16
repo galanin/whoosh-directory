@@ -3,22 +3,15 @@ import { connect } from 'react-redux';
 import { isArray } from 'lodash';
 import classNames from 'classnames';
 
+import { div, span, img, svgIcon, commonAvatar } from '@components/factories';
+
 import { loadUnitInfo } from '@actions/units';
 import { setCurrentEmploymentId } from '@actions/current';
 import { popEmployeeInfo } from '@actions/layout';
 import { currentTime, todayDate } from '@lib/datetime';
 
-import SvgIcon from '@components/common/SvgIcon';
 import ToCallIcon from '@icons/call.svg';
 import StarIcon from '@icons/star.svg';
-
-const div = React.createFactory('div');
-const span = React.createFactory('span');
-const img = React.createFactory('img');
-const svg = React.createFactory(SvgIcon);
-
-import CommonAvatar from '@components/staff/CommonAvatar';
-const avatar = React.createFactory(CommonAvatar);
 
 const mapStateToProps = (state, ownProps) => {
   const employment = state.employments[ownProps.employment_id];
@@ -129,7 +122,7 @@ class Employee extends React.Component {
         });
       }
     } else {
-      return avatar({
+      return commonAvatar({
         className: 'employee__avatar',
         gender: this.props.person.gender,
         post_code: this.props.employment.post_code
@@ -174,14 +167,17 @@ class Employee extends React.Component {
           ),
 
           this.props.is_to_call
-            ? svg({
+            ? svgIcon({
               className: 'small-icon employee__to-call',
               svg: ToCallIcon
             })
             : undefined,
 
           this.props.is_favorite
-            ? svg({ className: 'small-icon employee__favorite', svg: StarIcon })
+            ? svgIcon({
+              className: 'small-icon employee__favorite',
+              svg: StarIcon
+            })
             : undefined
         ),
 

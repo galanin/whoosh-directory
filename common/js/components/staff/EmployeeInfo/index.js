@@ -1,39 +1,30 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import SvgIcon from '@components/common/SvgIcon';
-import Silhouette from '@components/contact_info/CommonSilhouette';
-import SomeoneButtons from '@components/common/SomeoneButtons';
-import Phones from '@components/contact_info/Phones';
-import Email from '@components/contact_info/Email';
-import OfficeLocation from '@components/contact_info/OfficeLocation';
-import LunchBreak from '@components/contact_info/LunchBreak';
-import Birthday from '@components/contact_info/Birthday';
-import IconedData from '@components/contact_info/IconedData';
-import SearchResultUnit from '@components/staff/SearchResultUnit';
-import SomeoneWithButtons from '@components/staff/SomeoneWithButtons';
 import { reverse, isEmpty } from 'lodash';
+
+import {
+  div,
+  span,
+  a,
+  img,
+  svgIcon,
+  silhouette,
+  someoneButtons,
+  phones,
+  email,
+  lunchBreak,
+  birthday,
+  iconedData,
+  searchResultUnit,
+  someoneWithButtons,
+  officeLocation
+} from '@components/factories';
 
 import { setCurrentEmploymentId } from '@actions/current';
 import { sinkEmployeeInfo, popNodeInfo, popStructure } from '@actions/layout';
 import { goToNodeInStructure } from '@actions/nodes';
 import { getNodeParents } from '@actions/employments';
 import { currentTime, todayDate } from '@lib/datetime';
-
-const div = React.createFactory('div');
-const span = React.createFactory('span');
-const a = React.createFactory('a');
-const img = React.createFactory('img');
-const svg = React.createFactory(SvgIcon);
-const silhouette = React.createFactory(Silhouette);
-const buttons = React.createFactory(SomeoneButtons);
-const phones = React.createFactory(Phones);
-const email = React.createFactory(Email);
-const location = React.createFactory(OfficeLocation);
-const lunch_break = React.createFactory(LunchBreak);
-const birthday = React.createFactory(Birthday);
-const iconed_data = React.createFactory(IconedData);
-const unit = React.createFactory(SearchResultUnit);
-const employee = React.createFactory(SomeoneWithButtons);
 
 import CloseButton from '@icons/close_button.svg';
 import VacationIcon from '@icons/vacation.svg';
@@ -132,7 +123,7 @@ class EmployeeInfo extends React.Component {
           className: 'employee-info__close-button',
           onClick: this.onCloseButtonClick.bind(this)
         },
-        svg({
+        svgIcon({
           className: 'employee-info__close-button-cross',
           svg: CloseButton
         })
@@ -222,7 +213,7 @@ class EmployeeInfo extends React.Component {
 
               div(
                 { className: 'employee-info__data' },
-                buttons({ employment_id: this.props.employment_id }),
+                someoneButtons({ employment_id: this.props.employment_id }),
 
                 phones({
                   format_phones: this.props.employment.format_phones,
@@ -235,14 +226,14 @@ class EmployeeInfo extends React.Component {
                   className: 'employee-info__iconed-data employee-info__email'
                 }),
 
-                location({
+                officeLocation({
                   building: this.props.employment.building,
                   office: this.props.employment.office,
                   className:
                       'employee-info__iconed-data employee-info__location'
                 }),
 
-                lunch_break({
+                lunchBreak({
                   lunch_begin: this.props.employment.lunch_begin,
                   lunch_end: this.props.employment.lunch_end,
                   highlighted:
@@ -259,7 +250,7 @@ class EmployeeInfo extends React.Component {
                 }),
 
                 this.props.employment.on_vacation
-                  ? iconed_data(
+                  ? iconedData(
                     {
                       className:
                             'employee-info__iconed-data employee-info__vacation',
@@ -289,7 +280,7 @@ class EmployeeInfo extends React.Component {
                           key: parent.unit.id,
                           className: 'list-item hair-border'
                         },
-                        unit({
+                        searchResultUnit({
                           unit_id: parent.unit.id,
                           className: 'employee-info__structure-unit'
                         }),

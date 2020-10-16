@@ -1,7 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import classNames from 'classnames';
-import SvgIcon from '@components/common/SvgIcon';
+
+import { svgIcon } from '@components/factories';
 
 import { saveSetting } from '@actions/settings';
 
@@ -34,7 +35,7 @@ class SettingsBooleanButton extends React.Component {
       'settings-boolean-button-checked': this.props.is_checked
     });
 
-    return svg({
+    return svgIcon({
       className: class_name,
       svg: this.props.svg,
       onClick: this.onClick.bind(this)

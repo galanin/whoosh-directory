@@ -1,8 +1,6 @@
 import React from 'react';
-import SvgIcon from '@components/common/SvgIcon';
 
-const div = React.createFactory('div');
-const svg = React.createFactory(SvgIcon);
+import { div, svgIcon } from '@components/factories';
 
 import LeaderMan from '@icons/common-avatars/leader-man.svg';
 import LeaderWoman from '@icons/common-avatars/leader-woman.svg';
@@ -63,7 +61,7 @@ class CommonAvatar extends React.Component {
     if (avatar) {
       return div(
         { className: 'common-avatar ' + this.props.className },
-        svg({ svg: avatar })
+        svgIcon({ svg: avatar })
       );
     } else {
       return '';

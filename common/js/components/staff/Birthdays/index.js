@@ -1,7 +1,13 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { isArray } from 'lodash';
-import { Element as ScrollElement, scroller } from 'react-scroll';
+
+import {
+  div,
+  scrollElement,
+  someoneWithButtons,
+  scroller
+} from '@components/factories';
 
 import { dateByDayNumber } from '@lib/datetime';
 import { getDayNumberByOffset, getBirthdayPeriodDates } from '@lib/birthdays';
@@ -10,12 +16,6 @@ import {
   extendBirthdayPeriodRight,
   extendBirthdayPeriodLeft
 } from '@actions/birthday_period';
-
-const div = React.createFactory('div');
-const scroll_element = React.createFactory(ScrollElement);
-
-import SomeoneWithButtons from '@components/staff/SomeoneWithButtons';
-const someone = React.createFactory(SomeoneWithButtons);
 
 const mapStateToProps = (state, ownProps) => {
   let scroll_to_date;
@@ -103,7 +103,7 @@ class Birthdays extends React.Component {
               { className: 'birthdays__date', key: date },
               div(
                 { className: 'birthdays__date-head' },
-                scroll_element(
+                scrollElement(
                   {
                     className: 'birthdays__date-title',
                     name: `date-${date}`
@@ -127,13 +127,13 @@ class Birthdays extends React.Component {
 
                   day_obj.results.map(result => {
                     if (result.contact_id) {
-                      return someone({
+                      return someoneWithButtons({
                         key: result.contact_id,
                         contact_id: result.contact_id,
                         className: 'list-item shadow'
                       });
                     } else if (result.person_id) {
-                      return someone({
+                      return someoneWithButtons({
                         key: result.person_id,
                         employment_id: result.employ_ids[0],
                         hide: { birthday: true },

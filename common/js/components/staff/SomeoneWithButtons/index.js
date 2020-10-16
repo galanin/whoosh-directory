@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import classNames from 'classnames';
 import { clone } from 'lodash';
 
-import SvgIcon from '@components/common/SvgIcon';
+import { div, svgIcon, employee, contact } from '@components/factories';
 
 import {
   addEmploymentToCall,
@@ -17,15 +17,6 @@ import {
   removeFavoriteEmployment,
   removeFavoriteContact
 } from '@actions/favorites';
-
-const div = React.createFactory('div');
-const svg = React.createFactory(SvgIcon);
-
-import Employee from '@components/staff/Employee';
-const employee = React.createFactory(Employee);
-
-import Contact from '@components/staff/Contact';
-const contact = React.createFactory(Contact);
 
 import ToCallIcon from '@icons/call.svg';
 import StarIcon from '@icons/star.svg';
@@ -140,7 +131,7 @@ class SomeoneWithButtons extends React.Component {
               'employee-with-buttons__button employee-with-buttons__to-call employee-buttons-container__button',
             onClick: this.onAddToCall.bind(this)
           },
-          svg({
+          svgIcon({
             className: 'medium-icon employee-with-buttons__icon',
             svg: ToCallIcon
           })
@@ -152,7 +143,7 @@ class SomeoneWithButtons extends React.Component {
               'employee-with-buttons__button employee-with-buttons__favorite employee-buttons-container__button',
             onClick: this.onFavorite.bind(this)
           },
-          svg({
+          svgIcon({
             className: 'medium-icon employee-with-buttons__icon',
             svg: StarIcon
           })

@@ -2,13 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import classNames from 'classnames';
 
-const div = React.createFactory('div');
-
-import NodeEmploymentInfo from '@components/staff/NodeEmploymentInfo';
-const employee = React.createFactory(NodeEmploymentInfo);
-
-import NodeUnitInfo from '@components/staff/NodeUnitInfo';
-const unit = React.createFactory(NodeUnitInfo);
+import { div, nodeEmploymentInfo, nodeUnitInfo } from '@components/factories';
 
 const mapStateToProps = state => {
   const node_id = state.nodes.current_id;
@@ -26,12 +20,12 @@ const mapDispatchToProps = dispatch => ({});
 class NodeInfo extends React.Component {
   employeeOrUnit() {
     if (this.props.node.employment_id) {
-      return employee({
+      return nodeEmploymentInfo({
         employment_id: this.props.node.employment_id,
         className: 'plug'
       });
     } else if (this.props.node.unit_id) {
-      return unit({ unit_id: this.props.node.unit_id, className: 'plug' });
+      return nodeUnitInfo({ unit_id: this.props.node.unit_id, className: 'plug' });
     }
   }
 

@@ -1,6 +1,7 @@
 import React from 'react';
 import classNames from 'classnames';
-import SvgIcon from '@components/common/SvgIcon';
+
+import { div, svgIcon } from '@components/factories';
 
 class IconedData extends React.Component {
   render() {
@@ -14,7 +15,7 @@ class IconedData extends React.Component {
 
     return div(
       { className: classNames(classes), onClick: this.props.onClick },
-      svg({ className: 'big-icon iconed-data__icon', svg: this.props.icon }),
+      svgIcon({ className: 'big-icon iconed-data__icon', svg: this.props.icon }),
       div(
         { className: 'iconed-data__container' },
         div({ className: 'iconed-data__data' }, this.props.children)

@@ -16,7 +16,7 @@ import {
   popToCall
 } from '@actions/layout';
 
-import SvgIcon from '@components/common/SvgIcon';
+import { a, div, svgIcon } from '@components/factories';
 
 import CloseButton from '@icons/close_button.svg';
 
@@ -102,7 +102,7 @@ class Menu extends React.Component {
             className: 'employee-info__close-button',
             onClick: this.onCloseButtonClick.bind(this)
           },
-          svg({
+          svgIcon({
             className: 'employee-info__close-button-cross',
             svg: CloseButton
           })

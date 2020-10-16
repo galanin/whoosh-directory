@@ -1,10 +1,7 @@
 import React from 'react';
 import classNames from 'classnames';
-import BirthdayShortcut from '@components/staff/BirthdayShortcut';
 
-const div = React.createFactory('div');
-const span = React.createFactory('span');
-const shortcut = React.createFactory(BirthdayShortcut);
+import { div, span, birthdayShortcut } from '@components/factories';
 
 class BirthdayShortcutPanel extends React.Component {
   render() {
@@ -14,18 +11,18 @@ class BirthdayShortcutPanel extends React.Component {
     return div(
       { className: classNames(class_names) },
       span({ className: 'birthday-shortcut-panel__title' }, 'Дни рождения'),
-      shortcut(
+      birthdayShortcut(
         { className: 'birthday-shortcut-panel__shortcut', shortcut: 'today' },
         'Сегодня'
       ),
-      shortcut(
+      birthdayShortcut(
         {
           className: 'birthday-shortcut-panel__shortcut',
           shortcut: 'tomorrow'
         },
         'Будущие'
       ),
-      shortcut(
+      birthdayShortcut(
         { className: 'birthday-shortcut-panel__shortcut', shortcut: 'recent' },
         'Прошедшие'
       )

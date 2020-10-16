@@ -4,18 +4,11 @@ import { connect } from 'react-redux';
 import classNames from 'classnames';
 import { isArray, isEmpty, compact } from 'lodash';
 
+import { div, svgIcon, someoneWithButtons, nodeLink } from '@components/factories';
+
 import { addFavoriteUnit, removeFavoriteUnit } from '@actions/favorites';
 
-import SvgIcon from '@components/common/SvgIcon';
-import SomeoneWithButtons from '@components/staff/SomeoneWithButtons';
-import NodeLink from '@components/staff/NodeLink';
 import StarIcon from '@icons/star.svg';
-
-const div = React.createFactory('div');
-const svg = React.createFactory(SvgIcon);
-
-const someone = React.createFactory(SomeoneWithButtons);
-const node_link = React.createFactory(NodeLink);
 
 const mapStateToProps = (state, ownProps) => {
   let node_id;
@@ -83,7 +76,7 @@ class NodeUnitInfo extends React.Component {
           { className: 'unit__short-title' },
           this.props.unit.short_title,
 
-          svg({
+          svgIcon({
             className: 'medium-icon unit__favorite',
             svg: StarIcon,
             onClick: this.onClickFavorite.bind(this)
@@ -97,7 +90,7 @@ class NodeUnitInfo extends React.Component {
           this.props.unit.long_title,
 
           !this.props.unit.short_title
-            ? svg({
+            ? svgIcon({
               className: 'medium-icon unit__favorite',
               svg: StarIcon,
               onClick: this.onClickFavorite.bind(this)
@@ -107,7 +100,7 @@ class NodeUnitInfo extends React.Component {
         : undefined,
 
       this.props.unit.head_id
-        ? someone({
+        ? someoneWithButtons({
           key: this.props.unit.head_id,
           employment_id: this.props.unit.head_id,
           hide: { unit: true },
@@ -119,7 +112,7 @@ class NodeUnitInfo extends React.Component {
         ? [
           this.props.employments.map(employment => {
             if (employment.id !== this.props.unit.head_id) {
-              return someone({
+              return someoneWithButtons({
                 key: employment.id,
                 employment_id: employment.id,
                 hide: { unit: true },
@@ -130,7 +123,7 @@ class NodeUnitInfo extends React.Component {
 
           isArray(this.props.node?.contact_ids)
             ? this.props.node.contact_ids.map(contact_id =>
-              someone({
+              someoneWithButtons({
                 key: contact_id,
                 contact_id,
                 hide: { unit: true },
@@ -140,7 +133,7 @@ class NodeUnitInfo extends React.Component {
             : undefined,
 
           this.props.child_nodes.map(child_node =>
-            node_link({
+            nodeLink({
               key: child_node.id,
               node_id: child_node.id,
               className: child_class_name

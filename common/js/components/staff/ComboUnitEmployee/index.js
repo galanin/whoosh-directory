@@ -1,12 +1,11 @@
 import React from 'react';
 import classNames from 'classnames';
 
-import SearchResultUnit from '@components/staff/SearchResultUnit';
-import SomeoneWithButtons from '@components/staff/SomeoneWithButtons';
-
-const div = React.createFactory('div');
-const unit = React.createFactory(SearchResultUnit);
-const employee = React.createFactory(SomeoneWithButtons);
+import {
+  div,
+  searchResultUnit,
+  someoneWithButtons
+} from '@components/factories';
 
 class ComboUnitEmployee extends React.Component {
   render() {
@@ -16,10 +15,10 @@ class ComboUnitEmployee extends React.Component {
     return div(
       { className: classNames(class_names) },
       this.props.unit_id
-        ? unit({ unit_id: this.props.unit_id })
+        ? searchResultUnit({ unit_id: this.props.unit_id })
         : undefined,
       this.props.employment_id
-        ? employee({
+        ? someoneWithButtons({
           employment_id: this.props.employment_id,
           hide: { unit: true }
         })

@@ -1,7 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import SvgIcon from '@components/common/SvgIcon';
 import classNames from 'classnames';
+
+import { svgIcon } from '@components/factories';
 
 import ManSilhouette from '@icons/businessman.svg';
 import WomanSilhouette from '@icons/businesswoman.svg';
@@ -19,7 +20,7 @@ class CommonSilhouette extends React.Component {
     const class_names = { 'common-silhouette': true };
     class_names[this.props.className] = true;
 
-    return svg({ svg: silhouette, className: classNames(class_names) });
+    return svgIcon({ svg: silhouette, className: classNames(class_names) });
   }
 }
 

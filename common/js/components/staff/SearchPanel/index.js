@@ -1,21 +1,14 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { isMobile } from 'react-device-detect';
-import SvgIcon from '@components/common/SvgIcon';
+
+import { div, svgIcon, input, menuButton } from '@components/factories';
 
 import { RESULTS_SOURCE_QUERY } from '@constants/search';
 
 import { setQuery, forceQueryResults, setResultsSource } from '@actions/search';
 import { popSearchResults } from '@actions/layout';
 import { fixText } from '@lib/keyboard_layout_fixer';
-
-const div = React.createFactory('div');
-const img = React.createFactory('img');
-const svg = React.createFactory(SvgIcon);
-const input = React.createFactory('input');
-
-import MenuButton from '@components/common/Menu/Button';
-const menu_button = React.createFactory(MenuButton);
 
 import Backspace from './icons/backspace.svg';
 import SearchButton from '@icons/search.svg';
@@ -108,7 +101,7 @@ class SearchPanel extends React.Component {
       { className: 'search-panel-container plug' },
       div(
         { className: 'search-panel' },
-        menu_button({}),
+        menuButton({}),
 
         div(
           { className: 'search-panel__input-container' },
@@ -131,7 +124,7 @@ class SearchPanel extends React.Component {
                 className: 'search-panel__reset',
                 onClick: this.onQueryReset.bind(this)
               },
-              svg({ className: 'search-panel__reset-icon', svg: Backspace })
+              svgIcon({ className: 'search-panel__reset-icon', svg: Backspace })
             )
           ),
 
@@ -140,7 +133,7 @@ class SearchPanel extends React.Component {
               className: 'search-panel__search',
               onClick: this.onQueryExec.bind(this)
             },
-            svg({ className: 'search-panel__search-icon', svg: SearchButton })
+            svgIcon({ className: 'search-panel__search-icon', svg: SearchButton })
           )
         )
       )
@@ -149,4 +142,3 @@ class SearchPanel extends React.Component {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(SearchPanel);
-

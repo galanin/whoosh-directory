@@ -3,20 +3,23 @@ import { connect } from 'react-redux';
 
 import { RESULTS_SOURCE_BIRTHDAY } from '@constants/search';
 
-import SearchPanel from '@components/staff/SearchPanel';
-import BirthdayShortcutPanel from '@components/staff/BirthdayShortcutPanel';
-import SettingsPanel from '@components/staff/SettingsPanel';
-import ToCallPanel from '@components/staff/ToCallPanel';
-import FavoritesPanel from '@components/staff/FavoritesPanel';
-import NodeInfo from '@components/staff/NodeInfo';
-import OrganizationStructure from '@components/staff/OrganizationStructure';
-import EmployeeInfo from '@components/staff/EmployeeInfo';
-import ContactInfo from '@components/staff/ContactInfo';
-import EmployeeDummyInfo from '@components/staff/EmployeeDummyInfo';
-import SearchResults from '@components/staff/SearchResults';
-import Birthdays from '@components/staff/Birthdays';
-import ToCallList from '@components/staff/ToCallList';
-import FavoritesList from '@components/staff/FavoritesList';
+import {
+  div,
+  searchPanel,
+  birthdayShortcutPanel,
+  settingsPanel,
+  toCallPanel,
+  favoritesPanel,
+  nodeInfo,
+  organizationStructure,
+  employeeInfo,
+  contactInfo,
+  employeeDummyInfo,
+  searchResults,
+  birthdays,
+  toCallList,
+  favoritesList
+} from '@components/factories';
 
 const mapStateToProps = state => ({
   pile: state.layout.pile,
@@ -35,19 +38,19 @@ class WorkingArea extends React.Component {
 
     return div(
       { className: 'working-area plug' },
-      div({ className: 'working-area__search-panel socket' }, search_panel({})),
+      div({ className: 'working-area__search-panel socket' }, searchPanel({})),
 
       div(
         { className: 'working-area__toolbar-panel' },
         div(
           { className: 'working-area__toolbar-panel-left' },
-          birthday_panel({ className: 'working-area__toolbar' })
+          birthdayShortcutPanel({ className: 'working-area__toolbar' })
         ),
         div(
           { className: 'working-area__toolbar-panel-right' },
-          settings_panel({ className: 'working-area__toolbar' }),
-          favorites_panel({ className: 'working-area__toolbar' }),
-          to_call_panel({ className: 'working-area__toolbar' })
+          settingsPanel({ className: 'working-area__toolbar' }),
+          favoritesPanel({ className: 'working-area__toolbar' }),
+          toCallPanel({ className: 'working-area__toolbar' })
         )
       ),
 
@@ -57,23 +60,23 @@ class WorkingArea extends React.Component {
           {
             className: `working-area__block working-area__node-info socket block-index-${pile_hash['node-info']}`
           },
-          node_info({ className: 'plug' })
+          nodeInfo({ className: 'plug' })
         ),
         div(
           {
             className: `working-area__block working-area__structure socket block-index-${pile_hash['structure']}`
           },
-          organization_structure({})
+          organizationStructure({})
         ),
         div(
           {
             className: `working-area__block working-area__employee-info socket block-index-${pile_hash['employee-info']}`
           },
           this.props.employment_id
-            ? employee_info({})
+            ? employeeInfo({})
             : this.props.contact_id
-              ? contact_info({})
-              : dummy_info({})
+              ? contactInfo({})
+              : employeeDummyInfo({})
         ),
         div(
           {
@@ -82,19 +85,19 @@ class WorkingArea extends React.Component {
           this.props.results_source === RESULTS_SOURCE_BIRTHDAY ||
             this.props.results_type === 'birthday'
             ? birthdays({})
-            : search_results({})
+            : searchResults({})
         ),
         div(
           {
             className: `working-area__block working-area__to-call socket block-index-${pile_hash['to-call']}`
           },
-          to_call({})
+          toCallList({})
         ),
         div(
           {
             className: `working-area__block working-area__favorites socket block-index-${pile_hash['favorites']}`
           },
-          favorites({ className: 'plug' })
+          favoritesPanel({ className: 'plug' })
         )
       )
     );

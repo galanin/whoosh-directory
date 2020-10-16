@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 import classNames from 'classnames';
 import { isArray } from 'lodash';
 
+import { div, span } from '@components/factories';
+
 import { RESULTS_SOURCE_QUERY } from '@constants/search';
 
 import { setQuery } from '@actions/search';

@@ -5,10 +5,7 @@ import { connect } from 'react-redux';
 import * as UnitActions from '@actions/units';
 import { isEmpty } from 'lodash';
 
-const div = React.createFactory('div');
-
-import Node from '@components/staff/Node';
-const node = React.createFactory(Node);
+import {div, node} from '@components/factories';
 
 const mapStateToProps = state => ({
   root_ids: state.nodes.root_ids
@@ -18,9 +15,6 @@ const mapDispatchToProps = dispatch =>
   bindActionCreators(UnitActions, dispatch);
 
 class OrganizationStructure extends React.Component {
-  static initClass() {
-    this.propTypes = { root_ids: PropTypes.array };
-  }
 
   render() {
     return div(
@@ -37,7 +31,7 @@ class OrganizationStructure extends React.Component {
     );
   }
 }
-OrganizationStructure.initClass();
+OrganizationStructure.propTypes = { root_ids: PropTypes.array };
 
 export default connect(
   mapStateToProps,

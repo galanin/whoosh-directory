@@ -3,17 +3,15 @@ import { connect } from 'react-redux';
 import classNames from 'classnames';
 import { isArray, isEmpty } from 'lodash';
 
+import {
+  div,
+  span,
+  someoneWithButtons,
+  searchResultUnit
+} from '@components/factories';
+
 import { FAVORITE_PEOPLE, FAVORITE_UNITS } from '@constants/favorites';
 import { showFavoriteEmployments, showFavoriteUnits } from '@actions/favorites';
-
-const div = React.createFactory('div');
-const span = React.createFactory('span');
-
-import SomeoneWithButtons from '@components/staff/SomeoneWithButtons';
-const someone = React.createFactory(SomeoneWithButtons);
-
-import SearchResultUnit from '@components/staff/SearchResultUnit';
-const unit = React.createFactory(SearchResultUnit);
 
 const mapStateToProps = (state, ownProps) => ({
   people: state.favorites.favorite_people,
@@ -48,13 +46,13 @@ class FavoritesList extends React.Component {
             { className: 'favorite-list__employments' },
             this.props.people.map(favorite_people => {
               if (favorite_people.employment_id) {
-                return someone({
+                return someoneWithButtons({
                   key: favorite_people.employment_id,
                   employment_id: favorite_people.employment_id,
                   className: 'list-item shadow'
                 });
               } else if (favorite_people.contact_id) {
-                return someone({
+                return someoneWithButtons({
                   key: favorite_people.contact_id,
                   contact_id: favorite_people.contact_id,
                   className: 'list-item shadow'
@@ -70,7 +68,7 @@ class FavoritesList extends React.Component {
           return div(
             { className: 'favorite-list__units' },
             this.props.units.map(favorite_unit =>
-              unit({
+              searchResultUnit({
                 key: favorite_unit.unit_id,
                 unit_id: favorite_unit.unit_id,
                 className: 'list-item shadow'

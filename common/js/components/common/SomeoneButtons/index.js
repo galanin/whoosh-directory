@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import classNames from 'classnames';
 import { includes } from 'lodash';
 
-import SvgIcon from '@components/common/SvgIcon';
+import { span, div, svgIcon } from '@components/factories';
 
 import {
   addEmploymentToCall,
@@ -104,7 +104,7 @@ class SomeoneButtons extends React.Component {
           className: 'employee-buttons__button employee-buttons__to-call',
           onClick: this.onAddToCall.bind(this)
         },
-        svg({
+        svgIcon({
           className: 'medium-icon employee-buttons__icon',
           svg: ToCallIcon
         }),
@@ -119,7 +119,7 @@ class SomeoneButtons extends React.Component {
           className: 'employee-buttons__button employee-buttons__favorite',
           onClick: this.onFavorite.bind(this)
         },
-        svg({ className: 'medium-icon employee-buttons__icon', svg: StarIcon }),
+        svgIcon({ className: 'medium-icon employee-buttons__icon', svg: StarIcon }),
         span(
           { className: 'employee-buttons__label' },
           this.props.is_favorite ? 'В избранном' : 'Добавить в избранное'

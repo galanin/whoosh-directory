@@ -2,16 +2,10 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { isArray } from 'lodash';
 import classNames from 'classnames';
-import SvgIcon from '@components/common/SvgIcon';
+
+import { div, svgIcon, someoneWithButtons } from '@components/factories';
 
 import { expandSubUnit, collapseSubUnit } from '@actions/expand_sub_units';
-
-const div = React.createFactory('div');
-const span = React.createFactory('span');
-const svg = React.createFactory(SvgIcon);
-
-import SomeoneWithButtons from '@components/staff/SomeoneWithButtons';
-const someone = React.createFactory(SomeoneWithButtons);
 
 import Triangle from '@icons/triangle.svg';
 
@@ -65,19 +59,18 @@ class OrganizationSubUnit extends React.Component {
         },
         div(
           { className: 'sub-unit__button' },
-          svg({ className: 'sub-unit__triangle', svg: Triangle })
+          svgIcon({ className: 'sub-unit__triangle', svg: Triangle })
         ),
         div({ className: 'sub-unit__title' }, this.props.unit_data.list_title)
       ),
       div(
         { className: 'sub-unit__content' },
 
-        this.props.is_expanded &&
-          isArray(this.props.unit_data?.employ_ids)
+        this.props.is_expanded && isArray(this.props.unit_data?.employ_ids)
           ? div(
             { className: 'sub-unit__employees' },
             this.props.unit_data.employ_ids.map(employment_id =>
-              someone({
+              someoneWithButtons({
                 key: employment_id,
                 employment_id,
                 hide: { unit: true },
@@ -87,8 +80,7 @@ class OrganizationSubUnit extends React.Component {
           )
           : undefined,
 
-        this.props.is_expanded &&
-          isArray(this.props.unit_data?.child_ids)
+        this.props.is_expanded && isArray(this.props.unit_data?.child_ids)
           ? div(
             { className: 'sub-unit__sub-units' },
             this.props.unit_data.child_ids.map(sub_unit_id =>

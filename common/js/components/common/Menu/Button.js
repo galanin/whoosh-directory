@@ -4,6 +4,8 @@ import { connect } from 'react-redux';
 
 import { openMenu } from '@actions/menu';
 
+import { a, span } from '@components/factories';
+
 const mapStateToProps = (state, ownProps) => ({});
 
 const mapDispatchToProps = (dispatch, ownProps) => ({

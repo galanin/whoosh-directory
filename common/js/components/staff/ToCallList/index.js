@@ -2,15 +2,10 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { isArray, isEmpty } from 'lodash';
 
-import SvgIcon from '@components/common/SvgIcon';
+import { div, svgIcon, toCall } from '@components/factories';
+
 import ToCallIcon from '@icons/call.svg';
 import CheckedIcon from '@icons/checked.svg';
-import ToCall from '@components/staff/ToCall';
-
-const div = React.createFactory('div');
-const svg = React.createFactory(SvgIcon);
-
-const employee = React.createFactory(ToCall);
 
 const mapStateToProps = (state, ownProps) => ({
   data: state.to_call?.data,
@@ -35,7 +30,7 @@ class ToCallList extends React.Component {
           ? div(
             { className: 'to-call-list__empty-note' },
             'Этот список нужен для того, чтобы никому не забыть позвонить. Добавляйте в него коллег с помощью кнопки ',
-            svg({
+            svgIcon({
               className: 'medium-icon to-call-list__button-icon',
               svg: ToCallIcon
             }),
@@ -49,7 +44,7 @@ class ToCallList extends React.Component {
             this.props.unchecked.map(to_call_id => {
               to_call = this.props.data[to_call_id];
               if (to_call) {
-                return employee({
+                return toCall({
                   key: to_call.id,
                   to_call_id: to_call.id,
                   className: 'list-item shadow'
@@ -65,12 +60,12 @@ class ToCallList extends React.Component {
           ? div(
             { className: 'to-call-list__empty-note' },
             'Этот список нужен, чтобы видеть, как хорошо вы сегодня поработали. Перемещайте в него выполненные планы с помощью кнопки ',
-            svg({
+            svgIcon({
               className: 'medium-icon to-call-list__button-icon',
               svg: CheckedIcon
             }),
             ' или повторного нажатия кнопки ',
-            svg({
+            svgIcon({
               className: 'medium-icon to-call-list__button-icon',
               svg: ToCallIcon
             }),
@@ -84,7 +79,7 @@ class ToCallList extends React.Component {
             this.props.checked_today.map(to_call_id => {
               to_call = this.props.data[to_call_id];
               if (to_call) {
-                return employee({
+                return toCall({
                   key: to_call.id,
                   to_call_id: to_call.id,
                   className: 'list-item shadow'

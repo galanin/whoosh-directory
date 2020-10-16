@@ -1,10 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const div = React.createFactory('div');
-
-import ToolbarButton from './button';
-const toolbar_button = React.createFactory(ToolbarButton);
+import { div, toolbarButton } from '@components/factories';
 
 import Logo from './icons/logo-white.svg';
 import Phonebook from './icons/phonebook.svg';
@@ -32,7 +29,7 @@ class Toolbar extends React.Component {
     return div(
       { className: 'toolbar plug' },
       buttons.map(key => {
-        toolbar_button(key);
+        toolbarButton(key);
       })
     );
   }

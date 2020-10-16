@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import { span } from '@components/factories';
+
 class SvgIcon extends React.Component {
   render() {
     return span({

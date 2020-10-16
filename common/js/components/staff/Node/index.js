@@ -1,8 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import classNames from 'classnames';
-import SvgIcon from '@components/common/SvgIcon';
-import { Element as ScrollElement, scroller } from 'react-scroll';
+
+import { div, svgIcon, scrollElement, scroller } from '@components/factories';
 
 import {
   collapseNode,
@@ -14,10 +14,6 @@ import {
 } from '@actions/nodes';
 
 import { popNodeInfo } from '@actions/layout';
-
-const div = React.createFactory('div');
-const svg = React.createFactory(SvgIcon);
-const scroll_element = React.createFactory(ScrollElement);
 
 import MinusIcon from '@icons/minus-square.svg';
 import PlusIcon from '@icons/plus-square.svg';
@@ -54,9 +50,7 @@ const mapDispatchToProps = dispatch => {
 
 class Node extends React.Component {
   hasChildren() {
-    return (
-      +(this.props.node.c?.length) > 0
-    );
+    return +this.props.node.c?.length > 0;
   }
 
   componentDidUpdate(prevProps) {
@@ -115,14 +109,14 @@ class Node extends React.Component {
             className: 'node__button',
             onClick: this.onExpandCollapseClick.bind(this)
           },
-          svg({ className: 'node__button-open', svg: PlusIcon }),
-          svg({ className: 'node__button-close', svg: MinusIcon })
+          svgIcon({ className: 'node__button-open', svg: PlusIcon }),
+          svgIcon({ className: 'node__button-close', svg: MinusIcon })
         )
         : div({ className: 'node__button-stub' }),
 
       div(
         { className: 'node__content' },
-        scroll_element(
+        scrollElement(
           {
             className: title_class_name,
             onClick: this.onNodeClick.bind(this),

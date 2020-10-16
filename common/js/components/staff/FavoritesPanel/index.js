@@ -2,14 +2,11 @@ import React from 'react';
 import { connect } from 'react-redux';
 import classNames from 'classnames';
 
+import {div, span, svgIcon} from '@components/factories';
+
 import { popFavorites } from '@actions/layout';
 
-import SvgIcon from '@components/common/SvgIcon';
 import StarIcon from '@icons/star.svg';
-
-const div = React.createFactory('div');
-const span = React.createFactory('span');
-const svg = React.createFactory(SvgIcon);
 
 const mapStateToProps = (state, ownProps) => ({
   employee_counter: state.favorites.favorite_people.length,
@@ -36,7 +33,7 @@ class FavoritesPanel extends React.Component {
 
     return div(
       { className: classNames(class_names), onClick: this.onClick.bind(this) },
-      svg({ className: 'medium-icon favorites-panel__icon', svg: StarIcon }),
+      svgIcon({ className: 'medium-icon favorites-panel__icon', svg: StarIcon }),
       span({ className: 'favorites-panel__title' }, 'Избранное'),
       span(
         { className: 'favorites-panel__counter' },
