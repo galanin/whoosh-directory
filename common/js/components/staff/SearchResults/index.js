@@ -2,7 +2,11 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { isArray } from 'lodash';
 
-import {div,searchResultUnit,someoneWithButtons} from '@components/factories';
+import {
+  div,
+  searchResultUnit,
+  someoneWithButtons
+} from '@components/factories';
 
 const mapStateToProps = (state, ownProps) => ({
   results: state.search.results,

@@ -132,12 +132,15 @@ class NodeUnitInfo extends React.Component {
             )
             : undefined,
 
-          this.props.child_nodes.map(child_node =>
-            nodeLink({
-              key: child_node.id,
-              node_id: child_node.id,
-              className: child_class_name
-            })
+          this.props.child_nodes.map(child_node => {
+            if (child_node) {
+              nodeLink({
+                key: child_node.id,
+                node_id: child_node.id,
+                className: child_class_name
+              });
+            }
+          }
           )
         ]
         : undefined

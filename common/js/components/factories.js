@@ -52,12 +52,21 @@ export const settingsBooleanButtons = React.createFactory(
 import IconedData from '@components/contact_info/IconedData';
 export const iconedData = React.createFactory(IconedData);
 
-import { Element as ScrollElement, scroller as Scroller } from 'react-scroll';
+import { Element as ScrollElement } from 'react-scroll';
 export const scrollElement = React.createFactory(ScrollElement);
-export const scroller = React.createFactory(Scroller);
+export { scroller } from 'react-scroll';
+
+import Birthday from '@components/contact_info/Birthday';
+export const birthday = React.createFactory(Birthday);
+
+import Birthdays from '@components/staff/Birthdays';
+export const birthdays = React.createFactory(Birthdays);
 
 import BirthdayShortcut from '@components/staff/BirthdayShortcut';
 export const birthdayShortcut = React.createFactory(BirthdayShortcut);
+
+import BirthdayShortcutPanel from '@components/staff/BirthdayShortcutPanel';
+export const birthdayShortcutPanel = React.createFactory(BirthdayShortcutPanel);
 
 import CommonAvatar from '@components/staff/CommonAvatar';
 export const commonAvatar = React.createFactory(CommonAvatar);
@@ -80,9 +89,6 @@ export const officeLocation = React.createFactory(OfficeLocation);
 import LunchBreak from '@components/contact_info/LunchBreak';
 export const lunchBreak = React.createFactory(LunchBreak);
 
-import Birthday from '@components/contact_info/Birthday';
-export const birthday = React.createFactory(Birthday);
-
 import NodeLink from '@components/staff/NodeLink';
 export const nodeLink = React.createFactory(NodeLink);
 
@@ -91,9 +97,6 @@ export const node = React.createFactory(Node);
 
 import SearchPanel from '@components/staff/SearchPanel';
 export const searchPanel = React.createFactory(SearchPanel);
-
-import BirthdayShortcutPanel from '@components/staff/BirthdayShortcutPanel';
-export const birthdayShortcutPanel = React.createFactory(BirthdayShortcutPanel);
 
 import SettingsPanel from '@components/staff/SettingsPanel';
 export const settingsPanel = React.createFactory(SettingsPanel);
@@ -121,9 +124,6 @@ export const employeeDummyInfo = React.createFactory(EmployeeDummyInfo);
 
 import SearchResults from '@components/staff/SearchResults';
 export const searchResults = React.createFactory(SearchResults);
-
-import Birthdays from '@components/staff/Birthdays';
-export const birthdays = React.createFactory(Birthdays);
 
 import ToCallList from '@components/staff/ToCallList';
 export const toCallList = React.createFactory(ToCallList);

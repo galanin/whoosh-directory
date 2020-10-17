@@ -97,7 +97,7 @@ class WorkingArea extends React.Component {
           {
             className: `working-area__block working-area__favorites socket block-index-${pile_hash['favorites']}`
           },
-          favoritesPanel({ className: 'plug' })
+          favoritesList({ className: 'plug' })
         )
       )
     );
