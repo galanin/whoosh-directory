@@ -2,7 +2,13 @@ import React from 'react';
 import { connect } from 'react-redux';
 import classNames from 'classnames';
 
-import { div, svgIcon, scrollElement, scroller } from '@components/factories';
+import {
+  div,
+  svgIcon,
+  scrollElement,
+  scroller,
+  node
+} from '@components/factories';
 
 import {
   collapseNode,
@@ -137,7 +143,4 @@ class Node extends React.Component {
   }
 }
 
-const ConnectedNode = connect(mapStateToProps, mapDispatchToProps)(Node);
-var node = React.createFactory(ConnectedNode);
-
-export default ConnectedNode;
+export default connect(mapStateToProps, mapDispatchToProps)(Node);
