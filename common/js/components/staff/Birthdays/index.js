@@ -111,18 +111,17 @@ class Birthdays extends React.Component {
                   day_obj.date_formatted
                 ),
                 date === dates[0] || date === prev_date_offset_left
-                  ? div(
+                  && div(
                     {
                       className: 'birthdays__button-backward',
                       onClick: this.stepBackward.bind(this)
                     },
                     'Предыдущая неделя'
                   )
-                  : undefined
               ),
 
               isArray(day_obj.results) && day_obj.results.length > 0
-                ? div(
+                && div(
                   { className: 'birthdays__results' },
 
                   day_obj.results.map(result => {
@@ -142,7 +141,6 @@ class Birthdays extends React.Component {
                     }
                   })
                 )
-                : undefined
             );
           }
         }),

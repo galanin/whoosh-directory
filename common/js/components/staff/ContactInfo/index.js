@@ -126,7 +126,7 @@ class EmployeeInfo extends React.Component {
   }
 
   photoOrSilhouette() {
-    if (this.props.contact.photo.large.url || this.props.contact.gender) {
+    if (this.props.contact.photo.large.url) {
       return div(
         { className: 'employee-info__photo' },
         this.largePhotoOrSilhouette()
@@ -136,6 +136,32 @@ class EmployeeInfo extends React.Component {
         className: 'employee-info__avatar',
         gender: this.props.contact.gender
       });
+    }
+  }
+
+  vacationIcon() {
+    if (this.props.contact.on_vacation) {
+      iconedData(
+        {
+          className: 'employee-info__iconed-data employee-info__vacation',
+          icon: VacationIcon,
+          align_icon: 'middle'
+        },
+        'В отпуске'
+      );
+    }
+  }
+
+  unitTitle() {
+    if (this.props.node) {
+      a(
+        {
+          className: 'employee-info__unit_title',
+          onClick: this.onNodeClick.bind(this),
+          href: '/'
+        },
+        span({ className: 'employee-info__unit-long-title' }, this.props.node.t)
+      );
     }
   }
 
@@ -174,19 +200,7 @@ class EmployeeInfo extends React.Component {
               this.props.contact.post_title
             ),
 
-            this.props.node
-              ? a(
-                {
-                  className: 'employee-info__unit_title',
-                  onClick: this.onNodeClick.bind(this),
-                  href: '/'
-                },
-                span(
-                  { className: 'employee-info__unit-long-title' },
-                  this.props.node.t
-                )
-              )
-              : undefined,
+            this.unitTitle(),
 
             div(
               { className: 'employee-info__two-columns' },
@@ -231,17 +245,7 @@ class EmployeeInfo extends React.Component {
                       'employee-info__iconed-data employee-info__birthday'
                 }),
 
-                this.props.contact.on_vacation
-                  ? iconedData(
-                    {
-                      className:
-                            'employee-info__iconed-data employee-info__vacation',
-                      icon: VacationIcon,
-                      align_icon: 'middle'
-                    },
-                    'В отпуске'
-                  )
-                  : undefined
+                this.vacationIcon()
               )
             )
           )

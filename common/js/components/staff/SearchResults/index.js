@@ -16,6 +16,32 @@ const mapStateToProps = (state, ownProps) => ({
 const mapDispatchToProps = dispatch => ({});
 
 class SearchResults extends React.Component {
+  searchResults() {
+    this.props.results.map(result => {
+      if (result.unit_id) {
+        return searchResultUnit({
+          key: result.unit_id,
+          unit_id: result.unit_id,
+          className: 'list-item shadow'
+        });
+      } else if (result.contact_id) {
+        return someoneWithButtons({
+          key: result.contact_id,
+          contact_id: result.contact_id,
+          className: 'list-item shadow'
+        });
+      } else if (result.person_id) {
+        if (result.employ_ids) {
+          return someoneWithButtons({
+            key: result.person_id,
+            employment_id: result.employ_ids[0],
+            className: 'list-item shadow'
+          });
+        }
+      }
+    });
+  }
+
   render() {
     return div(
       { className: 'search-results__scroller plug' },
@@ -29,29 +55,7 @@ class SearchResults extends React.Component {
         isArray(this.props.results) && this.props.results.length > 0
           ? div(
             { className: 'search-results__results' },
-            this.props.results.map(result => {
-              if (result.unit_id) {
-                return searchResultUnit({
-                  key: result.unit_id,
-                  unit_id: result.unit_id,
-                  className: 'list-item shadow'
-                });
-              } else if (result.contact_id) {
-                return someoneWithButtons({
-                  key: result.contact_id,
-                  contact_id: result.contact_id,
-                  className: 'list-item shadow'
-                });
-              } else if (result.person_id) {
-                if (result.employ_ids) {
-                  return someoneWithButtons({
-                    key: result.person_id,
-                    employment_id: result.employ_ids[0],
-                    className: 'list-item shadow'
-                  });
-                }
-              }
-            })
+            this.searchResults()
           )
           : div(
             { className: 'search-results__no-results' },

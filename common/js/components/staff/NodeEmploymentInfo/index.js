@@ -45,10 +45,6 @@ const mapDispatchToProps = dispatch => ({
 });
 
 class NodeEmploymentInfo extends React.Component {
-  static initClass() {
-    this.propTypes = { employment_id: PropTypes.integer };
-  }
-
   onClickFavorite() {
     if (this.props.is_favorite) {
       return this.props.unfavorite(this.props.employment_id);
@@ -136,6 +132,6 @@ class NodeEmploymentInfo extends React.Component {
     );
   }
 }
-NodeEmploymentInfo.initClass();
+NodeEmploymentInfo.propTypes = { employment_id: PropTypes.integer };
 
 export default connect(mapStateToProps, mapDispatchToProps)(NodeEmploymentInfo);

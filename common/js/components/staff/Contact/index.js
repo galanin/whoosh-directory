@@ -145,6 +145,73 @@ class Contact extends React.Component {
     }
   }
 
+  office() {
+    if (this.props.contact.office) {
+      span(
+        { className: 'employee__location-office' },
+        span(
+          { className: 'employee__location-office-label' },
+          this.props.contact.building ? ', кабинет ' : 'Кабинет '
+        ),
+        span(
+          { className: 'employee__location-office-number' },
+          this.props.contact.office
+        )
+      );
+    }
+  }
+
+  building() {
+    if (this.props.contact.building) {
+      span(
+        { className: 'employee__location-building' },
+        span({ className: 'employee__location-building-label' }, 'Корпус '),
+        span(
+          { className: 'employee__location-building-number' },
+          this.props.contact.building
+        )
+      );
+    }
+  }
+
+  location() {
+    if (this.props.show_location) {
+      div({ className: 'employee__location' }, this.building(), this.office());
+    }
+  }
+
+  employeePhone() {
+    if (
+      isArray(this.props.contact.format_phones) &&
+      this.props.contact.format_phones.length > 0
+    ) {
+      div(
+        { className: 'employee__phones' },
+
+        this.props.contact.format_phones
+          .slice(0, 3)
+          .map(phone =>
+            div({ className: 'employee__phone', key: phone[1] }, phone[1])
+          )
+      );
+    }
+  }
+
+  birthday() {
+    if (this.isBirthday()) {
+      div(
+        { className: 'employee__status employee__birthday' },
+        'День рождения'
+      );
+    }
+  }
+
+  postTitle() {
+    if (this.props.contact.post_title) {
+      div({ className: 'employee__post_title' }, this.props.contact.post_title);
+    }
+  }
+
   render() {
     if (!this.props.contact) {
       return '';
@@ -173,93 +240,37 @@ class Contact extends React.Component {
         { className: 'employee__info' },
         div(
           { className: 'employee__name' },
+
           this.fullName(),
 
-          this.props.is_to_call
-            ? svgIcon({
+          this.props.is_to_call &&
+            svgIcon({
               className: 'small-icon employee__to-call',
               svg: ToCallIcon
-            })
-            : undefined,
+            }),
 
-          this.props.is_favorite
-            ? svgIcon({
+          this.props.is_favorite &&
+            svgIcon({
               className: 'small-icon employee__favorite',
               svg: StarIcon
             })
-            : undefined
         ),
-
-        this.props.contact.post_title
-          ? div(
-            { className: 'employee__post_title' },
-            this.props.contact.post_title
-          )
-          : undefined,
+        this.postTitle(),
 
         this.organizationTitle(),
 
-        this.props.show_location
-          ? div(
-            { className: 'employee__location' },
-            this.props.contact.building
-              ? span(
-                { className: 'employee__location-building' },
-                span(
-                  { className: 'employee__location-building-label' },
-                  'Корпус '
-                ),
-                span(
-                  { className: 'employee__location-building-number' },
-                  this.props.contact.building
-                )
-              )
-              : undefined,
-            this.props.contact.office
-              ? span(
-                { className: 'employee__location-office' },
-                span(
-                  { className: 'employee__location-office-label' },
-                  this.props.contact.building ? ', кабинет ' : 'Кабинет '
-                ),
-                span(
-                  { className: 'employee__location-office-number' },
-                  this.props.contact.office
-                )
-              )
-              : undefined
-          )
-          : undefined
+        this.location()
       ),
-
-      isArray(this.props.contact.format_phones) &&
-        this.props.contact.format_phones.length > 0
-        ? div(
-          { className: 'employee__phones' },
-
-          this.props.contact.format_phones
-            .slice(0, 3)
-            .map(phone =>
-              div({ className: 'employee__phone', key: phone[1] }, phone[1])
-            )
-        )
-        : undefined,
-
+      this.employeePhone(),
       div(
         { className: 'employee__status-container' },
+
         this.vacationOrLunch(),
-        this.isBirthday()
-          ? div(
-            { className: 'employee__status employee__birthday' },
-            'День рождения'
-          )
-          : undefined
+
+        this.birthday()
       )
     );
   }
 }
 
-const ConnectedContact = connect(mapStateToProps, mapDispatchToProps)(Contact);
-const contact = React.createFactory(ConnectedContact);
-
-export default ConnectedContact;
+export default connect(mapStateToProps, mapDispatchToProps)(Contact);

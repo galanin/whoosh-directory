@@ -87,18 +87,16 @@ class ToCall extends React.Component {
       { className: classNames(class_names) },
 
       this.props.to_call.employment_id
-        ? employee({
+        && employee({
           employment_id: this.props.to_call.employment_id,
           className: 'to-call__employee'
-        })
-        : undefined,
+        }),
 
       this.props.to_call.contact_id
-        ? contact({
+        && contact({
           contact_id: this.props.to_call.contact_id,
           className: 'to-call__contact'
-        })
-        : undefined,
+        }),
 
       div(
         { className: 'to-call__buttons employee-buttons-container__buttons' },

@@ -4,7 +4,12 @@ import { connect } from 'react-redux';
 import classNames from 'classnames';
 import { isArray, isEmpty, compact } from 'lodash';
 
-import { div, svgIcon, someoneWithButtons, nodeLink } from '@components/factories';
+import {
+  div,
+  svgIcon,
+  someoneWithButtons,
+  nodeLink
+} from '@components/factories';
 
 import { addFavoriteUnit, removeFavoriteUnit } from '@actions/favorites';
 
@@ -51,6 +56,38 @@ class NodeUnitInfo extends React.Component {
     }
   }
 
+  shortTitle() {
+    if (this.props.unit.short_title) {
+      return div(
+        { className: 'unit__short-title' },
+        this.props.unit.short_title,
+
+        svgIcon({
+          className: 'medium-icon unit__favorite',
+          svg: StarIcon,
+          onClick: this.onClickFavorite.bind(this)
+        })
+      );
+    }
+  }
+
+  longTitle() {
+    if (this.props.unit.long_title) {
+      div(
+        { className: 'unit__long-title' },
+        this.props.unit.long_title,
+
+        !this.props.unit.short_title
+          ? svgIcon({
+            className: 'medium-icon unit__favorite',
+            svg: StarIcon,
+            onClick: this.onClickFavorite.bind(this)
+          })
+          : undefined
+      );
+    }
+  }
+
   render() {
     if (!this.props.unit) {
       return '';
@@ -71,33 +108,9 @@ class NodeUnitInfo extends React.Component {
     return div(
       { className: classNames(class_names) },
 
-      this.props.unit.short_title
-        ? div(
-          { className: 'unit__short-title' },
-          this.props.unit.short_title,
+      this.shortTitle(),
 
-          svgIcon({
-            className: 'medium-icon unit__favorite',
-            svg: StarIcon,
-            onClick: this.onClickFavorite.bind(this)
-          })
-        )
-        : undefined,
-
-      this.props.unit.long_title
-        ? div(
-          { className: 'unit__long-title' },
-          this.props.unit.long_title,
-
-          !this.props.unit.short_title
-            ? svgIcon({
-              className: 'medium-icon unit__favorite',
-              svg: StarIcon,
-              onClick: this.onClickFavorite.bind(this)
-            })
-            : undefined
-        )
-        : undefined,
+      this.longTitle(),
 
       this.props.unit.head_id
         ? someoneWithButtons({
@@ -140,8 +153,7 @@ class NodeUnitInfo extends React.Component {
                 className: child_class_name
               });
             }
-          }
-          )
+          })
         ]
         : undefined
     );

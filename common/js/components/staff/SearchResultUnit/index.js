@@ -38,18 +38,16 @@ class SearchResultUnit extends React.Component {
         className: classNames(class_names),
         onClick: this.onUnitClick.bind(this)
       },
-      this.props.unit?.short_title
-        ? div(
+      this.props.unit?.short_title &&
+        div(
           { className: 'search-result-unit__short-title' },
           this.props.unit.short_title
-        )
-        : undefined,
-      this.props.unit?.long_title
-        ? div(
+        ),
+      this.props.unit?.long_title &&
+        div(
           { className: 'search-result-unit__long-title' },
           this.props.unit.long_title
         )
-        : undefined
     );
   }
 }

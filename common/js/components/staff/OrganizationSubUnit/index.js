@@ -39,6 +39,36 @@ class OrganizationSubUnit extends React.Component {
     }
   }
 
+  subUnits() {
+    if (this.props.is_expanded && isArray(this.props.unit_data?.child_ids)) {
+      return div(
+        { className: 'sub-unit__sub-units' },
+        this.props.unit_data.child_ids.map(sub_unit_id =>
+          sub_unit({
+            key: 'sub-unit-' + sub_unit_id,
+            unit_id: sub_unit_id
+          })
+        )
+      );
+    }
+  }
+
+  subUnitsEmployee() {
+    if (this.props.is_expanded && isArray(this.props.unit_data?.employ_ids)) {
+      return div(
+        { className: 'sub-unit__employees' },
+        this.props.unit_data.employ_ids.map(employment_id =>
+          someoneWithButtons({
+            key: employment_id,
+            employment_id,
+            hide: { unit: true },
+            className: 'list-item shadow'
+          })
+        )
+      );
+    }
+  }
+
   render() {
     if (!this.props.unit_data) {
       return '';
@@ -66,31 +96,9 @@ class OrganizationSubUnit extends React.Component {
       div(
         { className: 'sub-unit__content' },
 
-        this.props.is_expanded && isArray(this.props.unit_data?.employ_ids)
-          ? div(
-            { className: 'sub-unit__employees' },
-            this.props.unit_data.employ_ids.map(employment_id =>
-              someoneWithButtons({
-                key: employment_id,
-                employment_id,
-                hide: { unit: true },
-                className: 'list-item shadow'
-              })
-            )
-          )
-          : undefined,
+        this.subUnitsEmployee(),
 
-        this.props.is_expanded && isArray(this.props.unit_data?.child_ids)
-          ? div(
-            { className: 'sub-unit__sub-units' },
-            this.props.unit_data.child_ids.map(sub_unit_id =>
-              sub_unit({
-                key: 'sub-unit-' + sub_unit_id,
-                unit_id: sub_unit_id
-              })
-            )
-          )
-          : undefined
+        this.subUnits()
       )
     );
   }
