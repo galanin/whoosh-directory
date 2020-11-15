@@ -167,41 +167,37 @@ class Employee extends React.Component {
           ),
 
           this.props.is_to_call
-            ? svgIcon({
+            && svgIcon({
               className: 'small-icon employee__to-call',
               svg: ToCallIcon
-            })
-            : undefined,
+            }),
 
           this.props.is_favorite
-            ? svgIcon({
+            && svgIcon({
               className: 'small-icon employee__favorite',
               svg: StarIcon
             })
-            : undefined
         ),
 
         !this.props.hide?.post
-          ? div(
+          && div(
             { className: 'employee__post_title' },
             this.props.employment.post_title
-          )
-          : undefined,
+          ),
 
         !this.props.hide?.unit
-          ? div(
+          && div(
             { className: 'employee__organization_unit_title' },
             this.props.dept && this.props.dept_id !== this.props.node_id
               ? this.props.dept.t
               : this.props.node?.t
-          )
-          : undefined,
+          ),
 
         this.props.show_location
-          ? div(
+          && div(
             { className: 'employee__location' },
             this.props.employment.building
-              ? span(
+              && span(
                 { className: 'employee__location-building' },
                 span(
                   { className: 'employee__location-building-label' },
@@ -211,10 +207,9 @@ class Employee extends React.Component {
                   { className: 'employee__location-building-number' },
                   this.props.employment.building
                 )
-              )
-              : undefined,
+              ),
             this.props.employment.office
-              ? span(
+              && span(
                 { className: 'employee__location-office' },
                 span(
                   { className: 'employee__location-office-label' },
@@ -225,22 +220,19 @@ class Employee extends React.Component {
                   this.props.employment.office
                 )
               )
-              : undefined
           )
-          : undefined
       ),
 
       isArray(this.props.employment.format_phones) &&
         this.props.employment.format_phones.length > 0
-        ? div(
+        && div(
           { className: 'employee__phones' },
           this.props.employment.format_phones
             .slice(0, 3)
             .map(phone =>
               div({ className: 'employee__phone', key: phone[1] }, phone[1])
             )
-        )
-        : undefined,
+        ),
 
       div(
         { className: 'employee__status-container' },

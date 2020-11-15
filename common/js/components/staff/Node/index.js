@@ -131,13 +131,12 @@ class Node extends React.Component {
           this.props.node.t
         ),
         has_children
-          ? div(
+          && div(
             { className: 'node__children' },
             Array.from(this.props.node.c).map(child_id =>
               node({ key: child_id, node_id: child_id })
             )
           )
-          : undefined
       )
     );
   }

@@ -41,18 +41,16 @@ class NodeLink extends React.Component {
     if (this.props.unit) {
       return [
         this.props.unit.short_title
-          ? div(
+          && div(
             { className: 'node-link__unit-short-title', key: 'short' },
             this.props.unit.short_title
-          )
-          : undefined,
+          ),
 
         this.props.unit.long_title
-          ? div(
+          && div(
             { className: 'node-link__unit-long-title', key: 'long' },
             this.props.unit.long_title
           )
-          : undefined
       ];
     } else if (this.props.employment) {
       const photo = this.props.person?.photo;

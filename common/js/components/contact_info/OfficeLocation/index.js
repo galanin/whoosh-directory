@@ -44,19 +44,17 @@ class OfficeLocation extends React.Component {
         onClick: this.onClick.bind(this)
       },
       this.props.building
-        ? div(
+        && div(
           { className: 'iconed-data__row iconed-data__inline' },
           span({ className: 'iconed-data__inline-title' }, 'Корпус '),
           span({ className: 'iconed-data__inline-data' }, this.props.building)
-        )
-        : undefined,
+        ),
       this.props.office
-        ? div(
+        && div(
           { className: 'iconed-data__row iconed-data__inline' },
           span({ className: 'iconed-data__inline-title' }, 'Кабинет '),
           span({ className: 'iconed-data__inline-data' }, this.props.office)
         )
-        : undefined
     );
   }
 }

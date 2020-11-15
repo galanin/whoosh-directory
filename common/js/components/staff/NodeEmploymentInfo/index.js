@@ -114,11 +114,10 @@ class NodeEmploymentInfo extends React.Component {
       { className: classNames(class_names) },
 
       this.props.employment.post_title
-        ? div(
+        && div(
           { className: 'node-employment__post-title' },
           this.props.employment.post_title
-        )
-        : undefined,
+        ),
 
       div(
         { className: 'hierarchy-root' },

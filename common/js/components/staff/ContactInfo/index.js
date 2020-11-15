@@ -183,7 +183,7 @@ class EmployeeInfo extends React.Component {
         { className: 'employee-info-scroller' },
 
         this.props.contact
-          ? div(
+          && div(
             { className: 'employee-info contact-info' },
 
             div(
@@ -249,7 +249,6 @@ class EmployeeInfo extends React.Component {
               )
             )
           )
-          : undefined
       )
     );
   }

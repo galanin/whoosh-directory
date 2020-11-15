@@ -78,12 +78,11 @@ class NodeUnitInfo extends React.Component {
         this.props.unit.long_title,
 
         !this.props.unit.short_title
-          ? svgIcon({
+          && svgIcon({
             className: 'medium-icon unit__favorite',
             svg: StarIcon,
             onClick: this.onClickFavorite.bind(this)
           })
-          : undefined
       );
     }
   }
@@ -113,16 +112,15 @@ class NodeUnitInfo extends React.Component {
       this.longTitle(),
 
       this.props.unit.head_id
-        ? someoneWithButtons({
+        && someoneWithButtons({
           key: this.props.unit.head_id,
           employment_id: this.props.unit.head_id,
           hide: { unit: true },
           className: 'list-item shadow hierarchy-root'
-        })
-        : undefined,
+        }),
 
       this.props.node && this.props.tree_node
-        ? [
+        && [
           this.props.employments.map(employment => {
             if (employment.id !== this.props.unit.head_id) {
               return someoneWithButtons({
@@ -135,15 +133,14 @@ class NodeUnitInfo extends React.Component {
           }),
 
           isArray(this.props.node?.contact_ids)
-            ? this.props.node.contact_ids.map(contact_id =>
+            && this.props.node.contact_ids.map(contact_id =>
               someoneWithButtons({
                 key: contact_id,
                 contact_id,
                 hide: { unit: true },
                 className: child_class_name
               })
-            )
-            : undefined,
+            ),
 
           this.props.child_nodes.map(child_node => {
             if (child_node) {
@@ -155,7 +152,6 @@ class NodeUnitInfo extends React.Component {
             }
           })
         ]
-        : undefined
     );
   }
 }

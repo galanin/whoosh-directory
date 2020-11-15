@@ -133,7 +133,7 @@ class EmployeeInfo extends React.Component {
         { className: 'employee-info-scroller' },
 
         this.props.employment && this.props.person
-          ? div(
+          && div(
             { className: 'employee-info' },
             div(
               { className: 'employee-info__head' },
@@ -167,7 +167,7 @@ class EmployeeInfo extends React.Component {
             this.props.dept_id &&
                 this.props.dept_id !== this.props.parent_node_id &&
                 this.props.dept
-              ? a(
+              && a(
                 {
                   className: 'employee-info__unit-title-link',
                   onClick: this.onDeptClick.bind(this),
@@ -177,11 +177,10 @@ class EmployeeInfo extends React.Component {
                   { className: 'employee-info__unit-long-title' },
                   this.props.dept.t
                 )
-              )
-              : undefined,
+              ),
 
             this.props.parent_node
-              ? a(
+              && a(
                 {
                   className: 'employee-info__unit-title-link',
                   onClick: this.onUnitClick.bind(this),
@@ -191,8 +190,7 @@ class EmployeeInfo extends React.Component {
                   { className: 'employee-info__unit-long-title' },
                   this.props.parent_node.t
                 )
-              )
-              : undefined,
+              ),
 
             div(
               { className: 'employee-info__two-columns' },
@@ -250,7 +248,7 @@ class EmployeeInfo extends React.Component {
                 }),
 
                 this.props.employment.on_vacation
-                  ? iconedData(
+                  && iconedData(
                     {
                       className:
                             'employee-info__iconed-data employee-info__vacation',
@@ -259,12 +257,11 @@ class EmployeeInfo extends React.Component {
                     },
                     'В отпуске'
                   )
-                  : undefined
               )
             ),
 
             !isEmpty(this.props.parents)
-              ? div(
+              && div(
                 { className: 'employee-info__structure' },
                 div(
                   { className: 'employee-info__structure-title' },
@@ -285,14 +282,13 @@ class EmployeeInfo extends React.Component {
                           className: 'employee-info__structure-unit'
                         }),
                         parent.head
-                          ? someoneWithButtons({
+                          && someoneWithButtons({
                             key: parent.head.id,
                             employment_id: parent.head.id,
                             hide: { unit: true },
                             className:
                                     'employee-info__structure-employment'
                           })
-                          : undefined
                       );
                     } else if (parent.employment) {
                       return div(
@@ -311,9 +307,7 @@ class EmployeeInfo extends React.Component {
                   })
                 )
               )
-              : undefined
           )
-          : undefined
       )
     );
   }
