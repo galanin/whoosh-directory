@@ -73,7 +73,7 @@ class NodeUnitInfo extends React.Component {
 
   longTitle() {
     if (this.props.unit.long_title) {
-      div(
+      return div(
         { className: 'unit__long-title' },
         this.props.unit.long_title,
 
