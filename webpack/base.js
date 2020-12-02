@@ -104,6 +104,7 @@ export default {
     rules: [
       {
         test: /\.jsx$|\.js$/,
+        exclude: /@babel(?:\/|\\{1,2})runtime|core-js/,
         loader: 'babel-loader',
         options: babelOpts
       },
