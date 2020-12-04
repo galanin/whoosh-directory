@@ -20,7 +20,7 @@ require.extensions['.svg'] = (module, filename) => {
 };
 
 if (env === 'development') {
-  require('dotenv').load();
+  require('dotenv').config();
 
   // In development, we compile css-modules on the fly on the server. This is
   // not necessary in production since we build renderer and server files with

@@ -8,7 +8,7 @@ export default {
           ie: '11'
         },
         useBuiltIns: 'entry',
-        corejs: { version: '3.6' },
+        corejs: { version: '3.8' },
         debug: true
       }
     ],
