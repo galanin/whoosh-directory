@@ -147,7 +147,7 @@ class SearchQuery < ApplicationRecord
 
   def view_to_entries(view)
     view.map do |entry_doc|
-      SearchEntry.new(entry_doc.except(:weight))
+      SearchEntry.new(entry_doc.except('weight'))
     end
   end
 

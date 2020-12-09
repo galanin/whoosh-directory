@@ -14,9 +14,9 @@ gem 'grape-cli'
 # gem 'actioncable', '~> 5.1.5'
 # gem 'actionmailer', '~> 5.1.5'
 # gem 'actionview', '~> 5.1.5'
-gem 'activejob', '~> 5.1.5'
+#gem 'activejob', '~> 5.1.5'
 # gem 'activemodel', '~> 5.1.5'
-gem 'activesupport', '~> 5.1.5'
+gem 'activesupport', '~> 6.0.3'
 
 # Use sqlite3 as the database for Active Record
 gem 'mongoid'
@@ -26,11 +26,11 @@ gem 'mongoid_paranoia', github: 'ktanaka777/mongoid_paranoia'
 gem 'hashids'
 
 # Use Puma as the app server
-gem 'puma', '~> 3.7'
+gem 'puma', '~> 5.1'
 gem 'puma_worker_killer'
 
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
-gem 'jbuilder', '~> 2.5'
+#gem 'jbuilder', '~> 2.5'
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 4.0'
 # Use ActiveModel has_secure_password
@@ -43,7 +43,7 @@ gem 'nokogiri'
 gem 'dotenv'
 gem 'rake'
 gem 'mini_magick'
-gem 'carrierwave', '~> 1.2', require: 'carrierwave'
+gem 'carrierwave', '~> 2.1', require: 'carrierwave'
 gem 'carrierwave-mongoid', require: 'carrierwave/mongoid'
 gem 'i18n'
 gem 'net-ldap'
@@ -67,7 +67,7 @@ group :development do
 
   gem 'rails_real_favicon'
 
-  gem 'capistrano', '~> 3.11.0', require: false
+  gem 'capistrano', '~> 3.14.1', require: false
   gem 'capistrano-rvm', require: false
   gem 'capistrano-yarn', require: false
   gem 'capistrano-bundler', require: false
