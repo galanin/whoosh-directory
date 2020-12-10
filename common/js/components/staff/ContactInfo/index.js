@@ -141,7 +141,7 @@ class EmployeeInfo extends React.Component {
 
   vacationIcon() {
     if (this.props.contact.on_vacation) {
-      iconedData(
+      return iconedData(
         {
           className: 'employee-info__iconed-data employee-info__vacation',
           icon: VacationIcon,
@@ -154,7 +154,7 @@ class EmployeeInfo extends React.Component {
 
   unitTitle() {
     if (this.props.node) {
-      a(
+      return a(
         {
           className: 'employee-info__unit_title',
           onClick: this.onNodeClick.bind(this),
