@@ -11,7 +11,9 @@ const env = process.env.NODE_ENV || 'development';
 const app = new express();
 
 // Secure with helmet
-app.use(helmet());
+app.use(helmet({
+  contentSecurityPolicy: false,
+}));
 
 // Ensures SSL in used in production.
 // app.use(httpsRedirect({ enabled: env === 'production' }));

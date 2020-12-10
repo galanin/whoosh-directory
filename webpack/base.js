@@ -19,7 +19,7 @@ const isDev = process.env.NODE_ENV === 'development';
 const cwd = process.cwd();
 
 if (isDev) {
-  require('dotenv').load();
+  require('dotenv').config();
 }
 
 export const isSSR = yn(process.env.SSR) || false;
