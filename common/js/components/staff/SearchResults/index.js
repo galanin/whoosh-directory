@@ -17,7 +17,7 @@ const mapDispatchToProps = dispatch => ({});
 
 class SearchResults extends React.Component {
   searchResults() {
-    this.props.results.map(result => {
+    return Array.from(this.props.results).map(result => {
       if (result.unit_id) {
         return searchResultUnit({
           key: result.unit_id,
