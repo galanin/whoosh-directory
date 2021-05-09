@@ -228,7 +228,7 @@
     "express": "^4.17.1",
     "helmet": "^4.2.0",
     "history": "^4.10.1",
-    "lodash": "^4.17.20",
+    "lodash": "^4.17.21",
     "module-alias": "^2.2.2",
     "prop-types": "^15.7.2",
     "react": "^17.0.1",
