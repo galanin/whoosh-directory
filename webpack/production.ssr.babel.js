@@ -1,5 +1,5 @@
 import nodeExternals from 'webpack-node-externals';
-import { mergeWithCustomize, customizeObject } from 'webpack-merge';
+import { merge, mergeWithCustomize, customizeObject } from 'webpack-merge';
 import path from 'path';
 import config from '../config';
 import babelOpts from './babel.config.ssr';
@@ -20,14 +20,7 @@ const allowedPlugin = (plugin, key) => {
   }
 };
 
-export default mergeWithCustomize({
-  customizeObject: customizeObject({
-    entry: 'replace',
-    plugins: 'replace',
-    module: 'replace',
-    optimization: 'replace'
-  })
-})(baseConfig, {
+export default merge(baseConfig, {
   context: null,
   mode: 'production',
   optimization: {
