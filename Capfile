@@ -38,6 +38,7 @@ require 'capistrano/yarn'
 
 require 'capistrano/puma'
 install_plugin Capistrano::Puma
+install_plugin Capistrano::Puma::Systemd
 
 require 'whenever/capistrano'
 

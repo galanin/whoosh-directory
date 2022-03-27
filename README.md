@@ -81,3 +81,9 @@ Start Web server
 ~~~
 npm run dev:start
 ~~~
+
+Deployment
+
+```shell
+bundle exec cap demo2 puma:systemd:config puma:systemd:enable
+```
