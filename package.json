@@ -213,7 +213,7 @@
     "webpack-cli": "^3.3.12",
     "webpack-dev-server": "^3.1.4",
     "webpack-isomorphic-tools": "^3.0.5",
-    "webpack-merge": "^5.4.0",
+    "webpack-merge": "^4.1.2",
     "webpack-node-externals": "^2.5.2",
     "webpack-sources": "^2.2.0",
     "yn": "^4.0.0"
