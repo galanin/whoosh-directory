@@ -25,9 +25,7 @@ export default merge(baseConfig, {
     new UglifyJSPlugin({
       uglifyOptions: {
         parallel: 4,
-        compress: {
-          warnings: false
-        },
+        warnings: false,
         mangle: true,
         output: {
           comments: false
